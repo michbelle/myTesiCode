@@ -29,7 +29,7 @@ from nav2_common.launch import RewrittenYaml
 
 def generate_launch_description():
     # Get the launch directory
-    rover_dir = get_package_share_directory('myCode')
+    myCode_dir = get_package_share_directory('myCode')
     bringup_dir = get_package_share_directory('nav2_bringup')
     launch_dir = os.path.join(bringup_dir, 'launch')
 
@@ -97,7 +97,7 @@ def generate_launch_description():
 
     declare_params_file_cmd = DeclareLaunchArgument(
         'params_file',
-        default_value=os.path.join(rover_dir, 'config', 'rover_nav2_params.yaml'),
+        default_value=os.path.join(myCode_dir, 'config', 'rover_nav2_params.yaml'),
         description='Full path to the ROS2 parameters file to use for all launched nodes')
 
     declare_autostart_cmd = DeclareLaunchArgument(
@@ -158,7 +158,7 @@ def generate_launch_description():
         #                      'container_name': 'nav2_container'}.items()),
 
         IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(os.path.join(rover_dir, 'launch', 'nav2_backend.py')),
+            PythonLaunchDescriptionSource(os.path.join(myCode_dir, 'launch', 'nav2_backend.py')),
             launch_arguments={'namespace': namespace,
                               'use_sim_time': use_sim_time,
                               'autostart': autostart,
