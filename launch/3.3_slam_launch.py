@@ -22,6 +22,8 @@ from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 from nav2_common.launch import RewrittenYaml
 
+# file da dove l'ho tirato fuori
+# https://github.com/mikeferguson/ubr_reloaded/blob/ros2/ubr1_navigation/launch/localization.launch.py
 
 def generate_launch_description():
     # Get the launch directory
