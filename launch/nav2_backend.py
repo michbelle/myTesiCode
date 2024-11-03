@@ -77,7 +77,7 @@ def generate_launch_description():
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
         'use_sim_time',
-        default_value='false',
+        default_value='true',
         description='Use simulation (Gazebo) clock if true')
 
     declare_params_file_cmd = DeclareLaunchArgument(
@@ -102,7 +102,7 @@ def generate_launch_description():
         description='Whether to respawn if a node crashes. Applied when composition is disabled.')
 
     declare_log_level_cmd = DeclareLaunchArgument(
-        'log_level', default_value='info',
+        'log_level', default_value='DEBUG',
         description='log level')
 
     load_nodes = GroupAction(
