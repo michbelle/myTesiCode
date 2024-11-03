@@ -43,8 +43,7 @@ def generate_launch_description():
     # TODO(orduno) Substitute with `PushNodeRemapping`
     #              https://github.com/ros2/launch_ros/issues/56
     remappings = [('/tf', 'tf'),
-                  ('/tf_static', 'tf_static'),
-                  ('scan', 'base_scan')]
+                  ('/tf_static', 'tf_static')]
 
     # Create our own temporary YAML files that include substitutions
     param_substitutions = {
@@ -60,6 +59,7 @@ def generate_launch_description():
     return LaunchDescription([
         # Set env var to print messages to stdout immediately
         SetEnvironmentVariable('RCUTILS_LOGGING_BUFFERED_STREAM', '1'),
+        SetEnvironmentVariable('RCUTILS_COLORIZED_OUTPUT', '1'),
 
         DeclareLaunchArgument(
             'namespace', default_value='',
@@ -71,7 +71,7 @@ def generate_launch_description():
             description='Full path to map yaml file to load'),
 
         DeclareLaunchArgument(
-            'use_sim_time', default_value='false',
+            'use_sim_time', default_value='true',
             description='Use simulation (Gazebo) clock if true'),
 
         DeclareLaunchArgument(
