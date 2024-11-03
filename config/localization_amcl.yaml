@@ -8,6 +8,7 @@ amcl:
     base_frame_id: "base_link"
     global_frame_id: "map"
     laser_model_type: "likelihood_field"
+    odom_frame_id: "odom"
     max_beams: 100
     max_particles: 2000
     min_particles: 500
