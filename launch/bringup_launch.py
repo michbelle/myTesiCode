@@ -96,7 +96,7 @@ def generate_launch_description():
 
     declare_map_yaml_cmd = DeclareLaunchArgument(
         'map',
-        default_value='/home/michele/tesi_code/src/myCode/maps/maze_map',
+        default_value='/home/michele/tesi_code/src/myCode/maps/my_map',
         description='Full path to map yaml file to load')
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(

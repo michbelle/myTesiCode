@@ -29,7 +29,7 @@ from nav2_common.launch import RewrittenYaml
 
 def generate_launch_description():
     # Get the launch directory
-    myCode_dir = get_package_share_directory('myCode')
+    rover_dir = get_package_share_directory('roverrobotics_driver')
     bringup_dir = get_package_share_directory('nav2_bringup')
     launch_dir = os.path.join(bringup_dir, 'launch')
 
@@ -87,17 +87,17 @@ def generate_launch_description():
 
     declare_map_yaml_cmd = DeclareLaunchArgument(
         'map',
-        default_value='/home/michele/tesi_code/src/myCode/maps/my_map',#maze_map
+        default_value='/home/rover/rover_workspace/office_map.yaml',
         description='Full path to map yaml file to load')
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
         'use_sim_time',
-        default_value='true',
+        default_value='false',
         description='Use simulation (Gazebo) clock if true')
 
     declare_params_file_cmd = DeclareLaunchArgument(
         'params_file',
-        default_value=os.path.join(myCode_dir, 'config', 'rover_nav2_params.yaml'),
+        default_value=os.path.join(rover_dir, 'config', 'nav2_params.yaml'),
         description='Full path to the ROS2 parameters file to use for all launched nodes')
 
     declare_autostart_cmd = DeclareLaunchArgument(
@@ -116,7 +116,7 @@ def generate_launch_description():
         'log_level', default_value='info',
         description='log level')
     
-    rl_launch_path = os.path.join(get_package_share_directory("myCode"), 'launch', 'robot_localizer.launch.py')
+    rl_launch_path = os.path.join(get_package_share_directory("roverrobotics_driver"), 'launch', 'robot_localizer.launch.py')
     robot_localizer_launch = IncludeLaunchDescription(PythonLaunchDescriptionSource(rl_launch_path),
         launch_arguments={'use_sim_time': use_sim_time}.items())
 
@@ -158,7 +158,7 @@ def generate_launch_description():
         #                      'container_name': 'nav2_container'}.items()),
 
         IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(os.path.join(myCode_dir, 'launch', 'nav2_backend.py')),
+            PythonLaunchDescriptionSource(os.path.join(rover_dir, 'launch', 'nav2_backend.py')),
             launch_arguments={'namespace': namespace,
                               'use_sim_time': use_sim_time,
                               'autostart': autostart,
@@ -171,8 +171,8 @@ def generate_launch_description():
     # Slam toolbox stuff
     declare_slam_params_file_cmd = DeclareLaunchArgument(
         'slam_params_file',
-        default_value=os.path.join(get_package_share_directory("myCode"),
-                                   'config', 'mapper_params_localization.yaml'),
+        default_value=os.path.join(get_package_share_directory("roverrobotics_driver"),
+                                   'config/slam_configs', 'mapper_params_localization.yaml'),
         description='Full path to the ROS2 parameters file to use for the slam_toolbox node')
     
     declare_slam_map_file_cmd = DeclareLaunchArgument(
@@ -181,7 +181,7 @@ def generate_launch_description():
         description='Full path to the ROS2 parameters file to use for the slam_toolbox node')
     
     map_file_arg = PathJoinSubstitution([
-        get_package_share_directory('myCode'), 'maps', map_file])
+        get_package_share_directory('roverrobotics_driver'), 'maps', map_file])
 
     start_async_slam_toolbox_node = Node(
         parameters=[
