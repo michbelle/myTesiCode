@@ -21,17 +21,17 @@ from launch.actions import (DeclareLaunchArgument, GroupAction,
                             IncludeLaunchDescription, SetEnvironmentVariable)
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration, PythonExpression
+from launch.substitutions import LaunchConfiguration, PythonExpression, PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.actions import PushRosNamespace
-from launch_ros.descriptions import ParameterFile
-from nav2_common.launch import RewrittenYaml, ReplaceString
+from nav2_common.launch import RewrittenYaml
 
 
 def generate_launch_description():
     # Get the launch directory
-    myCode_dir = get_package_share_directory('myCode')
-    launch_dir = os.path.join(myCode_dir, 'launch')
+    rover_dir = get_package_share_directory('roverrobotics_driver')
+    bringup_dir = get_package_share_directory('nav2_bringup')
+    launch_dir = os.path.join(bringup_dir, 'launch')
 
     # Create the launch configuration variables
     namespace = LaunchConfiguration('namespace')
@@ -44,6 +44,8 @@ def generate_launch_description():
     use_composition = LaunchConfiguration('use_composition')
     use_respawn = LaunchConfiguration('use_respawn')
     log_level = LaunchConfiguration('log_level')
+    slam_params_file = LaunchConfiguration('slam_params_file')
+    map_file = LaunchConfiguration('map_file_name')
 
     # Map fully qualified names to relative ones so the node's namespace can be prepended.
     # In case of the transforms (tf), currently, there doesn't seem to be a better alternative
@@ -59,22 +61,11 @@ def generate_launch_description():
         'use_sim_time': use_sim_time,
         'yaml_filename': map_yaml_file}
 
-    # Only it applys when `use_namespace` is True.
-    # '<robot_namespace>' keyword shall be replaced by 'namespace' launch argument
-    # in config file 'nav2_multirobot_params.yaml' as a default & example.
-    # User defined config file should contain '<robot_namespace>' keyword for the replacements.
-    params_file = ReplaceString(
+    configured_params = RewrittenYaml(
         source_file=params_file,
-        replacements={'<robot_namespace>': ('/', namespace)},
-        condition=IfCondition(use_namespace))
-
-    configured_params = ParameterFile(
-        RewrittenYaml(
-            source_file=params_file,
-            root_key=namespace,
-            param_rewrites=param_substitutions,
-            convert_types=True),
-        allow_substs=True)
+        root_key=namespace,
+        param_rewrites=param_substitutions,
+        convert_types=True)
 
     stdout_linebuf_envvar = SetEnvironmentVariable(
         'RCUTILS_LOGGING_BUFFERED_STREAM', '1')
@@ -96,7 +87,7 @@ def generate_launch_description():
 
     declare_map_yaml_cmd = DeclareLaunchArgument(
         'map',
-        default_value='/home/michele/tesi_code/src/myCode/maps/my_map',
+        default_value='/home/rover/rover_workspace/office_map.yaml',
         description='Full path to map yaml file to load')
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
@@ -106,7 +97,7 @@ def generate_launch_description():
 
     declare_params_file_cmd = DeclareLaunchArgument(
         'params_file',
-        default_value=os.path.join(myCode_dir, 'config', 'nav2_params.yaml'),
+        default_value=os.path.join(rover_dir, 'config', 'nav2_params.yaml'),
         description='Full path to the ROS2 parameters file to use for all launched nodes')
 
     declare_autostart_cmd = DeclareLaunchArgument(
@@ -114,8 +105,8 @@ def generate_launch_description():
         description='Automatically startup the nav2 stack')
 
     declare_use_composition_cmd = DeclareLaunchArgument(
-        'use_composition', default_value='True',
-        description='Whether to use composed myCode')
+        'use_composition', default_value='False',
+        description='Whether to use composed bringup')
 
     declare_use_respawn_cmd = DeclareLaunchArgument(
         'use_respawn', default_value='False',
@@ -124,6 +115,10 @@ def generate_launch_description():
     declare_log_level_cmd = DeclareLaunchArgument(
         'log_level', default_value='info',
         description='log level')
+    
+    rl_launch_path = os.path.join(get_package_share_directory("roverrobotics_driver"), 'launch', 'robot_localizer.launch.py')
+    robot_localizer_launch = IncludeLaunchDescription(PythonLaunchDescriptionSource(rl_launch_path),
+        launch_arguments={'use_sim_time': use_sim_time}.items())
 
     # Specify the actions
     bringup_cmd_group = GroupAction([
@@ -150,21 +145,20 @@ def generate_launch_description():
                               'use_respawn': use_respawn,
                               'params_file': params_file}.items()),
 
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(os.path.join(launch_dir,
-                                                       'localization_launch.py')),
-            condition=IfCondition(PythonExpression(['not ', slam])),
-            launch_arguments={'namespace': namespace,
-                              'map': map_yaml_file,
-                              'use_sim_time': use_sim_time,
-                              'autostart': autostart,
-                              'params_file': params_file,
-                              'use_composition': use_composition,
-                              'use_respawn': use_respawn,
-                              'container_name': 'nav2_container'}.items()),
+        #IncludeLaunchDescription(
+        #    PythonLaunchDescriptionSource(os.path.join(launch_dir,
+        #                                               'localization_launch.py')),
+        #    condition=IfCondition(PythonExpression(['not ', slam])),
+        #    launch_arguments={'map': map_yaml_file,
+        #                      'use_sim_time': use_sim_time,
+        #                      'autostart': autostart,
+        #                      'params_file': params_file,
+        #                      'use_composition': use_composition,
+        #                      'use_respawn': use_respawn,
+        #                      'container_name': 'nav2_container'}.items()),
 
         IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(os.path.join(launch_dir, 'navigation_launch.py')),
+            PythonLaunchDescriptionSource(os.path.join(rover_dir, 'launch', 'nav2_backend.py')),
             launch_arguments={'namespace': namespace,
                               'use_sim_time': use_sim_time,
                               'autostart': autostart,
@@ -173,9 +167,39 @@ def generate_launch_description():
                               'use_respawn': use_respawn,
                               'container_name': 'nav2_container'}.items()),
     ])
+    
+    # Slam toolbox stuff
+    declare_slam_params_file_cmd = DeclareLaunchArgument(
+        'slam_params_file',
+        default_value=os.path.join(get_package_share_directory("roverrobotics_driver"),
+                                   'config/slam_configs', 'mapper_params_localization.yaml'),
+        description='Full path to the ROS2 parameters file to use for the slam_toolbox node')
+    
+    declare_slam_map_file_cmd = DeclareLaunchArgument(
+        'map_file_name',
+        default_value='maze_map',
+        description='Full path to the ROS2 parameters file to use for the slam_toolbox node')
+    
+    map_file_arg = PathJoinSubstitution([
+        get_package_share_directory('roverrobotics_driver'), 'maps', map_file])
 
+    start_async_slam_toolbox_node = Node(
+        parameters=[
+          slam_params_file,
+          {'use_sim_time': use_sim_time},
+          {'map_file_name': map_file_arg}
+        ],
+        package='slam_toolbox',
+        executable='localization_slam_toolbox_node',
+        name='slam_toolbox',
+        output='screen')
+    
     # Create the launch description and populate
     ld = LaunchDescription()
+    
+    # Add slam setup to launch description
+    ld.add_action(declare_slam_params_file_cmd)
+    ld.add_action(declare_slam_map_file_cmd)
 
     # Set environment variables
     ld.add_action(stdout_linebuf_envvar)
@@ -191,8 +215,10 @@ def generate_launch_description():
     ld.add_action(declare_use_composition_cmd)
     ld.add_action(declare_use_respawn_cmd)
     ld.add_action(declare_log_level_cmd)
-
+    
     # Add the actions to launch all of the navigation nodes
+    ld.add_action(robot_localizer_launch)
+    ld.add_action(start_async_slam_toolbox_node)
     ld.add_action(bringup_cmd_group)
 
     return ld
