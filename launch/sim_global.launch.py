@@ -35,13 +35,13 @@ def generate_launch_description():
     )
 
     nav_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(launch_folder, "launch", "2.1_navigation_launch.py")),
+        PythonLaunchDescriptionSource(os.path.join(launch_folder, "launch", "2_navigation_launch.py")),
         launch_arguments={
         }.items()
     )
 
     localization_nav = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(launch_folder, "launch", "3.3_slam_launch.py")),
+        PythonLaunchDescriptionSource(os.path.join(launch_folder, "launch", "3_slam_launch.py")),
         launch_arguments={
         }.items()
     )
