@@ -1,0 +1,34 @@
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="rover_miti_payload">
+    
+    <xacro:property name="box_dimension" value="0.287 0.224 0.01" />
+
+    <link name="payload_link">
+        <visual>
+            <origin xyz="0 0 0.005" rpy="0 0 0" />
+            <geometry>
+                <box size="${box_dimension}"/>
+            </geometry>
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0.005" rpy="0 0 0" />
+            <geometry>
+                <box size="${box_dimension}"/>
+            </geometry>
+        </collision>
+
+        <!-- <inertial>
+            <origin xyz="-0.01 0 0" rpy="0 0 0"/>
+            <mass value="2.95" />
+            <inertia ixx="0.018398" ixy="0.0"  ixz="0.0" iyy="0.04064" iyz="0.0" izz="0.05396" />
+        </inertial> -->
+    </link>
+
+    <joint name="payload_to_chassis" type="fixed">
+        <parent link="chassis_link"/>
+        <child link="payload_link"/>
+        <origin xyz="0 0 0.069"/>
+    </joint>
+
+
+</robot>
