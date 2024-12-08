@@ -33,7 +33,7 @@ def generate_launch_description():
     map_yaml_file = LaunchConfiguration('map')
     use_sim_time = LaunchConfiguration('use_sim_time')
     autostart = LaunchConfiguration('autostart')
-    params_file = LaunchConfiguration('params_file')
+    params_file = LaunchConfiguration('params_file_amcl')
     lifecycle_nodes = ['map_server', 'amcl']
 
     # Map fully qualified names to relative ones so the node's namespace can be prepended.
@@ -79,7 +79,7 @@ def generate_launch_description():
             description='Automatically startup the nav2 stack'),
 
         DeclareLaunchArgument(
-            'params_file',
+            'params_file_amcl',
             default_value=os.path.join(bringup_dir, 'config', 'localization_amcl.yaml'),
             description='Full path to the ROS2 parameters file to use'),
 
