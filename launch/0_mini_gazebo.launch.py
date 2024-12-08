@@ -15,7 +15,7 @@ def generate_launch_description():
     # Create the launch configuration variables
     use_sim_time = LaunchConfiguration('use_sim_time')
     urdf = os.path.join(get_package_share_directory(
-        'roverrobotics_description'), 'urdf', 'mini.urdf')
+        'myCode'), 'urdf', 'mini.urdf')
     world = LaunchConfiguration('world')
 
     robot_desc = ParameterValue(Command(['xacro ', urdf]),
@@ -88,7 +88,7 @@ def generate_launch_description():
         package='rviz2',
         executable='rviz2',
         name='rviz2',
-        arguments=['-d', rviz_config_dir],
+        # arguments=['-d', rviz_config_dir],
         output='screen')
 
 

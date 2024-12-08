@@ -19,6 +19,7 @@ install(DIRECTORY
   launch
   config
   maps
+  urdf
   DESTINATION share/${PROJECT_NAME})
   
 

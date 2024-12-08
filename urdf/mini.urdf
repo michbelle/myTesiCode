@@ -17,14 +17,15 @@
     <xacro:include filename="$(find roverrobotics_description)/urdf/accessories/imu.urdf" />
 
     <!-- Robot Description -->
-
-    <joint name="test_link" type="fixed">
+    <!-- Added a base_footprint to work with amcl but there was an error
+    -->
+    <!-- <joint name="test_link" type="fixed">
         <parent link="base_link"/>
         <child link="base_footprint"/>
         <origin xyz="0 0 0"/>
     </joint>
-    <link name="base_footprint" />
-    <!-- 
+    <link name="base_footprint" /> -->
+    <!--
     -->
 
     <link name="base_link" />
