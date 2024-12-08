@@ -11,36 +11,25 @@
     <!-- Part Includes - Payload, Sensors, Etc.. -->
     <!-- Comment or Uncomment any of these to add them to the dev payload -->
     <!-- You can always link them elsewhere if you wish by editing accessories/<sensor>.urdf -->
-    <xacro:property name="payload_z_offset" value="0.1105" />
-    <xacro:include filename="$(find roverrobotics_description)/urdf/accessories/rover_dev_payload.urdf" />
-    <xacro:include filename="$(find roverrobotics_description)/urdf/accessories/rplidar_s2.urdf" />
-    <xacro:include filename="$(find roverrobotics_description)/urdf/accessories/imu.urdf" />
+    <!-- <xacro:property name="payload_z_offset" value="0.1105" /> -->
+    <xacro:include filename="$(find myCode)/urdf/accessories/rover_dev_payload.urdf" />
+    <xacro:include filename="$(find myCode)/urdf/accessories/rplidar_s2.urdf" />
+    <xacro:include filename="$(find myCode)/urdf/accessories/imu.urdf" />
 
     <!-- Robot Description -->
-    <!-- Added a base_footprint to work with amcl but there was an error
-    -->
-    <!-- <joint name="test_link" type="fixed">
-        <parent link="base_link"/>
-        <child link="base_footprint"/>
-        <origin xyz="0 0 0"/>
-    </joint>
-    <link name="base_footprint" /> -->
-    <!--
-    -->
-
     <link name="base_link" />
     <link name="chassis_link">
         <visual>
             <origin xyz="0.01 0.02 0" rpy="0 -0 1.5708" />
             <geometry>
-                <mesh filename="file://$(find roverrobotics_description)/meshes/mini_chassis.dae"/>
+                <mesh filename="file://$(find myCode)/meshes/mini_chassis.dae"/>
             </geometry>
         </visual>
 
         <collision>
             <origin xyz="0.01 0.02 0" rpy="0 -0 1.5708" />
             <geometry>
-                <mesh filename="file://$(find roverrobotics_description)/meshes/mini_chassis.dae"/>
+                <mesh filename="file://$(find myCode)/meshes/mini_chassis.dae"/>
             </geometry>
         </collision>
 
@@ -61,14 +50,14 @@
         <visual>
             <origin xyz="0 0 0" rpy="1.57 3.1415 0" />
             <geometry>
-                <mesh filename="file://$(find roverrobotics_description)/meshes/hub_6.5in.dae"/>
+                <mesh filename="file://$(find myCode)/meshes/hub_6.5in.dae"/>
             </geometry>
         </visual>
 
         <collision>
             <origin xyz="0 0 0" rpy="1.57 3.1415 0" />
             <geometry>
-                <mesh filename="file://$(find roverrobotics_description)/meshes/hub_6.5in.dae"/>
+                <mesh filename="file://$(find myCode)/meshes/hub_6.5in.dae"/>
             </geometry>
         </collision>
 
@@ -90,14 +79,14 @@
         <visual>
             <origin xyz="0 0 0" rpy="1.57 3.1415 3.1415" />
             <geometry>
-                <mesh filename="file://$(find roverrobotics_description)/meshes/hub_6.5in.dae"/>
+                <mesh filename="file://$(find myCode)/meshes/hub_6.5in.dae"/>
             </geometry>
         </visual>
 
         <collision>
             <origin xyz="0 0 0" rpy="1.57 3.1415 3.1415" />
             <geometry>
-                <mesh filename="file://$(find roverrobotics_description)/meshes/hub_6.5in.dae"/>
+                <mesh filename="file://$(find myCode)/meshes/hub_6.5in.dae"/>
             </geometry>
         </collision>
 
@@ -119,14 +108,14 @@
         <visual>
             <origin xyz="0 0 0" rpy="1.57 3.1415 0" />
             <geometry>
-                <mesh filename="file://$(find roverrobotics_description)/meshes/hub_6.5in.dae"/>
+                <mesh filename="file://$(find myCode)/meshes/hub_6.5in.dae"/>
             </geometry>
         </visual>
 
         <collision>
             <origin xyz="0 0 0" rpy="1.57 3.1415 0" />
             <geometry>
-                <mesh filename="file://$(find roverrobotics_description)/meshes/hub_6.5in.dae"/>
+                <mesh filename="file://$(find myCode)/meshes/hub_6.5in.dae"/>
             </geometry>
         </collision>
 
@@ -148,14 +137,14 @@
         <visual>
             <origin xyz="0 0 0" rpy="1.57 3.1415 3.1415" />
             <geometry>
-                <mesh filename="file://$(find roverrobotics_description)/meshes/hub_6.5in.dae"/>
+                <mesh filename="file://$(find myCode)/meshes/hub_6.5in.dae"/>
             </geometry>
         </visual>
 
         <collision>
             <origin xyz="0 0 0" rpy="1.57 3.1415 3.1415" />
             <geometry>
-                <mesh filename="file://$(find roverrobotics_description)/meshes/hub_6.5in.dae"/>
+                <mesh filename="file://$(find myCode)/meshes/hub_6.5in.dae"/>
             </geometry>
         </collision>
 
