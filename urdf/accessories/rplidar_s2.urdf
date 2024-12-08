@@ -11,12 +11,12 @@
             </material>
         </visual>
 
-        <!-- <collision>
-            <origin xyz="0.027 0.7  0.05" rpy="1.5708 0 1.5708"/>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <mesh filename="file://$(find myCode)/meshes/rplidar-s1m1-r1.stl" scale="0.001 0.001 0.001"/>
+                <mesh filename="file://$(find myCode)/meshes/centered_rplidar-s1m1-r1.stl" scale="0.001 0.001 0.001"/>
             </geometry>
-        </collision> -->
+        </collision>
 
     </link>
 
