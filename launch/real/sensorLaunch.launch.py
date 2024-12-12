@@ -56,7 +56,7 @@ def generate_launch_description():
                 "launch/sensor", 
                 "wt31n.launch.py")),
             launch_arguments={
-            "path" : pathimu
+            "port" : pathimu
             }.items(),
         )
     
