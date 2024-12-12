@@ -35,18 +35,18 @@ def generate_launch_description():
 
     pathlaser = getttyusbconnected(*laserTTYinfo)
 
-    # sllidar_ros2 = IncludeLaunchDescription(
-    #         PythonLaunchDescriptionSource(os.path.join(
-    #             get_package_share_directory('myCode'), 
-    #             "launch/sensor", 
-    #             "sllidar_s1_launch.py")),
-    #         launch_arguments={
-    #         "serial_port" : pathlaser,
-    #         "frame_id" : 'laser'
-    #         }.items(),
-    #     )
+    sllidar_ros2 = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(os.path.join(
+                get_package_share_directory('myCode'), 
+                "launch/sensor", 
+                "sllidar_s1_launch.py")),
+            launch_arguments={
+            "serial_port" : pathlaser,
+            "frame_id" : 'laser'
+            }.items(),
+        )
     
-    # info_msg_laser = LogInfo(msg=f"laser found in {pathlaser}")
+    info_msg_laser = LogInfo(msg=f"laser found in {pathlaser}")
 
     pathimu = getttyusbconnected(*imuTTYinfo).split("/")[-1]
 
@@ -62,8 +62,8 @@ def generate_launch_description():
     
     info_msg_imu = LogInfo(msg=f"imu found in {pathimu}")
     
-    # ld.add_action(sllidar_ros2)
-    # ld.add_action(info_msg_laser)
+    ld.add_action(sllidar_ros2)
+    ld.add_action(info_msg_laser)
     ld.add_action(imu_ros2)
     ld.add_action(info_msg_imu)
     return ld
