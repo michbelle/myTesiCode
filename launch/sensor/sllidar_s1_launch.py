@@ -15,7 +15,7 @@ def generate_launch_description():
     serial_port = LaunchConfiguration('serial_port', default='/dev/ttyUSB0')
     serial_baudrate = LaunchConfiguration('serial_baudrate', default='256000') 
     frame_id = LaunchConfiguration('frame_id_lidar', default='lidar_link')#laser
-    inverted = LaunchConfiguration('inverted', default='false')
+    inverted = LaunchConfiguration('inverted', default='false') #false
     angle_compensate = LaunchConfiguration('angle_compensate', default='true')
 
     return LaunchDescription([
