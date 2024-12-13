@@ -35,39 +35,39 @@ def generate_launch_description():
     #     get_package_share_directory('roverrobotics_gazebo'), 'worlds', world])
 
     # Include the gz sim launch file  
-    gz_sim_share = get_package_share_directory("ros_gz_sim")
-    gz_sim = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(gz_sim_share, "launch", "gz_sim.launch.py")),
-        launch_arguments={
-            "gz_args" : 'empty.sdf' 
-        }.items()
-    )
+    # gz_sim_share = get_package_share_directory("ros_gz_sim")
+    # gz_sim = IncludeLaunchDescription(
+    #     PythonLaunchDescriptionSource(os.path.join(gz_sim_share, "launch", "gz_sim.launch.py")),
+    #     launch_arguments={
+    #         "gz_args" : 'empty.sdf' 
+    #     }.items()
+    # )
     
     # Spawn Rover Robot
-    gz_spawn_entity = Node(
-        package="ros_gz_sim",
-        executable="create",
-        arguments=[
-            "-topic", "/robot_description",
-            "-name", "rover_mini",
-            "-allow_renaming", "true",
-            "-z", "0.1",
-        ]
-    )
+    # gz_spawn_entity = Node(
+    #     package="ros_gz_sim",
+    #     executable="create",
+    #     arguments=[
+    #         "-topic", "/robot_description",
+    #         "-name", "rover_mini",
+    #         "-allow_renaming", "true",
+    #         "-z", "0.1",
+    #     ]
+    # )
     
-    gz_ros2_bridge = Node(
-        package="ros_gz_bridge",
-        executable="parameter_bridge",
-        arguments=[
-            "/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist",
-            "/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock",
-            "/odometry/wheels@nav_msgs/msg/Odometry@ignition.msgs.Odometry",
-            "/tf@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V",
-            '/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model',
-            '/scan@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan',
-            '/imu/data@sensor_msgs/msg/Imu@gz.msgs.IMU',
-        ],
-    )
+    # gz_ros2_bridge = Node(
+    #     package="ros_gz_bridge",
+    #     executable="parameter_bridge",
+    #     arguments=[
+    #         "/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist",
+    #         "/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock",
+    #         "/odometry/wheels@nav_msgs/msg/Odometry@ignition.msgs.Odometry",
+    #         "/tf@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V",
+    #         '/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model',
+    #         '/scan@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan',
+    #         '/imu/data@sensor_msgs/msg/Imu@gz.msgs.IMU',
+    #     ],
+    # )
 
     # Robot state publisher
     params = {'use_sim_time': use_sim_time, 'robot_description': robot_desc}
@@ -100,9 +100,9 @@ def generate_launch_description():
     ld.add_action(declare_world_cmd)
 
     # Launch Gazebo
-    ld.add_action(gz_sim)
-    ld.add_action(gz_spawn_entity)
-    ld.add_action(gz_ros2_bridge)
+    # ld.add_action(gz_sim)
+    # ld.add_action(gz_spawn_entity)
+    # ld.add_action(gz_ros2_bridge)
 
 
     # Launch Robot State Publisher

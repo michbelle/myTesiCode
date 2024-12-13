@@ -21,6 +21,7 @@ install(DIRECTORY
   maps
   urdf
   meshes
+  rviz
   DESTINATION share/${PROJECT_NAME})
   
 
