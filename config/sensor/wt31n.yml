@@ -6,7 +6,7 @@ witmotion_ros:
     timeout_ms: 150 # ms
     restart_service_name: /restart_imu
     imu_publisher:
-      topic_name: /imu
+      topic_name: /imu/data
       frame_id: imu_link
       use_native_orientation: false
       measurements:
