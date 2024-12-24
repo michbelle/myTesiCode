@@ -24,6 +24,9 @@ def generate_launch_description():
         package='cartographer_ros',
         executable='cartographer_node',
         name='cartographer_node',
+        remappings=[
+                ('/odom', '/odometry/filtered'),  # Remap odom to /odometry/filtered
+            ],
         output='screen',
         parameters=[{'use_sim_time': use_sim_time}],
         arguments=['-configuration_directory', configuration_directory,
@@ -33,6 +36,9 @@ def generate_launch_description():
         package='cartographer_ros',
         executable='cartographer_occupancy_grid_node',
         name='cartographer_occupancy_grid_node',
+        remappings=[
+                ('/odom', '/odometry/filtered'),  # Remap odom to /odometry/filtered
+            ],
         output='screen',
         parameters=[{'use_sim_time': use_sim_time}],
         arguments=['-resolution', resolution, '-publish_period_sec', publish_period_sec])
