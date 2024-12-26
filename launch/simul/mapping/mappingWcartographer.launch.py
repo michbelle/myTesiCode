@@ -15,7 +15,7 @@ def generate_launch_description():
     # Map publish period  
     publish_period_sec = LaunchConfiguration('publish_period_sec', default='0.5')
     # Configuration file folder path
-    configuration_directory = LaunchConfiguration('configuration_directory',default= os.path.join(pkg_share, 'config/slam_configs') )
+    configuration_directory = LaunchConfiguration('configuration_directory',default= os.path.join(pkg_share, 'config','slam_configs') )
     # Configuration file
     configuration_basename = LaunchConfiguration('configuration_basename', default='SLAMcartographer.lua')
 
