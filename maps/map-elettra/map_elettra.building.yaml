@@ -17,23 +17,7 @@ graphs:
 levels:
   floor1:
     doors:
-      - [92, 104, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, "null"], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, hinged]}]
-      - [84, 91, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, "null"], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, hinged]}]
-      - [262, 278, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, "null"], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, hinged]}]
-      - [253, 252, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, "null"], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, hinged]}]
-      - [266, 265, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, "null"], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, hinged]}]
-      - [107, 114, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, "null"], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, hinged]}]
-      - [116, 122, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, "null"], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, hinged]}]
-      - [279, 126, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, "null"], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, hinged]}]
-      - [280, 134, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, "null"], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, hinged]}]
-      - [135, 281, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, "null"], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, hinged]}]
-      - [139, 141, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, "null"], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, hinged]}]
-      - [142, 144, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, "null"], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, hinged]}]
-      - [144, 149, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, "null"], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, hinged]}]
-      - [282, 163, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, "null"], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, hinged]}]
-      - [164, 167, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, "null"], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, hinged]}]
       - [283, 284, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, LIFT1_door], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, double_sliding]}]
-      - [127, 130, {motion_axis: [1, end], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, "null"], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, hinged]}]
     drawing:
       filename: map.png
     elevation: 1
@@ -80,7 +64,15 @@ levels:
       - [322, 323, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
       - [324, 325, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
     layers:
-      {}
+      planimetria:
+        color: [1, 0, 0, 0.5]
+        filename: mapElettra.png
+        transform:
+          scale: 0.074999999999999997
+          translation_x: 0
+          translation_y: 0
+          yaw: 0
+        visible: true
     measurements:
       - [3, 4, {distance: [3, 3]}]
     models:
@@ -414,9 +406,8 @@ levels:
       - [1027.0429999999999, 1277.5409999999999, 0, ""]
       - [878.44899999999996, 1425.809, 0, ""]
       - [816.02999999999997, 1409.8330000000001, 0, ""]
-      - [752.37900000000002, 1522.454, 0, ""]
-      - [777.68499999999995, 1527.742, 0, ""]
-      - [3, 3, 0, "", {lift_cabin: [1, LIFT1]}]
+      - [759.94799999999998, 1538.7460000000001, 0, LIFT1_center]
+      - [759, 1535, 0, "", {lift_cabin: [1, LIFT1]}]
     walls:
       - [5, 6, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [6, 7, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
@@ -708,7 +699,7 @@ levels:
       - [37, 38, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, LIF1_2_door], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, double_sliding]}]
     drawing:
       filename: map.png
-    elevation: 0
+    elevation: 2
     floors:
       - parameters: {ceiling_scale: [3, 1], ceiling_texture: [1, blue_linoleum], indoor: [2, 0], texture_name: [1, blue_linoleum], texture_rotation: [3, 0], texture_scale: [3, 1]}
         vertices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 24, 25, 26, 27, 28, 29, 30, 31, 32]
@@ -838,6 +829,7 @@ levels:
       - [597.65999999999997, 1397.797, 0, ""]
       - [615.77499999999998, 1334.396, 0, ""]
       - [571.88099999999997, 1328.8219999999999, 0, ""]
+      - [759, 1535, 0, "", {lift_cabin: [1, LIFT1]}]
     walls:
       - [35, 36, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [36, 37, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
@@ -915,7 +907,7 @@ levels:
       - [119, 120, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
 lifts:
   LIFT1:
-    depth: 3
+    depth: 2
     doors:
       LIF1_2_door:
         door_type: 2
@@ -934,13 +926,13 @@ lifts:
     level_doors:
       floor1: [LIFT1_door]
       floor2: [LIF1_2_door]
-    lowest_floor: floor2
+    lowest_floor: floor1
     plugins: true
     reference_floor_name: floor1
-    width: 3
-    x: 3
-    y: 3
-    yaw: 0
+    width: 2
+    x: 759
+    y: 1535
+    yaw: -0.29999999999999999
 name: map_elettra
 parameters:
   generate_crs: [1, ""]
