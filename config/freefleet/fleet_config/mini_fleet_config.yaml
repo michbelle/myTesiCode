@@ -33,7 +33,7 @@ rmf_fleet:
   finishing_request: "nothing" # [park, charge, nothing]
   responsive_wait: True # Should responsive wait be on/off for the whole fleet by default? False if not specified.
   robots:
-    nav2_tb3:
+    mini1:
       charger: "tb3_charger"
       responsive_wait: False # Should responsive wait be on/off for this specific robot? Overrides the fleet-wide setting.
       # For Nav2RobotAdapter
@@ -46,6 +46,11 @@ rmf_fleet:
 
   robot_state_update_frequency: 10.0 # Hz
 
+
+# fleet_manager:
+#   prefix: "http://127.0.0.1:8080"
+#   user: "some_user"
+#   password: "some_password"
 
 # TRANSFORM CONFIG =============================================================
 # For computing transforms between Robot and RMF coordinate systems
