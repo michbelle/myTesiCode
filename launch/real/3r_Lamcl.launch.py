@@ -30,7 +30,7 @@ def generate_launch_description():
     bringup_dir = get_package_share_directory('myCode')
 
     namespace = LaunchConfiguration('namespace')
-    map_yaml_file = LaunchConfiguration('map')
+    # map_yaml_file = LaunchConfiguration('map')
     use_sim_time = LaunchConfiguration('use_sim_time')
     autostart = LaunchConfiguration('autostart')
     params_file = LaunchConfiguration('params_file_amcl')
@@ -47,8 +47,7 @@ def generate_launch_description():
 
     # Create our own temporary YAML files that include substitutions
     param_substitutions = {
-        'use_sim_time': use_sim_time,
-        'yaml_filename': map_yaml_file}
+        'use_sim_time': use_sim_time,}
 
     configured_params = RewrittenYaml(
         source_file=params_file,
@@ -65,10 +64,10 @@ def generate_launch_description():
             'namespace', default_value='',
             description='Top-level namespace'),
 
-        DeclareLaunchArgument(
-            'map',
-            default_value=os.path.join(bringup_dir, 'maps', 'maze_map.yaml'),
-            description='Full path to map yaml file to load'),
+        # DeclareLaunchArgument(
+        #     'map',
+        #     default_value=os.path.join(bringup_dir, 'maps', 'maze_map.yaml'),
+        #     description='Full path to map yaml file to load'),
 
         DeclareLaunchArgument(
             'use_sim_time', default_value='false',
@@ -80,7 +79,7 @@ def generate_launch_description():
 
         DeclareLaunchArgument(
             'params_file_amcl',
-            default_value=os.path.join(bringup_dir, 'config', 'localization_amcl.yaml'),
+            default_value=os.path.join(bringup_dir, 'config', 'Rlocalization_amcl.yaml'),
             description='Full path to the ROS2 parameters file to use'),
 
         Node(

@@ -125,4 +125,4 @@ amcl:
 map_server:
   ros__parameters:
     use_sim_time: True
-    yaml_filename: "/home/michele/tesi_code/src/myCode/maps/maze_map.yaml"
+    yaml_filename: "/home/mini/navros/src/myCode/maps/simul/maze_map.yaml"
