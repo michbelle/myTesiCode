@@ -19,6 +19,9 @@ levels:
     drawing:
       filename: images/map.png
     elevation: 0
+    floors:
+      - parameters: {ceiling_scale: [3, 1], ceiling_texture: [1, blue_linoleum], indoor: [2, 0], texture_name: [1, blue_linoleum], texture_rotation: [3, 0], texture_scale: [3, 1]}
+        vertices: [11, 12, 14, 0, 1, 2, 3, 4, 5, 55, 6, 7, 8, 9, 10]
     lanes:
       - [113, 114, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
       - [114, 115, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
@@ -31,6 +34,8 @@ levels:
       - [121, 122, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
     layers:
       {}
+    measurements:
+      - [71, 87, {distance: [3, 2.5]}]
     vertices:
       - [177.75800000000001, 2645.529, 0, ""]
       - [306.61900000000003, 2980.9749999999999, 0, ""]
@@ -155,6 +160,9 @@ levels:
       - [818.26499999999999, 1428.3869999999999, 0, ""]
       - [829.05100000000004, 1399.702, 0, ""]
       - [847.42399999999998, 1405.3920000000001, 0, ""]
+      - [792.37699999999995, 1447.144, 0, ""]
+      - [814.69299999999998, 1359.4970000000001, 0, ""]
+      - [875.82000000000005, 1378.579, 0, ""]
     walls:
       - [0, 1, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [1, 2, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
@@ -227,5 +235,8 @@ levels:
       - [29, 98, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [99, 31, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [31, 100, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [72, 123, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [123, 124, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [124, 125, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
 lifts: {}
 name: RMF-elettra-map
