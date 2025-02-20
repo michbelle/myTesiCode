@@ -39,7 +39,7 @@
         <scene>scene</scene>
         <ambient_light>0.4 0.4 0.4</ambient_light>
         <background_color>0.8 0.8 0.8</background_color>
-        <camera_pose>70.16886663991977 -108.78606461347621 10 0 0.6 1.57</camera_pose>
+        <camera_pose>73.71459581128748 -125.86166280361773 10 0 0.6 1.57</camera_pose>
       </plugin>
       <plugin filename="EntityContextMenuPlugin" name="Entity context menu">
         <gz-gui>
