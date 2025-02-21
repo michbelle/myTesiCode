@@ -40,6 +40,14 @@
         </inertial>
     </link>
 
+    <!-- TODO tmp fix for free fleet -->
+    <link name="base_footprint" />
+    <joint name="base_to_base_footprint" type="fixed">
+        <parent link="base_link"/>
+        <child link="base_footprint"/>
+        <origin xyz="0 0 0"/>
+    </joint>
+
     <joint name="base_to_chassis" type="fixed">
         <parent link="base_link"/>
         <child link="chassis_link"/>
