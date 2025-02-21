@@ -25,7 +25,7 @@ amcl:
       x: 2.920
       y: 18.643
       z: 1.101
-      yaw: 1.0
+      yaw: 1.1
     # yaml_filename: "/home/mini/navros/src/myTesiCode/maps/map-elettra/amcl/map.yaml"
     # map: "/home/mini/navros/src/myTesiCode/maps/map-elettra/amcl/map.yaml"
 
