@@ -3,22 +3,21 @@
     ros2dds: {
       namespace: "/",
       allow: {
-        publishers: ["*"],
+        publishers: [],
         subscribers: ["*"],
         service_servers: [],
         service_clients: [],
-        action_servers: [".*/navigate_to_pose"],
+        action_servers: [],
         action_clients: [],
       },
-      pub_max_frequencies: [".*/navigate_to_pose/*=1", ".*/battery_state=1"],
     },
   },
   // Zenoh related configurations
   mode: "client", // client
   connect: {
-    endpoints: ["tcp/172.19.233.54:7447"]
+    endpoints: []
   },
   listen: {
-    endpoints: ["tcp/172.19.233.54:7447"]
+    endpoints: []
   },
 }
