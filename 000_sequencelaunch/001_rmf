@@ -1,0 +1,11 @@
+xhost +
+docker run -it --rm -v /scratch/code/tesi_code/src/myTesiCode:/root/ff_ws/src/myTesiCode -v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY=$DISPLAY --network host --name serverNavRos rmf_all_imagev1.1  bash
+
+docker exec -it serverNavRos bash
+
+cd /root/ff_ws
+colcon build --packages-select myCode
+
+
+python3 nav2_get_tf.py -c ../../zenoh_1_1/zenoh_config_server/server_config.json5
+

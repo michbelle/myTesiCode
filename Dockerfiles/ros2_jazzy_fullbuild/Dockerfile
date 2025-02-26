@@ -9,7 +9,7 @@ FROM $rosimage
 
 #install Core rmf
 RUN mkdir -p ~/ff_ws/src \
-    && apt update && apt install -y ros-jazzy-rmf-dev ros-dev-tools \
+    && apt update && apt install -y ros-jazzy-rmf-dev ros-dev-tools vim \
     && apt upgrade -y  && apt install -y wget python3-pip python3-vcstool ros-jazzy-rmw-cyclonedds-cpp \
     && pip3 install eclipse-zenoh==1.1.0 pycdr2 rosbags --break-system-packages \
     && echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc \

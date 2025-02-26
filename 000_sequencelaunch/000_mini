@@ -1,0 +1,6 @@
+ros2 launch myCode 0.1r_sensorLaunch.launch.py
+ros2 launch myCode 0.2r_mini.launch.py
+ros2 launch myCode 1r_robot_localizationEKF.launch.py
+ros2 launch myCode 2r_navigation_launch.py
+ros2 launch myCode 3r_Lamcl.launch.py
+/home/mini/zenoh-bridge-ros2dds -c/home/mini/zenoh_client_rmf/config/zenoh_config_mini_bridge.json5
