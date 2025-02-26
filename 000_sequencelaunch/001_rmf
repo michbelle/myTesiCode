@@ -5,7 +5,16 @@ docker exec -it serverNavRos bash
 
 cd /root/ff_ws
 colcon build --packages-select myCode
+source install/setup.bash 
+
+#test zenoh
+cd ~/ff_ws/src/myTesiCode/rmf_code/code
+python3 /root/ff_ws/src/myTesiCode/rmf_code/code/nav2_get_tf.py -c /root/ff_ws/src/myTesiCode/zenoh_1_1/zenoh_config_server/server_config.json5
 
 
-python3 nav2_get_tf.py -c ../../zenoh_1_1/zenoh_config_server/server_config.json5
+ros2 launch myCode 0rmf_mini_world_rmf_core.launch.xml
 
+ros2 launch myCode 1rmf_mini_fleet_adapter.launch.xml server_uri:="ws://localhost:8000/_internal"
+
+
+ros2 run rmf_building_map_tools building_map_generator nav /root/ff_ws/src/myTesiCode/rmf_code/map/elettra/RMF-elettra-map.building.yaml /root/ff_ws/src/myTesiCode/rmf_code/trafficNavPath/elettra_big/
