@@ -1,9 +1,9 @@
 {
   plugins: {
     ros2dds: {
-      namespace: "/mini1",
+      namespace: "/nav2_tb3",
       allow: {
-        publishers: ["*"],
+        publishers: [".*/tf", ".*/battery_state"],
         subscribers: [],
         service_servers: [],
         service_clients: [],
