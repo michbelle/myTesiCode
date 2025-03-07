@@ -63,7 +63,7 @@ def generate_launch_description():
 
     declare_params_file_cmd = DeclareLaunchArgument(
         'params_file',
-        default_value=os.path.join(myCode_dir, 'config','slam', 'slam_configs', 'slamTool.yaml'),
+        default_value=os.path.join(myCode_dir, 'config','slam', 'slamTool.yaml'),
         description='Full path to the ROS2 parameters file to use for all launched nodes')
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
