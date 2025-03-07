@@ -17,7 +17,7 @@ RUN mkdir -p ~/ff_ws/src \
     && wget https://raw.githubusercontent.com/open-rmf/rmf/main/rmf.repos \
     && vcs import ~/ff_ws/src < rmf.repos
 RUN cd ~/ff_ws/src \
-    && git clone https://github.com/open-rmf/free_fleet \
+    && git clone https://github.com/michbelle/free_fleet.git \
     && cd ~/ff_ws \
     && rosdep install --from-paths src --ignore-src --rosdistro jazzy -yr \
     && /bin/bash -c "source /opt/ros/jazzy/setup.bash; colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release >> ~/log_build_rmf.log" \
@@ -26,7 +26,7 @@ RUN cd ~/ff_ws/src \
 # # #install simulation code
 RUN apt update && apt install -y ros-jazzy-nav2-bringup git \
     && git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations ~/turtlebot3_simulations \
-    && echo "source /opt/ros/jazzy/setup.bash\nexport RMW_IMPLEMENTATION=rmw_cyclonedds_cpp\nexport GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/turtlebot3_simulations/turtlebot3_gazebo/models" >> ~/.bashrc \
+    && echo "export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp\nexport GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/turtlebot3_simulations/turtlebot3_gazebo/models" >> ~/.bashrc \
     && rm -rf /var/lib/apt/lists/*
 
 # # #install zenoh
