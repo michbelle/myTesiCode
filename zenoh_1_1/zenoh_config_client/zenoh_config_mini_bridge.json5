@@ -3,7 +3,7 @@
     ros2dds: {
       namespace: "/mini1",
       allow: {
-        publishers: ["*"],
+        publishers: [".*/tf", ".*/battery_state"],
         subscribers: [],
         service_servers: [],
         service_clients: [],
