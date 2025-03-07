@@ -79,7 +79,7 @@ def generate_launch_description():
 
         DeclareLaunchArgument(
             'params_file_amcl',
-            default_value=os.path.join(bringup_dir, 'config', 'Rlocalization_amcl.yaml'),
+            default_value=os.path.join(bringup_dir, 'config','localization', 'Rlocalization_amcl.yaml'),
             description='Full path to the ROS2 parameters file to use'),
 
         Node(

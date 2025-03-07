@@ -22,7 +22,7 @@ def generate_launch_description():
 
     # Start robot localization using an Extended Kalman filter
     robot_localization_file_path = Path(get_package_share_directory(
-        'myCode'), 'config','localization','localization_ekf.yaml')
+        'myCode'), 'config','odom_filtered_localization','localization_ekf.yaml')
     
     localization_node = Node(
     	package='robot_localization',
