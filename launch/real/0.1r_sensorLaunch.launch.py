@@ -54,7 +54,7 @@ def generate_launch_description():
             PythonLaunchDescriptionSource(os.path.join(
                 get_package_share_directory('myCode'), 
                 "launch/sensor", 
-                "wt31n.launch.py")),
+                "wt901.launch.py")),
             launch_arguments={
             "port" : pathimu
             }.items(),
