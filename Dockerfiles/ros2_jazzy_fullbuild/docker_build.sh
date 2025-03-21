@@ -1,0 +1,1 @@
+docker build . -t rmf_all_imagev1.1
