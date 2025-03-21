@@ -13,7 +13,8 @@ from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 laserTTYinfo=['10c4', 'ea60']
-imuTTYinfo=['0403','6001']
+# imuTTYinfo=['0403','6001'] # FT232RL
+imuTTYinfo=['0403','6014'] # FT232H
 
 def getttyusbconnected(vendorID:str, productID:str)->str:
     import pyudev
