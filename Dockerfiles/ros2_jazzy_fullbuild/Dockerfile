@@ -11,7 +11,7 @@ FROM $rosimage
 RUN mkdir -p ~/ff_ws/src \
     && apt update && apt install -y ros-jazzy-rmf-dev ros-dev-tools vim \
     && apt upgrade -y  && apt install -y wget python3-pip python3-vcstool ros-jazzy-rmw-cyclonedds-cpp \
-    && pip3 install eclipse-zenoh==1.1.0 pycdr2 rosbags --break-system-packages \
+    && pip3 install nudged eclipse-zenoh==1.1.0 pycdr2 rosbags --break-system-packages \
     && echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc \
     && /bin/bash -c "source /opt/ros/jazzy/setup.bash" \
     && wget https://raw.githubusercontent.com/open-rmf/rmf/main/rmf.repos \
@@ -31,7 +31,7 @@ RUN echo "deb [trusted=yes] https://download.eclipse.org/zenoh/debian-repo/ /" |
 
 #install free fleet
 RUN cd ~/ff_ws/src \
-    && git clone https://github.com/open-rmf/free_fleet \
+    && git clone https://github.com/open-rmf/free_fleet.git \
     && apt update \
     && cd ~/ff_ws \
     && rosdep install --from-paths src --ignore-src --rosdistro jazzy -yr \
@@ -47,11 +47,6 @@ RUN cd ~/ff_ws/src \
     && echo "export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:/root/ff_ws/src/myTesiCode/rmf_code/ign_world/elettra/modelOUT/" >> ~/.bashrc \
     && /bin/bash -c "source /opt/ros/jazzy/setup.bash; colcon build --packages-select myCode >> ~/log_build_mycode.log" \
     && echo "source ~/ff_ws/install/setup.bash" >> ~/.bashrc
-
-RUN pip install nudged --break-system-packages
-
-# #copy my code
-# COPY $extworkdir /code/
 
 # #set simulation robot for nav2
 # ENV TURTLEBOT3_MODEL=burger
