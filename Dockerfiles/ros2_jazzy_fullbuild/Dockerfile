@@ -44,6 +44,7 @@ RUN cd ~/ff_ws/src \
     && apt update \
     && cd ~/ff_ws \
     && rosdep install --from-paths src --ignore-src --rosdistro jazzy -yr \
+    && echo "export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:/root/ff_ws/src/myTesiCode/rmf_code/ign_world/elettra/modelOUT/" >> ~/.bashrc \
     && /bin/bash -c "source /opt/ros/jazzy/setup.bash; colcon build --packages-select myCode >> ~/log_build_mycode.log" \
     && echo "source ~/ff_ws/install/setup.bash" >> ~/.bashrc
 
