@@ -16,12 +16,6 @@ RUN mkdir -p ~/ff_ws/src \
     && /bin/bash -c "source /opt/ros/jazzy/setup.bash" \
     && wget https://raw.githubusercontent.com/open-rmf/rmf/main/rmf.repos \
     && vcs import ~/ff_ws/src < rmf.repos
-RUN cd ~/ff_ws/src \
-    && git clone https://github.com/michbelle/free_fleet.git \
-    && cd ~/ff_ws \
-    && rosdep install --from-paths src --ignore-src --rosdistro jazzy -yr \
-    && /bin/bash -c "source /opt/ros/jazzy/setup.bash; colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release >> ~/log_build_rmf.log" \
-    && echo "source ~/ff_ws/install/setup.bash" >> ~/.bashrc
 
 # # #install simulation code
 RUN apt update && apt install -y ros-jazzy-nav2-bringup git \
@@ -34,6 +28,24 @@ RUN echo "deb [trusted=yes] https://download.eclipse.org/zenoh/debian-repo/ /" |
     && apt update \
     && apt install -y systemctl zenoh \
     && rm -rf /var/lib/apt/lists/*
+
+#install free fleet
+RUN cd ~/ff_ws/src \
+    && git clone https://github.com/open-rmf/free_fleet \
+    && apt update \
+    && cd ~/ff_ws \
+    && rosdep install --from-paths src --ignore-src --rosdistro jazzy -yr \
+    && /bin/bash -c "source /opt/ros/jazzy/setup.bash; colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release >> ~/log_build_rmf.log" \
+    && echo "source ~/ff_ws/install/setup.bash" >> ~/.bashrc
+
+#install tesi code
+RUN cd ~/ff_ws/src \
+    && git clone https://github.com/michbelle/myTesiCode.git \
+    && apt update \
+    && cd ~/ff_ws \
+    && rosdep install --from-paths src --ignore-src --rosdistro jazzy -yr \
+    && /bin/bash -c "source /opt/ros/jazzy/setup.bash; colcon build --packages-select myCode >> ~/log_build_mycode.log" \
+    && echo "source ~/ff_ws/install/setup.bash" >> ~/.bashrc
 
 RUN pip install nudged --break-system-packages
 
