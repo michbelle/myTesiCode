@@ -67,7 +67,7 @@ def generate_launch_description():
 
         DeclareLaunchArgument(
             'map',
-            default_value=os.path.join(bringup_dir, 'maps', 'maze_map.yaml'),
+            default_value=os.path.join(bringup_dir, 'maps', 'map-elettra', 'amcl', 'map.yaml'),
             description='Full path to map yaml file to load'),
 
         DeclareLaunchArgument(

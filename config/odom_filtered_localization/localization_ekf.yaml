@@ -1,14 +1,14 @@
 ### ekf config file ###
 ekf_filter_node:
     ros__parameters:
-        use_sim_time: true
+        use_sim_time: false
         frequency: 30.0
         sensor_timeout: 1.0
         two_d_mode: true
         transform_time_offset: 0.0
         transform_timeout: 0.0
         print_diagnostics: true
-        debug: true
+        debug: false
         debug_out_file: /home/mini/navros/file.txt
         publish_tf: true
         publish_acceleration: false
