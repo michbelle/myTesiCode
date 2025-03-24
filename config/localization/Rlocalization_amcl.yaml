@@ -22,10 +22,10 @@ amcl:
     scan_topic: scan
     set_initial_pose: True
     initial_pose:
-      x: 2.920
-      y: 18.643
+      x: 5.191
+      y: 22.214
       z: 1.101
-      yaw: 1.1
+      yaw: 1.070
     # yaml_filename: "/home/mini/navros/src/myTesiCode/maps/map-elettra/amcl/map.yaml"
     # map: "/home/mini/navros/src/myTesiCode/maps/map-elettra/amcl/map.yaml"
 
