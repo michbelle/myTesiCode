@@ -11,7 +11,7 @@ docker exec -it serverNavRos bash
 /root/ff_ws/src/myTesiCode/zenoh_1_1/zenoh-bridge-ros2dds -c /root/ff_ws/src/myTesiCode/zenoh_1_1/zenoh_config_server/server_config.json5
 
 cd /root/ff_ws
-colcon build --packages-select myCode
+colcon build --packages-select myCode free_fleet free_fleet_adapter
 source install/setup.bash 
 
 #test zenoh

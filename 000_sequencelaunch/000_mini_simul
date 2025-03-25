@@ -1,0 +1,5 @@
+ros2 launch myCode 0s_ign_mini_gazebo.launch.py
+ros2 launch myCode 1s_robot_localizationEKF.launch.py
+ros2 launch myCode 2r_navigation_launch.py
+ros2 launch myCode 3r_Lamcl.launch.py
+/home/mini/zenoh-bridge-ros2dds -c /home/mini/navros/src/myTesiCode/zenoh_1_1/zenoh_config_client/zenoh_config_mini_bridge.json5
