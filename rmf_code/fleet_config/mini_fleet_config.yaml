@@ -40,6 +40,7 @@ rmf_fleet:
       navigation_stack: 2
       # tf_mapping_base : base_link
       # tf_mapping_map : map
+      init_timeout_sec: 5
       map_frame: "map"
       robot_frame: "base_link"
       initial_map: "L1"
@@ -63,8 +64,8 @@ rmf_fleet:
 reference_coordinates:
   L1:
     rmf: [[73.5818, -86.1411],
-          [70.3178, -82.0966],
-          [60.5258, -100.8291]]
-    robot: [[2.920, 18.643],
-          [1.37657, 21.4197],
-          [-3.96994, 12.4861]]
+          [68.1894, -89.2635],
+          [61.5902, -100.1195]]
+    robot: [[5.181, 22.613],
+          [1.726, 20.227],
+          [-3.025, 12.522]]

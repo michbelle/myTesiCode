@@ -21,6 +21,8 @@ levels:
     elevation: 0
     fiducials:
       - [1037.3530000000001, 1214.808, ""]
+      - [961.21000000000004, 1258.0440000000001, ""]
+      - [868.45799999999997, 1411.7329999999999, ""]
     floors:
       - parameters: {ceiling_scale: [3, 1], ceiling_texture: [1, blue_linoleum], indoor: [2, 0], texture_name: [1, blue_linoleum], texture_rotation: [3, 0], texture_scale: [3, 1]}
         vertices: [23, 22, 86, 87, 30, 88, 83, 89, 43, 44, 45, 46, 47, 48, 49, 85, 2, 3, 0]
