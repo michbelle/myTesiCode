@@ -39,7 +39,8 @@ def generate_launch_description():
     gz_sim = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(gz_sim_share, "launch", "gz_sim.launch.py")),
         launch_arguments={
-            "gz_args" : gz_world_arg 
+            "gz_args" : gz_world_arg,
+            "headless": "true"
         }.items()
     )
     

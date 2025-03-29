@@ -15,88 +15,115 @@ levels:
     - - 2
       - 1
       - {}
-    - - 1
+    - - 0
       - 3
       - {}
     - - 3
-      - 1
+      - 0
       - {}
-    - - 1
+    - - 3
       - 4
-      - {dock_name: mini}
+      - {}
     - - 4
-      - 1
-      - {undock_name: mini}
-    - - 1
+      - 3
+      - {}
+    - - 3
       - 5
       - {}
     - - 5
-      - 1
+      - 3
       - {}
-    - - 1
+    - - 3
       - 6
       - {}
     - - 6
-      - 1
+      - 3
       - {}
-    - - 1
+    - - 3
       - 7
-      - {}
+      - {dock_name: mini}
     - - 7
-      - 1
-      - {}
-    - - 7
+      - 3
+      - {undock_name: mini}
+    - - 3
       - 8
       - {}
     - - 8
-      - 7
+      - 3
       - {}
-    - - 7
+    - - 3
       - 9
-      - {dock_name: T2PT071_dock_mini}
+      - {}
     - - 9
-      - 7
-      - {undock_name: T2PT071_dock_mini}
-    - - 7
+      - 3
+      - {}
+    - - 2
       - 10
       - {}
     - - 10
-      - 7
+      - 2
       - {}
-    - - 7
+    - - 10
       - 11
       - {}
     - - 11
-      - 7
+      - 10
       - {}
-    - - 7
+    - - 11
       - 12
       - {}
     - - 12
-      - 7
+      - 11
       - {}
-    - - 7
+    - - 11
       - 13
       - {}
     - - 13
-      - 7
+      - 11
       - {}
-    - - 7
+    - - 11
       - 14
-      - {}
+      - {dock_name: T2PT071_dock_mini1}
     - - 14
-      - 7
+      - 11
+      - {undock_name: T2PT071_dock_mini1}
+    - - 10
+      - 15
+      - {}
+    - - 15
+      - 10
+      - {}
+    - - 10
+      - 16
+      - {}
+    - - 16
+      - 10
+      - {}
+    - - 10
+      - 17
+      - {}
+    - - 17
+      - 10
       - {}
     vertices:
-    - - 59.18385061903676
-      - -99.18796054690164
-      - {dropoff_ingestor: dispensa_drop, name: dispensa_drop}
+    - - 62.562087095534224
+      - -101.48893623393921
+      - {name: ''}
+    - - 64.8790279833114
+      - -92.56864640737172
+      - {name: ''}
+    - - 70.32493534670525
+      - -82.0997321090639
+      - {name: ''}
     - - 60.543943809154456
       - -100.86813827273618
       - {name: ''}
     - - 60.149142133976305
       - -99.44971888258318
       - {name: dispensa_pickup, pickup_dispenser: dispensa_pickup}
+    - - 59.18385061903676
+      - -99.18796054690164
+      - {dropoff_ingestor: dispensa_drop, name: dispensa_drop}
     - - 58.95785433301189
       - -100.016660899958
       - {is_charger: true, is_holding_point: true, is_parking_spot: true, name: dispensa_charge}
@@ -115,15 +142,15 @@ levels:
     - - 71.52480887784517
       - -83.80431885291809
       - {name: ''}
-    - - 72.34180141702585
-      - -84.04159721413228
-      - {dock_name: T2PT071_dock_mini, name: T2PT071_dock_mini}
-    - - 72.96330894270618
-      - -84.38055616494573
-      - {is_charger: true, name: T2PT071_charge}
     - - 73.72601979937224
       - -84.70546573910833
       - {name: T2PT071_pick, pickup_dispenser: T2PT071_pick}
+    - - 72.96330894270618
+      - -84.38055616494573
+      - {is_charger: true, name: T2PT071_charge}
+    - - 72.34180141702585
+      - -84.04159721413228
+      - {dock_name: T2PT071_dock_mini1, name: T2PT071_dock_mini}
     - - 72.86439565456845
       - -83.23645440172277
       - {is_holding_point: true, name: T2PT071_hold}
