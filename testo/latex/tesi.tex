@@ -1,0 +1,52 @@
+%\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass[12pt,a4paper,oneside]{report}
+\usepackage{biblatex}
+\addbibresource{cap/references.bib}
+%\usepackage{blindtext}
+%\usepackage{emptypage}
+%\usepackage{graphicx}
+%\usepackage{float}
+%\usepackage{amsmath}
+%\usepackage{gensymb}
+%\usepackage{textcomp}
+%\usepackage{booktabs}
+
+%\usepackage{setspace}
+%\setstretch{1.5}
+
+%\usepackage{subcaption}
+
+%\usepackage{multirow}
+
+%\usepackage{natbib}
+% modification to natbib citations
+%\bibliographystyle{tmlr}
+%\setcitestyle{authoryear,round,citesep={;},aysep={,},yysep={;}}
+
+%\usepackage[format=hang,font=small,labelfont=bf]{caption}
+
+%\usepackage{etoolbox}
+%\renewcommand{\topfraction}{0.9}	% max fraction of floats at top
+%\renewcommand{\bottomfraction}{0.8}	% max fraction of floats at bottom
+
+%\setcounter{topnumber}{2}
+%\setcounter{bottomnumber}{2}
+%\setcounter{totalnumber}{4}     % 2 may work better
+%\setcounter{dbltopnumber}{2}    % for 2-column pages
+%\renewcommand{\dbltopfraction}{0.9}	% fit big float above 2-col. text
+%\renewcommand{\textfraction}{0.07}	% allow minimal text w. figs
+
+\begin{document}
+
+\include{cap/Introduction.tex}
+\include{cap/LiteratureReview.tex}
+\include{cap/Methodology.tex}
+\include{cap/Result.tex}
+\include{cap/Conclusion.tex}
+\include{cap/Reference.tex}
+\include{cap/Appendices.tex}
+
+%\addcontentsline{toc}{chapter}{Bibliography}
+%\bibliography{cap/references}
+\printbibliography
+\end{document}
