@@ -1,7 +1,60 @@
 \part{Literature Review}
+In this part we will provide a description of the technologies used in this thesis. We will start describing what is ROS and how it works then we will talk about the navigation system used and how it is implemented the control with the fleet management system Open-RMF
 \chapter{Overview of ROS1 and ROS2}
-\section{Description of ROS}
+The Robotics Operating System \footnote{\href{https://www.ros.org/}{https://www.ros.org/}} is a compilation of tools and libraries open-source that help the development of application in the robotic environment. otherwise from the name, it's not a Operating System (OS) but an Software Development Kit (SDK) that gives at the user all the tools for creating your robot giving some typically functionality of an OS: hardware abstraction, low-level device control, implementation of commonly-used functionality, message-passing between processes, and package management.
+The ROS ecosystem is based on (all these things is going to be described in detail in the next section):
+\begin{itemize}
+	\item An communication system named middleware or plumbing. This allow the Nodes to share information between each other with an anonymous publish/subscribe pattern allowing fault isolation, separation of concerns and clear interfaces and a synchronous system RPC-style communication between services.
+	\item Tools to control and improve the development of the software like launch,  introspection, debugging, visualization, plotting, logging, and playback.
+	\item Provides tools and libraries for obtaining, building, writing, and running code across multiple computers.
+	\item A active and big community with at the center the Open Robotics\footnote{\href{https://www.openrobotics.org/}{https://www.openrobotics.org/}}.
+\end{itemize}
+\section{Structure of ROS}
+The documentation\footnote{\href{https://docs.ros.org/en/rolling/index.html}{https://docs.ros.org/en/rolling/index.html}} give all the information of ROS, some functionality write below are not available for ROS 1:
+\begin{itemize}
+	\item The \textbf{ROS Graph} is a peer-to-peer network of processes that elaborated simultaneously and communicate with each other.
+	\item \textbf{Nodes} is a modular process and should be a specific resolution for a problem to be more easily communicate with other Nodes through topics, services, action and parameters.
+	\item \textbf{Topics} are the bus for communication between Nodes to share a streams of messages in a publisher to subscriber structure.
+	\begin{center}
+		\captionsetup{type=figure}
+		\includegraphics[width=0.49\linewidth]{img/Topic.png}
+		\captionof{figure}{Topic process}
+	\end{center}
+	\item \textbf{Service} are based on the request and response model. When a node with a Service client send a Request Message to Node with a Service Server it will send a Response Message to that specific Service Client. 
+	\begin{center}
+		\captionsetup{type=figure}
+		\includegraphics[width=0.49\linewidth]{img/Service.png}
+		\captionof{figure}{Service process}
+	\end{center}
+	\item \textbf{Parameters} are configuration of a node and allow to modified them without changing the code.
+	\item \textbf{Actions} were created to fulfill the needs of something for tracking long task. They are a combination of two service (goal and result) and a pub-sub (feedback). It send a goal request and receive a response then send a result request, the node then start to pub to the feedback topic and then response to the result request.
+	\begin{center}
+		\captionsetup{type=figure}
+		\includegraphics[width=0.49\linewidth]{img/Action.png}
+		\captionof{figure}{Action process}
+	\end{center}
+\end{itemize}
 \section{Tools of ROS}
+Now i will describe the tools that gives ROS to develop robotics system:
+\begin{itemize}
+	\item \textbf{Launch} is a file structure that allow to start multiple nodes with a set of parameters.
+	\item \textbf{rqt} is a graphical user interface (GUI) tool for ROS 2. With a series of plugins allow to interact with an interface for helping in the development, in the monitoring and diagnostic the ROS system.
+	\item \textbf{rqt\_console} visualize the log generate by the ROS 2 system.
+	\item \textbf{Rviz} is a 3D visualizer for the Robot Operating System \underline{framework?}.
+	\begin{figure}[h]
+		\centering
+		\begin{subfigure}{0.4\textwidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{img/rviz.png}
+		\end{subfigure}
+		\begin{subfigure}{0.4\textwidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{img/rviz2.png}
+		\end{subfigure}
+		\captionof{figure}{Examples of visualization of ROS data with Rviz}
+	\end{figure}
+	\item \textbf{rosdep} .
+\end{itemize}
 \chapter{Introduction to NAV2 and Google Cartographer}
 \section{Description of Nav2}
 \section{Cartographer}
