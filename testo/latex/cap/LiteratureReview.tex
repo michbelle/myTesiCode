@@ -4,7 +4,7 @@ In this part we will provide a description of the technologies used in this thes
 The Robotics Operating System \footnote{\href{https://www.ros.org/}{https://www.ros.org/}} is a compilation of tools and libraries open-source that help the development of application in the robotic environment. otherwise from the name, it's not a Operating System (OS) but an Software Development Kit (SDK) that gives at the user all the tools for creating your robot giving some typically functionality of an OS: hardware abstraction, low-level device control, implementation of commonly-used functionality, message-passing between processes, and package management.
 The ROS ecosystem is based on (all these things is going to be described in detail in the next section):
 \begin{itemize}
-	\item An communication system named middleware or plumbing. This allow the Nodes to share information between each other with an anonymous publish/subscribe pattern allowing fault isolation, separation of concerns and clear interfaces and a synchronous system RPC-style communication between services.
+	\item An communication system named middleware or plumbing based on DDS (Data Distribution Service). This allow the Nodes to share information between each other with an anonymous publish/subscribe pattern allowing fault isolation, separation of concerns and clear interfaces and a synchronous system (remote procedure call)RPC-style communication between services.
 	\item Tools to control and improve the development of the software like launch,  introspection, debugging, visualization, plotting, logging, and playback.
 	\item Provides tools and libraries for obtaining, building, writing, and running code across multiple computers.
 	\item A active and big community with at the center the Open Robotics\footnote{\href{https://www.openrobotics.org/}{https://www.openrobotics.org/}}.
@@ -53,7 +53,8 @@ Now i will describe the tools that gives ROS to develop robotics system:
 		\end{subfigure}
 		\captionof{figure}{Examples of visualization of ROS data with Rviz}
 	\end{figure}
-	\item \textbf{rosdep} .
+	\item \textbf{rosdep} is a dependency installer utility.
+	\item \textbf{sros2} is a package that provide the tools and instruction to apply security on DDS.
 \end{itemize}
 \chapter{Introduction to NAV2 and Google Cartographer}
 \section{Description of Nav2}
