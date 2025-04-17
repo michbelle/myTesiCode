@@ -1,14 +1,14 @@
-\contentsline {part}{I\hspace {1em}Introduction}{2}{part.1}%
-\contentsline {chapter}{\numberline {1}Background and motivation}{4}{chapter.1}%
-\contentsline {chapter}{\numberline {2}Research questions and objectives}{5}{chapter.2}%
-\contentsline {chapter}{\numberline {3}Scope and limitations}{6}{chapter.3}%
-\contentsline {part}{II\hspace {1em}Literature Review}{7}{part.2}%
-\contentsline {chapter}{\numberline {4}Overview of ROS1 and ROS2}{9}{chapter.4}%
+\contentsline {part}{I\hspace {1em}Introduction}{3}{part.1}%
+\contentsline {chapter}{\numberline {1}Background and motivation}{5}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Research questions and objectives}{6}{chapter.2}%
+\contentsline {chapter}{\numberline {3}Scope and limitations}{7}{chapter.3}%
+\contentsline {part}{II\hspace {1em}Literature Review}{8}{part.2}%
+\contentsline {chapter}{\numberline {4}Overview of ROS1 and ROS2}{10}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Structure of ROS}{10}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Tools of ROS}{11}{section.4.2}%
-\contentsline {chapter}{\numberline {5}Introduction to NAV2 and Google Cartographer}{12}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Description of Nav2}{12}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Cartographer}{12}{section.5.2}%
-\contentsline {chapter}{\numberline {6}Review of related work on porting navigation stack from ROS1 to ROS2}{13}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Overview of open source fleet management systems, particularly Open-RMF}{14}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Open-RMF description}{14}{section.7.1}%
+\contentsline {section}{\numberline {4.2}Tools of ROS}{12}{section.4.2}%
+\contentsline {chapter}{\numberline {5}Introduction to NAV2 and Google Cartographer}{14}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Description of Nav2}{14}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Cartographer}{16}{section.5.2}%
+\contentsline {chapter}{\numberline {6}Review of related work on porting navigation stack from ROS1 to ROS2}{17}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Overview of open source fleet management systems, particularly Open-RMF}{18}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Open-RMF description}{18}{section.7.1}%

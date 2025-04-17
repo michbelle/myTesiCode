@@ -2346,8 +2346,12 @@
   <bcf:section number="0">
     <bcf:citekey order="1">10.1007/978-3-031-45770-8_29</bcf:citekey>
     <bcf:citekey order="2">doi:10.1126/scirobotics.abm6074</bcf:citekey>
-    <bcf:citekey order="3">10.1007/978-3-031-45770-8_29</bcf:citekey>
-    <bcf:citekey order="4">doi:10.1126/scirobotics.abm6074</bcf:citekey>
+    <bcf:citekey order="3">macenski2023survey</bcf:citekey>
+    <bcf:citekey order="4">macenski2024smac</bcf:citekey>
+    <bcf:citekey order="5">10.1007/978-3-031-45770-8_29</bcf:citekey>
+    <bcf:citekey order="6">doi:10.1126/scirobotics.abm6074</bcf:citekey>
+    <bcf:citekey order="7">macenski2023survey</bcf:citekey>
+    <bcf:citekey order="8">macenski2024smac</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

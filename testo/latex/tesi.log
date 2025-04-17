@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.5.15)  13 APR 2025 19:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.4.11)  17 APR 2025 18:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -124,7 +124,7 @@ Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 \bibhang=\skip56
 \blx@bcfin=\read2
 \blx@bcfout=\write3
-\blx@langwohyphens=\language9
+\blx@langwohyphens=\language3
 \c@mincomprange=\count304
 \c@maxcomprange=\count305
 \c@mincompwidth=\count306
@@ -226,10 +226,20 @@ Package biblatex Info: ... file 'blx-compat.def' found.
 (/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-compat.def
 File: blx-compat.def 2022/02/02 v3.17 biblatex compatibility (PK/MW)
 )
+Package biblatex Info: Trying to load BibTeX backend compatibility...
+Package biblatex Info: ... file 'blx-bibtex.def' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-bibtex.def
+File: blx-bibtex.def 2022/02/02 v3.17 biblatex compatibility (PK/MW)
+
+
+Package biblatex Warning: Using fall-back BibTeX(8) backend:
+(biblatex)                functionality may be reduced/unavailable.
+
+)
 Package biblatex Info: Trying to load generic definitions...
 Package biblatex Info: ... file 'biblatex.def' found.
-
-(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.def
+ (/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.def
 File: biblatex.def 2022/02/02 v3.17 biblatex compatibility (PK/MW)
 \c@textcitecount=\count375
 \c@textcitetotal=\count376
@@ -452,32 +462,71 @@ Package: subcaption 2020/10/07 v1.3j Sub-captions (AR)
 \c@subfigure=\count399
 \c@subtable=\count400
 )
-\@quotelevel=\count401
-\@quotereset=\count402
- (./tesi.aux
-(./cap/Introduction.aux) (./cap/LiteratureReview.aux) (./cap/Methodology.aux)
-(./cap/Result.aux) (./cap/Conclusion.aux) (./cap/Reference.aux)
-(./cap/Appendices.aux))
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+)
+\Gm@cnth=\count401
+\Gm@cntv=\count402
+\c@Gm@tempcnt=\count403
+\Gm@bindingoffset=\dimen152
+\Gm@wd@mp=\dimen153
+\Gm@odd@mp=\dimen154
+\Gm@even@mp=\dimen155
+\Gm@layoutwidth=\dimen156
+\Gm@layoutheight=\dimen157
+\Gm@layouthoffset=\dimen158
+\Gm@layoutvoffset=\dimen159
+\Gm@dimlist=\toks17
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks18
+\inpenc@posthook=\toks19
+)
+(/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+Package: fancyhdr 2021/01/28 v4.0.1 Extensive control of page headers and foote
+rs
+\f@nch@headwidth=\skip72
+\f@nch@O@elh=\skip73
+\f@nch@O@erh=\skip74
+\f@nch@O@olh=\skip75
+\f@nch@O@orh=\skip76
+\f@nch@O@elf=\skip77
+\f@nch@O@erf=\skip78
+\f@nch@O@olf=\skip79
+\f@nch@O@orf=\skip80
+)
+
+Package biblatex Warning: Load 'inputenc' before biblatex.
+
+\@quotelevel=\count404
+\@quotereset=\count405
+(./tesi.aux (./cap/Introduction.aux) (./cap/LiteratureReview.aux)
+(./cap/Methodology.aux) (./cap/Result.aux) (./cap/Conclusion.aux)
+(./cap/Reference.aux) (./cap/Appendices.aux))
 \openout1 = `tesi.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
 Package biblatex Info: Trying to load language 'english'...
 Package biblatex Info: ... file 'english.lbx' found.
 
@@ -487,26 +536,29 @@ File: english.lbx 2022/02/02 v3.17 biblatex localization (PK/MW)
 Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Automatic encoding selection.
 (biblatex)             Assuming data encoding 'utf8'.
-\openout3 = `tesi.bcf'.
+Package biblatex Info: Input encoding 'utf8' detected.
+Package biblatex Info: Data encoding 'utf8' specified.
+(biblatex)             No need to reencode data.
+\openout3 = `tesi-blx.bib'.
 
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'tesi.bbl' found.
  (./tesi.bbl)
-Package biblatex Info: Reference section=0 on input line 49.
-Package biblatex Info: Reference segment=0 on input line 49.
+Package biblatex Info: Reference section=0 on input line 57.
+Package biblatex Info: Reference segment=0 on input line 57.
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count403
-\scratchdimen=\dimen152
+\scratchcounter=\count406
+\scratchdimen=\dimen160
 \scratchbox=\box51
-\nofMPsegments=\count404
-\nofMParguments=\count405
-\everyMPshowfont=\toks17
-\MPscratchCnt=\count406
-\MPscratchDim=\dimen153
-\MPnumerator=\count407
-\makeMPintoPDFobject=\count408
-\everyMPtoPDFconversion=\toks18
+\nofMPsegments=\count407
+\nofMParguments=\count408
+\everyMPshowfont=\toks20
+\MPscratchCnt=\count409
+\MPscratchDim=\dimen161
+\MPnumerator=\count410
+\makeMPintoPDFobject=\count411
+\everyMPtoPDFconversion=\toks21
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -519,7 +571,7 @@ e
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 49.
+Package hyperref Info: Link coloring OFF on input line 57.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -530,21 +582,57 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count409
+\c@section@level=\count412
 )
-LaTeX Info: Redefining \ref on input line 49.
-LaTeX Info: Redefining \pageref on input line 49.
-LaTeX Info: Redefining \nameref on input line 49.
+LaTeX Info: Redefining \ref on input line 57.
+LaTeX Info: Redefining \pageref on input line 57.
+LaTeX Info: Redefining \nameref on input line 57.
 
 (./tesi.out) (./tesi.out)
 \@outlinefile=\write4
 \openout4 = `tesi.out'.
 
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* bindingoffset: 17.07164pt
+* modes: twoside 
+* h-part:(L,W,R)=(61.45795pt, 426.79134pt, 92.18695pt)
+* v-part:(T,H,B)=(71.13188pt, 702.78308pt, 71.13188pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=426.79134pt
+* \textheight=702.78308pt
+* \oddsidemargin=6.2596pt
+* \evensidemargin=19.91696pt
+* \topmargin=-38.1381pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=85.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidetrue
+* \@mparswitchtrue
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 53.
+(Font)              <14.4> on input line 61.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 53.
- [1
+(Font)              <7> on input line 61.
+[1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./tesi.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -557,98 +645,199 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \tf@toc=\write5
 \openout5 = `tesi.toc'.
 
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
-been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.55 \include{cap/Introduction.tex}
-                                    [1
+ [2
 
 ]
 \openout2 = `cap/Introduction.aux'.
 
- (./cap/Introduction.tex [2
+
+(./cap/Introduction.tex [3
 
 
-] [3]
+]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[4]
 Chapter 1.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 4.
-[4
+[5
 
 ]
 Chapter 2.
-<img/RoverRoboticsMini.png, id=113, 421.575pt x 248.93pt>
+<img/RoverRoboticsMini.png, id=114, 421.575pt x 248.93pt>
 File: img/RoverRoboticsMini.png Graphic file (type png)
 <use img/RoverRoboticsMini.png>
 Package pdftex.def Info: img/RoverRoboticsMini.png  used on input line 12.
-(pdftex.def)             Requested size: 191.10214pt x 112.8417pt.
-[5
+(pdftex.def)             Requested size: 209.1301pt x 123.48851pt.
+[6
 
  <./img/RoverRoboticsMini.png>]
 Chapter 3.
-) [6
+) [7
 
 ]
 \openout2 = `cap/LiteratureReview.aux'.
 
- (./cap/LiteratureReview.tex [7
+ (./cap/LiteratureReview.tex [8
 
 
 
-
-] [8]
-Chapter 4.
-[9
 
 ]
-Overfull \hbox (2.69214pt too wide) in paragraph at lines 17--18
-[]\OT1/cmr/bx/n/12 Topics \OT1/cmr/m/n/12 are the bus for com-mu-ni-ca-tion be-
-tween Nodes to share a streams
- []
 
-<img/Topic.png, id=152, 642.90187pt x 361.35pt>
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[9]
+Chapter 4.
+<img/life_cycle_sm.png, id=145, 1175.14032pt x 1225.57875pt>
+File: img/life_cycle_sm.png Graphic file (type png)
+<use img/life_cycle_sm.png>
+Package pdftex.def Info: img/life_cycle_sm.png  used on input line 19.
+(pdftex.def)             Requested size: 341.43436pt x 356.08197pt.
+[10
+
+]
+<img/Topic.png, id=155, 642.90187pt x 361.35pt>
 File: img/Topic.png Graphic file (type png)
 <use img/Topic.png>
-Package pdftex.def Info: img/Topic.png  used on input line 20.
-(pdftex.def)             Requested size: 176.70837pt x 99.31917pt.
-<img/Service.png, id=153, 642.90187pt x 361.35pt>
+Package pdftex.def Info: img/Topic.png  used on input line 25.
+(pdftex.def)             Requested size: 194.73633pt x 109.45345pt.
+<img/Service.png, id=156, 642.90187pt x 361.35pt>
 File: img/Service.png Graphic file (type png)
 <use img/Service.png>
-Package pdftex.def Info: img/Service.png  used on input line 26.
-(pdftex.def)             Requested size: 176.70837pt x 99.31917pt.
-[10 <./img/Topic.png> <./img/Service.png>]
-<img/Action.png, id=163, 1445.4pt x 813.0375pt>
+Package pdftex.def Info: img/Service.png  used on input line 31.
+(pdftex.def)             Requested size: 194.73633pt x 109.45345pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[11 <./img/life_cycle_sm.png> <./img/Topic.png>]
+<img/Action.png, id=166, 1445.4pt x 813.0375pt>
 File: img/Action.png Graphic file (type png)
 <use img/Action.png>
-Package pdftex.def Info: img/Action.png  used on input line 33.
-(pdftex.def)             Requested size: 176.70837pt x 99.39636pt.
-<img/rviz.png, id=164, 1927.2pt x 1084.05pt>
+Package pdftex.def Info: img/Action.png  used on input line 38.
+(pdftex.def)             Requested size: 194.73633pt x 109.53201pt.
+<img/rviz.png, id=167, 1927.2pt x 1084.05pt>
 File: img/rviz.png Graphic file (type png)
 <use img/rviz.png>
-Package pdftex.def Info: img/rviz.png  used on input line 48.
-(pdftex.def)             Requested size: 140.3969pt x 78.96793pt.
-<img/rviz2.png, id=165, 1317.92375pt x 708.6475pt>
+Package pdftex.def Info: img/rviz.png  used on input line 53.
+(pdftex.def)             Requested size: 153.64148pt x 86.41148pt.
+<img/rviz2.png, id=168, 1317.92375pt x 708.6475pt>
 File: img/rviz2.png Graphic file (type png)
 <use img/rviz2.png>
-Package pdftex.def Info: img/rviz2.png  used on input line 52.
-(pdftex.def)             Requested size: 140.3969pt x 75.48608pt.
- [11 <./img/Action.png> <./img/rviz.png> <./img/rviz2.png>]
-Chapter 5.
-[12
+Package pdftex.def Info: img/rviz2.png  used on input line 57.
+(pdftex.def)             Requested size: 153.64148pt x 82.6119pt.
 
-]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[12 <./img/Service.png> <./img/Action.png>]
+<img/gazebo1.png, id=181, 1927.2pt x 1132.23pt>
+File: img/gazebo1.png Graphic file (type png)
+<use img/gazebo1.png>
+Package pdftex.def Info: img/gazebo1.png  used on input line 77.
+(pdftex.def)             Requested size: 153.64148pt x 90.252pt.
+<img/gazebo2.png, id=182, 1456.44125pt x 921.4425pt>
+File: img/gazebo2.png Graphic file (type png)
+<use img/gazebo2.png>
+Package pdftex.def Info: img/gazebo2.png  used on input line 81.
+(pdftex.def)             Requested size: 153.64148pt x 97.1972pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[13 <./img/rviz.png> <./img/rviz2.png> <./img/gazebo1.png> <./img/gazebo2.png>]
+Chapter 5.
+<img/nav2_architecture.png, id=200, 963.6pt x 602.25pt>
+File: img/nav2_architecture.png Graphic file (type png)
+<use img/nav2_architecture.png>
+Package pdftex.def Info: img/nav2_architecture.png  used on input line 94.
+(pdftex.def)             Requested size: 341.43436pt x 213.3913pt.
+[14
+
+ <./img/nav2_architecture.png (PNG copy)>]
+Overfull \hbox (1.39671pt too wide) in paragraph at lines 106--107
+\OT1/cmr/m/n/12 si-tion) and con-troller (gen-er-ate the ve-loc-ity com-mand us
+-ing the \OT1/cmr/bx/n/12 lo-cal costmap
+ []
+
+<img/bt2_nav2.png, id=214, 1273.75874pt x 505.89pt>
+File: img/bt2_nav2.png Graphic file (type png)
+<use img/bt2_nav2.png>
+Package pdftex.def Info: img/bt2_nav2.png  used on input line 111.
+(pdftex.def)             Requested size: 341.43436pt x 135.60405pt.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[15 <./img/bt2_nav2.png>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[16]
 Chapter 6.
-[13
+[17
 
 ]
 Chapter 7.
-) [14
+) [18
 
 ]
 \openout2 = `cap/Methodology.aux'.
 
  (./cap/Methodology.tex)
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 27.05003pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.05003pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-15.05003pt}.
+
+[19
+
+
+
+]
 \openout2 = `cap/Result.aux'.
 
  (./cap/Result.tex)
@@ -657,11 +846,11 @@ Chapter 7.
  (./cap/Conclusion.tex)
 \openout2 = `cap/Reference.aux'.
 
-
-(./cap/Reference.tex)
+ (./cap/Reference.tex)
 \openout2 = `cap/Appendices.aux'.
 
- (./cap/Appendices.tex) [15
+
+(./cap/Appendices.tex) [20
 
 
 
@@ -677,13 +866,9 @@ Chapter 7.
 
 
 
-
-
-
-] (./tesi.aux
-(./cap/Introduction.aux) (./cap/LiteratureReview.aux) (./cap/Methodology.aux)
-(./cap/Result.aux) (./cap/Conclusion.aux) (./cap/Reference.aux)
-(./cap/Appendices.aux))
+] (./tesi.aux (./cap/Introduction.aux)
+(./cap/LiteratureReview.aux) (./cap/Methodology.aux) (./cap/Result.aux)
+(./cap/Conclusion.aux) (./cap/Reference.aux) (./cap/Appendices.aux))
 Package rerunfilecheck Info: File `tesi.out' has not changed.
 (rerunfilecheck)             Checksum: 5324F9F1ED2300BE0F6518045093ED1D;2835.
 Package logreq Info: Writing requests to 'tesi.run.xml'.
@@ -691,28 +876,29 @@ Package logreq Info: Writing requests to 'tesi.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 17176 strings out of 480129
- 309707 string characters out of 5893409
- 1006172 words of memory out of 5000000
- 34885 multiletter control sequences out of 15000+600000
- 476795 words of font info for 53 fonts, out of 8000000 for 9000
- 81 hyphenation exceptions out of 8191
- 60i,9n,68p,1018b,1278s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/michele/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.6
-00pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmtt12.pfb>
-Output written on tesi.pdf (16 pages, 1605180 bytes).
+ 18002 strings out of 480247
+ 323514 string characters out of 5896151
+ 819960 words of memory out of 5000000
+ 35656 multiletter control sequences out of 15000+600000
+ 477147 words of font info for 54 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 60i,12n,68p,1853b,1281s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/michelebelletti/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tc
+rm1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx
+10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmsl12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmtt12.pfb>
+Output written on tesi.pdf (20 pages, 5585988 bytes).
 PDF statistics:
- 260 PDF objects out of 1000 (max. 8388607)
- 206 compressed objects within 3 object streams
- 45 named destinations out of 1000 (max. 500000)
- 143 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 325 PDF objects out of 1000 (max. 8388607)
+ 256 compressed objects within 3 object streams
+ 61 named destinations out of 1000 (max. 500000)
+ 168 words of extra memory for PDF output out of 10000 (max. 10000000)
 
