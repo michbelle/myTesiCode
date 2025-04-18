@@ -84,7 +84,7 @@ Gazebo offer:
 \end{figure}
 \chapter{Introduction to NAV2 and Google Cartographer}
 Multiple tools are available for move a robot in an environment. The one that give a full system is Nav2
-\footnote{\href{https://docs.nav2.org/}{https://docs.nav2.org/}}
+\footnote{\href{https://nav2.org/}{https://nav2.org/}}
 \cite{macenski2020marathon2}
  the successor of ROS Navigation Stack of ROS 1.
 \section{Description of Nav2}
@@ -92,34 +92,57 @@ Nav2 gives all the tools (perception, planning\cite{macenski2023survey}, control
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\linewidth]{img/nav2_architecture.png}
-\captionof{figure}{Nav2 architecture}
+\captionof{figure}{Nav2 architecture} \label{Nav2Arch}
 \end{figure}
 \newline
 These are also some of the updates that have changed from ROS 1 other less notable changes are the use of:
 \begin{itemize}
 	\item \textbf{Behavior trees}\cite{Colledanchise_2018}: gives to Nav2 a structure for completing a series of tasks in a human readable way. Their structure is similar to a tree and allow to create complex system that can be tested with different tools. The package used for this is BehaviorTree.CPP\footnote{\href{https://www.behaviortree.dev/}{https://www.behaviortree.dev/}} that respect others allow to link different tree.
-	\item \textbf{nav2\_util LifecycleNode} is a wrapper of rclcpp\_lifecycle LifecycleNode of the standard structure of ros as described in Nodes \ref{LifecycleNode} and add a bond connection to the lifecycle manager, node that knows the states of each node, and allow to  transition down its lifecycle nodes for safety if some node has crashed.
+	\item \textbf{nav2\_util LifecycleNode} is a wrapper of rclcpp\_lifecycle LifecycleNode of the standard structure of ros as described in Nodes \ref{LifecycleNode} and add a bond connection to the \textbf{Lifecycle Manager}, node that knows the states of each node, and allow to  transition down its lifecycle nodes for safety if some node has crashed.
 	\item \textbf{Action Server}: the functionality are described in the structure of ROS \ref{Action} and they are implemented in Nav2 for the interaction with the Behavior Tree (BT) like NavigationToPose (move to a location), NavigationThroughPoses (allow to select multiple waypoints), etc.
 \end{itemize}
 The control is based on this nodes:
 \begin{itemize}
-	\item \textbf{controller\_server} is the node that handle the request for moving the robot, using tree plugins progress checker (check if the robot has make some progress in following the path), goal checker (check if the robot has reached the goal position) and controller (generate the velocity command using the \textbf{local costmap} to move the robot avoiding collision)
-	\item \textbf{planner\_server} is the node that handle the request for calculate the path, using a loaded plugin planner, to reach a position using the \textbf{global costmap} and the data from sensors.
-	\item \textbf{bt\_navigator} is a Behavior Tree-based implementation of navigation that implement the NavigateToPose, NavigateThroughPoses, and other task interfaces to increment the flexibility during navigation.
+	\item \textbf{Controller Server} is the node that handle the request for moving the robot, using tree plugins progress checker (check if the robot has make some progress in following the path), goal checker (check if the robot has reached the goal position) and controller (generate the velocity command using the \textbf{local costmap} to move the robot avoiding collision)
+	\item \textbf{Planner Server} is the node that handle the request for calculate the path, using a loaded plugin planner, to reach a position using the \textbf{global costmap} and the data from sensors.
+	\item \textbf{BT Navigator Server} is a Behavior Tree-based implementation of navigation that implement the NavigateToPose, NavigateThroughPoses, and other task interfaces to increment the flexibility during navigation.
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=0.8\linewidth]{img/bt2_nav2.png}
-		\captionof{figure}{Nav2 bt navigation TOCECK}
+		\captionof{figure}{Nav2 BT navigation \texttt{navigate\_to\_pose\_w\_replanning\_and\_recovery.xml} loaded with Groot2 TOCECK}
 	\end{figure}
-	\item \textbf{smoother\_server}
-	\item \textbf{behavior\_server}
-	\item \textbf{waypoint\_follower}
-	\item \textbf{velocity\_smoother}
-	\item \textbf{global\_costmap}
-	\item \textbf{local\_costmap}
+	\item \textbf{Smoother Server} is the node that handle the request for smoothing, with plugins, a path minimizing sharp turns and rapid rotations from the path.
+	\item \textbf{Behavior Server} is the node that handles the behavior request like: spin, backup, wait.
+	\item \textbf{Waypoint Follower} is a way/example for controlling the robot for doing an orchestrated task. This implementation take a list of waypoints, call the NavigateToPose action server and at each waypoint do a task (wait, take a photo, ... ) as a plugin. This server can be changed with any \textbf{Autonomy System}
+	\item \textbf{Route Server} for computing routes through a predefined navigation graph rather than using freespace planning like the Planner Server.
+	\item \textbf{Velocity Smoother} as the name say smooth the velocity, acceleration and deadbands sent by Nav2 to the robot. 
+	\item \textbf{Costmap} is a representation of the environment using a regular 2D grid of cells with a cost (unknown, free, occupied, or inflated) and is used for generate the global plan or to compute local control efforts.
 \end{itemize}
-\section{Cartographer}
+The next things that allow to use Nav2 is a:
+\begin{itemize}
+	\item \textbf{state estimation} of the robot that generate a suitable TF tree, a tree structure of coordinate frames generated using the transform library\cite{6556373}, based on the \href{https://www.ros.org/reps/rep-0105.html}{REP 105}, that is should provide this structure: \texttt{map} $\rightarrow$ \texttt{odom} $\rightarrow$ \texttt{base\_link}. According to the REP 105 they are defines as:
+	\begin{itemize}
+		\item \texttt{map} : a world fix frame that is not continuos that is the pose of the robot can change in discrete jumps at any time. This is useful as a long-term global reference but not in the short-term.
+		\item \texttt{odom} : a world fix frame that can drift over time to be continuous. This allow to be useful in an short-term local reference but not good for long-term one.
+		\item \texttt{base\_link}: a robot fix frame.
+	\end{itemize}
+	The \texttt{odom} $\rightarrow$ \texttt{base\_link} link can be calculated using different sensors. To increase the performance of our estimation we will use the \texttt{robot\_localization} a node that provide nonlinear state estimation nodes using Kalman Filter \cite{MooreStouchKeneralizedEkf2014}.\\
+	The \texttt{map} $\rightarrow$ \texttt{odom} link can be generate with a global positioning system like Simultaneous Localization And Mapping (SLAM) method or using the one provided by Nav2, Adaptive Monte-Carlo Localization (AMCL). 
+	\item \textbf{map} that can be build during navigation using a SLAM tool or loaded. A powerful SLAM is Cartographer that will be described in the next section and it's the one used to build the map that we are going to use.
+\end{itemize}
+\subsection{Cartographer}
+Cartographer\cite{45466} \textcolor{red}{scarica questo paper} is a SLAM that work using two subsystem: a \textbf{Local SLAM} (called \textbf{Frontend}) that build a series of locally consistent \textbf{submaps} from successive scans and the pose extrapolator but with the possibility that can drift during acquisition and a \textbf{Global SLAM} (called \textbf{Backend}) that find loop closure constraints scan-matching scans against submaps using a global optimization in a way to obtain a consistent map.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth]{img/Alg_Cartographer.png}
+	\captionof{figure}{Cartographer Algorithm}
+\end{figure}
 \chapter{Review of related work on porting navigation stack from ROS1 to ROS2}
+The upgrade of ROS 2 was made necessary because
+and the changes are well described in this paper\cite{Macenski_2022} and also for nav2\cite{macenski2023survey}.
+see if true also \cite{erős2019ros2basedcommunicationarchitecture}
+also autoware
+While more detailed information about how to change the code are described in these sources, like the official documentation\footnote{\href{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}} and also secondary \footnote{\href{https://industrial-training-master.readthedocs.io/en/melodic/_source/session7/ROS1-to-ROS2-porting.html}{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}} and are the tools that are going to be used in the porting of the global planner. 
 \chapter{Overview of open source fleet management systems, particularly Open-RMF}
 \section{Open-RMF description}
 ...

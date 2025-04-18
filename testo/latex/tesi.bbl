@@ -53,7 +53,174 @@
     \field{year}{2018}
   \endentry
 
-  \entry{doi:10.1126/scirobotics.abm6074}{article}{}
+  \entry{erős2019ros2basedcommunicationarchitecture}{misc}{}
+    \name{author}{5}{}{%
+      {{hash=EE}{%
+         family={Erős},
+         familyi={E\bibinitperiod},
+         given={Endre},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=DM}{%
+         family={Dahl},
+         familyi={D\bibinitperiod},
+         given={Martin},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=BK}{%
+         family={Bengtsson},
+         familyi={B\bibinitperiod},
+         given={Kristofer},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=HA}{%
+         family={Hanna},
+         familyi={H\bibinitperiod},
+         given={Atieh},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=FP}{%
+         family={Falkman},
+         familyi={F\bibinitperiod},
+         given={Petter},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{EE+1}
+    \strng{fullhash}{EEDMBKHAFP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{E}
+    \field{sortinithash}{E}
+    \verb{eprint}
+    \verb 1905.09654
+    \endverb
+    \field{title}{A ROS2 based communication architecture for control in
+  collaborative and intelligent automation systems}
+    \verb{url}
+    \verb https://arxiv.org/abs/1905.09654
+    \endverb
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.RO}
+    \field{year}{2019}
+  \endentry
+
+  \entry{6556373}{inproceedings}{}
+    \name{author}{1}{}{%
+      {{hash=FT}{%
+         family={Foote},
+         familyi={F\bibinitperiod},
+         given={Tully},
+         giveni={T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{FT1}
+    \strng{fullhash}{FT1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{F}
+    \field{sortinithash}{F}
+    \field{booktitle}{Technologies for Practical Robot Applications (TePRA),
+  2013 IEEE International Conference on}
+    \verb{doi}
+    \verb 10.1109/TePRA.2013.6556373
+    \endverb
+    \field{issn}{2325-0526}
+    \field{pages}{1\bibrangedash 6}
+    \field{series}{Open-Source Software workshop}
+    \field{title}{tf: The transform library}
+    \field{year}{2013}
+    \warn{\item Invalid format of field 'month'}
+  \endentry
+
+  \entry{45466}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=HW}{%
+         family={Hess},
+         familyi={H\bibinitperiod},
+         given={Wolfgang},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=KD}{%
+         family={Kohler},
+         familyi={K\bibinitperiod},
+         given={Damon},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=RH}{%
+         family={Rapp},
+         familyi={R\bibinitperiod},
+         given={Holger},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=AD}{%
+         family={Andor},
+         familyi={A\bibinitperiod},
+         given={Daniel},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HW+1}
+    \strng{fullhash}{HWKDRHAD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \field{booktitle}{2016 IEEE International Conference on Robotics and
+  Automation (ICRA)}
+    \field{pages}{1271\bibrangedash 1278}
+    \field{title}{Real-Time Loop Closure in 2D LIDAR SLAM}
+    \field{year}{2016}
+  \endentry
+
+  \entry{10132508}{article}{}
+    \name{author}{4}{}{%
+      {{hash=MS}{%
+         family={Macenski},
+         familyi={M\bibinitperiod},
+         given={Steve},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=SA}{%
+         family={Soragna},
+         familyi={S\bibinitperiod},
+         given={Alberto},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=CM}{%
+         family={Carroll},
+         familyi={C\bibinitperiod},
+         given={Michael},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=GZ}{%
+         family={Ge},
+         familyi={G\bibinitperiod},
+         given={Zhenpeng},
+         giveni={Z\bibinitperiod},
+      }}%
+    }
+    \keyw{Robots;Task analysis;Robot sensing systems;Optimization;Operating
+  systems;Middleware;Benchmark testing;Engineering for robotic systems;software
+  architecture for robotic and automation;software tools for robot programming}
+    \strng{namehash}{MS+1}
+    \strng{fullhash}{MSSACMGZ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \verb{doi}
+    \verb 10.1109/LRA.2023.3279614
+    \endverb
+    \field{number}{7}
+    \field{pages}{3996\bibrangedash 4003}
+    \field{title}{Impact of ROS 2 Node Composition in Robotic Systems}
+    \field{volume}{8}
+    \field{journaltitle}{IEEE Robotics and Automation Letters}
+    \field{year}{2023}
+  \endentry
+
+  \entry{Macenski_2022}{article}{}
     \name{author}{5}{}{%
       {{hash=MS}{%
          family={Macenski},
@@ -86,7 +253,7 @@
          giveni={W\bibinitperiod},
       }}%
     }
-    \strng{namehash}{MS+1}
+    \strng{namehash}{MS+2}
     \strng{fullhash}{MSFTGBLCWW1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
@@ -134,7 +301,7 @@
          giveni={J\bibinitperiod},
       }}%
     }
-    \strng{namehash}{MS+1}
+    \strng{namehash}{MS+2}
     \strng{fullhash}{MSMFWRGCJ1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
@@ -144,6 +311,38 @@
   Robots and Systems (IROS)}
     \field{title}{The Marathon 2: A Navigation System}
     \field{year}{2020}
+  \endentry
+
+  \entry{MooreStouchKeneralizedEkf2014}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=MT}{%
+         family={Moore},
+         familyi={M\bibinitperiod},
+         given={T.},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=SD}{%
+         family={Stouch},
+         familyi={S\bibinitperiod},
+         given={D.},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{MTSD1}
+    \strng{fullhash}{MTSD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{booktitle}{Proceedings of the 13th International Conference on
+  Intelligent Autonomous Systems (IAS-13)}
+    \field{title}{A Generalized Extended Kalman Filter Implementation for the
+  Robot Operating System}
+    \field{year}{2014}
+    \warn{\item Invalid format of field 'month'}
   \endentry
 
   \entry{macenski2023survey}{article}{}

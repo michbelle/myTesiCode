@@ -221,45 +221,45 @@ Too many commas in name 1 of "S. Macenski, T. Moore, DV Lu, A. Merzlyakov, M. Fe
 while executing---line 2815 of file biblatex.bst
 Too many commas in name 1 of "S. Macenski, T. Moore, DV Lu, A. Merzlyakov, M. Ferguson" for entry macenski2023survey
 while executing---line 2815 of file biblatex.bst
-You've used 6 entries,
+You've used 11 entries,
             6399 wiz_defined-function locations,
-            1249 strings with 11300 characters,
-and the built_in function-call counts, 54848 in all, are:
-= -- 4753
-> -- 633
-< -- 174
-+ -- 1577
-- -- 229
-* -- 4013
-:= -- 6672
+            1290 strings with 12676 characters,
+and the built_in function-call counts, 95553 in all, are:
+= -- 8049
+> -- 1155
+< -- 312
++ -- 2942
+- -- 427
+* -- 6829
+:= -- 11558
 add.period$ -- 0
-call.type$ -- 6
-change.case$ -- 89
-chr.to.int$ -- 48
-cite$ -- 10
-duplicate$ -- 5280
-empty$ -- 4733
-format.name$ -- 380
-if$ -- 10955
+call.type$ -- 11
+change.case$ -- 144
+chr.to.int$ -- 50
+cite$ -- 20
+duplicate$ -- 10126
+empty$ -- 8131
+format.name$ -- 749
+if$ -- 18864
 int.to.chr$ -- 0
-int.to.str$ -- 15
+int.to.str$ -- 27
 missing$ -- 0
-newline$ -- 226
-num.names$ -- 259
-pop$ -- 1956
+newline$ -- 418
+num.names$ -- 478
+pop$ -- 3841
 preamble$ -- 1
-purify$ -- 123
+purify$ -- 211
 quote$ -- 0
-skip$ -- 1028
+skip$ -- 1869
 stack$ -- 0
-substring$ -- 9444
-swap$ -- 871
-text.length$ -- 163
-text.prefix$ -- 5
+substring$ -- 15108
+swap$ -- 1689
+text.length$ -- 302
+text.prefix$ -- 10
 top$ -- 1
-type$ -- 192
+type$ -- 362
 warning$ -- 0
-while$ -- 791
+while$ -- 1461
 width$ -- 0
-write$ -- 221
+write$ -- 408
 (There were 96 error messages)
