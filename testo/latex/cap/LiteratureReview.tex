@@ -131,18 +131,17 @@ The next things that allow to use Nav2 is a:
 	\item \textbf{map} that can be build during navigation using a SLAM tool or loaded. A powerful SLAM is Cartographer that will be described in the next section and it's the one used to build the map that we are going to use.
 \end{itemize}
 \subsection{Cartographer}
-Cartographer\cite{45466} \textcolor{red}{scarica questo paper} is a SLAM that work using two subsystem: a \textbf{Local SLAM} (called \textbf{Frontend}) that build a series of locally consistent \textbf{submaps} from successive scans and the pose extrapolator but with the possibility that can drift during acquisition and a \textbf{Global SLAM} (called \textbf{Backend}) that find loop closure constraints scan-matching scans against submaps using a global optimization in a way to obtain a consistent map.
+Cartographer\cite{45466} is a SLAM that work using two subsystem: a \textbf{Local SLAM} (called \textbf{Frontend}) that build a series of locally consistent \textbf{submaps} from successive scans and the pose extrapolator but with the possibility that can drift during acquisition and a \textbf{Global SLAM} (called \textbf{Backend}) that find loop closure constraints scan-matching scans against submaps using a global optimization in a way to obtain a consistent map.
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\linewidth]{img/Alg_Cartographer.png}
+	\includegraphics[width=0.8\linewidth]{img/Alg\_Cartographer.png}
 	\captionof{figure}{Cartographer Algorithm}
 \end{figure}
-\chapter{Review of related work on porting navigation stack from ROS1 to ROS2}
-The upgrade of ROS 2 was made necessary because
-and the changes are well described in this paper\cite{Macenski_2022} and also for nav2\cite{macenski2023survey}.
-see if true also \cite{erős2019ros2basedcommunicationarchitecture}
-also autoware
-While more detailed information about how to change the code are described in these sources, like the official documentation\footnote{\href{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}} and also secondary \footnote{\href{https://industrial-training-master.readthedocs.io/en/melodic/_source/session7/ROS1-to-ROS2-porting.html}{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}} and are the tools that are going to be used in the porting of the global planner. 
+\chapter{Review of related work on porting navigation stack from ROS 1 to ROS 2}
+The big diffusion of ROS as a software for controlling robots bring new users cases that were not considered when was built.
+Starting as an academic project, the new cases that has met are the need of a way to control a fleet of them, deveoping on little embedded board and microcontrollers, real time system, not ideal network and the code was not designed for industrial usage. These changes made impossible to save ROS from a total rewrite of the code that brigh to have ROS 2, all more documentation is accessible at \href{https://design.ros2.org/}{https://design.ros2.org/} . Multiple company started using the ROS 2 ecosystem and how it increase their development\cite{Macenski_2022} and also in the Nav2\cite{macenski2023survey}. New projects are born like micro-ROS \footnote{\href{https://micro.ros.org/}{https://micro.ros.org/}} for controlling microcontrollers.
+While more detailed information about how to change the code are described in these sources, like the official documentation\footnote{\href{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}} and also secondary \footnote{\href{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}} and are the tools that are going to be used in the porting of the global planner. 
+The notable changes, also described in that paper are:
 \chapter{Overview of open source fleet management systems, particularly Open-RMF}
 \section{Open-RMF description}
 ...

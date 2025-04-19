@@ -7,7 +7,6 @@ A level-1 auxiliary file: cap/LiteratureReview.aux
 A level-1 auxiliary file: cap/Methodology.aux
 A level-1 auxiliary file: cap/Result.aux
 A level-1 auxiliary file: cap/Conclusion.aux
-A level-1 auxiliary file: cap/Reference.aux
 A level-1 auxiliary file: cap/Appendices.aux
 Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
 Reallocated global_strs (elt_size=200001) to 20 items from 10.
@@ -221,45 +220,45 @@ Too many commas in name 1 of "S. Macenski, T. Moore, DV Lu, A. Merzlyakov, M. Fe
 while executing---line 2815 of file biblatex.bst
 Too many commas in name 1 of "S. Macenski, T. Moore, DV Lu, A. Merzlyakov, M. Ferguson" for entry macenski2023survey
 while executing---line 2815 of file biblatex.bst
-You've used 11 entries,
+You've used 10 entries,
             6399 wiz_defined-function locations,
-            1290 strings with 12676 characters,
-and the built_in function-call counts, 95553 in all, are:
-= -- 8049
-> -- 1155
-< -- 312
-+ -- 2942
-- -- 427
-* -- 6829
-:= -- 11558
+            1281 strings with 12371 characters,
+and the built_in function-call counts, 84341 in all, are:
+= -- 7067
+> -- 1045
+< -- 288
++ -- 2527
+- -- 379
+* -- 6050
+:= -- 10105
 add.period$ -- 0
-call.type$ -- 11
-change.case$ -- 144
+call.type$ -- 10
+change.case$ -- 135
 chr.to.int$ -- 50
-cite$ -- 20
-duplicate$ -- 10126
-empty$ -- 8131
-format.name$ -- 749
-if$ -- 18864
+cite$ -- 18
+duplicate$ -- 8793
+empty$ -- 7237
+format.name$ -- 658
+if$ -- 16748
 int.to.chr$ -- 0
-int.to.str$ -- 27
+int.to.str$ -- 25
 missing$ -- 0
-newline$ -- 418
-num.names$ -- 478
-pop$ -- 3841
+newline$ -- 367
+num.names$ -- 437
+pop$ -- 3427
 preamble$ -- 1
-purify$ -- 211
+purify$ -- 192
 quote$ -- 0
-skip$ -- 1869
+skip$ -- 1706
 stack$ -- 0
-substring$ -- 15108
-swap$ -- 1689
-text.length$ -- 302
-text.prefix$ -- 10
+substring$ -- 13338
+swap$ -- 1505
+text.length$ -- 274
+text.prefix$ -- 9
 top$ -- 1
-type$ -- 362
+type$ -- 328
 warning$ -- 0
-while$ -- 1461
+while$ -- 1263
 width$ -- 0
-write$ -- 408
+write$ -- 358
 (There were 96 error messages)

@@ -53,58 +53,6 @@
     \field{year}{2018}
   \endentry
 
-  \entry{erős2019ros2basedcommunicationarchitecture}{misc}{}
-    \name{author}{5}{}{%
-      {{hash=EE}{%
-         family={Erős},
-         familyi={E\bibinitperiod},
-         given={Endre},
-         giveni={E\bibinitperiod},
-      }}%
-      {{hash=DM}{%
-         family={Dahl},
-         familyi={D\bibinitperiod},
-         given={Martin},
-         giveni={M\bibinitperiod},
-      }}%
-      {{hash=BK}{%
-         family={Bengtsson},
-         familyi={B\bibinitperiod},
-         given={Kristofer},
-         giveni={K\bibinitperiod},
-      }}%
-      {{hash=HA}{%
-         family={Hanna},
-         familyi={H\bibinitperiod},
-         given={Atieh},
-         giveni={A\bibinitperiod},
-      }}%
-      {{hash=FP}{%
-         family={Falkman},
-         familyi={F\bibinitperiod},
-         given={Petter},
-         giveni={P\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{EE+1}
-    \strng{fullhash}{EEDMBKHAFP1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{sortinit}{E}
-    \field{sortinithash}{E}
-    \verb{eprint}
-    \verb 1905.09654
-    \endverb
-    \field{title}{A ROS2 based communication architecture for control in
-  collaborative and intelligent automation systems}
-    \verb{url}
-    \verb https://arxiv.org/abs/1905.09654
-    \endverb
-    \field{eprinttype}{arXiv}
-    \field{eprintclass}{cs.RO}
-    \field{year}{2019}
-  \endentry
-
   \entry{6556373}{inproceedings}{}
     \name{author}{1}{}{%
       {{hash=FT}{%
