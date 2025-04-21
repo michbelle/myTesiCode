@@ -640,16 +640,6 @@ INPUT /usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.st
 INPUT /usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
-INPUT ./tesi.out
-INPUT tesi.out
-INPUT ./tesi.out
-INPUT tesi.out
-INPUT ./tesi.out
-INPUT tesi.out
-INPUT ./tesi.out
-INPUT tesi.out
-INPUT ./tesi.out
-INPUT ./tesi.out
 OUTPUT tesi.out
 OUTPUT tesi.pdf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
@@ -659,8 +649,6 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
-INPUT ./tesi.toc
-INPUT tesi.toc
 OUTPUT tesi.toc
 INPUT ./cap/Introduction.tex
 OUTPUT cap/Introduction.aux

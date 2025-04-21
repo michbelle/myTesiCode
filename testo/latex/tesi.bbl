@@ -121,6 +121,51 @@
     \field{year}{2016}
   \endentry
 
+  \entry{macenski2023impactros2node}{misc}{}
+    \name{author}{4}{}{%
+      {{hash=MS}{%
+         family={Macenski},
+         familyi={M\bibinitperiod},
+         given={Steve},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=SA}{%
+         family={Soragna},
+         familyi={S\bibinitperiod},
+         given={Alberto},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=CM}{%
+         family={Carroll},
+         familyi={C\bibinitperiod},
+         given={Michael},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=GZ}{%
+         family={Ge},
+         familyi={G\bibinitperiod},
+         given={Zhenpeng},
+         giveni={Z\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MS+1}
+    \strng{fullhash}{MSSACMGZ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \verb{eprint}
+    \verb 2305.09933
+    \endverb
+    \field{title}{Impact of ROS 2 Node Composition in Robotic Systems}
+    \verb{url}
+    \verb https://arxiv.org/abs/2305.09933
+    \endverb
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.RO}
+    \field{year}{2023}
+  \endentry
+
   \entry{10132508}{article}{}
     \name{author}{4}{}{%
       {{hash=MS}{%
@@ -316,6 +361,97 @@
   capable mobile robotics algorithms in the robot operating system 2}
     \field{journaltitle}{Robotics and Autonomous Systems}
     \field{year}{2023}
+  \endentry
+
+  \entry{sikand2021robofleetopensourcecommunication}{misc}{}
+    \name{author}{4}{}{%
+      {{hash=SKS}{%
+         family={Sikand},
+         familyi={S\bibinitperiod},
+         given={Kavan\bibnamedelima Singh},
+         giveni={K\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+      {{hash=ZL}{%
+         family={Zartman},
+         familyi={Z\bibinitperiod},
+         given={Logan},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=RS}{%
+         family={Rabiee},
+         familyi={R\bibinitperiod},
+         given={Sadegh},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=BJ}{%
+         family={Biswas},
+         familyi={B\bibinitperiod},
+         given={Joydeep},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SKS+1}
+    \strng{fullhash}{SKSZLRSBJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \verb{eprint}
+    \verb 2103.06993
+    \endverb
+    \field{title}{Robofleet: Open Source Communication and Management for
+  Fleets of Autonomous Robots}
+    \verb{url}
+    \verb https://arxiv.org/abs/2103.06993
+    \endverb
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.RO}
+    \field{year}{2021}
+  \endentry
+
+  \entry{vilches2022sros2usablecybersecurity}{misc}{}
+    \name{author}{4}{}{%
+      {{hash=VVM}{%
+         family={Vilches},
+         familyi={V\bibinitperiod},
+         given={Victor\bibnamedelima Mayoral},
+         giveni={V\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=WR}{%
+         family={White},
+         familyi={W\bibinitperiod},
+         given={Ruffin},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=CG}{%
+         family={Caiazza},
+         familyi={C\bibinitperiod},
+         given={Gianluca},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=AM}{%
+         family={Arguedas},
+         familyi={A\bibinitperiod},
+         given={Mikael},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{VVM+1}
+    \strng{fullhash}{VVMWRCGAM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{V}
+    \field{sortinithash}{V}
+    \verb{eprint}
+    \verb 2208.02615
+    \endverb
+    \field{title}{SROS2: Usable Cyber Security Tools for ROS 2}
+    \verb{url}
+    \verb https://arxiv.org/abs/2208.02615
+    \endverb
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.CR}
+    \field{year}{2022}
   \endentry
 
   \entry{10.1007/978-3-031-45770-8_29}{inproceedings}{}
