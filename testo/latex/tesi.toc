@@ -8,7 +8,7 @@
 \contentsline {section}{\numberline {4.2}Tools of ROS}{12}{section.4.2}%
 \contentsline {chapter}{\numberline {5}Introduction to NAV2 and Google Cartographer}{14}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Description of Nav2}{14}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Cartographer}{16}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.1}Cartographer}{17}{subsection.5.1.1}%
 \contentsline {chapter}{\numberline {6}Review of related work on porting navigation stack from ROS 1 to ROS 2}{18}{chapter.6}%
 \contentsline {chapter}{\numberline {7}Overview of open source fleet management systems, particularly Open-RMF}{19}{chapter.7}%
 \contentsline {section}{\numberline {7.1}Open-RMF description}{20}{section.7.1}%
