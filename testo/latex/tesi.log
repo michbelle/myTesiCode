@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.4.11)  28 APR 2025 19:36
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.5.15)  29 APR 2025 10:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -124,7 +124,7 @@ Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 \bibhang=\skip56
 \blx@bcfin=\read2
 \blx@bcfout=\write3
-\blx@langwohyphens=\language3
+\blx@langwohyphens=\language9
 \c@mincomprange=\count304
 \c@maxcomprange=\count305
 \c@mincompwidth=\count306
@@ -702,7 +702,7 @@ Chapter 2.
 <img/RoverRoboticsMini.png, id=114, 421.575pt x 248.93pt>
 File: img/RoverRoboticsMini.png Graphic file (type png)
 <use img/RoverRoboticsMini.png>
-Package pdftex.def Info: img/RoverRoboticsMini.png  used on input line 12.
+Package pdftex.def Info: img/RoverRoboticsMini.png  used on input line 13.
 (pdftex.def)             Requested size: 209.1301pt x 123.48851pt.
 [6
 
@@ -1026,28 +1026,28 @@ Package logreq Info: Writing requests to 'tesi.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 18539 strings out of 480247
- 331701 string characters out of 5896151
- 830039 words of memory out of 5000000
- 36157 multiletter control sequences out of 15000+600000
+ 18539 strings out of 480129
+ 331701 string characters out of 5893409
+ 830434 words of memory out of 5000000
+ 36173 multiletter control sequences out of 15000+600000
  477315 words of font info for 55 fonts, out of 8000000 for 9000
- 14 hyphenation exceptions out of 8191
+ 81 hyphenation exceptions out of 8191
  60i,11n,68p,1853b,1279s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/michelebelletti/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tc
-rm1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx
-10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmsl12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
-t12.pfb>
-Output written on tesi.pdf (26 pages, 8120095 bytes).
+ </home/michele/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.6
+00pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmsl12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt1
+0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+
+Output written on tesi.pdf (26 pages, 8120666 bytes).
 PDF statistics:
  442 PDF objects out of 1000 (max. 8388607)
  349 compressed objects within 4 object streams

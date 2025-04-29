@@ -1,18 +1,18 @@
 \part{Introduction}
-This work is a study on a new system OPEN-RMF that is still in active development but has reached a good state to apply for the robots in the facility Elettra Sincotrone Trieste
+This work presents a study on the new system, OPEN-RMF, which is still under active development but has reached a mature enough state to be deployed with robots at the Elettra Sincotrone Trieste facility.
 \chapter{Background and motivation}
-Elettra Sincontrone Trieste\footnote{\href{https://www.elettra.eu/}{https://www.elettra.eu/}} is a big research facility that, principally, gives to users two light sources: the synchrotron Elettra and the laser at free electron Fermi.
-Besides this, it study new technology and technique to improve the their capabilities and work activities. A lot of the latest improvements are based on robots, that also after the covid and latest with the exploding diffusion of LLMs, allow an interaction of the users of the light sources to communicates and interact with the robots in the facility to obtain information and services as transport of packages.
-They already developed a global planner D-Star (D-star based optimized trajectory planner) \cite{10.1007/978-3-031-45770-8_29} in ROS 1 for sending a robot in the infrastructure that is optimized for exploring a big space. But ROS 1 has reached the end of life so we need to rewrite the code using the ROS 2 ecosystem.
-Furthermore, because there are multiple vendor that are specialized for different type of work, there is the problem of the interaction between them. For this in the latest years is born Open-RMF\footnote{\href{https://www.open-rmf.org/}{https://www.open-rmf.org/}} a multi platform for control and manage a multi fleet float of robots.
+Elettra Sincontrone Trieste\footnote{\href{https://www.elettra.eu/}{https://www.elettra.eu/}} s a major research facility that primarily provides users access to two light sources: the synchrotron Elettra and the free electron laser Fermi.
+In addition to operating these sources, the facility actively researches new technologies and techniques to enhance its capabilities and operations. Many recent advancements are based on robotics, which, especially after the COVID-19 pandemic and with the rapid rise of large language models (LLMs), have enabled new ways for users to interact with the infrastructure, including robot-assisted information retrieval and package delivery services.
+Previously, the facility developed a global planner, D-Star (D-star based optimized trajectory planner)\cite{10.1007/978-3-031-45770-8_29}, within the ROS 1 framework to enable robot navigation across large-scale environments.  However, as ROS 1 has reached end-of-life, the codebase must now be migrated to ROS 2.
+Additionally, the facility employs robots from multiple vendors, each specialized in different tasks and not designed to coordinate with one another. In an environment that shares resources such as narrow passages and lifts, this lack of interoperability creates significant coordination challenges. To address this issue,  Open-RMF\footnote{\href{https://www.open-rmf.org/}{https://www.open-rmf.org/}} has been developed in recent years as a multiplatform system for controlling and managing heterogeneous fleets of robots.
 \chapter{Research questions and objectives}
-Our objects for this thesis is: given the company Mini RoverRobotics\footnote{\href{https://roverrobotics.com/}{https://roverrobotics.com/}} Robot
+The objectives of this thesis are as follows: to integrate a Rover Mini robot from the company RoverRobotics \footnote{\href{https://roverrobotics.com/}{https://roverrobotics.com/}}
+into the ROS 2 Nav2 ecosystem, to port the D-Star global planner from ROS 1 to ROS 2,
 \begin{center}
 	\captionsetup{type=figure}
 	\includegraphics[width=0.49\linewidth]{img/RoverRoboticsMini.png}
 	\captionof{figure}{Rover Mini of the RoverRobotics}
 \end{center}
-import it to ROS 2 Nav2 ecosystem using a porting of the global planner D-star from ROS 1 to ROS 2 and then add it to Open-RMF to control it. Compare it to the ROS 1 stack and validate the use of the Open-RMF ecosystem in Elettra Sincotrone Trieste. 
+incorporate the robot into the Open-RMF framework for centralized fleet management, compare its performance to the ROS 1-based navigation stack, and evaluate the suitability of the Open-RMF ecosystem for deployment at the Elettra Sincrotrone Trieste facility.
 \chapter{Scope and limitations}
-The principal limitation is the now non accessible control for the lifts that will not enable us to have a direct control on them and also there is not an automatic open-close control over the doors.
-Even if the hight customability of open-rmf is possible to use a human interaction for active these systems, like when the robot reach a door, it the send a message or a light can be turned on and then wait until someone will open the door or a lift. But is not a good approach. 
+The principal limitation is the current lack of access to lift control systems, which prevents direct integration and operation by the robot fleet. Additionally, there is no automated system for opening and closing doors. While Open-RMF offers a high degree of customizability, and human-in-the-loop interactions can be configured—such as triggering a light or sending a notification when a robot approaches a door—this method requires a human to manually open the door or operate the lift. However, such an approach is not ideal for achieving full autonomy.
