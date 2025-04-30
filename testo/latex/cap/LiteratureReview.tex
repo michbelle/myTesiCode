@@ -1,39 +1,38 @@
 \part{Literature Review}
 In this section, we provide a description of the key technologies used in this thesis. We begin by describing the Robot Operating System (ROS) and its functionality, followed by an overview of the navigation system employed, and a discussion of how the Open-RMF fleet management system operates.
 \chapter{Overview of ROS1 and ROS2}
-The Robotics Operating System (ROS)\footnote{\href{https://www.ros.org/}{https://www.ros.org/}} is a compilation of tools and libraries open-source that help the development of application in the robotic environment. otherwise from the name, it's not a Operating System (OS) but an Software Development Kit (SDK) that gives at the user all the tools for creating your robot giving some typically functionality of an OS: hardware abstraction, low-level device control, implementation of commonly-used functionality, message-passing between processes, and package management.
-The ROS ecosystem is based on:
+The Robotics Operating System (ROS)\footnote{\href{https://www.ros.org/}{https://www.ros.org/}} is an open-source collection of tools and libraries designed to support the development of robotics applications. Despite its name, ROS is not an operating system (OS) in the traditional sense, but rather a software development kit (SDK) that provides developers with a comprehensive set of tools for building robotic systems. It offers several features typically associated with an OS, including hardware abstraction, low-level device control, implementation of commonly used functionalities, inter-process communication, and package management.
+The ROS ecosystem is built upon the following core components:
 \begin{itemize}
-	\item A communication called middleware (\textbf{RMW}) or plumbing made with \textbf{DDS} (Data Distribution Service). This allow the Nodes to share information between each other with an anonymous publish/subscribe pattern allowing fault isolation, separation of concerns and clear interfaces and a synchronous system (remote procedure call)RPC-style communication between services. The default one is eProsima Fast DDS (\texttt{rmw\_fastrtps\_cpp}), but we are going to use Eclipse Cyclone DDS (\texttt{rmw\_cyclonedds\_cpp}) that has better compatibility with Nav2.
-	\item Tools to control and improve the development of the software like launch,  introspection, debugging, visualization, plotting, logging, and playback.
-	\item Provides tools and libraries for obtaining, building, writing, and running code across multiple computers.
-	\item A active and big community with at the center the Open Robotics\footnote{\href{https://www.openrobotics.org/}{https://www.openrobotics.org/}}.
+	\item \textbf{Middleware communication layer (RMW)}: Built on the Data Distribution Service (DDS) standard, this layer enables nodes to exchange information using an anonymous publish/subscribe pattern. This design promotes fault isolation, separation of concerns, and modular interfaces. ROS also supports synchronous, Remote Procedure Call (RPC)-style communication between services. While the default DDS implementation is eProsima Fast DDS  (\texttt{rmw\_fastrtps\_cpp}), this work uses Eclipse Cyclone DDS (\texttt{rmw\_cyclonedds\_cpp}) due to its improved compatibility with the Nav2 navigation stack.
+	\item \textbf{Development tools}: ROS provides a suite of tools for managing and enhancing software development, including utilities for launching, introspection, debugging, visualization, plotting, logging, and playback.
+	\item \textbf{Multi-machine support} ROS includes tools and libraries for retrieving, building, writing, and executing code across multiple computers and OS.
+	\item \textbf{Community and governance}: ROS is supported by an active and extensive global community, coordinated primarily by Open Robotics\footnote{\href{https://www.openrobotics.org/}{https://www.openrobotics.org/}}, which serves as the central organization for its development and maintenance.
 \end{itemize}
 \section{Structure of ROS}
-The documentation\footnote{\href{https://docs.ros.org/en/rolling/index.html}{https://docs.ros.org/en/rolling/index.html}} give all the information of ROS, some functionality write below are not available for ROS 1:
+The official ROS documentation\footnote{\href{https://docs.ros.org/en/rolling/index.html}{https://docs.ros.org/en/rolling/index.html}} provides comprehensive information about the system.  All communication in ROS is handled through the \textbf{ROS Graph} , a peer-to-peer network of processes (called nodes) that execute concurrently and exchange information with one another. Some components of this graph are described below. Note that some of the functionalities described are specific to ROS 2 and are not available in ROS 1:
 \begin{itemize}
-	\item The \textbf{ROS Graph} is a peer-to-peer network of processes that elaborated simultaneously and communicate with each other.
-	\item \textbf{Nodes} is a modular process and should be a specific resolution for a problem to be more easily communicate with other Nodes through topics, services, action and parameters. They also can be based on \textbf{LifecycleNode}\label{LifecycleNode} that contain a state machine transitions for bringup and teardown to allow more deterministic behavior.
+	\item \textbf{Nodes}: A node is a modular process that performs a specific task. Nodes communicate with each other through topics, services, actions, and parameters. In ROS 2, nodes can be implemented as \textbf{LifecycleNode}\label{LifecycleNode}, which provide a managed state machine with defined transitions for startup and shutdown, enabling more deterministic behavior. Nodes can also be composed within the same process using the
 	\begin{figure}[h]
 	\centering
 	\includegraphics[width=0.8\linewidth]{img/life_cycle_sm.png}
 	\captionof{figure}{State Machine of LifecycleNode}
 	\end{figure}\\
-	Then can interact with other nodes with a \textbf{Composition}, that enable improve performance bypassing the middleware\cite{macenski2023impactros2node}. 
-	\item \textbf{Topics} are the bus for communication between Nodes to share a streams of messages in a publisher to subscriber structure.
+	 \textbf{Composition} feature, which improves performance by bypassing middleware overhead\cite{macenski2023impactros2node}. 
+	\item \textbf{Topics}: Topics are used for communication between nodes to share streams of messages in a publisher-subscriber structure.
 	\begin{center}
 		\captionsetup{type=figure}
 		\includegraphics[width=0.49\linewidth]{img/Topic.png}
 		\captionof{figure}{Topic process}
 	\end{center}
-	\item \textbf{Service} are based on the request and response model. When a node with a Service client send a Request Message to Node with a Service Server it will send a Response Message to that specific Service Client. 
+	\item \textbf{Service}: Services are based on the request-response model. When a node with a service client sends a Request Message to a node with a service server, it receives a Response Message from that specific server.
 	\begin{center}
 		\captionsetup{type=figure}
 		\includegraphics[width=0.49\linewidth]{img/Service.png}
 		\captionof{figure}{Service process}
 	\end{center}
-	\item \textbf{Parameters} are configuration of a node and allow to modified them without changing the code.
-	\item \textbf{Actions}\label{Action} were created to fulfill the needs of something for tracking long task. They are a combination of two service (goal and result) and a pub-sub (feedback). It send a goal request and receive a response then send a result request, the node then start to pub to the feedback topic and then response to the result request.
+	\item \textbf{Parameters}: Parameters are configurations of a node that can be modified without changing the source code.
+	\item \textbf{Actions}\label{Action}: Actions are designed to support long-running tasks that require feedback and the ability to preempt. They combine two services (goal and result) and a publisher-subscriber mechanism (feedback). A node sends a goal request and receives an acknowledgment, then starts publishing feedback messages while executing the task, and finally responds with the result.
 	\begin{center}
 		\captionsetup{type=figure}
 		\includegraphics[width=0.49\linewidth]{img/Action.png}
@@ -41,12 +40,12 @@ The documentation\footnote{\href{https://docs.ros.org/en/rolling/index.html}{htt
 	\end{center}
 \end{itemize}
 \section{Tools of ROS}
-Now i will describe the tools that are built in ROS for developing robotics system:
+Now, I will describe the tools that are built into ROS for developing robotic systems:
 \begin{itemize}
-	\item \textbf{Launch} is a file structure that allow to start multiple nodes with a set of parameters.
-	\item \textbf{rqt} is a graphical user interface (GUI) tool for ROS 2. With a series of plugins allow to interact with an interface for helping in the development, in the monitoring and diagnostic the ROS system.
-	\item \textbf{rqt\_console} visualize the log generate by the ROS 2 system.
-	\item \textbf{Rviz} is a 3D visualizer for the Robot Operating System \underline{framework?}.
+	\item \textbf{Launch}: A file structure that allows the simultaneous start of multiple nodes with a set of parameters.
+	\item \textbf{rqt}: A graphical user interface (GUI) tool for ROS. It includes a series of plugins that facilitate development, monitoring, and diagnostics of the ROS system.
+	\item \textbf{rqt\_console} A plugin for rqt that visualizes the logs generated by the ROS.
+	\item \textbf{Rviz}: A 3D visualization tool for the Robot Operating System. It allows visualization of sensor data and state information from ROS.
 	\begin{figure}[h]
 		\centering
 		\begin{subfigure}{0.4\textwidth}
@@ -59,17 +58,17 @@ Now i will describe the tools that are built in ROS for developing robotics syst
 		\end{subfigure}
 		\captionof{figure}{Examples of visualization of ROS data with Rviz}
 	\end{figure}
-	\item \textbf{rosdep} is a dependency installer utility.
-	\item \textbf{sros2} is a package that provide the tools and instruction to apply security on DDS.
+	\item \textbf{rosdep}: A command-line utility for installing system dependencies required by ROS packages.
+	\item \textbf{sros2}: A security extension for ROS 2 that provides tools and instructions to apply security policies to DDS (Data Distribution Service).
 \end{itemize}
-Another tools that are connected with ROS and helps develop is the simulation environments. They allow to test the code on a simulated robot in different condition to find possible bugs in the code that if there was launched on a real robot can be harmful to it or the environment. They provide realistic physical mechanics at all the parts of simulation and in the documentation of ROS there are listened 2: Gazebo and Webots.
-The first one is also a project under the Open Robotics and for a lot of projects is the default used like the one we will use.
+Another important category of tools that are integrated with ROS is simulation environments. These environments allow developers to test their code on simulated robots under various conditions, which helps identify bugs that could potentially harm a real robot or its surroundings. Simulation tools provide realistic physical behavior for all components of a robotic system.
+According to the ROS documentation, two main simulation tools are commonly used: Gazebo and Webots. Among them, Gazebo is also maintained by Open Robotics and is widely adopted in many projects, including the one discussed in this paper.
 Gazebo offer:
 \begin{itemize}
-	\item \textbf{ROS Integration} a bridge to converts the protobuf messages to ROS.
-	\item \textbf{Performance tools} that allow to have it distributed on servers, dynamically asset loading and control of the time step for simulation to have the best performances.
-	\item \textbf{Realistic simulation} that allow to insert a variety of sensor with their noise in a 3D rendering word built on Ogre 2.1\footnote{\href{https://wiki.ogre3d.org/Home}{https://wiki.ogre3d.org/Home}} and with the physic engine DART\footnote{\href{https://dartsim.github.io/}{https://dartsim.github.io/}}.
-	\item \textbf{Extensibility} because its built on modularity, it allow with plugins to run code that interact with the simulation.	
+	\item \textbf{ROS Integration}: A bridge that converts Protobuf messages to ROS messages, enabling communication between Gazebo and ROS.
+	\item \textbf{Performance tools}: Features for distributed simulation across servers, dynamic asset loading, and adjustable time steps to optimize simulation performance.
+	\item \textbf{Realistic simulation}: Support for a variety of sensors, including their noise models, within a 3D world rendered using OGRE 2.1\footnote{\href{https://wiki.ogre3d.org/Home}{https://wiki.ogre3d.org/Home}} and powered by the DART5\footnote{\href{https://dartsim.github.io/}{https://dartsim.github.io/}} physics engine.
+	\item \textbf{Extensibility}: A modular design that supports plugins, allowing developers to run custom code that interacts directly with the simulation environment.	
 \end{itemize}
 	\begin{figure}[h]
 		\centering
@@ -84,55 +83,54 @@ Gazebo offer:
 		\captionof{figure}{Examples of Gazebo}
 \end{figure}
 \chapter{Introduction to NAV2 and Google Cartographer}
-Multiple tools are available for move a robot in an environment. The one that give a full system is Nav2
+Multiple tools are available to enable a robot to move autonomously within an environment. One of the most complete systems is Nav2 
 \footnote{\href{https://nav2.org/}{https://nav2.org/}}
-\cite{macenski2020marathon2}
- the successor of ROS Navigation Stack of ROS 1.
+\cite{macenski2020marathon2}, the successor to the ROS 1 Navigation Stack.
 \section{Description of Nav2}
-Nav2 gives all the tools (perception, planning\cite{macenski2023survey}, control, localization, visualization) for whichever robot to navigate autonomously and reliably also thought hard environment. It allow to build a model of the environment from the data of the sensors, calculated dynamically the best path to follow to avoiding obstacles using a map, set the velocity of the motors and allow to follow logic step using a behaviors tree.
+Nav2 provides a comprehensive set of tools for perception, planning\cite{macenski2023survey}, control, localization, and visualization, allowing any robot to navigate autonomously and reliably, even in complex environments. It enables building a model of the environment from sensor data, dynamically calculating the optimal path to avoid obstacles, setting motor velocities, and executing navigation tasks using Behavior Trees.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\linewidth]{img/nav2_architecture.png}
 \captionof{figure}{Nav2 architecture} \label{Nav2Arch}
 \end{figure}
 \newline
-These are also some of the updates that have changed from ROS 1 other less notable changes are the use of:
+Nav2 introduces several improvements over ROS 1, including:
 \begin{itemize}
-	\item \textbf{Behavior trees}\cite{Colledanchise_2018}: gives to Nav2 a structure for completing a series of tasks in a human readable way. Their structure is similar to a tree and allow to create complex system that can be tested with different tools. The package used for this is BehaviorTree.CPP\footnote{\href{https://www.behaviortree.dev/}{https://www.behaviortree.dev/}} that respect others allow to link different tree.
-	\item \textbf{nav2\_util LifecycleNode} is a wrapper of rclcpp\_lifecycle LifecycleNode of the standard structure of ros as described in Nodes \ref{LifecycleNode} and add a bond connection to the \textbf{Lifecycle Manager}, node that knows the states of each node, and allow to  transition down its lifecycle nodes for safety if some node has crashed.
-	\item \textbf{Action Server}: the functionality are described in the structure of ROS \ref{Action} and they are implemented in Nav2 for the interaction with the Behavior Tree (BT) like NavigationToPose (move to a location), NavigationThroughPoses (allow to select multiple waypoints), etc.
+	\item \textbf{Behavior trees}\cite{Colledanchise_2018}: Nav2 uses Behavior Trees to structure and execute tasks in a human-readable and modular way. These trees enable the creation of complex systems and can be tested with various tools. The  BehaviorTree.CPP\footnote{\href{https://www.behaviortree.dev/}{https://www.behaviortree.dev/}} library is used to implement them, and it allows linking different trees for flexible behavior management.
+	\item \textbf{nav2\_util LifecycleNode}: This is a wrapper around the standard \texttt{rclcpp\_lifecycle::LifecycleNode} described earlier \ref{LifecycleNode}. It adds a bond connection to the Lifecycle Manager, which monitors the state of each node and can safely transition nodes through their lifecycle states in the event of a failure.
+	\item \textbf{Action Server}: As described in \ref{Action}, Nav2 uses action servers for Behavior Tree interactions, such as NavigationToPose (navigate to a specific location) and NavigationThroughPoses (navigate through multiple waypoints).
 \end{itemize}
-The control is based on this nodes:
+Nav2 is composed of several key nodes that work together to control the robot:
 \begin{itemize}
-	\item \textbf{Controller Server} is the node that handle the request for moving the robot, using tree plugins progress checker (check if the robot has make some progress in following the path), goal checker (check if the robot has reached the goal position) and controller (generate the velocity command using the \textbf{local costmap} to move the robot avoiding collision)
-	\item \textbf{Planner Server} is the node that handle the request for calculate the path, using a loaded plugin planner, to reach a position using the \textbf{global costmap} and the data from sensors.
-	\item \textbf{BT Navigator Server} is a Behavior Tree-based implementation of navigation that implement the NavigateToPose, NavigateThroughPoses, and other task interfaces to increment the flexibility during navigation.
+	\item \textbf{Controller Server}: Handles movement requests. It uses plugin-based modules such as a progress checker (to verify if the robot is making progress), goal checker (to determine if the robot has reached its destination), and a controller (to generate velocity commands using the \textbf{local costmap} while avoiding collisions).
+	\item \textbf{Planner Server}: Computes the global path to the destination using sensor data and a  plugin-based global planner loaded with the \textbf{global costmap}.
+	\item \textbf{BT Navigator Server}: Implements the NavigateToPose, NavigateThroughPoses, and other task interfaces. It is a Behavior Tree-based implementation of navigation that is intended to allow for flexibility in the navigation task and provide a way to easily specify complex robot behaviors.
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=0.8\linewidth]{img/bt_nav2.humble.png}
 		\captionof{figure}{Humble Nav2 BT navigation \texttt{navigate\_to\_pose\_w\_replanning\_and\_recovery.xml} loaded with Groot2}
 	\end{figure}
-	\item \textbf{Smoother Server} is the node that handle the request for smoothing, with plugins, a path minimizing sharp turns and rapid rotations from the path.
-	\item \textbf{Behavior Server} is the node that handles the behavior request like: spin, backup, wait.
-	\item \textbf{Waypoint Follower} is a way/example for controlling the robot for doing an orchestrated task. This implementation take a list of waypoints, call the NavigateToPose action server and at each waypoint do a task (wait, take a photo, ... ) as a plugin. This server can be changed with any \textbf{Autonomy System}
-	\item \textbf{Route Server} for computing routes through a predefined navigation graph rather than using freespace planning like the Planner Server.
-	\item \textbf{Velocity Smoother} as the name say smooth the velocity, acceleration and deadbands sent by Nav2 to the robot. 
+	\item \textbf{Smoother Server}: Smooth the path minimizing sharp turns and rapid rotations.
+	\item \textbf{Behavior Server}: Handles specific behavior actions like spinning, backing up, and waiting.
+	\item \textbf{Waypoint Follower}: An example of orchestrated control, this node takes a list of waypoints and uses the NavigateToPose action server to move between them, optionally performing custom tasks (e.g., taking a photo) at each waypoint through plugins. It can be replaced by any \textbf{Autonomy System}
+	\item \textbf{Route Server}: Calculates routes through a predefined navigation graph instead of using free-space planning.
+	\item \textbf{Velocity Smoother}: Smooths velocity, acceleration, and deadband signals sent to the robot to ensure safe and smooth motion.
 	\item \textbf{Costmap} is a representation of the environment using a regular 2D grid of cells with a cost (unknown, free, occupied, or inflated) and is used for generate the global plan or to compute local control efforts.
 \end{itemize}
-The next things that allow to use Nav2 is a:
+The next things that Nav2 relies on for controlling the navigation are:
 \begin{itemize}
 	\item \textbf{state estimation} of the robot that generate a suitable TF tree, a tree structure of coordinate frames generated using the transform library\cite{6556373}, based on the \href{https://www.ros.org/reps/rep-0105.html}{REP 105}, that is should provide this structure: \texttt{map} $\rightarrow$ \texttt{odom} $\rightarrow$ \texttt{base\_link}. According to the REP 105 they are defines as:
 	\begin{itemize}
-		\item \texttt{map} : a world fix frame that is not continuos that is the pose of the robot can change in discrete jumps at any time. This is useful as a long-term global reference but not in the short-term.
-		\item \texttt{odom} : a world fix frame that can drift over time to be continuous. This allow to be useful in an short-term local reference but not good for long-term one.
-		\item \texttt{base\_link}: a robot fix frame.
+		\item \texttt{map} : A world-fixed frame that may change in discrete jumps. It's useful for long-term global reference but not suitable for short-term localization.
+		\item \texttt{odom} : A continuous world-fixed frame that may drift over time. It provides short-term local reference.
+		\item \texttt{base\_link}: A robot fix frame.
 	\end{itemize}
-	The \texttt{odom} $\rightarrow$ \texttt{base\_link} link can be calculated using different sensors. To increase the performance of our estimation we will use the \texttt{robot\_localization} a node that provide nonlinear state estimation nodes using Kalman Filter \cite{MooreStouchKeneralizedEkf2014}.\\
+	The \texttt{odom} $\rightarrow$ \texttt{base\_link} link can be estimated using various sensors. For improved accuracy, we use the \texttt{robot\_localization} package, which provides nonlinear state estimation using Kalman Filter \cite{MooreStouchKeneralizedEkf2014}.\\
 	The \texttt{map} $\rightarrow$ \texttt{odom} link can be generate with a global positioning system like Simultaneous Localization And Mapping (SLAM) method or using the one provided by Nav2, Adaptive Monte-Carlo Localization (AMCL). 
-	\item \textbf{map} that can be build during navigation using a SLAM tool or loaded. A powerful SLAM is Cartographer that will be described in the next section and it's the one used to build the map that we are going to use.
+	\item \textbf{map} can either be preloaded or built dynamically using a SLAM method. One SLAM method systems is Google Cartographer, which will be described in the next section. It is also the SLAM method that was used to generate the map for navigation.
 \end{itemize}
 \subsection{Cartographer}
-Cartographer\cite{45466} is a SLAM that work using two subsystem: a \textbf{Local SLAM} (called \textbf{Frontend}) that build a series of locally consistent \textbf{submaps} from successive scans and the pose extrapolator but with the possibility that can drift during acquisition and a \textbf{Global SLAM} (called \textbf{Backend}) that find loop closure constraints scan-matching scans against submaps using a global optimization in a way to obtain a consistent map. It can perform a 2-3 cm accuracy mapping but required a lot tuning of the parameters. 
+Cartographer\cite{45466} is a SLAM method  that operates using two main subsystems: a \textbf{Local SLAM} (called \textbf{Frontend}) that build a series of locally consistent \textbf{submaps} from successive scans and the pose extrapolator but with the possibility that it can drift during acquisition and a \textbf{Global SLAM} (called \textbf{Backend}) reduces drift by performing loop closure—detecting when the robot has returned to a previously visited location. It uses scan matching against submaps and applies global optimization to align all submaps consistently and build a globally accurate map. Cartographer is capable of achieving mapping accuracy within 2–3 cm, but it requires extensive parameter tuning to reach optimal performance. 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.8\linewidth]{img/Alg\_Cartographer.png}
