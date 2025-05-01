@@ -1,14 +1,13 @@
-today the tool for converting the data are 
-\href{https://www.ros.org/blog/noetic-eol/}{https://www.ros.org/blog/noetic-eol/}
+\part{Methodology}
+In this part we will discuss all the procedure that took place from building our testing platform, based on the Rover Mini and the sensors used. Setting up the Nav2 navigation stack. The procedure used to port the Global planner from ROS 1 to ROS 2. How we integrate the system and the software that is used to setup the Open-RMF system.
+\chapter{Description of research platform and hardware used}
+The robot is a 4 wheel drive (WD) skid-steering (see Figure \ref{fig:RoverRobotics Rover Mini})that has a maximum speed of 12.87 km/h with a payload of 45,36 kg. The company offer the code to control it and also to simulate on github\footnote{\href{https://github.com/RoverRobotics/roverrobotics_ros2}{https://github.com/RoverRobotics/roverrobotics\_ros2}}. The code is steel tested only for ROS 2 Humble, this is going to be our version of ROS 2 that we are going to use on the Rover.\\
+For controlling it, the rover give a USB terminal for connecting to a PC or single board computer. For this purpose we are using a Mini PC where there is all the control of all the navigation based on Nav2.
+The Mini PC is a Ryzen 7 qbvqg as in picture\\
+For Nav2 
+\chapter{Steps taken to port the navigation stack from ROS 1 to ROS 2}
+\chapter{Hardware adaptation process from Rover Zero to Rover Mini}
+\chapter{Integration of the navigation stack with Open-RMF}
+\chapter{Testing and evaluation of the system}
 
 
-implement also \href{https://github.com/ros-navigation/navigation2/tree/main/tools/planner\_benchmarking}{planning benchmark}
-
-describe and \textcolor{red}{use} composition in nav2 to obtain better performance \cite{10132508}
-
-
-
-Inoltre per gestire il traffico sulla rete utilizzeremo zenoh (Zero Overhead Network Protocol) ed il bridge per ros2 zenoh-bridge-ros2dds che è  pub/sub/query protocol unifying data in motion, data at rest and computations. It elegantly blends traditional pub/sub with geo distributed storage, queries and computations, while retaining a level of time and space efficiency that is well beyond any of the mainstream stacks. data liberator protocol. Zenoh liberates data in several dimensions. 
-
-
-with chatgpt possiamo gestire il robot in due modi: si ferma ed esegue l'azione non communicando con rmf (la linea rimane bloccata dal suo passaggio) 

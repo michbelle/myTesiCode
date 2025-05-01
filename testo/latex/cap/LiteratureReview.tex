@@ -137,101 +137,102 @@ Cartographer\cite{45466} is a SLAM method  that operates using two main subsyste
 	\captionof{figure}{Cartographer Algorithm}
 \end{figure}
 \chapter{Review of related work on porting navigation stack from ROS 1 to ROS 2}
-The big diffusion of ROS as a software for controlling robots bring new users cases that were not considered when was built.
-Starting as an academic project, the new cases that has met are the need of a way to control a fleet of them, deveoping on little embedded board and microcontrollers, real time system, not ideal network and the code was not designed for industrial usage. These changes made impossible to save ROS from a total rewrite of the code that brigh to have ROS 2, all more documentation is accessible at \href{https://design.ros2.org/}{https://design.ros2.org/} . Multiple company started using the ROS 2 ecosystem and how it increase their development\cite{Macenski_2022} and also in the Nav2\cite{macenski2023survey}. New projects are born like micro-ROS \footnote{\href{https://micro.ros.org/}{https://micro.ros.org/}} for controlling microcontrollers. And the new tool Node Composition allow an higher degree of performance optimization \cite{macenski2023impactros2node} and also allow for a better security\cite{vilches2022sros2usablecybersecurity}
-While more detailed information about how to change the code are described in these sources, like the official documentation\footnote{\href{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}} and also secondary \footnote{\href{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}} and are the tools that are going to be used in the porting of the global planner. 
-\textcolor{red}{The notable changes, also described in that paper are:}
+The widespread adoption of the Robot Operating System (ROS) has introduced new use cases that were not originally considered during its development. Initially created as an academic project, ROS encountered limitations as users began applying it to more complex scenarios such as fleet management, deployment on embedded boards and microcontrollers, real-time systems, unreliable networks, and industrial applications. These emerging requirements highlighted architectural constraints in ROS 1, ultimately necessitating a complete redesign, which led to the development of ROS 2. Comprehensive documentation for ROS 2 is available at \href{https://design.ros2.org/}{https://design.ros2.org/} . Many companies have adopted the ROS 2 ecosystem, noting improvements in development workflows\cite{Macenski_2022} and in specific subsystems like Nav2\cite{macenski2023survey}. New initiatives, such as micro-ROS\footnote{\href{https://micro.ros.org/}{https://micro.ros.org/}}, aim to bring ROS 2 capabilities to microcontrollers. Additionally, features like Node Composition offer improved performance optimization\cite{macenski2023impactros2node} while sros2 allow for a better security\cite{vilches2022sros2usablecybersecurity}.
+As outlined in these references, ROS 2 offers substantial advantages over ROS 1, making it the preferred framework for modern robotic applications. With this in mind, we will migrate the global planner using the official ROS 2 documentation\footnote{\href{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}} and various secondary sources \footnote{\href{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}}. 
 
-Like describe in this paper the use of ROS 2 respect ROS 1 bring many advantages and is the way to go.
 \chapter{Overview of open source fleet management systems, particularly Open-RMF}
-Currently these are some the fleet management system available:
+Currently, several fleet management systems are available:
 \begin{itemize}
-	\item \textbf{Isaac Mission Dispatch}\footnote{\href{https://github.com/NVIDIA-ISAAC/isaac_mission_dispatch}{https://github.com/NVIDIA-ISAAC/isaac\_mission\_dispatch}} is a NVIDIA microservice enble fleet managment software to submit missions to multiple robots and monitor the robot and mission status. It provides a connection between the robots and the fleet management system but does not handle logistics such as task allocation or conflict resolution, e.g., robots with intersecting paths. The implementation relies VDA5050 protocol as an industry standard between a cloud control service and mobile robots, and uses MQTT as a lightweight, publish-subscribe, machine to machine network protocol designed for devices with resource constraints and limited network bandwidth.	
-	\item \textbf{ROOSTER Fleet Management}\footnote{\href{https://github.com/ROOSTER-fleet-management}{https://github.com/ROOSTER-fleet-management}} is a ROS 1 based open source project to develop a heterogeneous fleet management solution with task allocation, scheduling and routing capabilities.
-	\item \textbf{Open Robotics Middleware Framework (Open-RMF)}\footnote{\href{https://www.open-rmf.org/}{https://www.open-rmf.org/}} is a free, open source, modular software system that enables sharing and interoperability between multiple fleets of robots and physical infrastructure, like doors, elevators and building management systems. 
-	\item \textbf{Robofleet}\footnote{\href{https://github.com/ut-amrl/robofleet}{https://github.com/ut-amrl/robofleet}}\cite{sikand2021robofleetopensourcecommunication} based on ROS 1 is open-source system which provides inter-robot communication, remote monitoring, and remote tasking for a heterogenous fleet of ROS-enabled service-mobile robots that is designed with the	practical goals of resilience to network variance and security control in mind.
+	\item \textbf{Isaac Mission Dispatch}\footnote{\href{https://github.com/NVIDIA-ISAAC/isaac_mission_dispatch}{https://github.com/NVIDIA-ISAAC/isaac\_mission\_dispatch}}: A microservice-enabled fleet management system developed by NVIDIA that allows users to submit missions to multiple robots and monitor both robot and mission statuses. It provides connectivity between robots and the fleet management system but does not handle logistics such as task allocation or conflict resolution (e.g., intersecting robot paths). The implementation relies on the VDA5050 protocol, an industry standard for communication between cloud control services and mobile robots, and uses MQTT, a lightweight, publish-subscribe network protocol designed for devices with limited resources and bandwidth.	
+	\item \textbf{ROOSTER Fleet Management}\footnote{\href{https://github.com/ROOSTER-fleet-management}{https://github.com/ROOSTER-fleet-management}}:An open-source ROS 1-based project that supports heterogeneous fleet management with task allocation, scheduling, and routing functionalities.
+	\item \textbf{Open Robotics Middleware Framework (Open-RMF)}\footnote{\href{https://www.open-rmf.org/}{https://www.open-rmf.org/}}: A free, open-source, and modular system that facilitates interoperability between multiple robot fleets and physical infrastructure such as doors, elevators, and building management systems.
+	\item \textbf{Robofleet}\footnote{\href{https://github.com/ut-amrl/robofleet}{https://github.com/ut-amrl/robofleet}}\cite{sikand2021robofleetopensourcecommunication}: An open-source system based on ROS 1 that supports inter-robot communication, remote monitoring, and remote tasking for heterogeneous fleets of ROS-enabled service robots. It is specifically designed to handle network variability and to incorporate security control features.
 \end{itemize}
-While others gives an infrastructure for start the control of a fleet:
+Other frameworks provide the infrastructure needed to initiate fleet control:
 \begin{itemize}
-	\item \textbf{Transitive Robotics}\footnote{\href{https://transitiverobotics.com/}{https://transitiverobotics.com/}} is an open-source framework for full-stack robotics. It is designed to  make it easy to create capabilities that seamlessly connect robot,  cloud, and web front-ends including a dynamically updating shared data  model. It offers solutions to many problems developers encounter when  building full-stack robotic applications, including unreliable networks,  robots that are regularly offline or turned off, as well as  cross-device version.
-	\item \textbf{Robot Web Tools}\footnote{\href{https://robotwebtools.github.io/}{https://robotwebtools.github.io/}} is a collection of tools that allow to communicate with a remote robot.
+	\item \textbf{Transitive Robotics}\footnote{\href{https://transitiverobotics.com/}{https://transitiverobotics.com/}}: An open-source framework for full-stack robotics, designed to simplify the development of capabilities that connect robots, cloud services, and web front-ends through a dynamically updating shared data model. It addresses common challenges in building full-stack robotic applications, such as unreliable networks, intermittently offline robots, and cross-device versioning.
+	\item \textbf{Robot Web Tools}\footnote{\href{https://robotwebtools.github.io/}{https://robotwebtools.github.io/}}: A collection of tools that enable communication with remote robots via web technologies, facilitating remote monitoring and interaction.
 \end{itemize}
-Given that Open-RMF gives a control over multiple fleet, a structure for them to interact with each other to obtain the best outcome, a lot of tool to build the system, is based on ROS 2 and is open source, it is going to be the base on witch we will build our fleet.
-Now we will all the capabilities of Open-RMF
+Given that Open-RMF offers control over multiple fleets, enables structured interaction between them to achieve optimal outcomes, provides a comprehensive toolset for system development, is based on ROS 2, and is open source, it will be used as the foundation for our fleet management architecture.
 \section{Open-RMF description}
-Open-RMF is a flexible tool set build on ROS 2 for allowing the interaction between heterogeneous robot fleets. It uses a standardized protocol for communication with infrastructures, environments and automations to optimize the use of the critical resources (like other robots, lifts, doors, narrow passages) of a system to control the traffic. It gives intelligence to a system avoiding conflicts for the available resources and assigned it correctly.
-This figure describe how works Open-RMF:
+Open-RMF is a flexible and modular toolkit built on ROS 2 that facilitates interaction between heterogeneous robot fleets. It employs standardized protocols to enable communication with infrastructure, environments, and automation systems, optimizing the utilization of critical shared resources such as elevators, doors, narrow corridors, and other robots. By coordinating access to these resources, Open-RMF introduces system-level intelligence that helps prevent conflicts and ensures proper task and resource allocation.
+Figure \ref{fig:Open-RMF Structure} illustrates the architecture and operational workflow of Open-RMF.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.8\linewidth]{img/RMF\_struct.png}
 	\captionof{figure}{Open-RMF Structure}
+	\label{fig:Open-RMF Structure}
 \end{figure}
 \\
-There are 3 type of fleet adapter :
+The fleets that can be controlled through Open-RMF can be categorized into three types:
 \begin{itemize}
-	\item \textit{Full Control}: have full status updates and full control on the path
-	\item \textit{Traffic Light}: have full status updates and a pause/resume control 
-	\item \textit{Read Only}:  have only status updates. It can be only one of this type because more of them will make avoiding deadlock or resource conflict nearly impossible.
+	\item \textit{Full Control}: Fleets of this type provide full status updates and allow complete control over path planning and execution.
+	\item \textit{Traffic Light}: These fleets also provide full status updates, but only allow limited control, such as pausing and resuming operations. Open-RMF has control over certain behaviors, but not over the specific paths.
+	\item \textit{Read Only}: These fleets only provide status updates and cannot be controlled. Only one read-only fleet can exist in the system at any given time, as the presence of multiple read-only fleets would make it nearly impossible to avoid deadlocks or resource conflicts.
 \end{itemize}
-In case there is a fleet with \textit{No Interface} this can result deadlocks on the available resources and is not compatible with a RMF system.
+If a fleet lacks has \textit{No Interface}, it can lead to deadlocks in resource allocation and is incompatible with an RMF system.
 \\
-The Open-RMF core \texttt{rmf\_core} is built on this list of packages:
+The core of Open-RMF, known as \texttt{rmf\_core}, is composed of several modular packages, each serving a distinct role within the system:
 \begin{itemize}
-	\item \texttt{rmf\_traffic}: Core scheduling and traffic management systems based on the following traffic deconfliction: \textit{Prevention} and \textit{Negotiation} using a living platform-agnostic Traffic Schedule Database.
+	\item \texttt{rmf\_traffic}: Provides core scheduling and traffic management capabilities. It is based on a platform-agnostic \textbf{Traffic Schedule Database} and includes two main mechanisms for traffic deconfliction:
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=0.8\linewidth]{img/RMF_tut_schedule.png}
 		\captionof{figure}{Open-RMF Schedule structure}
+		\label{fig:Open-RMF Schedule structure}
 	\end{figure}
 		\begin{itemize}
-			\item \textit{Prevention} when there are some changes in the DB, like cancellations, the fleet manager can plan the routes to avoid conflicts. 
-			\item \textit{Negotiation} When thought the Database there is an upcoming conflict between two or more schedule participants, it will send a conflict notice out to the relevant fleet managers, that will reply with their preferable path that can accommodate the others and through a external judge choose the best path to follow 
+			\item \textit{Prevention}: When changes occur in the database (e.g., route cancellations), fleet managers can proactively replan routes to avoid conflicts.
+			\item \textit{Negotiation}: When a potential conflict is detected between two or more schedule participants, a conflict notice is issued to the relevant fleet managers. Each manager responds with a preferred path that accommodates other agents, and an external arbitration module selects the optimal path.
 		\end{itemize}
-	Conflict avoidance for automated guided vehicle AGV's is implemented with time-dependent extension to A* search for both path and task. This search takes time into account so that it can find paths through space and time that account for the motions of other agents that are in the traffic schedule.
-	It's not designed for autonomous mobile robot (AMR) that is in development.
-	\item \texttt{rmf\_traffic\_ros2}: provide the interface between rmf\_traffic and ros2
-	\item \texttt{rmf\_task}: APIs and base classes for defining and managing Tasks in RMF.
-	RMF supports three types of task requests out of the box:
+	Conflict avoidance for Automated Guided Vehicles (AGVs) is implemented using a time-dependent extension to A* search. This algorithm considers both spatial and temporal dimensions, allowing it to generate conflict-free paths by accounting for the future movements of other agents. Support for Autonomous Mobile Robots (AMRs) is under active development.
+	\item \texttt{rmf\_traffic\_ros2}: Provides the necessary ROS 2 interfaces for integrating rmf\_traffic into ROS 2-based systems.
+	\item \texttt{rmf\_task}: Contains APIs and base classes for defining and managing tasks in RMF.
+	The framework natively supports three types of task requests:
 	\begin{itemize}
-		\item \textit{Clean}: For robots capable of cleaning floor spaces in facilities
-		\item \textit{Delivery}: For robots capable of delivering items between locations in facilities
-		\item \textit{Loop}: For robots capable to navigating back and forth between locations in facilities
+		\item \textit{Clean}: For robots capable of cleaning floor spaces.
+		\item \textit{Delivery}: For robots tasked with transporting items between locations.
+		\item \textit{Loop}: For robots required to repeatedly navigate between two or more points.
 	\end{itemize}
-	\item \texttt{rmf\_dispatcher\_node}: RMF simplifies task allocation and management across multi-fleet systems. When a user submits a new task request, RMF will intelligently assign it to the robot in the fleet that can best perform the task as described in the image.
+	\item \texttt{rmf\_dispatcher\_node}: Contains the logic responsible for task allocation and management across multi-fleet systems. When a user submits a new task request, the dispatcher intelligently assigns it to the most suitable robot by querying each fleet adapter capable of performing the task. These adapters respond with bids indicating which robot is best suited, and RMF uses this bidding mechanism to determine the optimal assignment, as illustrated in Figure \ref{fig:Open-RMF Bid Task}.
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=0.8\linewidth]{img/RMF_tut_BidTask.png}
 		\captionof{figure}{Open-RMF Bid Task}
+		\label{fig:Open-RMF Bid Task}
 	\end{figure}
-	\item \texttt{rmf\_battery}: rmf battery estimation 
-	\item \texttt{rmf\_ros2}: ros2 adapters and nodes and python bindings for rmf\_core
-	\item \texttt{rmf\_utils}: utility for rmf
+	\item \texttt{rmf\_battery}: Provides battery consumption estimation models for different robot activities, aiding in energy-aware task planning.
+	\item \texttt{rmf\_ros2}: Supplies ROS 2 adapters, nodes, and Python bindings to integrate the RMF core components into ROS 2 applications.
+	\item \texttt{rmf\_utils}: A collection of utility functions and tools used across various RMF packages.
 	
 \end{itemize}
 
-For the development these are the tools ready to use to develop:
+The following tools are available to support development with Open-RMF:
 \begin{itemize}
-	\item \textbf{RMF demos} contains demonstrations of the capabilities and are a starting point for the development.
-	\item \textbf{Traffic Editor} is a graphical editor that allow to create a map with traffic patterns and the place of interaction that RMF will use to control the traffic. It also can generate a Gazebo world for simulation.
+	\item \textbf{RMF demos}: A collection of demonstration packages showcasing the capabilities of Open-RMF. These serve as a useful starting point for development and experimentation.
+	\item \textbf{Traffic Editor}: A graphical map editor used to define traffic patterns and interaction points (e.g., doors, lifts) that RMF uses for traffic management. It also supports the generation of Gazebo simulation worlds based on the designed maps.
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.8\linewidth]{img/RMF\_tut\_trafficEditor.png}
+		\includegraphics[width=0.8\linewidth]{img/RMF_tut_trafficEditor.png}
 		\captionof{figure}{Traffic Editor}
-	\end{figure}
-	\item \textbf{Free Fleet} is a free fleet adapter allow to integrate standalone mobile robots into Open-RMF to form a heterogeneous fleet.
+		\label{fig:Traffic Editor}
+	\end{figure}\\\\\\
+	\item \textbf{Free Fleet}: An open-source fleet adapter that enables the integration of standalone mobile robots into Open-RMF, allowing the creation of heterogeneous fleets.
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=0.8\linewidth]{img/RMF_tut_fleetAdapterTMPL.png}
 		\captionof{figure}{Fleet Adapter}
+		\label{fig:Fleet Adapter}
 	\end{figure}
-	\item \textbf{RMF Schedule Visualizer} is a plugin for rviz to see and control Open-RMF.
-	\item \textbf{RMF Web UI} is a web application for visualization and control the Robotic Middleware that is rmf\_core
+	\item \textbf{RMF Schedule Visualizer}: An RViz plugin that provides visualization and monitoring of the RMF schedule, enabling users to observe and interact with traffic and task execution in real time.
+	\item \textbf{RMF Web UI} : A web-based application for visualization and control of the Robotic Middleware Framework (\texttt{rmf\_core}). It provides a user-friendly interface for monitoring system state and interacting with fleet operations.
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=0.8\linewidth]{img/RMF_tut_web.png}
 		\captionof{figure}{RMF Web}
+		\label{fig:RMF Web}
 	\end{figure}
-	\item \textbf{RMF Simulation} plugins to simulate each capability in gazebo.
-	\item \textbf{Simulation assets} are the models freely avaible.
+	\item \textbf{RMF Simulation}: A set of Gazebo plugins designed to simulate various aspects of building infrastructure—such as doors, lifts, and crowds—as well as robot behavior, including navigation and interactions with workcells.
+	\item \textbf{Simulation assets}: Freely available 3D models and environment assets used to support simulation development and testing in Gazebo.
 \end{itemize}
 
