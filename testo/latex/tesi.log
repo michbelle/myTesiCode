@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.5.15)  1 MAY 2025 21:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.4.11)  2 MAY 2025 13:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -124,7 +124,7 @@ Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 \bibhang=\skip56
 \blx@bcfin=\read2
 \blx@bcfout=\write3
-\blx@langwohyphens=\language9
+\blx@langwohyphens=\language3
 \c@mincomprange=\count304
 \c@maxcomprange=\count305
 \c@mincompwidth=\count306
@@ -1021,28 +1021,80 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [28]
 Chapter 8.
+<img/miniPC.jpg, id=411, 1084.05pt x 929.4725pt>
+File: img/miniPC.jpg Graphic file (type jpg)
+<use img/miniPC.jpg>
+Package pdftex.def Info: img/miniPC.jpg  used on input line 10.
+(pdftex.def)             Requested size: 170.71393pt x 146.36432pt.
+<img/IMU.jpg, id=415, 1084.05pt x 946.53625pt>
+File: img/IMU.jpg Graphic file (type jpg)
+<use img/IMU.jpg>
+Package pdftex.def Info: img/IMU.jpg  used on input line 16.
+(pdftex.def)             Requested size: 170.71393pt x 149.05136pt.
+<img/laserScanRPLIDAR.png, id=421, 235.88126pt x 207.77625pt>
+File: img/laserScanRPLIDAR.png Graphic file (type png)
+<use img/laserScanRPLIDAR.png>
+Package pdftex.def Info: img/laserScanRPLIDAR.png  used on input line 25.
+(pdftex.def)             Requested size: 170.71393pt x 150.37552pt.
+<img/RoverwithSensor.jpg, id=422, 812.03375pt x 641.39626pt>
+File: img/RoverwithSensor.jpg Graphic file (type jpg)
+<use img/RoverwithSensor.jpg>
+Package pdftex.def Info: img/RoverwithSensor.jpg  used on input line 31.
+(pdftex.def)             Requested size: 170.71393pt x 134.8342pt.
+
+Overfull \hbox (44.89545pt too wide) in paragraph at lines 4--34
+\OT1/cmtt/m/n/12 witmotion[]ros \OT1/cmr/m/n/12 us-ing the code from this repo 
+in github Elet-traSci-Comp/witmotion[]IMU[]ros[][][].
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--34
+
+ []
+
 [29
 
-]
+ <./img/miniPC.jpg>]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 27.05003pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.05003pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-15.05003pt}.
+
+[30 <./img/IMU.jpg> <./img/laserScanRPLIDAR.png>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 27.05003pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.05003pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-15.05003pt}.
+
+[31 <./img/RoverwithSensor.jpg>]
 Chapter 9.
-[30
-
-]
-Chapter 10.
-[31
-
-]
-Chapter 11.
 [32
 
 ]
+Chapter 10.
+[33
+
+]
+Chapter 11.
+[34
+
+]
 Chapter 12.
-) [33
+) [35
 
 ]
 \openout2 = `cap/Result.aux'.
 
- (./cap/Result.tex [34
+ (./cap/Result.tex [36
 
 
 
@@ -1066,10 +1118,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[35]
+[37]
 \openout2 = `cap/Conclusion.aux'.
 
- (./cap/Conclusion.tex [36
+ (./cap/Conclusion.tex [38
 
 
 
@@ -1077,7 +1129,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 ])
 \openout2 = `cap/Appendices.aux'.
 
- (./cap/Appendices.tex [37
+ (./cap/Appendices.tex [39
 
 
 
@@ -1091,13 +1143,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[38]
+[40]
 Overfull \hbox (5.22047pt too wide) in paragraph at lines 74--74
 \OT1/cmr/m/it/12 IEEE/RSJ In-ter-na-tional Con-fer-ence on In-tel-li-gent Robot
 s and Sys-tems (IROS)\OT1/cmr/m/n/12 .
  []
 
-[39
+[41
 
 
 
@@ -1110,7 +1162,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[40] (./tesi.aux (./cap/Introduction.aux) (./cap/LiteratureReview.aux)
+[42] (./tesi.aux (./cap/Introduction.aux) (./cap/LiteratureReview.aux)
 (./cap/Methodology.aux) (./cap/Result.aux) (./cap/Conclusion.aux)
 (./cap/Appendices.aux))
 Package rerunfilecheck Info: File `tesi.out' has not changed.
@@ -1120,31 +1172,31 @@ Package logreq Info: Writing requests to 'tesi.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 18585 strings out of 480129
- 332213 string characters out of 5893409
- 830801 words of memory out of 5000000
- 36192 multiletter control sequences out of 15000+600000
+ 18641 strings out of 480247
+ 333842 string characters out of 5896151
+ 830660 words of memory out of 5000000
+ 36216 multiletter control sequences out of 15000+600000
  477315 words of font info for 55 fonts, out of 8000000 for 9000
- 81 hyphenation exceptions out of 8191
- 60i,12n,68p,1853b,1278s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/michele/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.6
-00pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmsl12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt1
-0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-
-Output written on tesi.pdf (40 pages, 8131897 bytes).
+ 14 hyphenation exceptions out of 8191
+ 60i,12n,68p,1853b,1334s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/michelebelletti/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tc
+rm1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx
+10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmsl12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
+t12.pfb>
+Output written on tesi.pdf (42 pages, 8513869 bytes).
 PDF statistics:
- 575 PDF objects out of 1000 (max. 8388607)
- 467 compressed objects within 5 object streams
- 117 named destinations out of 1000 (max. 500000)
- 299 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 612 PDF objects out of 1000 (max. 8388607)
+ 496 compressed objects within 5 object streams
+ 128 named destinations out of 1000 (max. 500000)
+ 319 words of extra memory for PDF output out of 10000 (max. 10000000)
 
