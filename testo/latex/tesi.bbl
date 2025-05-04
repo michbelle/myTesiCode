@@ -162,6 +162,44 @@
     \field{year}{2016}
   \endentry
 
+  \entry{Macenski2021}{article}{}
+    \name{author}{2}{}{%
+      {{hash=MS}{%
+         family={Macenski},
+         familyi={M\bibinitperiod},
+         given={Steve},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=JI}{%
+         family={Jambrecic},
+         familyi={J\bibinitperiod},
+         given={Ivona},
+         giveni={I\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {The Open Journal}%
+    }
+    \strng{namehash}{MSJI1}
+    \strng{fullhash}{MSJI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \verb{doi}
+    \verb 10.21105/joss.02783
+    \endverb
+    \field{number}{61}
+    \field{pages}{2783}
+    \field{title}{SLAM Toolbox: SLAM for the dynamic world}
+    \verb{url}
+    \verb https://doi.org/10.21105/joss.02783
+    \endverb
+    \field{volume}{6}
+    \field{journaltitle}{Journal of Open Source Software}
+    \field{year}{2021}
+  \endentry
+
   \entry{macenski2023impactros2node}{misc}{}
     \name{author}{4}{}{%
       {{hash=MS}{%

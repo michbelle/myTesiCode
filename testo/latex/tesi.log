@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.4.11)  2 MAY 2025 13:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.5.15)  4 MAY 2025 21:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -124,7 +124,7 @@ Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 \bibhang=\skip56
 \blx@bcfin=\read2
 \blx@bcfout=\write3
-\blx@langwohyphens=\language3
+\blx@langwohyphens=\language9
 \c@mincomprange=\count304
 \c@maxcomprange=\count305
 \c@mincompwidth=\count306
@@ -516,34 +516,59 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1373.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1374.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1375.
 )
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count404
+\lst@gtempboxa=\box51
+\lst@token=\toks20
+\lst@length=\count405
+\lst@currlwidth=\dimen160
+\lst@column=\count406
+\lst@pos=\count407
+\lst@lostspace=\dimen161
+\lst@width=\dimen162
+\lst@newlines=\count408
+\lst@lineno=\count409
+\lst@maxwidth=\dimen163
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+\c@lstnumber=\count410
+\lst@skipnumbers=\count411
+\lst@framebox=\box52
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2020/03/24 1.8d listings configuration
+))
+Package: listings 2020/03/24 1.8d (Carsten Heinz)
+
 
 Package biblatex Warning: Load 'inputenc' before biblatex.
 
-\@quotelevel=\count404
-\@quotereset=\count405
+\@quotelevel=\count412
+\@quotereset=\count413
 (./tesi.aux (./cap/Introduction.aux) (./cap/LiteratureReview.aux)
 (./cap/Methodology.aux) (./cap/Result.aux) (./cap/Conclusion.aux)
 (./cap/Appendices.aux))
 \openout1 = `tesi.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
 Package biblatex Info: Trying to load language 'english'...
 Package biblatex Info: ... file 'english.lbx' found.
 
@@ -572,21 +597,21 @@ Package biblatex Warning: BibTeX reported the following issues
 (biblatex)                - Invalid format of field 'month'.
 
 )
-Package biblatex Info: Reference section=0 on input line 58.
-Package biblatex Info: Reference segment=0 on input line 58.
+Package biblatex Info: Reference section=0 on input line 61.
+Package biblatex Info: Reference segment=0 on input line 61.
  (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count406
-\scratchdimen=\dimen160
-\scratchbox=\box51
-\nofMPsegments=\count407
-\nofMParguments=\count408
-\everyMPshowfont=\toks20
-\MPscratchCnt=\count409
-\MPscratchDim=\dimen161
-\MPnumerator=\count410
-\makeMPintoPDFobject=\count411
-\everyMPtoPDFconversion=\toks21
+\scratchcounter=\count414
+\scratchdimen=\dimen164
+\scratchbox=\box53
+\nofMPsegments=\count415
+\nofMParguments=\count416
+\everyMPshowfont=\toks21
+\MPscratchCnt=\count417
+\MPscratchDim=\dimen165
+\MPnumerator=\count418
+\makeMPintoPDFobject=\count419
+\everyMPtoPDFconversion=\toks22
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -598,8 +623,9 @@ e
 ))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
+Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 58.
+Package hyperref Info: Link coloring OFF on input line 61.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -610,11 +636,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count412
+\c@section@level=\count420
 )
-LaTeX Info: Redefining \ref on input line 58.
-LaTeX Info: Redefining \pageref on input line 58.
-LaTeX Info: Redefining \nameref on input line 58.
+LaTeX Info: Redefining \ref on input line 61.
+LaTeX Info: Redefining \pageref on input line 61.
+LaTeX Info: Redefining \nameref on input line 61.
 
 (./tesi.out) (./tesi.out)
 \@outlinefile=\write4
@@ -656,10 +682,11 @@ LaTeX Info: Redefining \nameref on input line 58.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
+\c@lstlisting=\count421
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 62.
+(Font)              <14.4> on input line 65.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 62.
+(Font)              <7> on input line 65.
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./tesi.toc
@@ -707,7 +734,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 ]
 Chapter 2.
-<img/RoverRoboticsMini.png, id=180, 421.575pt x 248.93pt>
+<img/RoverRoboticsMini.png, id=207, 421.575pt x 248.93pt>
 File: img/RoverRoboticsMini.png Graphic file (type png)
 <use img/RoverRoboticsMini.png>
 Package pdftex.def Info: img/RoverRoboticsMini.png  used on input line 13.
@@ -747,19 +774,11 @@ k uses Eclipse Cy-clone DDS (\OT1/cmtt/m/n/12 rmw[]cyclonedds[]cpp\OT1/cmr/m/n/
 [11
 
 ]
-<img/life_cycle_sm.png, id=218, 1175.14032pt x 1225.57875pt>
-File: img/life_cycle_sm.png Graphic file (type png)
-<use img/life_cycle_sm.png>
-Package pdftex.def Info: img/life_cycle_sm.png  used on input line 18.
-(pdftex.def)             Requested size: 341.43436pt x 356.08197pt.
-<img/Topic.png, id=220, 642.90187pt x 361.35pt>
-File: img/Topic.png Graphic file (type png)
-<use img/Topic.png>
-Package pdftex.def Info: img/Topic.png  used on input line 25.
-(pdftex.def)             Requested size: 194.73633pt x 109.45345pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
+<img/life_cycle_sm_nf.png, id=243, 1270.7475pt x 1245.65375pt>
+File: img/life_cycle_sm_nf.png Graphic file (type png)
+<use img/life_cycle_sm_nf.png>
+Package pdftex.def Info: img/life_cycle_sm_nf.png  used on input line 19.
+(pdftex.def)             Requested size: 426.79134pt x 418.36574pt.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -769,17 +788,22 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[12 <./img/life_cycle_sm.png>]
-<img/Service.png, id=228, 642.90187pt x 361.35pt>
+[12 <./img/life_cycle_sm_nf.png>]
+<img/Topic.png, id=253, 642.90187pt x 361.35pt>
+File: img/Topic.png Graphic file (type png)
+<use img/Topic.png>
+Package pdftex.def Info: img/Topic.png  used on input line 26.
+(pdftex.def)             Requested size: 238.45241pt x 134.02272pt.
+<img/Service.png, id=254, 642.90187pt x 361.35pt>
 File: img/Service.png Graphic file (type png)
 <use img/Service.png>
-Package pdftex.def Info: img/Service.png  used on input line 31.
-(pdftex.def)             Requested size: 194.73633pt x 109.45345pt.
-<img/Action.png, id=229, 1445.4pt x 813.0375pt>
+Package pdftex.def Info: img/Service.png  used on input line 32.
+(pdftex.def)             Requested size: 238.45241pt x 134.02272pt.
+<img/Action.png, id=255, 1445.4pt x 813.0375pt>
 File: img/Action.png Graphic file (type png)
 <use img/Action.png>
-Package pdftex.def Info: img/Action.png  used on input line 38.
-(pdftex.def)             Requested size: 194.73633pt x 109.53201pt.
+Package pdftex.def Info: img/Action.png  used on input line 39.
+(pdftex.def)             Requested size: 238.45241pt x 134.12059pt.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -790,29 +814,25 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [13 <./img/Topic.png> <./img/Service.png> <./img/Action.png>]
-<img/rviz.png, id=241, 1927.2pt x 1084.05pt>
+<img/rviz.png, id=267, 1927.2pt x 1084.05pt>
 File: img/rviz.png Graphic file (type png)
 <use img/rviz.png>
-Package pdftex.def Info: img/rviz.png  used on input line 53.
-(pdftex.def)             Requested size: 153.64148pt x 86.41148pt.
-<img/rviz2.png, id=242, 1317.92375pt x 708.6475pt>
+Package pdftex.def Info: img/rviz.png  used on input line 54.
+(pdftex.def)             Requested size: 170.71393pt x 96.02194pt.
+<img/rviz2.png, id=268, 1317.92375pt x 708.6475pt>
 File: img/rviz2.png Graphic file (type png)
 <use img/rviz2.png>
-Package pdftex.def Info: img/rviz2.png  used on input line 57.
-(pdftex.def)             Requested size: 153.64148pt x 82.6119pt.
-<img/gazebo1.png, id=247, 1927.2pt x 1132.23pt>
-File: img/gazebo1.png Graphic file (type png)
-<use img/gazebo1.png>
-Package pdftex.def Info: img/gazebo1.png  used on input line 77.
-(pdftex.def)             Requested size: 153.64148pt x 90.252pt.
-<img/gazebo2.png, id=248, 1456.44125pt x 921.4425pt>
-File: img/gazebo2.png Graphic file (type png)
-<use img/gazebo2.png>
-Package pdftex.def Info: img/gazebo2.png  used on input line 81.
-(pdftex.def)             Requested size: 153.64148pt x 97.1972pt.
+Package pdftex.def Info: img/rviz2.png  used on input line 58.
+(pdftex.def)             Requested size: 170.71393pt x 91.7922pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--62
+
+ []
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+Underfull \hbox (badness 10000) in paragraph at lines 49--62
+
+ []
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -823,6 +843,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [14 <./img/rviz.png> <./img/rviz2.png>]
+<img/gazebo1.png, id=280, 1927.2pt x 1132.23pt>
+File: img/gazebo1.png Graphic file (type png)
+<use img/gazebo1.png>
+Package pdftex.def Info: img/gazebo1.png  used on input line 78.
+(pdftex.def)             Requested size: 170.71393pt x 100.2896pt.
+<img/gazebo2.png, id=281, 1456.44125pt x 921.4425pt>
+File: img/gazebo2.png Graphic file (type png)
+<use img/gazebo2.png>
+Package pdftex.def Info: img/gazebo2.png  used on input line 82.
+(pdftex.def)             Requested size: 170.71393pt x 107.99533pt.
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -833,26 +864,26 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [15 <./img/gazebo1.png> <./img/gazebo2.png>]
 Chapter 5.
-<img/nav2_architecture.png, id=269, 963.6pt x 602.25pt>
+<img/nav2_architecture.png, id=295, 963.6pt x 602.25pt>
 File: img/nav2_architecture.png Graphic file (type png)
 <use img/nav2_architecture.png>
-Package pdftex.def Info: img/nav2_architecture.png  used on input line 93.
+Package pdftex.def Info: img/nav2_architecture.png  used on input line 94.
 (pdftex.def)             Requested size: 341.43436pt x 213.3913pt.
 [16
 
  <./img/nav2_architecture.png (PNG copy)>]
-Overfull \hbox (132.70123pt too wide) in paragraph at lines 100--101
+Overfull \hbox (132.70123pt too wide) in paragraph at lines 101--102
 []\OT1/cmr/bx/n/12 nav2[]util Life-cy-cleN-ode\OT1/cmr/m/n/12 : This is a wrap-
 per around the stan-dard \OT1/cmtt/m/n/12 rclcpp[]lifecycle::LifecycleNode
  []
 
-<img/bt_nav2.humble.png, id=283, 1283.79625pt x 747.79375pt>
-File: img/bt_nav2.humble.png Graphic file (type png)
-<use img/bt_nav2.humble.png>
-Package pdftex.def Info: img/bt_nav2.humble.png  used on input line 110.
-(pdftex.def)             Requested size: 341.43436pt x 198.87184pt.
+<img/bt_nav2_neg.humble.png, id=309, 1283.79625pt x 747.79375pt>
+File: img/bt_nav2_neg.humble.png Graphic file (type png)
+<use img/bt_nav2_neg.humble.png>
+Package pdftex.def Info: img/bt_nav2_neg.humble.png  used on input line 111.
+(pdftex.def)             Requested size: 332.89671pt x 193.90831pt.
 
-Overfull \hbox (27.97102pt too wide) in paragraph at lines 111--111
+Overfull \hbox (27.97102pt too wide) in paragraph at lines 112--112
 []\OT1/cmr/bx/n/10.95 Figure 5.2: |\OT1/cmr/m/n/10.95 Hum-ble Nav2 BT nav-i-ga-
 tion \OT1/cmtt/m/n/10.95 navigate[]to[]pose[]w[]replanning[]and[]recovery.xml
  []
@@ -865,12 +896,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[17 <./img/bt_nav2.humble.png>]
-<img/Alg_Cartographer.png, id=297, 963.6pt x 722.7pt>
+[17 <./img/bt_nav2_neg.humble.png>]
+<img/Alg_Cartographer.png, id=324, 963.6pt x 722.7pt>
 File: img/Alg_Cartographer.png Graphic file (type png)
 <use img/Alg_Cartographer.png>
-Package pdftex.def Info: img/Alg_Cartographer.png  used on input line 136.
-(pdftex.def)             Requested size: 341.43436pt x 256.06956pt.
+Package pdftex.def Info: img/Alg_Cartographer.png  used on input line 137.
+(pdftex.def)             Requested size: 426.79134pt x 320.0842pt.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -892,7 +923,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [19 <./img/Alg_Cartographer.png>]
 Chapter 6.
 
-Underfull \hbox (badness 10000) in paragraph at lines 141--141
+Underfull \hbox (badness 10000) in paragraph at lines 142--142
 [][][][]\OT1/cmr/m/n/10 https://industrial-training-master.readthedocs.io/en/me
 lodic/[]source/session7/ROS1-to-
  []
@@ -904,10 +935,10 @@ Chapter 7.
 [21
 
 ]
-<img/RMF_struct.png, id=359, 1195.46625pt x 616.3025pt>
+<img/RMF_struct.png, id=384, 1195.46625pt x 616.3025pt>
 File: img/RMF_struct.png Graphic file (type png)
 <use img/RMF_struct.png>
-Package pdftex.def Info: img/RMF_struct.png  used on input line 162.
+Package pdftex.def Info: img/RMF_struct.png  used on input line 163.
 (pdftex.def)             Requested size: 341.43436pt x 176.0242pt.
 
 
@@ -919,10 +950,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-15.05003pt}.
 
 [22 <./img/RMF_struct.png (PNG copy)>]
-<img/RMF_tut_schedule.png, id=367, 2522.42375pt x 1557.82pt>
+<img/RMF_tut_schedule.png, id=392, 2522.42375pt x 1557.82pt>
 File: img/RMF_tut_schedule.png Graphic file (type png)
 <use img/RMF_tut_schedule.png>
-Package pdftex.def Info: img/RMF_tut_schedule.png  used on input line 180.
+Package pdftex.def Info: img/RMF_tut_schedule.png  used on input line 181.
 (pdftex.def)             Requested size: 341.43436pt x 210.84334pt.
 
 
@@ -934,40 +965,40 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-15.05003pt}.
 
 [23 <./img/RMF_tut_schedule.png>]
-<img/RMF_tut_BidTask.png, id=375, 1762.585pt x 896.34875pt>
+<img/RMF_tut_BidTask.png, id=400, 1762.585pt x 896.34875pt>
 File: img/RMF_tut_BidTask.png Graphic file (type png)
 <use img/RMF_tut_BidTask.png>
-Package pdftex.def Info: img/RMF_tut_BidTask.png  used on input line 200.
+Package pdftex.def Info: img/RMF_tut_BidTask.png  used on input line 201.
 (pdftex.def)             Requested size: 341.43436pt x 173.63158pt.
-<img/RMF_tut_trafficEditor.png, id=376, 2501.345pt x 1426.32875pt>
+<img/RMF_tut_trafficEditor.png, id=401, 2501.345pt x 1426.32875pt>
 File: img/RMF_tut_trafficEditor.png Graphic file (type png)
 <use img/RMF_tut_trafficEditor.png>
-Package pdftex.def Info: img/RMF_tut_trafficEditor.png  used on input line 216.
+Package pdftex.def Info: img/RMF_tut_trafficEditor.png  used on input line 217.
 
 (pdftex.def)             Requested size: 341.43436pt x 194.67894pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 213--220
+Underfull \hbox (badness 10000) in paragraph at lines 214--221
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 213--220
+Underfull \hbox (badness 10000) in paragraph at lines 214--221
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 213--220
+Underfull \hbox (badness 10000) in paragraph at lines 214--221
 
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<img/RMF_tut_fleetAdapterTMPL.png, id=377, 1256.695pt x 233.87375pt>
+<img/RMF_tut_fleetAdapterTMPL.png, id=402, 1256.695pt x 233.87375pt>
 File: img/RMF_tut_fleetAdapterTMPL.png Graphic file (type png)
 <use img/RMF_tut_fleetAdapterTMPL.png>
 Package pdftex.def Info: img/RMF_tut_fleetAdapterTMPL.png  used on input line 2
-23.
+24.
 (pdftex.def)             Requested size: 341.43436pt x 63.53929pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -978,10 +1009,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-15.05003pt}.
 
 [24 <./img/RMF_tut_BidTask.png>]
-<img/RMF_tut_web.png, id=384, 2557.555pt x 1193.45876pt>
+<img/RMF_tut_web.png, id=409, 2557.555pt x 1193.45876pt>
 File: img/RMF_tut_web.png Graphic file (type png)
 <use img/RMF_tut_web.png>
-Package pdftex.def Info: img/RMF_tut_web.png  used on input line 231.
+Package pdftex.def Info: img/RMF_tut_web.png  used on input line 232.
 (pdftex.def)             Requested size: 341.43436pt x 159.32533pt.
 
 
@@ -1021,43 +1052,31 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [28]
 Chapter 8.
-<img/miniPC.jpg, id=411, 1084.05pt x 929.4725pt>
+<img/miniPC.jpg, id=439, 1084.05pt x 929.4725pt>
 File: img/miniPC.jpg Graphic file (type jpg)
 <use img/miniPC.jpg>
-Package pdftex.def Info: img/miniPC.jpg  used on input line 10.
+Package pdftex.def Info: img/miniPC.jpg  used on input line 12.
 (pdftex.def)             Requested size: 170.71393pt x 146.36432pt.
-<img/IMU.jpg, id=415, 1084.05pt x 946.53625pt>
+<img/IMU.jpg, id=443, 1084.05pt x 946.53625pt>
 File: img/IMU.jpg Graphic file (type jpg)
 <use img/IMU.jpg>
-Package pdftex.def Info: img/IMU.jpg  used on input line 16.
+Package pdftex.def Info: img/IMU.jpg  used on input line 18.
 (pdftex.def)             Requested size: 170.71393pt x 149.05136pt.
-<img/laserScanRPLIDAR.png, id=421, 235.88126pt x 207.77625pt>
+<img/laserScanRPLIDAR.png, id=449, 235.88126pt x 207.77625pt>
 File: img/laserScanRPLIDAR.png Graphic file (type png)
 <use img/laserScanRPLIDAR.png>
-Package pdftex.def Info: img/laserScanRPLIDAR.png  used on input line 25.
+Package pdftex.def Info: img/laserScanRPLIDAR.png  used on input line 27.
 (pdftex.def)             Requested size: 170.71393pt x 150.37552pt.
-<img/RoverwithSensor.jpg, id=422, 812.03375pt x 641.39626pt>
-File: img/RoverwithSensor.jpg Graphic file (type jpg)
-<use img/RoverwithSensor.jpg>
-Package pdftex.def Info: img/RoverwithSensor.jpg  used on input line 31.
-(pdftex.def)             Requested size: 170.71393pt x 134.8342pt.
 
-Overfull \hbox (44.89545pt too wide) in paragraph at lines 4--34
+Overfull \hbox (51.83087pt too wide) in paragraph at lines 6--30
 \OT1/cmtt/m/n/12 witmotion[]ros \OT1/cmr/m/n/12 us-ing the code from this repo 
-in github Elet-traSci-Comp/witmotion[]IMU[]ros[][][].
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 4--34
-
+in github \OT1/cmtt/m/n/12 ElettraSciComp/witmotion[]IMU[]ros[][][]\OT1/cmr/m/n
+/12 .
  []
 
 [29
 
  <./img/miniPC.jpg>]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 27.05003pt, for example:
@@ -1067,6 +1086,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-15.05003pt}.
 
 [30 <./img/IMU.jpg> <./img/laserScanRPLIDAR.png>]
+<img/RoverwithSensor.jpg, id=469, 812.03375pt x 641.39626pt>
+File: img/RoverwithSensor.jpg Graphic file (type jpg)
+<use img/RoverwithSensor.jpg>
+Package pdftex.def Info: img/RoverwithSensor.jpg  used on input line 34.
+(pdftex.def)             Requested size: 170.71393pt x 134.8342pt.
+<img/modelWithTFtree.png, id=470, 1065.9825pt x 936.49875pt>
+File: img/modelWithTFtree.png Graphic file (type png)
+<use img/modelWithTFtree.png>
+Package pdftex.def Info: img/modelWithTFtree.png  used on input line 40.
+(pdftex.def)             Requested size: 170.71393pt x 149.97147pt.
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 27.05003pt, for example:
@@ -1075,26 +1105,97 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-15.05003pt}.
 
-[31 <./img/RoverwithSensor.jpg>]
+[31 <./img/RoverwithSensor.jpg> <./img/modelWithTFtree.png (PNG copy)>]
 Chapter 9.
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <17.28> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 54.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <17.28> on input line 54.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 54.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\rightarrow' on input line 54.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 54.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 64.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\rightarrow' on input line 64.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 64.
+
+<img/map.png, id=486, 1969.3575pt x 3074.48625pt>
+File: img/map.png Graphic file (type png)
+<use img/map.png>
+Package pdftex.def Info: img/map.png  used on input line 69.
+(pdftex.def)             Requested size: 170.71393pt x 266.51175pt.
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+)
+Overfull \hbox (22.6571pt too wide) in paragraph at lines 65--74
+\OT1/cmr/m/n/12 from \OT1/cmtt/m/n/12 slam[]toolbox\OT1/cmr/m/n/12 [[]5[]] (git
+hub: SteveMa-cen-ski/s-lam[]toolbox[][][]) and \OT1/cmtt/m/n/12 cartographer[]r
+os\OT1/cmr/m/n/12 [[]4[]]
+ []
+
 [32
 
 ]
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 7
+5.
+ (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 75.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 27.05003pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.05003pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-15.05003pt}.
+
+[33 <./img/map.png>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 27.05003pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.05003pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-15.05003pt}.
+
+[34]
 Chapter 10.
-[33
+[35
 
 ]
 Chapter 11.
-[34
+[36
 
 ]
 Chapter 12.
-) [35
+) [37
 
 ]
 \openout2 = `cap/Result.aux'.
 
- (./cap/Result.tex [36
+ (./cap/Result.tex [38
 
 
 
@@ -1118,10 +1219,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[37]
+[39]
 \openout2 = `cap/Conclusion.aux'.
 
- (./cap/Conclusion.tex [38
+ (./cap/Conclusion.tex [40
 
 
 
@@ -1129,7 +1230,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 ])
 \openout2 = `cap/Appendices.aux'.
 
- (./cap/Appendices.tex [39
+ (./cap/Appendices.tex [41
 
 
 
@@ -1143,13 +1244,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[40]
-Overfull \hbox (5.22047pt too wide) in paragraph at lines 74--74
+[42]
+Overfull \hbox (5.22047pt too wide) in paragraph at lines 77--77
 \OT1/cmr/m/it/12 IEEE/RSJ In-ter-na-tional Con-fer-ence on In-tel-li-gent Robot
 s and Sys-tems (IROS)\OT1/cmr/m/n/12 .
  []
 
-[41
+[43
 
 
 
@@ -1162,41 +1263,42 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[42] (./tesi.aux (./cap/Introduction.aux) (./cap/LiteratureReview.aux)
+[44] (./tesi.aux (./cap/Introduction.aux) (./cap/LiteratureReview.aux)
 (./cap/Methodology.aux) (./cap/Result.aux) (./cap/Conclusion.aux)
 (./cap/Appendices.aux))
 Package rerunfilecheck Info: File `tesi.out' has not changed.
-(rerunfilecheck)             Checksum: 4663E9FCA4AFF496958AD1AE286143D5;6255.
+(rerunfilecheck)             Checksum: 62F18E4A2D355F32894D175349C6AEBF;7223.
 Package logreq Info: Writing requests to 'tesi.run.xml'.
 \openout1 = `tesi.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 18641 strings out of 480247
- 333842 string characters out of 5896151
- 830660 words of memory out of 5000000
- 36216 multiletter control sequences out of 15000+600000
- 477315 words of font info for 55 fonts, out of 8000000 for 9000
- 14 hyphenation exceptions out of 8191
- 60i,12n,68p,1853b,1334s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/michelebelletti/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tc
-rm1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx
-10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmsl12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
-t12.pfb>
-Output written on tesi.pdf (42 pages, 8513869 bytes).
+ 20443 strings out of 480129
+ 358244 string characters out of 5893409
+ 1009714 words of memory out of 5000000
+ 37992 multiletter control sequences out of 15000+600000
+ 478268 words of font info for 59 fonts, out of 8000000 for 9000
+ 81 hyphenation exceptions out of 8191
+ 60i,12n,68p,1853b,1383s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/michele/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.6
+00pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmsl12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsltt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on tesi.pdf (44 pages, 8962760 bytes).
 PDF statistics:
- 612 PDF objects out of 1000 (max. 8388607)
- 496 compressed objects within 5 object streams
- 128 named destinations out of 1000 (max. 500000)
- 319 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 689 PDF objects out of 1000 (max. 8388607)
+ 563 compressed objects within 6 object streams
+ 147 named destinations out of 1000 (max. 500000)
+ 369 words of extra memory for PDF output out of 10000 (max. 10000000)
 

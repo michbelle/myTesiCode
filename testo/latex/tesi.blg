@@ -25,13 +25,13 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: tesi-blx.bib
 Database file #2: cap/references.bib
-Repeated entry---line 127 of file cap/references.bib
+Repeated entry---line 128 of file cap/references.bib
  : @misc{sikand2021robofleetopensourcecommunication
  :                                                 ,
 I'm skipping whatever remains of this entry
 Warning--string name "august" is undefined
---line 140 of file cap/references.bib
-Repeated entry---line 170 of file cap/references.bib
+--line 141 of file cap/references.bib
+Repeated entry---line 171 of file cap/references.bib
  : @inproceedings{vslamComparison2021
  :                                   ,
 I'm skipping whatever remains of this entry
@@ -230,45 +230,45 @@ Too many commas in name 1 of "S. Macenski, T. Moore, DV Lu, A. Merzlyakov, M. Fe
 while executing---line 2815 of file biblatex.bst
 Too many commas in name 1 of "S. Macenski, T. Moore, DV Lu, A. Merzlyakov, M. Ferguson" for entry macenski2023survey
 while executing---line 2815 of file biblatex.bst
-You've used 16 entries,
+You've used 17 entries,
             6399 wiz_defined-function locations,
-            1318 strings with 13726 characters,
-and the built_in function-call counts, 136619 in all, are:
-= -- 11381
-> -- 1702
-< -- 451
-+ -- 4090
-- -- 648
-* -- 9911
-:= -- 16283
+            1329 strings with 13932 characters,
+and the built_in function-call counts, 143559 in all, are:
+= -- 11896
+> -- 1828
+< -- 495
++ -- 4287
+- -- 695
+* -- 10391
+:= -- 16992
 add.period$ -- 0
-call.type$ -- 16
-change.case$ -- 197
+call.type$ -- 17
+change.case$ -- 224
 chr.to.int$ -- 50
-cite$ -- 30
-duplicate$ -- 14343
-empty$ -- 11753
-format.name$ -- 1109
-if$ -- 27117
+cite$ -- 32
+duplicate$ -- 15125
+empty$ -- 12352
+format.name$ -- 1177
+if$ -- 28548
 int.to.chr$ -- 0
-int.to.str$ -- 40
+int.to.str$ -- 43
 missing$ -- 0
-newline$ -- 595
-num.names$ -- 698
-pop$ -- 5667
+newline$ -- 633
+num.names$ -- 758
+pop$ -- 6008
 preamble$ -- 1
-purify$ -- 293
+purify$ -- 325
 quote$ -- 0
-skip$ -- 2737
+skip$ -- 2965
 stack$ -- 0
-substring$ -- 21468
-swap$ -- 2447
-text.length$ -- 443
-text.prefix$ -- 15
+substring$ -- 22305
+swap$ -- 2627
+text.length$ -- 472
+text.prefix$ -- 16
 top$ -- 1
-type$ -- 532
+type$ -- 566
 warning$ -- 0
-while$ -- 2021
+while$ -- 2113
 width$ -- 0
-write$ -- 580
+write$ -- 617
 (There were 98 error messages)

@@ -19,7 +19,7 @@ RUN mkdir -p ~/ff_ws/src \
 
 # # #install simulation code
 RUN apt update && apt install -y ros-jazzy-nav2-bringup git \
-    && git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations ~/turtlebot3_simulations \
+    && git clone -b main https://github.com/ROBOTIS-GIT/turtlebot3_simulations ~/turtlebot3_simulations \
     && echo "export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp\nexport GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/turtlebot3_simulations/turtlebot3_gazebo/models" >> ~/.bashrc \
     && rm -rf /var/lib/apt/lists/*
 
@@ -31,7 +31,7 @@ RUN echo "deb [trusted=yes] https://download.eclipse.org/zenoh/debian-repo/ /" |
 
 #install free fleet
 RUN cd ~/ff_ws/src \
-    && git clone https://github.com/open-rmf/free_fleet.git \
+    && git clone -b main https://github.com/open-rmf/free_fleet.git \
     && apt update \
     && cd ~/ff_ws \
     && rosdep install --from-paths src --ignore-src --rosdistro jazzy -yr \
@@ -40,7 +40,7 @@ RUN cd ~/ff_ws/src \
 
 #install tesi code
 RUN cd ~/ff_ws/src \
-    && git clone https://github.com/michbelle/myTesiCode.git \
+    && git clone -b master https://github.com/michbelle/myTesiCode.git \
     && apt update \
     && cd ~/ff_ws \
     && rosdep install --from-paths src --ignore-src --rosdistro jazzy -yr \
