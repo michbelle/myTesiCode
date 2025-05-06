@@ -561,6 +561,67 @@
     \field{year}{2022}
   \endentry
 
+  \entry{10.1007/978-3-031-67295-8_33}{inproceedings}{}
+    \name{author}{1}{}{%
+      {{hash=VA}{%
+         family={Vukolov},
+         familyi={V\bibinitperiod},
+         given={Andrey},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \name{editor}{3}{}{%
+      {{hash=RG}{%
+         family={Rosati},
+         familyi={R\bibinitperiod},
+         given={Giulio},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=GA}{%
+         family={Gasparetto},
+         familyi={G\bibinitperiod},
+         given={Alessandro},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=CM}{%
+         family={Ceccarelli},
+         familyi={C\bibinitperiod},
+         given={Marco},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer Nature Switzerland}%
+    }
+    \strng{namehash}{VA1}
+    \strng{fullhash}{VA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{V}
+    \field{sortinithash}{V}
+    \field{abstract}{%
+    This paper proposes the path planner module designed for the robots
+  operating in the dense dynamic environments. It contains description of the
+  novel ROS module that implements adopted version of the known and well
+  described D-star (D*) algorithm accompanied with customized heuristic, and
+  optimizer pipeline for trajectory decompaction, and postprocessing engine for
+  holding a safety distance from the obstacles. The module removes the known
+  problems that D-star experiences on high-resolution maps, providing sparse
+  trajectory useful for the industrial unmanned ground vehicles (UGVs) with
+  simple actuation trackers installed. Test results of the algorithm are given
+  for the dense industrial environment containing closed loops.%
+    }
+    \field{booktitle}{New Trends in Mechanism and Machine Science}
+    \field{isbn}{978-3-031-67295-8}
+    \field{pages}{294\bibrangedash 301}
+    \field{title}{D-Star-Based Optimized Trajectory Planner for Mobile Robots
+  Operating in Dense Environments}
+    \list{location}{1}{%
+      {Cham}%
+    }
+    \field{year}{2024}
+  \endentry
+
   \entry{andrei_vukolov_2022_7017118}{software}{}
     \name{author}{1}{}{%
       {{hash=VA}{%

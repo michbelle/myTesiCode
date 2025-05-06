@@ -272,9 +272,9 @@ planner_server:
     planner_plugins: ["GridBased"]
     GridBased:
       plugin: "dstar_global_planner/DStarGlobalPlanner"
-      goal_distance_threshold: 0.5
+      goal_distance_threshold: 0.3 #0.5 <--
       neighbor_distance_threshold : 0.1
-      occupancy_threshold: 245 # 64 #
+      occupancy_threshold: 245 # 64 # <--
       cutoff_distance: 16
       trajectory_optimizer:
         repulsion_gain: 50.0
@@ -282,12 +282,12 @@ planner_server:
       erosion:
         enable: false
         erosion_gap: 2
-      paths:
-        from: /none
-        enable: false
-      tolerance: 0.5
-      use_astar: false
-      allow_unknown: true
+                            # paths:
+                            #   from: /none
+                            #   enable: false
+                            # tolerance: 0.5
+                            # use_astar: false
+                            # allow_unknown: true
 #     topic_name: /trajectory_controller/global_costmap/costmap
 #     enable_erosion: false
 #     erosion_gap: 3

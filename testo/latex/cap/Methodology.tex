@@ -63,7 +63,7 @@ for the IMU we used only the yaw velocity while for the odometry we select only 
 Then is also possible to tune the process noise covariance matrix $ Q $ and represents the noise we add to the total error after each prediction step.  In general, the larger the value for Q relative to the variance for a given variable in an input message, the faster the filter will converge to the value in the measurement.
 \section{localization \texttt{map} $\rightarrow$ \texttt{odom}}
 In this part we will describe how archive the link frame from \texttt{map} to \texttt{odom}. As described before the costmap was create with Cartographer, for testing both SLAM from \texttt{slam\_toolbox}\cite{Macenski2021} (github: SteveMacenski/slam\_toolbox\footnote{\href{https://github.com/SteveMacenski/slam_toolbox/tree/ros2}{https://github.com/SteveMacenski/slam\_toolbox/tree/ros2}}) and \texttt{cartographer\_ros}\cite{45466} (github: ros2/cartographer\_ros\footnote{\href{https://github.com/cartographer-project/cartographer_ros}{https://github.com/cartographer-project/cartographer\_ros}}) package were used in this thesis. \\
-Optaining this map:
+With cartographer we obtain this map:
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.4\linewidth]{img/map.png}
@@ -77,8 +77,15 @@ ros2 run cartographer_ros cartographer_pbstream_to_ros_map \
 	-map_filename map.pgm \
 	-resolution 0.05
 \end{lstlisting}
+This bringht some minors errors to the map thiking there was some place capable to move on, repaired usign gimp and optainint this map (also correct error to allow from my workstation to not have a obstacle not present)\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.4\linewidth]{img/mapV.png}
+	\captionof{figure}{\alert{Map edited with Gimp and used}}
+\end{figure}
+\newpage
 Then it was possible to launch the localization using:\\
-\hspace*{10mm} \texttt{3<r/s>\_Lamcl.launch.py}\\
+\hspace*{10mm} \texttt{3<r/s>\_L<amcl/Cartographer>.launch.py}\\
 While for mapping are provided the code:\\
 \hspace*{10mm} \texttt{X<r/s>\_mappingW<slam/cartographer>.launch.py}
 \section{navigation stack}
@@ -102,9 +109,74 @@ The file  is launching all the following packages with node or composition plugi
 	
 	\item \texttt{nav2\_lifecycle\_manager} with Node \texttt{lifecycle\_manager} or\\plugin \texttt{nav2\_lifecycle\_manager::LifecycleManager}
 \end{itemize}
-The parameters where not as much changed by the default configuration, the only change we need to apply is in the \texttt{planner\_server}. 
+The parameters where not as much changed by the default configuration, the only change we need to apply is in the \texttt{planner\_server} to have our navigation system after porting it to ROS 2. 
+In the next section is the step we took to port it to ROS 2.
+\subsection{Porting DStarGlobalPlanner to ROS 2}
+The \texttt{DStarGlobalPlanner} is a implementation of the D* informed incremental search algoritm with external optimizers\cite{10.1007/978-3-031-67295-8_33} for the ROS 1 \texttt{move\_base} package\footnote{\href{https://wiki.ros.org/move_base}{https://wiki.ros.org/move\_base}}. In this part we will refer a lot on the porting documentation refered before \footnote{\href{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}}\footnote{\href{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}} and the documentection from Nav2 : "Writing a New Planner Plugin"\footnote{\href{https://docs.nav2.org/plugin_tutorials/docs/writing_new_nav2planner_plugin.html}{https://docs.nav2.org/plugin\_tutorials/docs/writing\_new\_nav2planner\_plugin.html}}
+Is now described the 2 phases of porting the code, the first one is the Nav2 structure porting procedure and the second part adapt the old code to ROS 2.
+\subsubsection{Porting code to ROS 1}
+In the \texttt{package.xml} that describe the package as an organizational unit for your ROS 2 code, the changes that are performed are:
+\begin{itemize}
+	\item \texttt{buildtool\_depend} : \texttt{catking} $\rightarrow$ \texttt{ament\_cmake} :  ament as its build system, there are 2 one for CMake based packages and mostly cpp ament\_cmake and one for python ament\_python
+	\item \texttt{roscpp} $\rightarrow$ \texttt{rclcpp}: the new structure on how the client library are build are that at the fondation there is the general ros client library rcl writen in C and build on top of that are the rclcpp and rclpy, but are avaible in community maintened more.
+	\item update the naming of all the packages
+	\item to tell colcon the package is an ament\_cmake add it in the build\_type 
+\end{itemize}
+Because we are working with cpp we need to edit also the \texttt{CMakeLists.txt} and the major changes are:
+\begin{itemize}
+	\item update all the names of the packages
+	\item set the new standard of C++ to 17
+	\item \texttt{find\_package()} required to be called for each package
+	\item call \texttt{ament\_export\_dependencies()} to indicates which ament packages this package depends on at runtime
+	\item write \texttt{ament\_package()} at the end	
+\end{itemize}
+Also in the code this was changes:
+
+\begin{itemize}
+	\item the log calls are changed from \texttt{ROS\_} to \texttt{RCLCPP\_}
+	\item the structure of some messages are changed
+	\item add good practice to use share pointer
+\end{itemize}
+other changes are reported in the next section because are also connected with Nav2
+
+\subsubsection{Porting code to Nav 2}
+\begin{itemize}
+	\item in plugin definition: we move from thr base\_class\_type of nav\_core::BaseGlobalPlanner to nav2\_core::GlobalPlanner.
+	\item because it is a plugin based on \texttt{nav2\_core::GlobalPlanner} it inherits 5 pure virtual methods (\texttt{configure()},\texttt{activate()},\texttt{deactivate()},\texttt{cleanup()},\texttt{createPlan()}) that required override and used to compute the trajectories. Now we describe each method
+	\begin{itemize}
+		\item \texttt{configure()} : called when node enters \texttt{on\_configure} state, used for perform declarations of ROS parameters and initialization of planner’s member variables. The input parameters are: shared pointer to parent node, planner name, tf buffer pointer and shared pointer to costmap. This replace the \texttt{initialize} method used in ROS 1 and also the class initialization. Also it's parametrs are used to link the planner information locally:
+		\begin{itemize}
+		\item \texttt{rclcpp\_lifecycle::LifecycleNode::WeakPtr} to link to the base class
+		\item the name of the plugin
+		\item a link to the \texttt{tf} with \texttt{std::shared\_ptr<tf2\_ros::Buffer>}
+		\item the map with \texttt{std::shared\_ptr<nav2\_costmap\_2d::Costmap2DROS>}
+		\end{itemize}
+		\item \texttt{activate()} : called when node enters \texttt{on\_activate} state, used for implement operations which are necessary before planner goes to an active state.
+		\item \texttt{deactivate()} : called when node enters \texttt{on\_deactivate} state, used for implement operations which are necessary before planner goes to an inactive state.
+		\item \texttt{cleanup()} : called when node enters \texttt{on\_cleanup} state, should clean up resources which are created for the planner.
+		\item \texttt{createPlan()} : called when planner server demands a global plan for specified start and goal pose. replace the makePlan used in ROS 1 and return a path as \texttt{nav\_msgs::msg::Path} using the start and end position as \texttt{geometry\_msgs::msg::PoseStamped}
+	\end{itemize}
+	\item at the end we placed the code that is used also or plugins:\\
+\texttt{\#include "pluginlib/class\_list\_macros.hpp"}\\
+\texttt{PLUGINLIB\_EXPORT\_CLASS(<type of the plugin class>, <type of the base class>);}
+	\item because it's a plugin we need to add a plugin declaration where is package.xml is located and edit the CMake file as described in the doc for plugins\footnote{\href{https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Pluginlib.html}{https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Pluginlib.html}}.
+\end{itemize}
+\subsubsection{build the project}
+At the end we build the system using the new tool for building \texttt{colcon} and we have the global planner and also all the system ready to navigate through the facility.
 
 \chapter{Hardware adaptation process from Rover Zero to Rover Mini}
+\alert{Non ho informazioni su nessun Rover Zero, rimuovo il capitolo?}
 \chapter{Integration of the navigation stack with Open-RMF}
-\chapter{Testing and evaluation of the system}
+Now we discuss the steps taken to insert the rover Mini to the The Open Robotics Middleware Framework (Open-RMF), all this steps are taken following the documentation\footnote{\href{https://osrf.github.io/ros2multirobotbook/intro.html}{https://osrf.github.io/ros2multirobotbook/intro.html}}.
+The first thing that we need to build is route maps, this maps are used to predict the navigation paths that the robots will took allowing RMF to avoid conflicts, this procedure is called "traffic management". For this Opem-RMF give the traffic editor tool\footnote{\href{https://github.com/open-rmf/rmf\_traffic\_editor}{https://github.com/open-rmf/rmf\_traffic\_editor}} that allow to generate the route map.
+We started with the map obtained from Cartographer and start a new project \texttt{*.building.yaml}. Then, there are some drawing of the facility's plans and also that was added. \alert{This make us discover that the map acquired using Cartographer was not perfect and have a rotation error at one of the turning point of the building, visible in figure}. We then to design the traffic flow for the floor following  the best practice to obtain a optimize plan \footnote{\href{https://osrf.github.io/ros2multirobotbook/integration\_nav-maps-strategies.html}{https://osrf.github.io/ros2multirobotbook/integration\_nav-maps-strategies.html}}
 
+\chapter{Testing and evaluation of the system}
+The testing have brigh up some problem in the design of the rover.
+If needed to move in office the robot with the laser sensor cannot see part of the obstacle, see image:
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\linewidth]{img/problem\_chair.jpg}
+	\captionof{figure}{Cartographer Algorithm}
+\end{figure}\\
+can be increase the occupancy map bigger but the dimension of the legs chair wouldn't allow to pass through port. A solution is to move the laser to a lower position but this required a low profile laser, that need some filtering to remove the wheel and obtaining blind spot without adding the sensor on top or adding another sensor like a deep camera that give a 3D occupancy greed that can be processed to obtain a simple map.
