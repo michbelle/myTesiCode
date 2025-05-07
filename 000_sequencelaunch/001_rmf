@@ -3,10 +3,11 @@
 docker compose up 
 
 xhost +
-docker run -it --rm -v /scratch/code/tesi_code/src/myTesiCode:/root/ff_ws/src/myTesiCode -v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY=$DISPLAY --network host --name serverNavRos rmf_all_imagev1.1  bash
+docker run -it --rm -v /scratch/code/tesi_code/src/myTesiCode:/root/ff_ws/src/myTesiCode -v /tmp/.X11-unix:/tmp/.X11-unix:ro --device=/dev/dri:/dev/dri -e DISPLAY=$DISPLAY --network host --name serverNavRos rmf_all_imagev1.1  bash
 
 docker exec -it serverNavRos bash
 
+zenohd
 
 /root/ff_ws/src/myTesiCode/zenoh_1_1/zenoh-bridge-ros2dds -c /root/ff_ws/src/myTesiCode/zenoh_1_1/zenoh_config_server/server_config.json5
 

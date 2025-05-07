@@ -168,8 +168,85 @@ At the end we build the system using the new tool for building \texttt{colcon} a
 \alert{Non ho informazioni su nessun Rover Zero, rimuovo il capitolo?}
 \chapter{Integration of the navigation stack with Open-RMF}
 Now we discuss the steps taken to insert the rover Mini to the The Open Robotics Middleware Framework (Open-RMF), all this steps are taken following the documentation\footnote{\href{https://osrf.github.io/ros2multirobotbook/intro.html}{https://osrf.github.io/ros2multirobotbook/intro.html}}.
-The first thing that we need to build is route maps, this maps are used to predict the navigation paths that the robots will took allowing RMF to avoid conflicts, this procedure is called "traffic management". For this Opem-RMF give the traffic editor tool\footnote{\href{https://github.com/open-rmf/rmf\_traffic\_editor}{https://github.com/open-rmf/rmf\_traffic\_editor}} that allow to generate the route map.
-We started with the map obtained from Cartographer and start a new project \texttt{*.building.yaml}. Then, there are some drawing of the facility's plans and also that was added. \alert{This make us discover that the map acquired using Cartographer was not perfect and have a rotation error at one of the turning point of the building, visible in figure}. We then to design the traffic flow for the floor following  the best practice to obtain a optimize plan \footnote{\href{https://osrf.github.io/ros2multirobotbook/integration\_nav-maps-strategies.html}{https://osrf.github.io/ros2multirobotbook/integration\_nav-maps-strategies.html}}
+The first thing that we need to build is \textbf{route maps}, this maps are used to predict the navigation paths that the robots will took allowing RMF to avoid conflicts, this procedure is called "traffic management".
+\section{route maps generation}
+For this Open-RMF give the \textbf{traffic editor tool}\footnote{\href{https://github.com/open-rmf/rmf\_traffic\_editor}{https://github.com/open-rmf/rmf\_traffic\_editor}} that allow to generate the route map.
+We started with the map obtained from Cartographer and start a new project \texttt{*.building.yaml}. Then, there are some drawing of the facility's plans and also that was added. \alert{This make us discover that the map acquired using Cartographer was not perfect and have a rotation error at one of the turning point of the building, visible in figure}. We then to design the traffic flow for the floor following  the best practice to obtain a optimize plan \footnote{\href{https://osrf.github.io/ros2multirobotbook/integration\_nav-maps-strategies.html}{https://osrf.github.io/ros2multirobotbook/integration\_nav-maps-strategies.html}}, the traffic editor allow to define this following components to the map that is going to be used as route map:
+\begin{itemize}
+	\item \textbf{vertex}: they are waypoints or the definition of wall, door or else. The properties of a vertex can be:
+	\begin{itemize}
+		\item \texttt{is\_holding\_point} : the robot is allowed to wait at this waypoint for an indefinite period of time.
+		\item \texttt{is\_parking\_spot}: robot is required to park itself.
+		\item \texttt{is\_passthrough\_point}: waypoint which the robot shouldn't stop.
+		\item \texttt{is\_charger}: charging station for a robot
+		\item \texttt{is\_cleaning\_zone}: used for the \texttt{Clean} task, indicate if is a clean zone where to start the cleaning
+		\item \texttt{dock\_name}: used when the robot is executing their custom docking sequence. \alert{send a command to rmf to dock the robot.}
+		\item \texttt{pickup\_dispenser}: dispenser workcell for \texttt{Delivery} Task
+		\item \texttt{dropoff\_ingestor}: ingestor workcell for \texttt{Delivery} Task
+		\item \texttt{spawn\_robot\_type}: used in simulation to spawn a robot model 
+		\item \texttt{spawn\_robot\_name}: used in simulation to identify a robot spawned
+	\end{itemize}
+	\item \texttt{measurement} allow to add a measurement to set the scale of the drawing. In our case we used the \alert{know} width of the hallway.
+	\item \texttt{door}: used both for interacting with the real world than for simulation. if a robot is going to pass throught a lane where is a door, rmf will request to open the door.
+	\item \texttt{traffic lane}: connect waypoints and are the paths for a fleet to follow, they are divided by groups and multiple fleet can be assign on a group. rmf suppose that are straight lines for control the vehicles. the lanes can be unidirectional or bidirectional and orientation if required the robot to navigate forward or backward.
+	\item \texttt{fiducials}: used for align multiple floor and used as a link to ROS 2 map, are visible throught multiple floor and give an information about their position respect the map.
+	\item \texttt{lift}: used for align multiple floor and used as a link to ROS 2 map, are visible throught multiple floor and give an information about their position respect the map.
+	\item \texttt{walls}: for simulation add the walls to the world that will generate.
+	\item \texttt{floor}: for simulation add the ground plane for robots wo walk on. can added hole for lifts.
+	\item \texttt{environment assets}: for simulation add models of different furniture for gazebo. 
+\end{itemize}
+This plan take into account for planning this factor:
+\begin{itemize}
+	\item in the hallways can pass only one robot
+	\item Holding points (leaf nodes) are added along the corridor or near the begin or the end of it for giving way to one another. If there are some task waypoint is suggested to add a very low limit speed to avoid to use them as holding points.
+	\item \alert{mutex lanes or waypoints, At any point of time, only one robot is allowed to occupy any waypoint or lane belonging to the same mutex group, allow to avoids deadlocks.}
+\end{itemize}
+\newpage
+\begin{figure}[h]
+\centering
+\includegraphics[width=1\linewidth]{img/RMF-traffic-map.png}
+\captionof{figure}{Traffic editor with Elettra's route map}
+\end{figure}
+Then it is possible to generate each route maps from each graphs \texttt{*.yaml} using the command:\\
+\texttt{ros2 run rmf\_building\_map\_tools building\_map\_generator nav \textbackslash \\ \hspace*{1cm} <map.building.yaml> <folder/where/to/generate/routes>}
+Create the map we need a method to connect the rover to rmf, this is done through the \textbf{free fleet}
+\newpage
+\section{free fleet}
+Free fleet\footnote{\href{https://github.com/open-rmf/free\_fleet}{https://github.com/open-rmf/free\_fleet}} is a python implementation of the \texttt{full\_control} Open-RMF Fleet Adapter. It uses \texttt{zenoh} as a communication layer between each robot and the fleet adapter, allowing access and control over the navigation stacks of the robots. 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\linewidth]{img/free\_fleet\_adapter.png}
+	\captionof{figure}{Free Fleet Adapter with Zenoh}
+\end{figure}\\
+The we edit the fleet configuration file to respect the characteristic of the fleet: name of the fleet, the limits in velocity, their size and mechanical info, their battery management, what task they are capable of and a list of all robot that are inside this fleet with its name, what charger use, frame used to calculate his position and information on the map.
+At the end we set the reference cordinate respect the robot frame and the rmf map.
+\subsection{Zenoh}
+Zenoh\footnote{\href{https://zenoh.io/}{https://zenoh.io/}} is a pub/sub/query protocol unifying data in motion, data at rest and computations. It blends traditional pub/sub with geo distributed storage, queries and computations, while retaining a well level of time and space efficiency. It allow to send only specific topic through the web reducing bandwidth to a specific server.
+On this server is need to launch a Zenoh router with (\texttt{\$ zenohd}), but there can be multiple instance of Zenoh router for redundancy. Then as described in the repo is suggested to use the binaries of \texttt{zenoh-bridge-ros2dds} one on the server and one on each robot with a configuration file. On the server it's configurated to accept all the traffic \alert{test se necessario avere avere il server} from each machine can reach it, while on the client we need to setup:
+\begin{itemize}
+ \item the \texttt{namespace} as the one associated to the file of configuration of the fleet
+ \item allow to publish the frame status of the robot (\texttt{.*/tf} and \texttt{.*/tf\_static}) and if we could also the battery information (\texttt{.*/battery\_state}) and allow also the action servers that control the navigation(\texttt{.*/navigate\_to\_pose})
+ \item setup zenoh configuration defining the mode and the address of the server, with is protocol and its port that th client will \texttt{connect} and \texttt{listen} to (\texttt{tcp/<ip address server>:7447})
+\end{itemize}
+\section{launch RMF core}
+Setup the robot we can now launch the core of RMF using the launch file:\\
+\texttt{0rmf\_mini\_world\_rmf\_core.launch.xml} \\
+that launch:
+\begin{itemize}
+	\item rmf\_traffic\_schedule : Traffic Schedule
+	\item rmf\_traffic\_blockade : the traffic Blockade Moderator
+	\item building\_map\_server : the build map
+	\item visualization.launch.xml: that launch all the tool to see in rviz2 \alert{provare a rimuovere}
+	\item door\_supervisor
+	\item lift\_supervisor
+	\item rmf\_task\_dispatcher
+	\item queue\_manager: if request Enable the reservation node for parking spot de-confliction
+\end{itemize}
+
+\section{web interface}
+launch with docker compose the we server and web interface and then launch:
+\texttt{ros2 launch myCode 1rmf\_mini\_fleet\_adapter.launch.xml \textbackslash \\ \hspace*{1cm} server\_uri:="ws://localhost:8000/\_internal"}
+
 
 \chapter{Testing and evaluation of the system}
 The testing have brigh up some problem in the design of the rover.
@@ -180,3 +257,5 @@ If needed to move in office the robot with the laser sensor cannot see part of t
 	\captionof{figure}{Cartographer Algorithm}
 \end{figure}\\
 can be increase the occupancy map bigger but the dimension of the legs chair wouldn't allow to pass through port. A solution is to move the laser to a lower position but this required a low profile laser, that need some filtering to remove the wheel and obtaining blind spot without adding the sensor on top or adding another sensor like a deep camera that give a 3D occupancy greed that can be processed to obtain a simple map.
+\\
+\alert{The RMF commands from waypoint to waypoint: RMF commands the robot from waypoint to waypoint, and it leaves the low level navigation to each robot's navigation stack. So if the robot chooses to use a non-straight route, it means that the RMF navigation graph might need to be re-drawn or reconsidered (if there are constant obstacles around), or the navigation stack of the robot should be tuned to allow tighter tolerances for static/dynamic obstacles. but how the robot chooses to navigate between them is out of RMF's control, since RMF does not have dynamic obstacle information, or if there are new static obstacles, it needs to be reflected into RMF's traffic navigation graph}
