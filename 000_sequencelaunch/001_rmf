@@ -1,16 +1,21 @@
-#launch web interface
-#in myTesiCode/Dockerfiles/dockerCompose
-docker compose up 
+#setup docker
 
-xhost +
+xhost + 
+# xhost local:root
+#share local repo to docker
 docker run -it --rm -v /scratch/code/tesi_code/src/myTesiCode:/root/ff_ws/src/myTesiCode -v /tmp/.X11-unix:/tmp/.X11-unix:ro --device=/dev/dri:/dev/dri -e DISPLAY=$DISPLAY --network host --name serverNavRos rmf_all_imagev1.1  bash
+#without share local repo to docker
+docker run -it --rm -v /tmp/.X11-unix:/tmp/.X11-unix:ro --device=/dev/dri:/dev/dri -e DISPLAY=$DISPLAY --network host --name serverNavRos rmf_all_imagev1.1  bash
 
+#connect to the container
 docker exec -it serverNavRos bash
 
+#setup zenoh
 zenohd
 
 /root/ff_ws/src/myTesiCode/zenoh_1_1/zenoh-bridge-ros2dds -c /root/ff_ws/src/myTesiCode/zenoh_1_1/zenoh_config_server/server_config.json5
 
+#compilation of the code if need an update use git pull
 cd /root/ff_ws
 colcon build --packages-select myCode free_fleet free_fleet_adapter
 source install/setup.bash 
@@ -22,7 +27,19 @@ source install/setup.bash
 
 ros2 launch myCode 0rmf_mini_world_rmf_core.launch.xml
 
+#set up rmf-web 
+
+#outside on test machine
+docker -f /scratch/code/tesi_code/src/myTesiCode/Dockerfiles/dockerCompose/rmf-web_base/compose.yml compose up 
+
 ros2 launch myCode 1rmf_mini_fleet_adapter.launch.xml server_uri:="ws://localhost:8000/_internal"
 
 
+# Other commands
+
+## create the route maps
 ros2 run rmf_building_map_tools building_map_generator nav /root/ff_ws/src/myTesiCode/rmf_code/map/elettra/RMF-elettra-map.building.yaml /root/ff_ws/src/myTesiCode/rmf_code/trafficNavPath/elettra_big/
+
+## create the gazebo world
+ros2 run rmf_building_map_tools building_map_generator nav /root/ff_ws/src/myTesiCode/rmf_code/map/elettra/RMF-elettra-map.building.yaml /root/ff_ws/src/myTesiCode/rmf_code/trafficNavPath/elettra_big/
+
