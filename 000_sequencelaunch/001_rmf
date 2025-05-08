@@ -30,7 +30,7 @@ ros2 launch myCode 0rmf_mini_world_rmf_core.launch.xml
 #set up rmf-web 
 
 #outside on test machine
-docker -f /scratch/code/tesi_code/src/myTesiCode/Dockerfiles/dockerCompose/rmf-web_base/compose.yml compose up 
+docker compose -f /scratch/code/tesi_code/src/myTesiCode/Dockerfiles/dockerCompose/rmf-web_base/compose.yml up 
 
 ros2 launch myCode 1rmf_mini_fleet_adapter.launch.xml server_uri:="ws://localhost:8000/_internal"
 
@@ -41,5 +41,7 @@ ros2 launch myCode 1rmf_mini_fleet_adapter.launch.xml server_uri:="ws://localhos
 ros2 run rmf_building_map_tools building_map_generator nav /root/ff_ws/src/myTesiCode/rmf_code/map/elettra/RMF-elettra-map.building.yaml /root/ff_ws/src/myTesiCode/rmf_code/trafficNavPath/elettra_big/
 
 ## create the gazebo world
-ros2 run rmf_building_map_tools building_map_generator nav /root/ff_ws/src/myTesiCode/rmf_code/map/elettra/RMF-elettra-map.building.yaml /root/ff_ws/src/myTesiCode/rmf_code/trafficNavPath/elettra_big/
+ros2 run rmf_building_map_tools building_map_generator gazebo /root/ff_ws/src/myTesiCode/rmf_code/map/elettra/RMF-elettra-map.building.yaml ign-elettra-map.world /root/ff_ws/src/myTesiCode/rmf_code/ign_world/elettra/modelOUT
 
+##edit route map
+traffic-editor /root/ff_ws/src/myTesiCode/rmf_code/map/elettra/RMF-elettra-map.building.yaml

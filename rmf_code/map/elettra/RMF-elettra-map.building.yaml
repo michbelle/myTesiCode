@@ -7,7 +7,7 @@ crowd_sim:
   enable: 0
   goal_sets: []
   model_types: []
-  obstacle_set: {class: 1, file_name: L1_navmesh.nav, type: nav_mesh}
+  obstacle_set: {class: 1, file_name: PT_navmesh.nav, type: nav_mesh}
   states:
     - {final: 1, goal_set: -1, name: external_static, navmesh_file_name: ""}
   transitions: []
@@ -15,7 +15,7 @@ crowd_sim:
 graphs:
   {}
 levels:
-  L1:
+  PT:
     drawing:
       filename: images/map.png
     elevation: 0
@@ -130,6 +130,15 @@ levels:
       - [276, 308, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
       - [308, 93, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
     layers:
+      composition:
+        color: [0, 1, 0, 0.5]
+        filename: images/mapComposizione.png
+        transform:
+          scale: 0.078
+          translation_x: -5
+          translation_y: -12
+          yaw: 0
+        visible: false
       plan:
         color: [1, 0, 0, 0.5]
         filename: images/mapElettra.png
@@ -137,7 +146,7 @@ levels:
           scale: 0.070999999999999994
           translation_x: -5
           translation_y: -3
-          yaw: 0.0069813170079773184
+          yaw: 0.0087266462599716477
         visible: false
     measurements:
       - [40, 52, {distance: [3, 2.5]}]
@@ -451,6 +460,133 @@ levels:
       - [1085.597, 927.02099999999996, 0, hold_2Corridor_1, {is_holding_point: [4, true]}]
       - [1221.3420000000001, 517.62099999999998, 0, hold_3Corridor_0, {is_holding_point: [4, true]}]
       - [1316.3199999999999, 593.15599999999995, 0, hold_3Corridor_1, {is_holding_point: [4, true]}]
+      - [841.64499999999998, 1900.0719999999999, 0, ""]
+      - [964.67899999999997, 1901.384, 0, ""]
+      - [836.899, 2003.7929999999999, 0, ""]
+      - [964.11800000000005, 2007.377, 0, ""]
+      - [832.39400000000001, 2111.1930000000002, 0, ""]
+      - [965.40899999999999, 2113.0160000000001, 0, ""]
+      - [840.53300000000002, 2210.1959999999999, 0, ""]
+      - [963.952, 2212.625, 0, ""]
+      - [459.846, 1676.575, 0, ""]
+      - [602.15300000000002, 1681.319, 0, ""]
+      - [458.89699999999999, 1779.51, 0, ""]
+      - [595.51199999999994, 1784.2539999999999, 0, ""]
+      - [458.88200000000001, 1834.748, 0, ""]
+      - [594.404, 1839.605, 0, ""]
+      - [456.75999999999999, 2275.8429999999998, 0, ""]
+      - [583.46100000000001, 2249.9810000000002, 0, ""]
+      - [451.25400000000002, 2196.3020000000001, 0, ""]
+      - [698.62300000000005, 1597.184, 0, ""]
+      - [455.96100000000001, 1888.1700000000001, 0, ""]
+      - [589.34299999999996, 1891.6420000000001, 0, ""]
+      - [589.05399999999997, 1939.0920000000001, 0, ""]
+      - [456.82900000000001, 1935.6199999999999, 0, ""]
+      - [456.166, 1992.9770000000001, 0, ""]
+      - [585.21299999999997, 1992.9770000000001, 0, ""]
+      - [454.56799999999998, 2040.52, 0, ""]
+      - [582.81500000000005, 2044.915, 0, ""]
+      - [454.56799999999998, 2089.6610000000001, 0, ""]
+      - [578.42100000000005, 2094.855, 0, ""]
+      - [451.947, 2136.6419999999998, 0, ""]
+      - [576.31700000000001, 2141.0059999999999, 0, ""]
+      - [676.62699999999995, 2201.4609999999998, 0, ""]
+      - [695.45799999999997, 2306.913, 0, ""]
+      - [616.64200000000005, 2096.3760000000002, 0, ""]
+      - [680.74599999999998, 2099.1190000000001, 0, ""]
+      - [684.15200000000004, 1984.0309999999999, 0, ""]
+      - [688.38400000000001, 1868.231, 0, ""]
+      - [643.93600000000004, 1922.0340000000001, 0, ""]
+      - [686.39700000000005, 1923.973, 0, ""]
+      - [632.71199999999999, 1784.799, 0, ""]
+      - [691.99800000000005, 1786.1780000000001, 0, ""]
+      - [636.84799999999996, 1682.3130000000001, 0, ""]
+      - [694.755, 1684.1510000000001, 0, ""]
+      - [726.255, 2162.5599999999999, 0, ""]
+      - [726.58799999999997, 2161.1439999999998, 0, ""]
+      - [799.04700000000003, 2161.5140000000001, 0, ""]
+      - [729.17600000000004, 2099.7759999999998, 0, ""]
+      - [798.67700000000002, 2103.8429999999998, 0, ""]
+      - [735.87199999999996, 1987.4469999999999, 0, ""]
+      - [739.70799999999997, 1872.769, 0, ""]
+      - [738.29499999999996, 1926.877, 0, ""]
+      - [786.14499999999998, 1928.694, 0, ""]
+      - [679.82100000000003, 2218.6999999999998, 0, ""]
+      - [618.97500000000002, 2235.2179999999998, 0, ""]
+      - [677.93899999999996, 2161.1999999999998, 0, ""]
+      - [614.375, 2158.6909999999998, 0, ""]
+      - [619.73599999999999, 2040.009, 0, ""]
+      - [682.16099999999994, 2042.547, 0, ""]
+      - [732.15099999999995, 2044.3230000000001, 0, ""]
+      - [798.88999999999999, 2046.607, 0, ""]
+      - [744.79899999999998, 1786.896, 0, ""]
+      - [808.85699999999997, 1787.635, 0, ""]
+      - [749.23400000000004, 1685.635, 0, ""]
+      - [814.52300000000002, 1686.1279999999999, 0, ""]
+      - [588.89499999999998, 1220.8489999999999, 0, ""]
+      - [699.43799999999999, 1277.662, 0, ""]
+      - [707.80600000000004, 1541.9079999999999, 0, ""]
+      - [743.47900000000004, 1383.8009999999999, 0, ""]
+      - [822.49599999999998, 1208.3119999999999, 0, ""]
+      - [782.58699999999999, 1190.068, 0, ""]
+      - [837.88900000000001, 1077.183, 0, ""]
+      - [958.75599999999997, 1179.046, 0, ""]
+      - [823.44600000000003, 1107.5899999999999, 0, ""]
+      - [871.35799999999995, 1229.604, 0, ""]
+      - [921.05899999999997, 1254.259, 0, ""]
+      - [818.42600000000004, 801.87300000000005, 0, ""]
+      - [887.43299999999999, 904.24599999999998, 0, ""]
+      - [786.19799999999998, 861.40099999999995, 0, ""]
+      - [851.79200000000003, 975.14800000000002, 0, ""]
+      - [750.178, 926.23699999999997, 0, ""]
+      - [828.66300000000001, 1019.889, 0, ""]
+      - [727.428, 969.08199999999999, 0, ""]
+      - [809.68399999999997, 1060.672, 0, ""]
+      - [703.73299999999995, 1013.046, 0, ""]
+      - [785.87, 1104.1569999999999, 0, ""]
+      - [681.99000000000001, 1052.0440000000001, 0, ""]
+      - [764.12800000000004, 1149.367, 0, ""]
+      - [659.21199999999999, 1095.529, 0, ""]
+      - [1099.1659999999999, 605.88599999999997, 0, ""]
+      - [1012.499, 539.51999999999998, 0, ""]
+      - [964.53200000000004, 692.22900000000004, 0, ""]
+      - [1066.106, 647.404, 0, ""]
+      - [1262.434, 561.65999999999997, 0, ""]
+      - [1196.4760000000001, 646.79700000000003, 0, ""]
+      - [1262.902, 697.78599999999994, 0, ""]
+      - [1141.277, 605.63199999999995, 0, ""]
+      - [1154.4010000000001, 895.774, 0, ""]
+      - [1249.6769999999999, 969.14999999999998, 0, ""]
+      - [1182.3969999999999, 859.19899999999996, 0, ""]
+      - [1278.3499999999999, 932.79999999999995, 0, ""]
+      - [1219.6489999999999, 813.59299999999996, 0, ""]
+      - [1314.925, 883.13, 0, ""]
+      - [1296.8610000000001, 716.83199999999999, 0, ""]
+      - [1388.8789999999999, 784.50800000000004, 0, ""]
+      - [1331.3679999999999, 672.69500000000005, 0, ""]
+      - [1422.5830000000001, 739.30100000000004, 0, ""]
+      - [1487.02, 522.45299999999997, 0, ""]
+      - [1559.3019999999999, 615.65999999999997, 0, ""]
+      - [1592.8510000000001, 438.74099999999999, 0, ""]
+      - [1667.2080000000001, 528.29600000000005, 0, ""]
+      - [1670.5319999999999, 371.61099999999999, 0, ""]
+      - [1745.587, 464.69099999999997, 0, ""]
+      - [1705.4000000000001, 343.53899999999999, 0, ""]
+      - [1782.5239999999999, 435.142, 0, ""]
+      - [1759.1800000000001, 296.851, 0, ""]
+      - [1838.3720000000001, 388.15800000000002, 0, ""]
+      - [1419.8800000000001, 291.56099999999998, 0, ""]
+      - [1345.172, 214.44300000000001, 0, ""]
+      - [1305.0540000000001, 388.04300000000001, 0, ""]
+      - [1237.0260000000001, 319.37299999999999, 0, ""]
+      - [1232.6500000000001, 446.85899999999998, 0, ""]
+      - [1173.8009999999999, 381.77999999999997, 0, ""]
+      - [1188.3399999999999, 495.32299999999998, 0, ""]
+      - [1117.722, 436.01299999999998, 0, ""]
+      - [1313.2329999999999, 421.66000000000003, 0, ""]
+      - [1417.7560000000001, 538.08000000000004, 0, ""]
+      - [1316.6320000000001, 547.00300000000004, 0, ""]
+      - [1378.6659999999999, 495.166, 0, ""]
     walls:
       - [1, 2, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [3, 4, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
@@ -653,6 +789,79 @@ levels:
       - [137, 256, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [257, 258, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [259, 260, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [309, 310, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [311, 312, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [313, 314, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [315, 316, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [317, 318, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [319, 320, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [321, 322, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [323, 324, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [235, 325, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [327, 328, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [329, 330, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [331, 332, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [333, 334, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [335, 336, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [337, 338, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [326, 339, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [339, 340, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [340, 176, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [341, 342, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [170, 343, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [169, 344, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [345, 346, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [347, 348, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [349, 350, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [46, 351, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [351, 185, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [352, 353, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [354, 355, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [188, 356, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [189, 357, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [358, 359, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [360, 361, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [362, 363, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [364, 365, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [366, 367, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [368, 369, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [370, 371, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [372, 373, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [374, 375, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [375, 376, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [376, 377, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [379, 380, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [81, 381, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [381, 382, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [253, 383, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [384, 385, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [386, 387, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [388, 389, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [390, 391, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [392, 393, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [394, 395, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [396, 397, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [132, 398, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [135, 399, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [400, 401, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [401, 402, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [401, 403, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [404, 405, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [406, 407, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [408, 409, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [410, 411, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [412, 413, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [414, 415, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [416, 417, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [418, 419, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [420, 421, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [422, 423, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [424, 425, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [426, 427, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [428, 429, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [430, 431, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [432, 433, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [434, 435, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
 lifts:
   Lift_T1_0:
     depth: 1
@@ -664,12 +873,12 @@ lifts:
         x: 0
         y: 0.5
     highest_floor: ""
-    initial_floor_name: L1
+    initial_floor_name: PT
     level_doors:
       {}
     lowest_floor: ""
     plugins: false
-    reference_floor_name: L1
+    reference_floor_name: PT
     width: 1
     x: 746.07399999999996
     y: 2366
@@ -679,12 +888,12 @@ lifts:
     doors:
       {}
     highest_floor: ""
-    initial_floor_name: L1
+    initial_floor_name: PT
     level_doors:
       {}
     lowest_floor: ""
     plugins: true
-    reference_floor_name: L1
+    reference_floor_name: PT
     width: 1
     x: 761.57299999999998
     y: 1534.27
@@ -694,12 +903,12 @@ lifts:
     doors:
       {}
     highest_floor: ""
-    initial_floor_name: L1
+    initial_floor_name: PT
     level_doors:
       {}
     lowest_floor: ""
     plugins: true
-    reference_floor_name: L1
+    reference_floor_name: PT
     width: 1
     x: 1741.6199999999999
     y: 162.45500000000001
