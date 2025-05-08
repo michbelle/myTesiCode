@@ -14,28 +14,29 @@
 \contentsline {section}{\numberline {7.1}Open-RMF description}{22}{section.7.1}%
 \contentsline {part}{III\hspace {1em}Methodology}{27}{part.3}%
 \contentsline {chapter}{\numberline {8}Description of research platform and hardware used}{29}{chapter.8}%
-\contentsline {chapter}{\numberline {9}Steps taken to port the navigation stack from ROS 1 to ROS 2}{32}{chapter.9}%
-\contentsline {section}{\numberline {9.1}odometry estimation \texttt {odom} $\rightarrow $ \texttt {base\_link}}{32}{section.9.1}%
-\contentsline {subsection}{\numberline {9.1.1}odometry estimation configuration}{32}{subsection.9.1.1}%
-\contentsline {section}{\numberline {9.2}localization \texttt {map} $\rightarrow $ \texttt {odom}}{33}{section.9.2}%
-\contentsline {section}{\numberline {9.3}navigation stack}{34}{section.9.3}%
-\contentsline {subsection}{\numberline {9.3.1}navigation launch file}{34}{subsection.9.3.1}%
-\contentsline {subsection}{\numberline {9.3.2}Porting DStarGlobalPlanner to ROS 2}{35}{subsection.9.3.2}%
-\contentsline {subsubsection}{Porting code to ROS 1}{35}{section*.25}%
-\contentsline {subsubsection}{Porting code to Nav 2}{36}{section*.26}%
-\contentsline {subsubsection}{build the project}{37}{section*.27}%
-\contentsline {chapter}{\numberline {10}Hardware adaptation process from Rover Zero to Rover Mini}{38}{chapter.10}%
-\contentsline {chapter}{\numberline {11}Integration of the navigation stack with Open-RMF}{39}{chapter.11}%
-\contentsline {section}{\numberline {11.1}route maps generation}{39}{section.11.1}%
-\contentsline {section}{\numberline {11.2}free fleet}{42}{section.11.2}%
-\contentsline {subsection}{\numberline {11.2.1}Zenoh}{42}{subsection.11.2.1}%
-\contentsline {section}{\numberline {11.3}launch RMF core}{43}{section.11.3}%
-\contentsline {section}{\numberline {11.4}web interface}{43}{section.11.4}%
-\contentsline {chapter}{\numberline {12}Testing and evaluation of the system}{44}{chapter.12}%
-\contentsline {part}{IV\hspace {1em}Results and Analysis}{46}{part.4}%
-\contentsline {chapter}{\numberline {13}Presentation of results from testing and evaluation}{47}{chapter.13}%
-\contentsline {chapter}{\numberline {14}Comparison of system performance before and after the porting process}{48}{chapter.14}%
-\contentsline {chapter}{\numberline {15}Discussion on the challenges encountered and how they were addressed}{49}{chapter.15}%
-\contentsline {part}{V\hspace {1em}Conclusion and Future Work}{50}{part.5}%
-\contentsline {part}{VI\hspace {1em}Appendices}{51}{part.6}%
-\contentsline {chapter}{\numberline {16}Simulation}{52}{chapter.16}%
+\contentsline {chapter}{\numberline {9}Steps taken to port the navigation stack from ROS 1 to ROS 2}{33}{chapter.9}%
+\contentsline {section}{\numberline {9.1}odometry estimation \texttt {odom} $\rightarrow $ \texttt {base\_link}}{33}{section.9.1}%
+\contentsline {subsection}{\numberline {9.1.1}odometry estimation configuration}{33}{subsection.9.1.1}%
+\contentsline {section}{\numberline {9.2}localization \texttt {map} $\rightarrow $ \texttt {odom}}{34}{section.9.2}%
+\contentsline {section}{\numberline {9.3}navigation stack}{35}{section.9.3}%
+\contentsline {subsection}{\numberline {9.3.1}navigation launch file}{35}{subsection.9.3.1}%
+\contentsline {subsection}{\numberline {9.3.2}Porting DStarGlobalPlanner to ROS 2}{36}{subsection.9.3.2}%
+\contentsline {subsubsection}{Porting code to ROS 1}{36}{section*.26}%
+\contentsline {subsubsection}{Porting code to Nav 2}{37}{section*.27}%
+\contentsline {subsubsection}{build the project}{38}{section*.28}%
+\contentsline {chapter}{\numberline {10}Hardware adaptation process from Rover Zero to Rover Mini}{39}{chapter.10}%
+\contentsline {chapter}{\numberline {11}Integration of the navigation stack with Open-RMF}{40}{chapter.11}%
+\contentsline {section}{\numberline {11.1}traffic management - route maps generation}{40}{section.11.1}%
+\contentsline {section}{\numberline {11.2}launch RMF core}{43}{section.11.2}%
+\contentsline {section}{\numberline {11.3}setup fleet - communication layer - free fleet}{44}{section.11.3}%
+\contentsline {subsection}{\numberline {11.3.1}Zenoh}{44}{subsection.11.3.1}%
+\contentsline {subsection}{\numberline {11.3.2}launching free fleet}{45}{subsection.11.3.2}%
+\contentsline {section}{\numberline {11.4}web interface}{45}{section.11.4}%
+\contentsline {chapter}{\numberline {12}Testing and evaluation of the system}{46}{chapter.12}%
+\contentsline {part}{IV\hspace {1em}Results and Analysis}{48}{part.4}%
+\contentsline {chapter}{\numberline {13}Presentation of results from testing and evaluation}{49}{chapter.13}%
+\contentsline {chapter}{\numberline {14}Comparison of system performance before and after the porting process}{50}{chapter.14}%
+\contentsline {chapter}{\numberline {15}Discussion on the challenges encountered and how they were addressed}{51}{chapter.15}%
+\contentsline {part}{V\hspace {1em}Conclusion and Future Work}{52}{part.5}%
+\contentsline {part}{VI\hspace {1em}Appendices}{53}{part.6}%
+\contentsline {chapter}{\numberline {16}Simulation}{54}{chapter.16}%

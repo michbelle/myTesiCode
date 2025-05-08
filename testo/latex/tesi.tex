@@ -1,5 +1,8 @@
+% !TeX document-id = {723fde2e-8374-4acb-a15d-4655fdd0b330}
+% !TeX TXS-program:compile = txs:///pdflatex/[--shell-escape]
+\pdfminorversion=7
 %\RequirePackage[l2tabu, orthodox]{nag}
-\documentclass[12pt,a4paper,twoside]{report}
+\documentclass[12pt,a4paper,twoside]{report}%report
 %\usepackage[style=numeric, backend=bibtex]{biblatex}
 \usepackage[style=numeric, backend=bibtex]{biblatex}
 \addbibresource{cap/references.bib}
@@ -7,22 +10,48 @@
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage{hyperref}
 \usepackage{subcaption}
-
 %%%%%%
 \usepackage[a4paper,width=150mm,top=25mm,bottom=25mm,bindingoffset=6mm]{geometry}
 \usepackage[utf8]{inputenc}
-%\usepackage{fancyhdr}
-%\pagestyle{fancy}
 
+%%fonts
+%\usepackage{lmodern}
+%\usepackage[qtm]{tgtermes}
 
 \usepackage{xcolor}
 
 %% code part
 \usepackage{listings}
+\usepackage{minted}
+\usemintedstyle{bw}
 
 %% TOREMOVE
 \usepackage{easyReview}
 
+%% ~
+\usepackage{textcomp}
+\newcommand{\mytexttilde}{\raisebox{0.5ex}{\texttildelow}}
+%% error copy _
+\usepackage[T1]{fontenc}
+%\usepackage{lmodern}
+
+
+%% pdf-A
+\usepackage[a-1b,mathxmp]{pdfx}[2018/12/22]
+\usepackage{colorprofiles}
+%\usepackage{pdfa}
+
+\begin{filecontents*}[overwrite]{\jobname.xmpdata}
+	\Title{An implementation of Open-RMF in an industrial environment}
+	\Author{Michele Belletti}
+	\Language{en-GB}
+	\Subject{The abstract or short description.}
+	\Keywords{keyword1\sep keyword2\sep keyword3}
+\end{filecontents*}
+
+\title{An implementation of Open-RMF in an industrial environment}
+\author{Michele Belletti}
+%\date{2025\\ December}
 
 %\usepackage{blindtext}
 %\usepackage{emptypage}
@@ -57,10 +86,6 @@
 %\setcounter{dbltopnumber}{2}    % for 2-column pages
 %\renewcommand{\dbltopfraction}{0.9}	% fit big float above 2-col. text
 %\renewcommand{\textfraction}{0.07}	% allow minimal text w. figs
-
-\title{An implementation of Open-RMF in an industrial environment}
-\author{Michele Belletti}
-%\date{2025\\ December}
 
 \begin{document}
 

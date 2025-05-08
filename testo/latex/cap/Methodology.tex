@@ -45,10 +45,16 @@ This allow to launch the following nodes:
 	\item \texttt{0.1r\_sensorLaunch.launch.py}: this file allow to launch the nodes that publish the data of the IMU and LIDAR.
 	\item \texttt{0.2r\_mini.launch.py}: this publich the data of the odometry given by the encoder data built in the rover.
 \end{itemize}
+\newpage
 For simulation:
 \begin{itemize}
 	\item \texttt{0s\_ign\_mini\_gazebo.launch.py}: launch the simulation in gazebo of the robot and using the node \texttt{ros\_gz\_bridge/parameter\_bridge} share the message generate in gazebo with ROS 2.
 \end{itemize}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\linewidth]{img/robot\_in\_simulation.png}
+	\captionof{figure}{Model of the robot in Gazebo Ignition}
+\end{figure}
 \chapter{Steps taken to port the navigation stack from ROS 1 to ROS 2}
 In this capter we will split the parts in function of the different part that we are going to use of nav2 with particular attention of the porting of the code of the global planner from ROS 1 to ROS 2.
 \section{odometry estimation \texttt{odom} $\rightarrow$ \texttt{base\_link}}
@@ -70,14 +76,16 @@ With cartographer we obtain this map:
 	\captionof{figure}{Map acquired with Cartographer}
 \end{figure}\\
 Then it was tried the use of cartographer as only for localization but because the project is not more maintained was not found possible to use it correctly, so the solution was to use the one given from nav2 package \texttt{nav2\_amcl} and node \texttt{amcl}.\\
-But this has the problem that we need to convert the map acquired with cartographer as a \texttt{.pbstream} to a pair of \texttt{.pgm} and \texttt{.yaml} for the new Node. This was done using this command:
-\begin{lstlisting}[language=bash]
+But this has the problem that we need to convert the map acquired with cartographer as a \texttt{.pbstream} to a pair of \texttt{.pgm} and \texttt{.yaml} for the new Node. This was done using this command:\\
+\begin{listing} [ht!]
+\begin{minted}{bash} 
 ros2 run cartographer_ros cartographer_pbstream_to_ros_map \
 	-pbstream_filename map.pbstream \
 	-map_filename map.pgm \
 	-resolution 0.05
-\end{lstlisting}
-This bringht some minors errors to the map thiking there was some place capable to move on, repaired usign gimp and optainint this map (also correct error to allow from my workstation to not have a obstacle not present)\\
+\end{minted}
+\end{listing}\\
+This bright some minors errors to the map thinking there was some place capable to move on like wall because were not perfect black, repaired using gimp and we obtain this map (also correct error to allow from my workstation to not have a obstacle not present)\\
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.4\linewidth]{img/mapV.png}
@@ -112,7 +120,7 @@ The file  is launching all the following packages with node or composition plugi
 The parameters where not as much changed by the default configuration, the only change we need to apply is in the \texttt{planner\_server} to have our navigation system after porting it to ROS 2. 
 In the next section is the step we took to port it to ROS 2.
 \subsection{Porting DStarGlobalPlanner to ROS 2}
-The \texttt{DStarGlobalPlanner} is a implementation of the D* informed incremental search algoritm with external optimizers\cite{10.1007/978-3-031-67295-8_33} for the ROS 1 \texttt{move\_base} package\footnote{\href{https://wiki.ros.org/move_base}{https://wiki.ros.org/move\_base}}. In this part we will refer a lot on the porting documentation refered before \footnote{\href{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}}\footnote{\href{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}} and the documentection from Nav2 : "Writing a New Planner Plugin"\footnote{\href{https://docs.nav2.org/plugin_tutorials/docs/writing_new_nav2planner_plugin.html}{https://docs.nav2.org/plugin\_tutorials/docs/writing\_new\_nav2planner\_plugin.html}}
+The \texttt{DStarGlobalPlanner}\footnote{\href{https://github.com/ElettraSciComp/DStar-Trajectory-Planner/tree/ros2_port}{https://github.com/ElettraSciComp/DStar-Trajectory-Planner/tree/ros2\_port}} is a implementation of the D* informed incremental search algoritm with external optimizers\cite{10.1007/978-3-031-67295-8_33} for the ROS 1 \texttt{move\_base} package\footnote{\href{https://wiki.ros.org/move_base}{https://wiki.ros.org/move\_base}}. In this part we will refer a lot on the porting documentation refered before \footnote{\href{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}}\footnote{\href{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}} and the documentection from Nav2 : "Writing a New Planner Plugin"\footnote{\href{https://docs.nav2.org/plugin_tutorials/docs/writing_new_nav2planner_plugin.html}{https://docs.nav2.org/plugin\_tutorials/docs/writing\_new\_nav2planner\_plugin.html}}
 Is now described the 2 phases of porting the code, the first one is the Nav2 structure porting procedure and the second part adapt the old code to ROS 2.
 \subsubsection{Porting code to ROS 1}
 In the \texttt{package.xml} that describe the package as an organizational unit for your ROS 2 code, the changes that are performed are:
@@ -157,8 +165,12 @@ other changes are reported in the next section because are also connected with N
 		\item \texttt{createPlan()} : called when planner server demands a global plan for specified start and goal pose. replace the makePlan used in ROS 1 and return a path as \texttt{nav\_msgs::msg::Path} using the start and end position as \texttt{geometry\_msgs::msg::PoseStamped}
 	\end{itemize}
 	\item at the end we placed the code that is used also or plugins:\\
-\texttt{\#include "pluginlib/class\_list\_macros.hpp"}\\
-\texttt{PLUGINLIB\_EXPORT\_CLASS(<type of the plugin class>, <type of the base class>);}
+\begin{listing} [ht!]
+\begin{minted}{cpp} 
+#include "pluginlib/class_list_macros.hpp"
+PLUGINLIB_EXPORT_CLASS(<type of the plugin class>, <type of the base class>);
+\end{minted}
+\end{listing}
 	\item because it's a plugin we need to add a plugin declaration where is package.xml is located and edit the CMake file as described in the doc for plugins\footnote{\href{https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Pluginlib.html}{https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Pluginlib.html}}.
 \end{itemize}
 \subsubsection{build the project}
@@ -167,11 +179,10 @@ At the end we build the system using the new tool for building \texttt{colcon} a
 \chapter{Hardware adaptation process from Rover Zero to Rover Mini}
 \alert{Non ho informazioni su nessun Rover Zero, rimuovo il capitolo?}
 \chapter{Integration of the navigation stack with Open-RMF}
-Now we discuss the steps taken to insert the rover Mini to the The Open Robotics Middleware Framework (Open-RMF), all this steps are taken following the documentation\footnote{\href{https://osrf.github.io/ros2multirobotbook/intro.html}{https://osrf.github.io/ros2multirobotbook/intro.html}}.
-The first thing that we need to build is \textbf{route maps}, this maps are used to predict the navigation paths that the robots will took allowing RMF to avoid conflicts, this procedure is called "traffic management".
-\section{route maps generation}
-For this Open-RMF give the \textbf{traffic editor tool}\footnote{\href{https://github.com/open-rmf/rmf\_traffic\_editor}{https://github.com/open-rmf/rmf\_traffic\_editor}} that allow to generate the route map.
-We started with the map obtained from Cartographer and start a new project \texttt{*.building.yaml}. Then, there are some drawing of the facility's plans and also that was added. \alert{This make us discover that the map acquired using Cartographer was not perfect and have a rotation error at one of the turning point of the building, visible in figure}. We then to design the traffic flow for the floor following  the best practice to obtain a optimize plan \footnote{\href{https://osrf.github.io/ros2multirobotbook/integration\_nav-maps-strategies.html}{https://osrf.github.io/ros2multirobotbook/integration\_nav-maps-strategies.html}}, the traffic editor allow to define this following components to the map that is going to be used as route map:
+For integrating a fleet to Open-RMF we need before set the rmf\_core that needs the information of the facility. this is possible using the \textbf{traffic editor tool}\footnote{\href{https://github.com/open-rmf/rmf\_traffic\_editor}{https://github.com/open-rmf/rmf\_traffic\_editor}}  \footnote{\href{https://osrf.github.io/ros2multirobotbook/intro.html}{https://osrf.github.io/ros2multirobotbook/intro.html}}. also it able to build is \textbf{route maps}, this maps are used to predict the navigation paths that the robots will took allowing RMF to avoid conflicts, this procedure is called "traffic management".
+\section{traffic management - route maps generation}
+We are using the traffic\_editor to create the map and relative routes.
+We started with the map obtained from Cartographer and start a new project \texttt{*.building.yaml}. Then, there are some drawing of the facility's plans and also that was added. We then to design the traffic flow for the floor following the best practice to obtain a optimize plan \footnote{\href{https://osrf.github.io/ros2multirobotbook/integration\_nav-maps-strategies.html}{https://osrf.github.io/ros2multirobotbook/integration\_nav-maps-strategies.html}}, the traffic editor allow to define this following components to the map that is going to be used as route map:
 \begin{itemize}
 	\item \textbf{vertex}: they are waypoints or the definition of wall, door or else. The properties of a vertex can be:
 	\begin{itemize}
@@ -208,11 +219,40 @@ This plan take into account for planning this factor:
 \captionof{figure}{Traffic editor with Elettra's route map}
 \end{figure}
 Then it is possible to generate each route maps from each graphs \texttt{*.yaml} using the command:\\
-\texttt{ros2 run rmf\_building\_map\_tools building\_map\_generator nav \textbackslash \\ \hspace*{1cm} <map.building.yaml> <folder/where/to/generate/routes>}
-Create the map we need a method to connect the rover to rmf, this is done through the \textbf{free fleet}
+\texttt{ros2 run rmf\_building\_map\_tools building\_map\_generator nav \textbackslash \\ \hspace*{1cm} \$\{building\_map\_path\} \$\{output\_nav\_graphs\_dir\}}\\
+Then for the simulation we can use the following command to generate the map that can be used in simulation:\\
+\texttt{ros2 run rmf\_building\_map\_tools building\_map\_generator ignition \textbackslash{}\\ \hspace*{1cm}
+\$\{building\_map\_path\} \$\{output\_world\_path\} \$\{output\_model\_dir\}}\\
+While to download the models used during the configuration of the app use:
+\texttt{ros2 run rmf\_building\_map\_tools building\_map\_model\_downloader \textbackslash{} \\ \hspace*{1cm}
+\$\{building\_map\_path\} -f -e \mytexttilde/.gazebo/models}\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\linewidth]{img/rmf\_generated\_world.png}
+	\captionof{figure}{Map generated using traffic editor}
+\end{figure}\\
 \newpage
-\section{free fleet}
-Free fleet\footnote{\href{https://github.com/open-rmf/free\_fleet}{https://github.com/open-rmf/free\_fleet}} is a python implementation of the \texttt{full\_control} Open-RMF Fleet Adapter. It uses \texttt{zenoh} as a communication layer between each robot and the fleet adapter, allowing access and control over the navigation stacks of the robots. 
+Create the routes map we need a method to connect the rover to rmf, this is done through the \textbf{free fleet}.
+
+\section{launch RMF core}
+After defined the structure of the building we can now launch the core of RMF using the launch file:\\
+\texttt{0rmf\_mini\_world\_rmf\_core.launch.xml} \\
+and require the Building description file required by rmf\_building\_map\_tools that launch the following nodes:
+\begin{itemize}
+	\item \texttt{rmf\_traffic\_schedule} : Traffic Schedule, \alert{control the path structure and publish the itinerary topics, control the conflicts, }
+	\item \texttt{rmf\_traffic\_blockade} : the traffic Blockade Moderator, \alert{control checkpoint information}
+	\item \texttt{building\_map\_server} : publish the data of the map like points of interes like parking spot
+	\item \texttt{visualization.launch.xml}: that launch all the tool to see in rviz2 \alert{provare a rimuovere}
+	\item \texttt{door\_supervisor}: using ros structure publish the request of control the door
+	\item \texttt{lift\_superviso}: using ros structure publish the request of control the lift
+	\item \texttt{rmf\_task\_dispatcher}: Dispatcher node will allow you to dispatch submitted task to the best fleet/robot within RMF.
+	\item \texttt{queue\_manager}: if request Enable the reservation node for parking spot de-confliction
+\end{itemize}
+
+Now we can create the communication between the robot and rmf, for this there is this repo  free fleet.
+
+\section{setup fleet - communication layer - free fleet}
+Free fleet\footnote{\href{https://github.com/open-rmf/free\_fleet}{https://github.com/open-rmf/free\_fleet}} is a python implementation of the \texttt{full\_control} Open-RMF Fleet Adapter. It uses \texttt{zenoh} as a communication layer between each robot and the fleet adapter, allowing access and control over the navigation stacks of the robots. It has already a compatibility layer with ROS 2 but allow with a python api to communicate with different fleet/robot. Following is wiev how it communicate with ROS 2:
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\linewidth]{img/free\_fleet\_adapter.png}
@@ -228,24 +268,20 @@ On this server is need to launch a Zenoh router with (\texttt{\$ zenohd}), but t
  \item allow to publish the frame status of the robot (\texttt{.*/tf} and \texttt{.*/tf\_static}) and if we could also the battery information (\texttt{.*/battery\_state}) and allow also the action servers that control the navigation(\texttt{.*/navigate\_to\_pose})
  \item setup zenoh configuration defining the mode and the address of the server, with is protocol and its port that th client will \texttt{connect} and \texttt{listen} to (\texttt{tcp/<ip address server>:7447})
 \end{itemize}
-\section{launch RMF core}
-Setup the robot we can now launch the core of RMF using the launch file:\\
-\texttt{0rmf\_mini\_world\_rmf\_core.launch.xml} \\
-that launch:
-\begin{itemize}
-	\item rmf\_traffic\_schedule : Traffic Schedule
-	\item rmf\_traffic\_blockade : the traffic Blockade Moderator
-	\item building\_map\_server : the build map
-	\item visualization.launch.xml: that launch all the tool to see in rviz2 \alert{provare a rimuovere}
-	\item door\_supervisor
-	\item lift\_supervisor
-	\item rmf\_task\_dispatcher
-	\item queue\_manager: if request Enable the reservation node for parking spot de-confliction
-\end{itemize}
+\subsection{launching free fleet}
+\texttt{ros2 launch myCode 1rmf\_mini\_fleet\_adapter.launch.xml \textbackslash{} \\ \hspace*{1cm}
+	server\_uri:=``ws://localhost:8000/\_internal''}\\
+that need the configuration of the fleet as described before and the route maps the fleet is going to use, generated before.
+
 
 \section{web interface}
-launch with docker compose the we server and web interface and then launch:
-\texttt{ros2 launch myCode 1rmf\_mini\_fleet\_adapter.launch.xml \textbackslash \\ \hspace*{1cm} server\_uri:="ws://localhost:8000/\_internal"}
+it's then possible to control through internet using 
+\begin{itemize}
+	\item api server 
+	\item dashboard
+\end{itemize}
+
+
 
 
 \chapter{Testing and evaluation of the system}
@@ -259,3 +295,11 @@ If needed to move in office the robot with the laser sensor cannot see part of t
 can be increase the occupancy map bigger but the dimension of the legs chair wouldn't allow to pass through port. A solution is to move the laser to a lower position but this required a low profile laser, that need some filtering to remove the wheel and obtaining blind spot without adding the sensor on top or adding another sensor like a deep camera that give a 3D occupancy greed that can be processed to obtain a simple map.
 \\
 \alert{The RMF commands from waypoint to waypoint: RMF commands the robot from waypoint to waypoint, and it leaves the low level navigation to each robot's navigation stack. So if the robot chooses to use a non-straight route, it means that the RMF navigation graph might need to be re-drawn or reconsidered (if there are constant obstacles around), or the navigation stack of the robot should be tuned to allow tighter tolerances for static/dynamic obstacles. but how the robot chooses to navigate between them is out of RMF's control, since RMF does not have dynamic obstacle information, or if there are new static obstacles, it needs to be reflected into RMF's traffic navigation graph}
+
+Another thing that we discover both with the traffic editor and also using a better image manipulation program like gimp is that the image taken from the planimetry and the cartographer map are not well aligned. see image below:
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{img/mapComposizione.png}
+	\captionof{figure}{Overlap Cartographer Map and photo of floor plan}
+\end{figure}\\
+It's look like at each major rotation it overestimate the angle that the robot rotate when performing the mapping.
