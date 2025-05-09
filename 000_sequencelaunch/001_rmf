@@ -24,7 +24,7 @@ source install/setup.bash
 # cd ~/ff_ws/src/myTesiCode/rmf_code/code
 # python3 /root/ff_ws/src/myTesiCode/rmf_code/code/nav2_get_tf.py -c /root/ff_ws/src/myTesiCode/zenoh_1_1/zenoh_config_server/server_config.json5
 
-
+### rnf-core
 ros2 launch myCode 0rmf_mini_world_rmf_core.launch.xml
 
 #set up rmf-web 
@@ -38,10 +38,10 @@ ros2 launch myCode 1rmf_mini_fleet_adapter.launch.xml server_uri:="ws://localhos
 # Other commands
 
 ## create the route maps
-ros2 run rmf_building_map_tools building_map_generator nav /root/ff_ws/src/myTesiCode/rmf_code/map/elettra/RMF-elettra-map.building.yaml /root/ff_ws/src/myTesiCode/rmf_code/trafficNavPath/elettra_big/
+# ros2 run rmf_building_map_tools building_map_generator nav /root/ff_ws/src/myTesiCode/rmf_code/map/elettra/RMF-elettra-map.building.yaml /root/ff_ws/src/myTesiCode/rmf_code/trafficNavPath/elettra/
 
 ## create the gazebo world
-ros2 run rmf_building_map_tools building_map_generator gazebo /root/ff_ws/src/myTesiCode/rmf_code/map/elettra/RMF-elettra-map.building.yaml ign-elettra-map.world /root/ff_ws/src/myTesiCode/rmf_code/ign_world/elettra/modelOUT
+# ros2 run rmf_building_map_tools building_map_generator gazebo /root/ff_ws/src/myTesiCode/rmf_code/map/elettra/RMF-elettra-map.building.yaml ign-elettra-map.world /root/ff_ws/src/myTesiCode/rmf_code/ign_world/elettra/modelOUT
 
 ##edit route map
-traffic-editor /root/ff_ws/src/myTesiCode/rmf_code/map/elettra/RMF-elettra-map.building.yaml
+# traffic-editor /root/ff_ws/src/myTesiCode/rmf_code/map/elettra/RMF-elettra-map.building.yaml

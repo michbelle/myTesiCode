@@ -106,7 +106,7 @@ def generate_launch_description():
             output='screen'),
 
         IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(os.path.join(myCode_dir, 'launch', 'nav2_backend.py')),
+            PythonLaunchDescriptionSource(os.path.join(myCode_dir, 'launch', 'Snav2_backend.py')),
             launch_arguments={'namespace': namespace,
                               'use_sim_time': use_sim_time,
                               'autostart': autostart,
