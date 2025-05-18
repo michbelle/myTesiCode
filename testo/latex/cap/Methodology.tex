@@ -1,68 +1,84 @@
 \part{Methodology}
-In this part we will discuss all the procedure that took place from building our testing platform, based on the Rover Mini and the sensors used. Setting up the Nav2 navigation stack. The procedure used to port the Global planner from ROS 1 to ROS 2. How we integrate the system and the software that is used to setup the Open-RMF system.
-All the code is available to this github repo \texttt{michbelle/myTesiCode} \footnote{\href{https://github.com/michbelle/myTesiCode}{https://github.com/michbelle/myTesiCode}} and allow also the simulation of our platform.
-For the simulation is going to be used Docker, that allow to have a base container that not depend of the OS of the machine. The Docker image is based on \texttt{osrf/ros:jazzy-desktop-full} and install all the code used in this thesis and also all the open-RMF tools and demos. Tested were done with a i5-7600K CPU and a GeForce GTX 1060 6GB on Ubuntu 22.04, the software was laggy so it reccomend to use more recent hardware.
+In this part, we describe the entire procedure followed for building this project:
+\begin{itemize}
+	\item Setup of our testing platform, which is based on the Rover Mini and a suite of onboard sensors.
+	\item Setup the Nav2 navigation stack.
+	\item The procedure used to port the Global planner from ROS 1 to ROS 2 and how it's insert in Nav2
+	\item And the tools used to integrate it in the Open-RMF system.
+\end{itemize}
+All the source code developed for this project is publicly available in the following GitHub repository: \texttt{michbelle/myTesiCode}\footnote{\href{https://github.com/michbelle/myTesiCode}{https://github.com/michbelle/myTesiCode}}. The repository also includes the necessary components for simulating the platform.\\
+\alert{The simulation environment is containerized} using Docker, which provides a consistent and OS-independent base system. The Docker image is built on top of \texttt{osrf/ros:jazzy-desktop-full} and includes all the packages developed for this thesis, as well as the required Open-RMF tools and demo setups.\\
+\alert{Tested were done with a i5-7600K CPU and a GeForce GTX 1060 6GB on Ubuntu 22.04. The software showed noticeable lag on this configuration; therefore, we recommend using more recent and powerful hardware for optimal performance.}
+
+
+
 \chapter{Description of research platform and hardware used}
-The robot is a 4 wheel drive (WD) skid-steering (see Figure \ref{fig:RoverRobotics Rover Mini})that has a maximum speed of 12.87 km/h with a payload of 45,36 kg. With an operating time of Operating Time 60-90 minutes active or max 6 hours in idle. The company offer the code to control it and also to simulate on Gazebo on github\footnote{\href{https://github.com/RoverRobotics/roverrobotics_ros2}{https://github.com/RoverRobotics/roverrobotics\_ros2}}. The code is steel tested only for ROS 2 Humble, this is going to be our version of ROS 2 that we are going to use for navigation on the Rover.\\
-For controlling it, the rover give a USB terminal for connecting to a PC or single board computer. For this purpose we are using a Mini PC where there is all the control of all the navigation based on Nav2.
-The Mini PC is a Beelink SER3-E-16512EJ0W64PRO with a Ryzen 7 3750H Picasso processor which is a quad-core 8-thread 2.3 GHz mobile processor boosting to 4.0 GHz with Radeon RX Vega 10 Graphics.
-The power that it's necessary from it to work will be took from the Rover that can provide 19V.
+The robot used in this thesis is a four-wheel drive (WD) skid-steering vehicle (see Figure \ref{fig:RoverRobotics Rover Mini}). It has a maximum speed of 12.87 km/h and a payload of 45,36 kg. Its operational time ranges from 60 to 90 minutes under active usage, and up to 6 hours in idle mode. The manufacturer provides open-source control and simulation code on GitHub\footnote{\href{https://github.com/RoverRobotics/roverrobotics_ros2}{https://github.com/RoverRobotics/roverrobotics\_ros2}}, compatible with the Gazebo simulator. However, this code is officially supported only for ROS 2 Humble, so that is the ROS 2 distribution chosen for this thesis.\\
+The robot includes a USB interface that enables connection to a PC or single-board computer for control purposes. In this work, a mini PC is used to control the robot and also used to manage the entire navigation stack based on Nav2.
+The Mini PC is a \textbf{Beelink SER3-E-16512EJ0W64PRO} with a Ryzen 7 3750H processor which is a quad-core 8-thread 2.3 GHz mobile processor boosting to 4.0 GHz with a Radeon RX Vega 10 Graphics.
+The mini PC draws power directly from the robot, which also supplies 19V output. \alert{This will reduce the operation time.}
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.4\linewidth]{img/miniPC.jpg}
 	\captionof{figure}{Mini PC used}
 \end{figure}\\
-On top of that to increase the estimation of odometry we will mount an IMU Witmotion (WIT) JY901B. A 9-Axis Combined IMU/Magnetometer/Altimeter (linear accelerations, angular velocities, Euler angles, magnetic field, barometry, altitude). The data from the sensor use a TTL/UART protocol that are collected using the libeary Witmotion Sensors UART Connection Library\cite{andrei_vukolov_2022_7017118},using a channel bridge chip USB to serial, and then published into ROS 2 ecosystem through a node \texttt{witmotion\_ros} using the code from this repo in github \texttt{ElettraSciComp/witmotion\_IMU\_ros}\footnote{\href{https://github.com/ElettraSciComp/witmotion_IMU_ros/tree/ros2}{https://github.com/ElettraSciComp/witmotion\_IMU\_ros/tree/ros2}}.
+To improve odometry estimation, an additional sensor is mounted: the \textbf{IMU Witmotion (WIT) JY901B}. This is a 9-Axis Combined IMU/Magnetometer/Altimeter (measure linear accelerations, angular velocities, Euler angles, magnetic field, barometry, altitude). It communicates via TTL/UART protocol. Sensor data are acquired using the Witmotion Sensors UART Connection Library\cite{andrei_vukolov_2022_7017118},with a USB-to-serial converter, and are published in the ROS 2 environment using a dedicated node \texttt{witmotion\_ros}, avaible on GitHub at  \texttt{ElettraSciComp/witmotion\_IMU\_ros}\footnote{\href{https://github.com/ElettraSciComp/witmotion_IMU_ros/tree/ros2}{https://github.com/ElettraSciComp/witmotion\_IMU\_ros/tree/ros2}}.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.4\linewidth]{img/IMU.jpg}
 	\captionof{figure}{IMU used}
 \end{figure}\\
-The last sensor necessary to complete the navigation that is used in localization as described in \ref{ref_map_to_odom} to generate a link between the TF frame \texttt{map} and \texttt{odom} that compensate the errors generated by the model and to see obstacles is a Laser 2D scan because gives as information in all the directions using only a sensor and we built have built only a 2D map, respect at other tools are available \cite{10056144}\cite{vslamComparison2021} that may require more computer power.
-The Laser scan used is RPLIDAR S1, 360 degree 2D laser scanner
-(LIDAR that is light detection and ranging) with a distance range of 40m on white object and 10m on black ones, a sample rate of 9.2kHz, scan rate from 8 to 15 Hz, so an angular resolution of 0.313-0.587°, accuracy of $\pm$5cm and resolution of 3cm.
-The code is available on github \texttt{Slamtec/sllidar\_ros2} \footnote{\href{https://github.com/Slamtec/sllidar_ros2}{https://github.com/Slamtec/sllidar\_ros2}}.
+For localization \ref{ref_map_to_odom}, a \textbf{2D laser scanner} is employed to provide environment perception and correct for odometry drift by maintaining a transformation link between the \texttt{map} and \texttt{odom} TF frames.
+The 2D laser scanner offers a cost-effective solution for environmental perception, providing dense spatial information that enables obstacle detection and basic environment recognition. Compared to alternative technologies \cite{10056144}\cite{vslamComparison2021}, it requires significantly less computational power, making it a practical choice for lightweight and resource-constrained robotic platforms.
+The Laser scan used is \textbf{RPLIDAR S1} a 360 degree 2D laser scanner(LIDAR) with a distance range of 40m on white object and 10m on black ones, a sample rate of 9.2kHz, scan rate from 8 to 15 Hz, which mean an angular resolution of 0.313-0.587°, with an accuracy of $\pm$5cm and resolution of 3cm.
+The ROS 2 driver for the RPLIDAR S1 is available on Github at: \texttt{Slamtec/sllidar\_ros2}\footnote{\href{https://github.com/Slamtec/sllidar_ros2}{https://github.com/Slamtec/sllidar\_ros2}}.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.4\linewidth]{img/laserScanRPLIDAR.png}
 	\captionof{figure}{LIDAR used}
 \end{figure}
 \newpage
-Then all is mounted on the Rover as in the following picture, where also modeled and printed with a 3d print a support for each sensor. 
+All components are physically mounted on the rover, using custom 3D-printed parts as shows in the following image:
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.4\linewidth]{img/RoverwithSensor.jpg}
 	\captionof{figure}{Robot used}
 \end{figure}\\
-Then we edit the URDF (Unified Robot Description Format), a file format for specifying the geometry and organization of robots in ROS, given from the producer to better fit the new configuration to allow the nodes that are going to use the sensor to know the exact position and orientation of the sensors respect the \texttt{base\_link}.
+To reflect this new hardware configuration, the original URDF (Unified Robot Description Format) file provided by the manufacturer was modified. This ensures accurate sensor placement relative to the \texttt{base\_link} frame, which is essential for proper operation of sensor-dependent ROS 2 nodes.\\
+A 3D model of the robot, including all coordinate frames (TF), is shown in this picture:
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.4\linewidth]{img/modelWithTFtree.png}
 \captionof{figure}{3D model with TF}
 \end{figure}\\
-This allow to launch the following nodes:
+With the system fully assembled, the following ROS 2 launch files were created to run on the robot's mini PC:
 \begin{itemize}
-	\item \texttt{0.1r\_sensorLaunch.launch.py}: this file allow to launch the nodes that publish the data of the IMU and LIDAR.
-	\item \texttt{0.2r\_mini.launch.py}: this publich the data of the odometry given by the encoder data built in the rover.
+	\item \texttt{0.1r\_sensorLaunch.launch.py}: Launches the nodes responsible for publishing data from the IMU and LIDAR sensors.
+	\item \texttt{0.2r\_mini.launch.py}: Publishes odometry data based on the built-in encoders of the robot.
 \end{itemize}
 \newpage
-For simulation:
+While for simulation the following launch file is created:
 \begin{itemize}
-	\item \texttt{0s\_ign\_mini\_gazebo.launch.py}: launch the simulation in gazebo of the robot and using the node \texttt{ros\_gz\_bridge/parameter\_bridge} share the message generate in gazebo with ROS 2.
+	\item \texttt{0s\_ign\_mini\_gazebo.launch.py}: Launch the simulation in gazebo of the robot with the sensors and using the node \texttt{ros\_gz\_bridge/parameter\_bridge} share the data generate in Gazebo with ROS 2.
 \end{itemize}
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\linewidth]{img/robot\_in\_simulation.png}
 	\captionof{figure}{Model of the robot in Gazebo Ignition}
 \end{figure}
+
+
 \chapter{Steps taken to port the navigation stack from ROS 1 to ROS 2}
-In this capter we will split the parts in function of the different part that we are going to use of nav2 with particular attention of the porting of the code of the global planner from ROS 1 to ROS 2.
-\section{odometry estimation \texttt{odom} $\rightarrow$ \texttt{base\_link}}
-As described before the odometry data given from the rover arent good and the navigation stack report big errors in rotation a well know fact of problem in estimation using skid-steering vehicles. For solve this problem we use the package \texttt{robot\_localization} in specific the Node \texttt{ekf\_node}.
-This package allow fusing multiple sensor also of the same type, allow to publish in multiple message type like nav\_msgs/Odometry, allow to edit message from each sensor before insering in the estimation and is a continuous estimation that allow to estimate the position even if data is going to missing for a long period.
-For launching the node there are provide the following launch file:\\
+In this chapter, we divide the system architecture according to the key components of the Nav2 stack that are utilized. Particular emphasis is placed on the process of porting the Global Planner module from ROS 1 to ROS 2, detailing the necessary adaptations and challenges encountered.
+
+\section{Odometry Estimation \texttt{odom} $\rightarrow$ \texttt{base\_link}}
+As previously discussed, the raw odometry data provided by the rover are not sufficiently accurate, particularly in rotational movements\cite{MooreStouchKeneralizedEkf2014}. This is a well-known issue in odometry estimation for skid-steering vehicles, which tend to produce significant drift and errors during turns.\\
+To address this problem, we used the \texttt{robot\_localization} package\cite{MooreStouchKeneralizedEkf2014}, specifically the \texttt{ekf\_node}.
+This package enables the fusion of multiple sensor, even multiple instances of the same sensor type, and supports output in various ROS message formats, such as \texttt{nav\_msgs/Odometry}. It also allows preprocessing of sensor messages prior to inserting into the estimation process. The filter performs continuous state estimation and is robust to intermittent sensor data loss, maintaining a coherent position estimate over time.\\
+To launch the EKF node, the following launch file was created:\\
 \hspace*{10mm}\texttt{1<r/s>\_robot\_localizationEKF.launch.py}
-\subsection{odometry estimation configuration}
+
+\subsection{Odometry Estimation configuration}
 Has describe before and also in the doc\footnote{\href{https://docs.ros.org/en/noetic/api/robot_localization/html/index.html}{https://docs.ros.org/en/noetic/api/robot\_localization/html/index.html}} of the node for adding the sensors we added this rows at the configuration file \texttt{odom0:odometry/wheels} and \texttt{imu0:imu/data} that are the estimation described before. Also we need to choose which components of the state we want to fuse using this array and set \texttt{true} if we want it to fuse:\\
 \texttt{sensorX\_config}:$ [X, Y, Z, roll, pitch, yaw, \dot{X}, \dot{Y}, \dot{Z}, \dot{roll}, \dot{pitch}, \dot{yaw}, \ddot{X}, \ddot{Y}, \ddot{Z}] $\\
 for the IMU we used only the yaw velocity while for the odometry we select only the velocity along the x and y.\\
