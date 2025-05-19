@@ -22,3 +22,4 @@ testo/latex/*.out
 testo/latex/*.url 
 testo/latex/*.svn 
 testo/latex/*.toc
+testo/latex/*.aux
