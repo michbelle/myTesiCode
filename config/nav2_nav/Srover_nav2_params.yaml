@@ -19,6 +19,8 @@ bt_navigator:
     navigators: ['navigate_to_pose', 'navigate_through_poses']
     navigate_to_pose:
       plugin: "nav2_bt_navigator::NavigateToPoseNavigator"
+      enable_groot_monitoring: true
+      groot_server_port: 1667
     navigate_through_poses:
       plugin: "nav2_bt_navigator::NavigateThroughPosesNavigator" 
     # plugin_lib_names is used to add custom BT plugins to the executor (vector of strings).

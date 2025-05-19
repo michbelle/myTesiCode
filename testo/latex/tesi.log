@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.5.6)  19 MAY 2025 17:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.5.15)  19 MAY 2025 21:04
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -124,7 +124,7 @@ Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 \bibhang=\skip56
 \blx@bcfin=\read2
 \blx@bcfout=\write3
-\blx@langwohyphens=\language3
+\blx@langwohyphens=\language9
 \c@mincomprange=\count304
 \c@maxcomprange=\count305
 \c@mincompwidth=\count306
@@ -1461,32 +1461,43 @@ Overfull \hbox (48.84152pt too wide) in paragraph at lines 143--144
  []
 
 
-Overfull \hbox (60.42062pt too wide) in paragraph at lines 160--166
-[]\T1/cmr/m/n/12 As \T1/cmtt/m/n/12 behavior_plugins \T1/cmr/m/n/12 use: \T1/cm
-tt/m/n/12 nav2_behaviors/Spin \T1/cmr/m/n/12 that is , \T1/cmtt/m/n/12 nav2_beh
-aviors/BackUp
+Overfull \hbox (28.11456pt too wide) in paragraph at lines 160--166
+\T1/cmr/m/n/12 robot to back up by a spe-cific dis-place-ment, []\T1/cmtt/m/n/1
+2 nav2_behaviors/DriveOnHeading
  []
 
 
-Overfull \hbox (8.94847pt too wide) in paragraph at lines 160--166
-\T1/cmr/m/n/12 that is , []\T1/cmtt/m/n/12 nav2_behaviors/DriveOnHeading \T1/cm
-r/m/n/12 that is[] , \T1/cmtt/m/n/12 nav2_behaviors/Wait
+Overfull \hbox (40.60043pt too wide) in paragraph at lines 160--166
+\T1/cmr/m/n/12 dis-place-ment, \T1/cmtt/m/n/12 nav2_behaviors/Wait \T1/cmr/m/n/
+12 that is , []\T1/cmtt/m/n/12 nav2_behaviors/AssistedTeleop
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 187--187
+Overfull \hbox (24.14755pt too wide) in paragraph at lines 170--171
+[]\T1/cmr/m/n/12 As \T1/cmtt/m/n/12 smoother_plugins \T1/cmr/m/n/12 use \T1/cmt
+t/m/n/12 nav2_bt_navigator::NavigateToPoseNavigator
+ []
+
+
+Overfull \hbox (10.7198pt too wide) in paragraph at lines 178--179
+[]\T1/cmtt/m/n/12 nav2_lifecycle_manager::LifecycleManager \T1/cmr/m/n/12 that 
+han-dling the life-cy-cle tran-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 184--184
 [][][][]\T1/cmr/m/n/10 https://industrial-training-master.readthedocs.io/en/mel
 odic/_source/session7/ROS1-to-
  []
 
 [37]
-Overfull \hbox (49.63794pt too wide) in paragraph at lines 216--217
+Overfull \hbox (49.63794pt too wide) in paragraph at lines 213--214
 []\T1/cmr/m/n/12 in plu-gin def-i-ni-tion: we move from thr base_class_type of 
 nav_core::BaseGlobalPlanner
  []
 
 [38]
-Overfull \hbox (41.08868pt too wide) in paragraph at lines 217--218
+Overfull \hbox (41.08868pt too wide) in paragraph at lines 214--215
 \T1/cmr/m/n/12 vir-tual meth-ods (\T1/cmtt/m/n/12 configure()\T1/cmr/m/n/12 ,\T
 1/cmtt/m/n/12 activate()\T1/cmr/m/n/12 ,\T1/cmtt/m/n/12 deactivate()\T1/cmr/m/n
 /12 ,\T1/cmtt/m/n/12 cleanup()\T1/cmr/m/n/12 ,\T1/cmtt/m/n/12 createPlan()\T1/c
@@ -1494,7 +1505,7 @@ mr/m/n/12 )
  []
 
 
-Overfull \hbox (3.5635pt too wide) in paragraph at lines 224--225
+Overfull \hbox (3.5635pt too wide) in paragraph at lines 221--222
 []\T1/cmr/m/n/12 the map with \T1/cmtt/m/n/12 std::shared_ptr<nav2_costmap_2d::
 Costmap2DROS> 
  []
@@ -1513,7 +1524,7 @@ Chapter 10.
 ]
 Chapter 11.
 
-Overfull \hbox (1.32234pt too wide) in paragraph at lines 248--250
+Overfull \hbox (1.32234pt too wide) in paragraph at lines 245--247
 \T1/cmr/m/n/12 with the map ob-tained from Car-tog-ra-pher and start a new proj
 ect \T1/cmtt/m/n/12 *.building.yaml\T1/cmr/m/n/12 .
  []
@@ -1524,15 +1535,15 @@ ect \T1/cmtt/m/n/12 *.building.yaml\T1/cmr/m/n/12 .
 <img/RMF-traffic-map.png, id=657, 1856.9375pt x 1177.39874pt>
 File: img/RMF-traffic-map.png Graphic file (type png)
 <use img/RMF-traffic-map.png>
-Package pdftex.def Info: img/RMF-traffic-map.png  used on input line 282.
+Package pdftex.def Info: img/RMF-traffic-map.png  used on input line 279.
 (pdftex.def)             Requested size: 426.79134pt x 270.59839pt.
 <img/rmf_generated_world.png, id=658, 1856.9375pt x 1177.39874pt>
 File: img/rmf_generated_world.png Graphic file (type png)
 <use img/rmf_generated_world.png>
-Package pdftex.def Info: img/rmf_generated_world.png  used on input line 295.
+Package pdftex.def Info: img/rmf_generated_world.png  used on input line 292.
 (pdftex.def)             Requested size: 426.79134pt x 270.59839pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 285--298
+Underfull \hbox (badness 10000) in paragraph at lines 282--295
 
  []
 
@@ -1543,10 +1554,10 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <img/free_fleet_adapter.png, id=674, 1229.59375pt x 468.75125pt>
 File: img/free_fleet_adapter.png Graphic file (type png)
 <use img/free_fleet_adapter.png>
-Package pdftex.def Info: img/free_fleet_adapter.png  used on input line 322.
+Package pdftex.def Info: img/free_fleet_adapter.png  used on input line 319.
 (pdftex.def)             Requested size: 426.79134pt x 162.7064pt.
 
-Overfull \hbox (9.06923pt too wide) in paragraph at lines 319--327
+Overfull \hbox (9.06923pt too wide) in paragraph at lines 316--324
 \T1/cmr/m/n/12 Free fleet[][][] is a python im-ple-men-ta-tion of the \T1/cmtt/
 m/n/12 full_control \T1/cmr/m/n/12 Open-RMF Fleet Adapter.
  []
@@ -1556,7 +1567,7 @@ Chapter 12.
 <img/problem_chair.jpg, id=689, 1284.8pt x 963.6pt>
 File: img/problem_chair.jpg Graphic file (type jpg)
 <use img/problem_chair.jpg>
-Package pdftex.def Info: img/problem_chair.jpg  used on input line 356.
+Package pdftex.def Info: img/problem_chair.jpg  used on input line 353.
 (pdftex.def)             Requested size: 426.79134pt x 320.09155pt.
 [48
 
@@ -1564,7 +1575,7 @@ Package pdftex.def Info: img/problem_chair.jpg  used on input line 356.
 <img/mapComposizione.png, id=695, 1969.3575pt x 3074.48625pt>
 File: img/mapComposizione.png Graphic file (type png)
 <use img/mapComposizione.png>
-Package pdftex.def Info: img/mapComposizione.png  used on input line 366.
+Package pdftex.def Info: img/mapComposizione.png  used on input line 363.
 (pdftex.def)             Requested size: 298.75262pt x 466.36037pt.
 ) [49 <./img/mapComposizione.png>]
 \openout2 = `cap/Result.aux'.
@@ -1629,36 +1640,43 @@ Package logreq Info: Writing requests to 'tesi.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 33976 strings out of 480247
- 659288 string characters out of 5896152
- 1324005 words of memory out of 5000000
- 51135 multiletter control sequences out of 15000+600000
+ 33976 strings out of 480129
+ 659288 string characters out of 5893409
+ 1325400 words of memory out of 5000000
+ 51151 multiletter control sequences out of 15000+600000
  488787 words of font info for 68 fonts, out of 8000000 for 9000
- 14 hyphenation exceptions out of 8191
+ 81 hyphenation exceptions out of 8191
  114i,9n,108p,1853b,1383s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/
-fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1095.p
-fb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf
-/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/
-cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pf
-b></usr/share/texmf/fonts/type1/public/cm-super/sfcc1200.pfb></usr/share/texmf/
-fonts/type1/public/cm-super/sfit1200.pfb></usr/share/texmf/fonts/type1/public/c
-m-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb
-></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/f
-onts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm
--super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb>
-</usr/share/texmf/fonts/type1/public/cm-super/sfrm2074.pfb></usr/share/texmf/fo
-nts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-
-super/sftt1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb><
-/usr/share/texmf/fonts/type1/public/cm-super/sftt1440.pfb></usr/share/texmf/fon
-ts/type1/public/cm-super/sftt1728.pfb>
-Output written on tesi.pdf (58 pages, 12131531 bytes).
+ </home/michele/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1200.6
+00pk> </home/michele/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tctt120
+0.600pk> </home/michele/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcit
+1200.600pk> </home/michele/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/e
+cit1200.600pk> </home/michele/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/e
+c/ectt1440.600pk> </home/michele/.texlive2021/texmf-var/fonts/pk/ljfour/jknappe
+n/ec/ectt1728.600pk> </home/michele/.texlive2021/texmf-var/fonts/pk/ljfour/jkna
+ppen/ec/ecti1200.600pk> </home/michele/.texlive2021/texmf-var/fonts/pk/ljfour/j
+knappen/ec/ectt1095.600pk> </home/michele/.texlive2021/texmf-var/fonts/pk/ljfou
+r/jknappen/ec/ecbx1728.600pk> </home/michele/.texlive2021/texmf-var/fonts/pk/lj
+four/jknappen/ec/tcrm1200.600pk> </home/michele/.texlive2021/texmf-var/fonts/pk
+/ljfour/jknappen/ec/ecrm1095.600pk> </home/michele/.texlive2021/texmf-var/fonts
+/pk/ljfour/jknappen/ec/ecbx1095.600pk> </home/michele/.texlive2021/texmf-var/fo
+nts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/michele/.texlive2021/texmf-var
+/fonts/pk/ljfour/jknappen/ec/ecrm0700.600pk> </home/michele/.texlive2021/texmf-
+var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </home/michele/.texlive2021/tex
+mf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> </home/michele/.texlive2021/
+texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/michele/.texlive20
+21/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/michele/.texliv
+e2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/michele/.tex
+live2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2488.600pk> </home/michele/.
+texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </home/michel
+e/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on tesi.pdf (58 pages, 11936374 bytes).
 PDF statistics:
- 915 PDF objects out of 1000 (max. 8388607)
- 747 compressed objects within 8 object streams
+ 1607 PDF objects out of 1728 (max. 8388607)
+ 770 compressed objects within 8 object streams
  190 named destinations out of 1000 (max. 500000)
  496 words of extra memory for PDF output out of 10000 (max. 10000000)
 

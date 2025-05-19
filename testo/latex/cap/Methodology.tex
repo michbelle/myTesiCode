@@ -158,27 +158,24 @@ This is the list of all process used with a little description of what is used w
 	\item \texttt{nav2\_behaviors::BehaviorServer} that use the following plugins:
 	\begin{itemize}
 		\item As \texttt{behavior\_plugins} use:
-		\texttt{nav2\_behaviors/Spin} that is ,
-		\texttt{nav2\_behaviors/BackUp} that is ,
-		\alert{\texttt{nav2\_behaviors/DriveOnHeading} that is} ,
+		\texttt{nav2\_behaviors/Spin} performs an in-place rotation by a given angle,
+		\texttt{nav2\_behaviors/BackUp} which causes the robot to back up by a specific displacement,
+		\alert{\texttt{nav2\_behaviors/DriveOnHeading} that is} which causes the robot to drive on the current heading by a specific displacement,
 		\texttt{nav2\_behaviors/Wait} that is ,
-		\alert{\texttt{nav2\_behaviors/AssistedTeleop} that is} 
+		\alert{\texttt{nav2\_behaviors/AssistedTeleop} that is} allow user to teleop the robot avoiding commands that can create collision.
 	\end{itemize}
 	
-	\item \texttt{nav2\_bt\_navigator::BtNavigator} that use the following plugins:
+	\item \texttt{nav2\_bt\_navigator::BtNavigator} that use the following navigators:
+	\begin{itemize}
+		\item As \texttt{smoother\_plugins} use \texttt{nav2\_bt\_navigator::NavigateToPoseNavigator} and \texttt{nav2\_bt\_navigator::NavigateThroughPosesNavigator} that use the bt tree to navigate
+	\end{itemize}
+	
+	\item \alert{\texttt{nav2\_waypoint\_follower::WaypointFollower}} that use the following plugins:
 	\begin{itemize}
 		\item As \texttt{smoother\_plugins} use \texttt{nav2\_smoother::SimpleSmoother} that is 
 	\end{itemize}
 	
-	\item \texttt{nav2\_waypoint\_follower::WaypointFollower} that use the following plugins:
-	\begin{itemize}
-		\item As \texttt{smoother\_plugins} use \texttt{nav2\_smoother::SimpleSmoother} that is 
-	\end{itemize}
-	
-	\item \texttt{nav2\_lifecycle\_manager::LifecycleManager} that use the following plugins:
-	\begin{itemize}
-		\item As \texttt{smoother\_plugins} use \texttt{nav2\_smoother::SimpleSmoother} that is 
-	\end{itemize}
+	\item \texttt{nav2\_lifecycle\_manager::LifecycleManager} that handling the lifecycle transition states for the stack in a deterministic way
 \end{itemize}
 The simulation configuration file has some changes in the structure because the version of ROS 2 is Jazzy while the robot use Humble. 
 The parameters where not as much changed by the default configuration, the only change we need to apply is in the \texttt{planner\_server} to have our navigation system after porting it to ROS 2. 
