@@ -1,5 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{+w}{    }ros2\PYG{+w}{ }service\PYG{+w}{ }call\PYG{+w}{ }/write\PYGZus{}state\PYG{+w}{ }cartographer\PYGZus{}ros\PYGZus{}msgs/srv/WriteState\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}\PYGZob{}filename: \PYGZsq{}map\PYGZhy{}elettra.pdstream\PYGZsq{}, include\PYGZus{}unfinished\PYGZus{}submaps : false\PYGZcb{}\PYGZdq{}}
-\PYG{+w}{    }ros2\PYG{+w}{ }interface\PYG{+w}{ }show\PYG{+w}{ }cartographer\PYGZus{}ros\PYGZus{}msgs/srv/FinishTrajectory.srv
-\PYG{+w}{    }ros2\PYG{+w}{ }service\PYG{+w}{ }call\PYG{+w}{ }/write\PYGZus{}state\PYG{+w}{ }cartographer\PYGZus{}ros\PYGZus{}msgs/srv/WriteState\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}\PYGZob{}filename: \PYGZsq{}/home/develop/bags/mymap.pbstream\PYGZsq{}\PYGZcb{}\PYGZdq{}}
-\end{Verbatim}

@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-ros2\PYG{+w}{ }run\PYG{+w}{ }cartographer\PYGZus{}ros\PYG{+w}{ }cartographer\PYGZus{}pbstream\PYGZus{}to\PYGZus{}ros\PYGZus{}map\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
-\PYG{+w}{	}\PYGZhy{}pbstream\PYGZus{}filename\PYG{+w}{ }map.pbstream\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
-\PYG{+w}{	}\PYGZhy{}map\PYGZus{}filename\PYG{+w}{ }map.pgm\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
-\PYG{+w}{	}\PYGZhy{}resolution\PYG{+w}{ }\PYG{l+m}{0}.05
-\end{Verbatim}
