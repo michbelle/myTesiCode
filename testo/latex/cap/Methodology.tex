@@ -51,13 +51,13 @@ A 3D model of the robot, including all coordinate frames (TF), is shown in this 
 \includegraphics[width=0.4\linewidth]{img/modelWithTFtree.png}
 \captionof{figure}{3D model with TF}
 \end{figure}\\
-With the system fully assembled, the following ROS 2 launch files were created to run on the robot's mini PC:
+With the system fully assembled, the following ROS 2 launch files allow to get the data from the sensors connected on the robot's mini PC:
 \begin{itemize}
 	\item \texttt{0.1r\_sensorLaunch.launch.py}: Launches the nodes responsible for publishing data from the IMU and LIDAR sensors.
 	\item \texttt{0.2r\_mini.launch.py}: Publishes odometry data based on the built-in encoders of the robot.
 \end{itemize}
 \newpage
-While for simulation the following launch file is created:
+While for simulation the following launch file can be used for starting the simulation:
 \begin{itemize}
 	\item \texttt{0s\_ign\_mini\_gazebo.launch.py}: Launch the simulation in gazebo of the robot with the sensors and using the node \texttt{ros\_gz\_bridge/parameter\_bridge} share the data generate in Gazebo with ROS 2.
 \end{itemize}
@@ -75,24 +75,41 @@ In this chapter, we divide the system architecture according to the key componen
 As previously discussed, the raw odometry data provided by the rover are not sufficiently accurate, particularly in rotational movements\cite{MooreStouchKeneralizedEkf2014}. This is a well-known issue in odometry estimation for skid-steering vehicles, which tend to produce significant drift and errors during turns.\\
 To address this problem, we used the \texttt{robot\_localization} package\cite{MooreStouchKeneralizedEkf2014}, specifically the \texttt{ekf\_node}.
 This package enables the fusion of multiple sensor, even multiple instances of the same sensor type, and supports output in various ROS message formats, such as \texttt{nav\_msgs/Odometry}. It also allows preprocessing of sensor messages prior to inserting into the estimation process. The filter performs continuous state estimation and is robust to intermittent sensor data loss, maintaining a coherent position estimate over time.\\
-To launch the EKF node, the following launch file was created:\\
+To launch the EKF node, the following launch file was wrote:\\
 \hspace*{10mm}\texttt{1<r/s>\_robot\_localizationEKF.launch.py}
 
-\subsection{Odometry Estimation configuration}
-Has describe before and also in the doc\footnote{\href{https://docs.ros.org/en/noetic/api/robot_localization/html/index.html}{https://docs.ros.org/en/noetic/api/robot\_localization/html/index.html}} of the node for adding the sensors we added this rows at the configuration file \texttt{odom0:odometry/wheels} and \texttt{imu0:imu/data} that are the estimation described before. Also we need to choose which components of the state we want to fuse using this array and set \texttt{true} if we want it to fuse:\\
+\subsection{Configuration Odometry Estimation in \texttt{ekf\_node}}
+As described previously and in the documentation of the node\footnote{\href{https://docs.ros.org/en/noetic/api/robot_localization/html/index.html}{https://docs.ros.org/en/noetic/api/robot\_localization/html/index.html}}, we added the information about the sensors used to the configuration file. The principal information to include is the type of sensor and on which topic subscribe for the data, \texttt{odom0:odometry/wheels} and \texttt{imu0:imu/data}, and, for each sensor, we need to choose which components of the state measurement data we want to fuse using the following array, setting the corresponding values to \texttt{true} for those we wish to include and \texttt{false} for those we do not:\\
 \texttt{sensorX\_config}:$ [X, Y, Z, roll, pitch, yaw, \dot{X}, \dot{Y}, \dot{Z}, \dot{roll}, \dot{pitch}, \dot{yaw}, \ddot{X}, \ddot{Y}, \ddot{Z}] $\\
-for the IMU we used only the yaw velocity while for the odometry we select only the velocity along the x and y.\\
-Then is also possible to tune the process noise covariance matrix $ Q $ and represents the noise we add to the total error after each prediction step.  In general, the larger the value for Q relative to the variance for a given variable in an input message, the faster the filter will converge to the value in the measurement.
-\section{localization \texttt{map} $\rightarrow$ \texttt{odom}}
-In this part we will describe how archive the link frame from \texttt{map} to \texttt{odom}. As described before the costmap was create with Cartographer, for testing both SLAM from \texttt{slam\_toolbox}\cite{Macenski2021} (github: SteveMacenski/slam\_toolbox\footnote{\href{https://github.com/SteveMacenski/slam_toolbox/tree/ros2}{https://github.com/SteveMacenski/slam\_toolbox/tree/ros2}}) and \texttt{cartographer\_ros}\cite{45466} (github: ros2/cartographer\_ros\footnote{\href{https://github.com/cartographer-project/cartographer_ros}{https://github.com/cartographer-project/cartographer\_ros}}) package were used in this thesis. \\
-With cartographer we obtain this map:
+\alert{ In our case we used only the yaw velocity for the IMU while for the odometry we select only the velocity along the x and y}.\\
+It is also possible to tune the process noise covariance matrix $ Q $, which represents the noise we add to the total error after each prediction step. Generally, the larger the value of $ Q $ relative to the variance of a given variable in an input message, the faster the filter will converge to the value indicated by the measurement.
+
+\section{Localization \texttt{map} $\rightarrow$ \texttt{odom}}
+In this section, we will describe how to acquire a map and use it to achieve the link between the \texttt{map} frame and \texttt{odom} frame using a localization method. This is necessary because, for long-term operation, the position of the robot in the world is not enough accurate and we need a method to compensate this error\cite{sh-p1-prelude}.
+\subsection{Mapping}
+We have already have a map, but for completeness, we provided the code for the following SLAM packages: \texttt{slam\_toolbox}\cite{Macenski2021} (GitHub: SteveMacenski/slam\_toolbox\footnote{\href{https://github.com/SteveMacenski/slam_toolbox/tree/ros2}{https://github.com/SteveMacenski/slam\_toolbox/tree/ros2}}) and \texttt{cartographer\_ros}\cite{45466} (GitHub: ros2/cartographer\_ros\footnote{\href{https://github.com/cartographer-project/cartographer_ros}{https://github.com/cartographer-project/cartographer\_ros}}). They can be launch using the following launch files:\\
+\hspace*{10mm} \texttt{X<r/s>\_mappingW<slam/cartographer>.launch.py} \\
+To save the map, you can use the following command, which is valid for both \texttt{slam\_toolbox} and \texttt{cartographer\_ros}.  This \alert{command} will save the map in two files, a \texttt{.pgm} and a \texttt{.yaml}:\\
+\hspace*{10mm} \texttt{ros2 run nav2\_map\_server map\_saver\_cli -f map}\\
+When using Cartographer, it is also possible to save the map as a \texttt{.pdstream} using the \alert{following command}:
+\begin{listing} [ht!]
+\begin{minted}{bash} 
+    ros2 service call /write_state cartographer_ros_msgs/srv/WriteState "{filename: 'map-elettra.pdstream', include_unfinished_submaps : false}"
+    ros2 interface show cartographer_ros_msgs/srv/FinishTrajectory.srv
+    ros2 service call /write_state cartographer_ros_msgs/srv/WriteState "{filename: '/home/develop/bags/mymap.pbstream'}"
+\end{minted}
+\end{listing}
+\newpage
+\subsection{Only localization}
+The map that was built using Cartographer is the following:
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.4\linewidth]{img/map.png}
 	\captionof{figure}{Map acquired with Cartographer}
-\end{figure}\\
-Then it was tried the use of cartographer as only for localization but because the project is not more maintained was not found possible to use it correctly, so the solution was to use the one given from nav2 package \texttt{nav2\_amcl} and node \texttt{amcl}.\\
-But this has the problem that we need to convert the map acquired with cartographer as a \texttt{.pbstream} to a pair of \texttt{.pgm} and \texttt{.yaml} for the new Node. This was done using this command:\\
+\end{figure}
+
+We attempted to use Cartographer solely for localization; however, due to the project's lack of maintenance, \alert{we found it challenging to use it correctly}. As a solution, we opted for the method provided by the Nav2 package, specifically  \texttt{nav2\_amcl} and the \texttt{amcl} node.\\
+But this has the problem that we need to convert the map acquired with cartographer as a \texttt{.pbstream} to a pair of \texttt{.pgm} and \texttt{.yaml} for the \texttt{amcl} node. This can be done using this \alert{command}:\\
 \begin{listing} [ht!]
 \begin{minted}{bash} 
 ros2 run cartographer_ros cartographer_pbstream_to_ros_map \
@@ -101,42 +118,73 @@ ros2 run cartographer_ros cartographer_pbstream_to_ros_map \
 	-resolution 0.05
 \end{minted}
 \end{listing}\\
-This bright some minors errors to the map thinking there was some place capable to move on like wall because were not perfect black, repaired using gimp and we obtain this map (also correct error to allow from my workstation to not have a obstacle not present)\\
+\newpage
+Since certain walls of the Cartographer map where not solid black, the conversion brings some errors that lead to the misinterpretation of these areas as free zones and the planner returned a path that pass through them. \alert{The solution of this problem was to add the walls manually using GIMP}, an image editor, on the \texttt{.pgm} file.\\
+We then obtained the following map:
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.4\linewidth]{img/mapV.png}
-	\captionof{figure}{\alert{Map edited with Gimp and used}}
-\end{figure}
-\newpage
-Then it was possible to launch the localization using:\\
-\hspace*{10mm} \texttt{3<r/s>\_L<amcl/Cartographer>.launch.py}\\
-While for mapping are provided the code:\\
-\hspace*{10mm} \texttt{X<r/s>\_mappingW<slam/cartographer>.launch.py}
-\section{navigation stack}
-In this section we will discuss what structure for the navigation stack is used and how we port the Global planner from ROS 1 to ROS 2.
-\subsection{navigation launch file}
-In this file we will use the new structures of ROS 2, the composition node and the lifecycle manager.
-The file was written to use the ability of composition if it is enable in the launch configuration so it can be operate in boths ways. 
-The file  is launching all the following packages with node or composition plugins:
+	\captionof{figure}{Map edited with Gimp and used}
+\end{figure}\\
+We have now all tools necessary for the localization and we have wrote the following launch file to start the localization:\\
+\hspace*{10mm} \texttt{3<r/s>\_L<amcl/Cartographer>.launch.py}
+
+Now we have all the requirements to use the navigation stack Nav2.
+\section{Structure Navigation Stack Nav2}
+In this section we will discuss what components are used for the navigation stack and how we have ported the Global planner from ROS 1 to ROS 2.
+\subsection{Navigation Launch file}
+The launch file contains all the necessary processes required for the Navigation Nav2 system to operate. It implement also the composition structure (\ref{Composition}) and the lifecycle manager (\ref{LifecycleNode}).
+This is the list of all process used with a little description of what is used with them, \alert{documention is avaible at} \footnote{\href{https://docs.nav2.org/setup_guides/algorithm/select_algorithm.html}{https://docs.nav2.org/setup\_guides/algorithm/select\_algorithm.html}} :
 \begin{itemize}
-	\item package \texttt{nav2\_controller} with Node \texttt{controller\_server} or\\ plugin \texttt{nav2\_controller::ControllerServer}
+	\item \texttt{nav2\_controller::ControllerServer} that use the following plugins:
+	\begin{itemize}
+		\item As \texttt{controller\_plugins} use \texttt{nav2\_mppi\_controller::MPPIController} that is a Model Predictive Path Integral (MPPI) algorithm to track a path with adaptive collision avoidance.
+		
+		\item As \texttt{progress\_checker\_plugins} use \texttt{nav2\_controller::SimpleProgressChecker} that checks whether the robot has made positional progress.
+		
+		\item As \texttt{goal\_checker\_plugins} use \texttt{nav2\_controller::SimpleGoalChecker} that checks whether the robot has reached the goal pose.
+	\end{itemize}
 	
-	\item package \texttt{nav2\_smoother} with Node \texttt{smoother\_server} or\\plugin \texttt{nav2\_smoother::SmootherServer} 
+	\item \texttt{nav2\_smoother::SmootherServer} that use the following plugins:
+	\begin{itemize}
+		\item As \texttt{smoother\_plugins} use \texttt{nav2\_smoother::SimpleSmoother} that take in an input path and smooth it using a simple and fast smoothing technique. It weights the initial path points and the smoothed path points to create a balanced result where the path retains its high level characteristics but reduces oscillations or jagged features.
+	\end{itemize}
 	
-	\item \texttt{nav2\_planner} with Node \texttt{planner\_server} or\\plugin \texttt{nav2\_planner::PlannerServer} 
+	\item \texttt{nav2\_planner::PlannerServer} that use the following plugins:
+	\begin{itemize}
+		\item As \texttt{planner\_plugins} use  \texttt{dstar\_global\_planner\alert{/}DStarGlobalPlanner} that is our global planner plugin and is a implementation of the D* informed incremental search algoritm with external optimizers\cite{10.1007/978-3-031-67295-8_33}.
+	\end{itemize}
 	
-	\item \texttt{nav2\_behaviors} with Node \texttt{behavior\_server} or\\plugin \texttt{nav2\_behaviors::BehaviorServer} 
+	\item \texttt{nav2\_behaviors::BehaviorServer} that use the following plugins:
+	\begin{itemize}
+		\item As \texttt{behavior\_plugins} use:
+		\texttt{nav2\_behaviors/Spin} that is ,
+		\texttt{nav2\_behaviors/BackUp} that is ,
+		\alert{\texttt{nav2\_behaviors/DriveOnHeading} that is} ,
+		\texttt{nav2\_behaviors/Wait} that is ,
+		\alert{\texttt{nav2\_behaviors/AssistedTeleop} that is} 
+	\end{itemize}
 	
-	\item \texttt{nav2\_bt\_navigator} with Node \texttt{bt\_navigator} or\\plugin \texttt{nav2\_bt\_navigator::BtNavigator} 
+	\item \texttt{nav2\_bt\_navigator::BtNavigator} that use the following plugins:
+	\begin{itemize}
+		\item As \texttt{smoother\_plugins} use \texttt{nav2\_smoother::SimpleSmoother} that is 
+	\end{itemize}
 	
-	\item \texttt{nav2\_waypoint\_follower} with Node \texttt{waypoint\_follower} or\\plugin \texttt{nav2\_waypoint\_follower::WaypointFollower} 
+	\item \texttt{nav2\_waypoint\_follower::WaypointFollower} that use the following plugins:
+	\begin{itemize}
+		\item As \texttt{smoother\_plugins} use \texttt{nav2\_smoother::SimpleSmoother} that is 
+	\end{itemize}
 	
-	\item \texttt{nav2\_lifecycle\_manager} with Node \texttt{lifecycle\_manager} or\\plugin \texttt{nav2\_lifecycle\_manager::LifecycleManager}
+	\item \texttt{nav2\_lifecycle\_manager::LifecycleManager} that use the following plugins:
+	\begin{itemize}
+		\item As \texttt{smoother\_plugins} use \texttt{nav2\_smoother::SimpleSmoother} that is 
+	\end{itemize}
 \end{itemize}
+The simulation configuration file has some changes in the structure because the version of ROS 2 is Jazzy while the robot use Humble. 
 The parameters where not as much changed by the default configuration, the only change we need to apply is in the \texttt{planner\_server} to have our navigation system after porting it to ROS 2. 
 In the next section is the step we took to port it to ROS 2.
 \subsection{Porting DStarGlobalPlanner to ROS 2}
-The \texttt{DStarGlobalPlanner}\footnote{\href{https://github.com/ElettraSciComp/DStar-Trajectory-Planner/tree/ros2_port}{https://github.com/ElettraSciComp/DStar-Trajectory-Planner/tree/ros2\_port}} is a implementation of the D* informed incremental search algoritm with external optimizers\cite{10.1007/978-3-031-67295-8_33} for the ROS 1 \texttt{move\_base} package\footnote{\href{https://wiki.ros.org/move_base}{https://wiki.ros.org/move\_base}}. In this part we will refer a lot on the porting documentation refered before \footnote{\href{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}}\footnote{\href{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}} and the documentection from Nav2 : "Writing a New Planner Plugin"\footnote{\href{https://docs.nav2.org/plugin_tutorials/docs/writing_new_nav2planner_plugin.html}{https://docs.nav2.org/plugin\_tutorials/docs/writing\_new\_nav2planner\_plugin.html}}
+As write before, the \texttt{DStarGlobalPlanner}\footnote{\href{https://github.com/ElettraSciComp/DStar-Trajectory-Planner/tree/ros2_port}{https://github.com/ElettraSciComp/DStar-Trajectory-Planner/tree/ros2\_port}} is a implementation of the D* informed incremental search algoritm with external optimizers\cite{10.1007/978-3-031-67295-8_33} for the ROS 1 \texttt{move\_base} package\footnote{\href{https://wiki.ros.org/move_base}{https://wiki.ros.org/move\_base}}. In this part we will refer a lot on the porting documentation refered before \footnote{\href{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}}\footnote{\href{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}} and the documentection from Nav2 : "Writing a New Planner Plugin"\footnote{\href{https://docs.nav2.org/plugin_tutorials/docs/writing_new_nav2planner_plugin.html}{https://docs.nav2.org/plugin\_tutorials/docs/writing\_new\_nav2planner\_plugin.html}}
 Is now described the 2 phases of porting the code, the first one is the Nav2 structure porting procedure and the second part adapt the old code to ROS 2.
 \subsubsection{Porting code to ROS 1}
 In the \texttt{package.xml} that describe the package as an organizational unit for your ROS 2 code, the changes that are performed are:

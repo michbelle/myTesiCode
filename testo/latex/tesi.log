@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.5.15)  18 MAY 2025 19:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.5.6)  19 MAY 2025 17:30
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -124,7 +124,7 @@ Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 \bibhang=\skip56
 \blx@bcfin=\read2
 \blx@bcfout=\write3
-\blx@langwohyphens=\language9
+\blx@langwohyphens=\language3
 \c@mincomprange=\count304
 \c@maxcomprange=\count305
 \c@mincompwidth=\count306
@@ -1160,7 +1160,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 ]
 Chapter 2.
-<img/RoverRoboticsMini.png, id=254, 421.575pt x 248.93pt>
+<img/RoverRoboticsMini.png, id=264, 421.575pt x 248.93pt>
 File: img/RoverRoboticsMini.png Graphic file (type png)
 <use img/RoverRoboticsMini.png>
 Package pdftex.def Info: img/RoverRoboticsMini.png  used on input line 13.
@@ -1190,34 +1190,34 @@ Overfull \hbox (25.23451pt too wide) in paragraph at lines 7--8
 [11
 
 ]
-<img/life_cycle_sm_nf.png, id=291, 1270.7475pt x 1245.65375pt>
+<img/life_cycle_sm_nf.png, id=301, 1270.7475pt x 1245.65375pt>
 File: img/life_cycle_sm_nf.png Graphic file (type png)
 <use img/life_cycle_sm_nf.png>
 Package pdftex.def Info: img/life_cycle_sm_nf.png  used on input line 19.
 (pdftex.def)             Requested size: 426.79134pt x 418.36574pt.
  [12 <./img/life_cycle_sm_nf.png>]
-<img/Topic.png, id=302, 642.90187pt x 361.35pt>
+<img/Topic.png, id=312, 642.90187pt x 361.35pt>
 File: img/Topic.png Graphic file (type png)
 <use img/Topic.png>
 Package pdftex.def Info: img/Topic.png  used on input line 26.
 (pdftex.def)             Requested size: 238.45241pt x 134.02272pt.
-<img/Service.png, id=303, 642.90187pt x 361.35pt>
+<img/Service.png, id=313, 642.90187pt x 361.35pt>
 File: img/Service.png Graphic file (type png)
 <use img/Service.png>
 Package pdftex.def Info: img/Service.png  used on input line 32.
 (pdftex.def)             Requested size: 238.45241pt x 134.02272pt.
-<img/Action.png, id=304, 1445.4pt x 813.0375pt>
+<img/Action.png, id=314, 1445.4pt x 813.0375pt>
 File: img/Action.png Graphic file (type png)
 <use img/Action.png>
 Package pdftex.def Info: img/Action.png  used on input line 39.
 (pdftex.def)             Requested size: 238.45241pt x 134.12059pt.
  [13 <./img/Topic.png> <./img/Service.png> <./img/Action.png>]
-<img/rviz.png, id=316, 1927.2pt x 1084.05pt>
+<img/rviz.png, id=327, 1927.2pt x 1084.05pt>
 File: img/rviz.png Graphic file (type png)
 <use img/rviz.png>
 Package pdftex.def Info: img/rviz.png  used on input line 54.
 (pdftex.def)             Requested size: 170.71393pt x 96.02194pt.
-<img/rviz2.png, id=317, 1317.92375pt x 708.6475pt>
+<img/rviz2.png, id=328, 1317.92375pt x 708.6475pt>
 File: img/rviz2.png Graphic file (type png)
 <use img/rviz2.png>
 Package pdftex.def Info: img/rviz2.png  used on input line 58.
@@ -1233,19 +1233,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 49--62
  []
 
 [14 <./img/rviz.png> <./img/rviz2.png>]
-<img/gazebo1.png, id=330, 1927.2pt x 1132.23pt>
+<img/gazebo1.png, id=340, 1927.2pt x 1132.23pt>
 File: img/gazebo1.png Graphic file (type png)
 <use img/gazebo1.png>
 Package pdftex.def Info: img/gazebo1.png  used on input line 78.
 (pdftex.def)             Requested size: 170.71393pt x 100.2896pt.
-<img/gazebo2.png, id=331, 1456.44125pt x 921.4425pt>
+<img/gazebo2.png, id=341, 1456.44125pt x 921.4425pt>
 File: img/gazebo2.png Graphic file (type png)
 <use img/gazebo2.png>
 Package pdftex.def Info: img/gazebo2.png  used on input line 82.
 (pdftex.def)             Requested size: 170.71393pt x 107.99533pt.
  [15 <./img/gazebo1.png> <./img/gazebo2.png>]
 Chapter 5.
-<img/nav2_architecture.png, id=345, 963.6pt x 602.25pt>
+<img/nav2_architecture.png, id=355, 963.6pt x 602.25pt>
 File: img/nav2_architecture.png Graphic file (type png)
 <use img/nav2_architecture.png>
 Package pdftex.def Info: img/nav2_architecture.png  used on input line 94.
@@ -1253,7 +1253,7 @@ Package pdftex.def Info: img/nav2_architecture.png  used on input line 94.
 [16
 
  <./img/nav2_architecture.png (PNG copy)>]
-<img/bt_nav2_neg.humble.png, id=359, 1283.79625pt x 747.79375pt>
+<img/bt_nav2_neg.humble.png, id=369, 1283.79625pt x 747.79375pt>
 File: img/bt_nav2_neg.humble.png Graphic file (type png)
 <use img/bt_nav2_neg.humble.png>
 Package pdftex.def Info: img/bt_nav2_neg.humble.png  used on input line 111.
@@ -1265,7 +1265,7 @@ on \T1/cmtt/m/n/10.95 navigate_to_pose_w_replanning_and_recovery.xml
  []
 
 [17 <./img/bt_nav2_neg.humble.png>]
-<img/Alg_Cartographer.png, id=373, 963.6pt x 722.7pt>
+<img/Alg_Cartographer.png, id=384, 963.6pt x 722.7pt>
 File: img/Alg_Cartographer.png Graphic file (type png)
 <use img/Alg_Cartographer.png>
 Package pdftex.def Info: img/Alg_Cartographer.png  used on input line 137.
@@ -1285,24 +1285,24 @@ Chapter 7.
 [21
 
 ]
-<img/RMF_struct.png, id=433, 1195.46625pt x 616.3025pt>
+<img/RMF_struct.png, id=445, 1195.46625pt x 616.3025pt>
 File: img/RMF_struct.png Graphic file (type png)
 <use img/RMF_struct.png>
 Package pdftex.def Info: img/RMF_struct.png  used on input line 163.
 (pdftex.def)             Requested size: 341.43436pt x 176.0242pt.
  [22 <./img/RMF_struct.png (PNG copy)>]
-<img/RMF_tut_schedule.png, id=441, 2522.42375pt x 1557.82pt>
+<img/RMF_tut_schedule.png, id=453, 2522.42375pt x 1557.82pt>
 File: img/RMF_tut_schedule.png Graphic file (type png)
 <use img/RMF_tut_schedule.png>
 Package pdftex.def Info: img/RMF_tut_schedule.png  used on input line 181.
 (pdftex.def)             Requested size: 341.43436pt x 210.84334pt.
  [23 <./img/RMF_tut_schedule.png>]
-<img/RMF_tut_BidTask.png, id=449, 1762.585pt x 896.34875pt>
+<img/RMF_tut_BidTask.png, id=462, 1762.585pt x 896.34875pt>
 File: img/RMF_tut_BidTask.png Graphic file (type png)
 <use img/RMF_tut_BidTask.png>
 Package pdftex.def Info: img/RMF_tut_BidTask.png  used on input line 201.
 (pdftex.def)             Requested size: 341.43436pt x 173.63158pt.
-<img/RMF_tut_trafficEditor.png, id=450, 2501.345pt x 1426.32875pt>
+<img/RMF_tut_trafficEditor.png, id=463, 2501.345pt x 1426.32875pt>
 File: img/RMF_tut_trafficEditor.png Graphic file (type png)
 <use img/RMF_tut_trafficEditor.png>
 Package pdftex.def Info: img/RMF_tut_trafficEditor.png  used on input line 217.
@@ -1326,14 +1326,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 214--221
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<img/RMF_tut_fleetAdapterTMPL.png, id=451, 1256.695pt x 233.87375pt>
+<img/RMF_tut_fleetAdapterTMPL.png, id=464, 1256.695pt x 233.87375pt>
 File: img/RMF_tut_fleetAdapterTMPL.png Graphic file (type png)
 <use img/RMF_tut_fleetAdapterTMPL.png>
 Package pdftex.def Info: img/RMF_tut_fleetAdapterTMPL.png  used on input line 2
 24.
 (pdftex.def)             Requested size: 341.43436pt x 63.53929pt.
 [24 <./img/RMF_tut_BidTask.png>]
-<img/RMF_tut_web.png, id=459, 2557.555pt x 1193.45876pt>
+<img/RMF_tut_web.png, id=471, 2557.555pt x 1193.45876pt>
 File: img/RMF_tut_web.png Graphic file (type png)
 <use img/RMF_tut_web.png>
 Package pdftex.def Info: img/RMF_tut_web.png  used on input line 232.
@@ -1350,17 +1350,17 @@ img/RMF_tut_web.png>]) [26]
 
 ] [28]
 Chapter 8.
-<img/miniPC.jpg, id=489, 1084.05pt x 929.4725pt>
+<img/miniPC.jpg, id=501, 1084.05pt x 929.4725pt>
 File: img/miniPC.jpg Graphic file (type jpg)
 <use img/miniPC.jpg>
 Package pdftex.def Info: img/miniPC.jpg  used on input line 22.
 (pdftex.def)             Requested size: 170.71393pt x 146.36432pt.
-<img/IMU.jpg, id=493, 1084.05pt x 946.53625pt>
+<img/IMU.jpg, id=505, 1084.05pt x 946.53625pt>
 File: img/IMU.jpg Graphic file (type jpg)
 <use img/IMU.jpg>
 Package pdftex.def Info: img/IMU.jpg  used on input line 28.
 (pdftex.def)             Requested size: 170.71393pt x 149.05136pt.
-<img/laserScanRPLIDAR.png, id=499, 235.88126pt x 207.77625pt>
+<img/laserScanRPLIDAR.png, id=511, 235.88126pt x 207.77625pt>
 File: img/laserScanRPLIDAR.png Graphic file (type png)
 <use img/laserScanRPLIDAR.png>
 Package pdftex.def Info: img/laserScanRPLIDAR.png  used on input line 37.
@@ -1368,19 +1368,19 @@ Package pdftex.def Info: img/laserScanRPLIDAR.png  used on input line 37.
 [29
 
  <./img/miniPC.jpg>] [30 <./img/IMU.jpg> <./img/laserScanRPLIDAR.png>]
-<img/RoverwithSensor.jpg, id=518, 812.03375pt x 641.39626pt>
+<img/RoverwithSensor.jpg, id=530, 812.03375pt x 641.39626pt>
 File: img/RoverwithSensor.jpg Graphic file (type jpg)
 <use img/RoverwithSensor.jpg>
 Package pdftex.def Info: img/RoverwithSensor.jpg  used on input line 44.
 (pdftex.def)             Requested size: 170.71393pt x 134.8342pt.
-<img/modelWithTFtree.png, id=519, 1065.9825pt x 936.49875pt>
+<img/modelWithTFtree.png, id=531, 1065.9825pt x 936.49875pt>
 File: img/modelWithTFtree.png Graphic file (type png)
 <use img/modelWithTFtree.png>
 Package pdftex.def Info: img/modelWithTFtree.png  used on input line 51.
 (pdftex.def)             Requested size: 170.71393pt x 149.97147pt.
 
 [31 <./img/RoverwithSensor.jpg> <./img/modelWithTFtree.png (PNG copy)>]
-<img/robot_in_simulation.png, id=527, 1856.9375pt x 1177.39874pt>
+<img/robot_in_simulation.png, id=539, 1856.9375pt x 1177.39874pt>
 File: img/robot_in_simulation.png Graphic file (type png)
 <use img/robot_in_simulation.png>
 Package pdftex.def Info: img/robot_in_simulation.png  used on input line 66.
@@ -1404,68 +1404,97 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 74.
 
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <14.4> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 81.
 [33
 
 ]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 86.
+(hyperref)                removing `math shift' on input line 87.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\rightarrow' on input line 86.
+(hyperref)                removing `\rightarrow' on input line 87.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 86.
+(hyperref)                removing `math shift' on input line 87.
 
-<img/map.png, id=552, 1969.3575pt x 3074.48625pt>
-File: img/map.png Graphic file (type png)
-<use img/map.png>
-Package pdftex.def Info: img/map.png  used on input line 91.
-(pdftex.def)             Requested size: 170.71393pt x 266.51175pt.
 \openout4 = `tesi.pyg'.
 
 (./_minted-tesi/bw.pygstyle)
+(./_minted-tesi/0A7F46E140D81EDE7FB353CB9EB610B83922414B4DDF0DD63F23153E5E8C6AC
+D.pygtex
+LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
+2.
+ (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmtt.fd
+File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)) [34]
+<img/map.png, id=575, 1969.3575pt x 3074.48625pt>
+File: img/map.png Graphic file (type png)
+<use img/map.png>
+Package pdftex.def Info: img/map.png  used on input line 107.
+(pdftex.def)             Requested size: 170.71393pt x 266.51175pt.
+\openout4 = `tesi.pyg'.
+
+
 (./_minted-tesi/7D06C314AFEDD47BB10095FD44F295B03922414B4DDF0DD63F23153E5E8C6AC
 D.pygtex
 LaTeX Font Info:    Font shape `T1/cmtt/bx/it' in size <12> not available
 (Font)              Font shape `T1/cmtt/m/it' tried instead on input line 2.
 )
-<img/mapV.png, id=553, 1969.3575pt x 3074.48625pt>
-File: img/mapV.png Graphic file (type png)
-<use img/mapV.png>
-Package pdftex.def Info: img/mapV.png  used on input line 107.
-(pdftex.def)             Requested size: 170.71393pt x 266.51175pt.
+Underfull \hbox (badness 10000) in paragraph at lines 111--121
 
-Overfull \hbox (30.9149pt too wide) in paragraph at lines 87--110
-\T1/cmr/m/n/12 from \T1/cmtt/m/n/12 slam_toolbox\T1/cmr/m/n/12 [[]5[]] (github:
- SteveMa-cen-ski/s-lam_toolbox[][][]) and \T1/cmtt/m/n/12 cartographer_ros\T1/c
-mr/m/n/12 [[]4[]]
  []
 
-[34 <./img/map.png>] [35 <./img/mapV.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 139--139
+[35 <./img/map.png>]
+<img/mapV.png, id=581, 1969.3575pt x 3074.48625pt>
+File: img/mapV.png Graphic file (type png)
+<use img/mapV.png>
+Package pdftex.def Info: img/mapV.png  used on input line 126.
+(pdftex.def)             Requested size: 170.71393pt x 266.51175pt.
+ [36 <./img/mapV.png>]
+Overfull \hbox (48.84152pt too wide) in paragraph at lines 143--144
+[]\T1/cmr/m/n/12 As \T1/cmtt/m/n/12 progress_checker_plugins \T1/cmr/m/n/12 use
+ \T1/cmtt/m/n/12 nav2_controller::SimpleProgressChecker
+ []
+
+
+Overfull \hbox (60.42062pt too wide) in paragraph at lines 160--166
+[]\T1/cmr/m/n/12 As \T1/cmtt/m/n/12 behavior_plugins \T1/cmr/m/n/12 use: \T1/cm
+tt/m/n/12 nav2_behaviors/Spin \T1/cmr/m/n/12 that is , \T1/cmtt/m/n/12 nav2_beh
+aviors/BackUp
+ []
+
+
+Overfull \hbox (8.94847pt too wide) in paragraph at lines 160--166
+\T1/cmr/m/n/12 that is , []\T1/cmtt/m/n/12 nav2_behaviors/DriveOnHeading \T1/cm
+r/m/n/12 that is[] , \T1/cmtt/m/n/12 nav2_behaviors/Wait
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 187--187
 [][][][]\T1/cmr/m/n/10 https://industrial-training-master.readthedocs.io/en/mel
 odic/_source/session7/ROS1-to-
  []
 
-[36]
-Overfull \hbox (49.63794pt too wide) in paragraph at lines 168--169
+[37]
+Overfull \hbox (49.63794pt too wide) in paragraph at lines 216--217
 []\T1/cmr/m/n/12 in plu-gin def-i-ni-tion: we move from thr base_class_type of 
 nav_core::BaseGlobalPlanner
  []
 
-
-Overfull \hbox (41.08868pt too wide) in paragraph at lines 169--170
+[38]
+Overfull \hbox (41.08868pt too wide) in paragraph at lines 217--218
 \T1/cmr/m/n/12 vir-tual meth-ods (\T1/cmtt/m/n/12 configure()\T1/cmr/m/n/12 ,\T
 1/cmtt/m/n/12 activate()\T1/cmr/m/n/12 ,\T1/cmtt/m/n/12 deactivate()\T1/cmr/m/n
 /12 ,\T1/cmtt/m/n/12 cleanup()\T1/cmr/m/n/12 ,\T1/cmtt/m/n/12 createPlan()\T1/c
 mr/m/n/12 )
  []
 
-[37]
-Overfull \hbox (3.5635pt too wide) in paragraph at lines 176--177
+
+Overfull \hbox (3.5635pt too wide) in paragraph at lines 224--225
 []\T1/cmr/m/n/12 the map with \T1/cmtt/m/n/12 std::shared_ptr<nav2_costmap_2d::
 Costmap2DROS> 
  []
@@ -1477,96 +1506,91 @@ Costmap2DROS>
 3.pygtex
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 3.
-) [38] [39]
+) [39] [40]
 Chapter 10.
-[40
+[41
 
 ]
 Chapter 11.
 
-Overfull \hbox (1.32234pt too wide) in paragraph at lines 200--202
+Overfull \hbox (1.32234pt too wide) in paragraph at lines 248--250
 \T1/cmr/m/n/12 with the map ob-tained from Car-tog-ra-pher and start a new proj
 ect \T1/cmtt/m/n/12 *.building.yaml\T1/cmr/m/n/12 .
  []
 
-[41
+[42
 
-] [42]
-<img/RMF-traffic-map.png, id=631, 1856.9375pt x 1177.39874pt>
+] [43]
+<img/RMF-traffic-map.png, id=657, 1856.9375pt x 1177.39874pt>
 File: img/RMF-traffic-map.png Graphic file (type png)
 <use img/RMF-traffic-map.png>
-Package pdftex.def Info: img/RMF-traffic-map.png  used on input line 234.
+Package pdftex.def Info: img/RMF-traffic-map.png  used on input line 282.
 (pdftex.def)             Requested size: 426.79134pt x 270.59839pt.
-LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
-244.
- (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmtt.fd
-File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-)
-<img/rmf_generated_world.png, id=632, 1856.9375pt x 1177.39874pt>
+<img/rmf_generated_world.png, id=658, 1856.9375pt x 1177.39874pt>
 File: img/rmf_generated_world.png Graphic file (type png)
 <use img/rmf_generated_world.png>
-Package pdftex.def Info: img/rmf_generated_world.png  used on input line 247.
+Package pdftex.def Info: img/rmf_generated_world.png  used on input line 295.
 (pdftex.def)             Requested size: 426.79134pt x 270.59839pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 237--250
+Underfull \hbox (badness 10000) in paragraph at lines 285--298
 
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[43 <./img/RMF-traffic-map.png>] [44 <./img/rmf_generated_world.png>]
-<img/free_fleet_adapter.png, id=649, 1229.59375pt x 468.75125pt>
+[44 <./img/RMF-traffic-map.png>] [45 <./img/rmf_generated_world.png>]
+<img/free_fleet_adapter.png, id=674, 1229.59375pt x 468.75125pt>
 File: img/free_fleet_adapter.png Graphic file (type png)
 <use img/free_fleet_adapter.png>
-Package pdftex.def Info: img/free_fleet_adapter.png  used on input line 274.
+Package pdftex.def Info: img/free_fleet_adapter.png  used on input line 322.
 (pdftex.def)             Requested size: 426.79134pt x 162.7064pt.
 
-Overfull \hbox (9.06923pt too wide) in paragraph at lines 271--279
+Overfull \hbox (9.06923pt too wide) in paragraph at lines 319--327
 \T1/cmr/m/n/12 Free fleet[][][] is a python im-ple-men-ta-tion of the \T1/cmtt/
 m/n/12 full_control \T1/cmr/m/n/12 Open-RMF Fleet Adapter.
  []
 
-[45 <./img/free_fleet_adapter.png>] [46]
+[46 <./img/free_fleet_adapter.png>] [47]
 Chapter 12.
-<img/problem_chair.jpg, id=664, 1284.8pt x 963.6pt>
+<img/problem_chair.jpg, id=689, 1284.8pt x 963.6pt>
 File: img/problem_chair.jpg Graphic file (type jpg)
 <use img/problem_chair.jpg>
-Package pdftex.def Info: img/problem_chair.jpg  used on input line 308.
+Package pdftex.def Info: img/problem_chair.jpg  used on input line 356.
 (pdftex.def)             Requested size: 426.79134pt x 320.09155pt.
-[47
+[48
 
  <./img/problem_chair.jpg>]
-<img/mapComposizione.png, id=670, 1969.3575pt x 3074.48625pt>
+<img/mapComposizione.png, id=695, 1969.3575pt x 3074.48625pt>
 File: img/mapComposizione.png Graphic file (type png)
 <use img/mapComposizione.png>
-Package pdftex.def Info: img/mapComposizione.png  used on input line 318.
+Package pdftex.def Info: img/mapComposizione.png  used on input line 366.
 (pdftex.def)             Requested size: 298.75262pt x 466.36037pt.
-) [48 <./img/mapComposizione.png>]
+) [49 <./img/mapComposizione.png>]
 \openout2 = `cap/Result.aux'.
 
 
-(./cap/Result.tex [49
+(./cap/Result.tex [50
 
 
 
 
 ]
 Chapter 13.
-[50
-
-]
-Chapter 14.
 [51
 
 ]
+Chapter 14.
+[52
+
+]
 Chapter 15.
-) [52
+) [53
 
 ]
 \openout2 = `cap/Conclusion.aux'.
 
- (./cap/Conclusion.tex [53
+ (./cap/Conclusion.tex [54
 
 
 
@@ -1574,14 +1598,14 @@ Chapter 15.
 ])
 \openout2 = `cap/Appendices.aux'.
 
- (./cap/Appendices.tex [54
+ (./cap/Appendices.tex [55
 
 
 
 
 ]
 Chapter 16.
-) [55
+) [56
 
 ]
 Overfull \hbox (5.11417pt too wide) in paragraph at lines 106--106
@@ -1589,15 +1613,15 @@ Overfull \hbox (5.11417pt too wide) in paragraph at lines 106--106
  and Sys-tems (IROS)\T1/cmr/m/n/12 .
  []
 
-[56
+[57
 
 
 
-] [57] (./tesi.aux (./cap/Introduction.aux) (./cap/LiteratureReview.aux)
+] [58] (./tesi.aux (./cap/Introduction.aux) (./cap/LiteratureReview.aux)
 (./cap/Methodology.aux) (./cap/Result.aux) (./cap/Conclusion.aux)
 (./cap/Appendices.aux))
 Package rerunfilecheck Info: File `tesi.out' has not changed.
-(rerunfilecheck)             Checksum: 58EC4F53DCB5213153E3979FEC80B76E;8667.
+(rerunfilecheck)             Checksum: 78C438E87743A4CCA7ECA4BBD0BBF9BA;9064.
 runsystem(rm tesi.pyg)...executed.
 
 Package logreq Info: Writing requests to 'tesi.run.xml'.
@@ -1605,41 +1629,36 @@ Package logreq Info: Writing requests to 'tesi.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 33951 strings out of 480129
- 658394 string characters out of 5893409
- 1324221 words of memory out of 5000000
- 51136 multiletter control sequences out of 15000+600000
- 488176 words of font info for 66 fonts, out of 8000000 for 9000
- 81 hyphenation exceptions out of 8191
- 114i,9n,108p,1853b,1389s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/michele/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1200.6
-00pk> </home/michele/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tctt120
-0.600pk> </home/michele/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecit
-1200.600pk> </home/michele/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/e
-ctt1728.600pk> </home/michele/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/e
-c/ecti1200.600pk> </home/michele/.texlive2021/texmf-var/fonts/pk/ljfour/jknappe
-n/ec/ectt1095.600pk> </home/michele/.texlive2021/texmf-var/fonts/pk/ljfour/jkna
-ppen/ec/ecbx1728.600pk> </home/michele/.texlive2021/texmf-var/fonts/pk/ljfour/j
-knappen/ec/tcrm1200.600pk> </home/michele/.texlive2021/texmf-var/fonts/pk/ljfou
-r/jknappen/ec/ecrm1095.600pk> </home/michele/.texlive2021/texmf-var/fonts/pk/lj
-four/jknappen/ec/ecbx1095.600pk> </home/michele/.texlive2021/texmf-var/fonts/pk
-/ljfour/jknappen/ec/ecrm1000.600pk> </home/michele/.texlive2021/texmf-var/fonts
-/pk/ljfour/jknappen/ec/ecrm0700.600pk> </home/michele/.texlive2021/texmf-var/fo
-nts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </home/michele/.texlive2021/texmf-var
-/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> </home/michele/.texlive2021/texmf-
-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/michele/.texlive2021/tex
-mf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/michele/.texlive2021/
-texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/michele/.texlive20
-21/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2488.600pk> </home/michele/.texliv
-e2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </home/michele/.tex
-live2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on tesi.pdf (57 pages, 11924441 bytes).
+ 33976 strings out of 480247
+ 659288 string characters out of 5896152
+ 1324005 words of memory out of 5000000
+ 51135 multiletter control sequences out of 15000+600000
+ 488787 words of font info for 68 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 114i,9n,108p,1853b,1383s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/
+fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1095.p
+fb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf
+/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/
+cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pf
+b></usr/share/texmf/fonts/type1/public/cm-super/sfcc1200.pfb></usr/share/texmf/
+fonts/type1/public/cm-super/sfit1200.pfb></usr/share/texmf/fonts/type1/public/c
+m-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb
+></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/f
+onts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm
+-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb>
+</usr/share/texmf/fonts/type1/public/cm-super/sfrm2074.pfb></usr/share/texmf/fo
+nts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-
+super/sftt1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb><
+/usr/share/texmf/fonts/type1/public/cm-super/sftt1440.pfb></usr/share/texmf/fon
+ts/type1/public/cm-super/sftt1728.pfb>
+Output written on tesi.pdf (58 pages, 12131531 bytes).
 PDF statistics:
- 1549 PDF objects out of 1728 (max. 8388607)
- 739 compressed objects within 8 object streams
- 185 named destinations out of 1000 (max. 500000)
- 480 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 915 PDF objects out of 1000 (max. 8388607)
+ 747 compressed objects within 8 object streams
+ 190 named destinations out of 1000 (max. 500000)
+ 496 words of extra memory for PDF output out of 10000 (max. 10000000)
 

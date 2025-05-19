@@ -19,7 +19,7 @@ The official ROS documentation\footnote{\href{https://docs.ros.org/en/rolling/in
 	\includegraphics[width=1\linewidth]{img/life_cycle_sm_nf.png}
 	\captionof{figure}{State Machine of LifecycleNode}
 	\end{figure}\\
-	Nodes can also be composed within the same process using the \textbf{Composition} feature, which improves performance by bypassing middleware overhead\cite{macenski2023impactros2node}. 
+	Nodes can also be composed within the same process using the \textbf{Composition}\label{Composition} feature, which improves performance by bypassing middleware overhead\cite{macenski2023impactros2node}.
 	\item \textbf{Topics}: Topics are used for communication between nodes to share streams of messages in a publisher-subscriber structure.
 	\begin{center}
 		\captionsetup{type=figure}
@@ -127,7 +127,7 @@ The next things that Nav2 relies on for controlling the navigation are:
 		\item \texttt{base\_link}: A robot fix frame.
 	\end{itemize}
 	The \texttt{odom} $\rightarrow$ \texttt{base\_link} link \label{ref_odom_to_base}can be estimated using various sensors. For improved accuracy, we use the \texttt{robot\_localization} package\cite{MooreStouchKeneralizedEkf2014}, which provides nonlinear state estimation using Kalman Filter fusing the robot's odometry and the IMU data.\\
-	The \texttt{map} $\rightarrow$ \texttt{odom} link can be generate with a global positioning system like Simultaneous Localization And Mapping (SLAM) method or using the one provided by Nav2, Adaptive Monte-Carlo Localization (AMCL). \label{ref_map_to_odom}
+	The \texttt{map} $\rightarrow$ \texttt{odom} link can be generate with a global positioning system like Simultaneous Localization And Mapping (SLAM) method\cite{sh-p1-prelude} or using the one provided by Nav2, Adaptive Monte-Carlo Localization (AMCL). \label{ref_map_to_odom}
 	\item \textbf{map} can either be preloaded or built dynamically using a SLAM method. One SLAM method systems is Google Cartographer, which will be described in the next section. It is also the SLAM method that was used to generate the map for navigation.
 \end{itemize}
 \subsection{Cartographer}

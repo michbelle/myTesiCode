@@ -58,6 +58,85 @@
     \field{year}{2023}
   \endentry
 
+  \entry{sh-p1-prelude}{inbook}{}
+    \name{author}{5}{}{%
+      {{hash=CL}{%
+         family={Carlone},
+         familyi={C\bibinitperiod},
+         given={Luca},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=KA}{%
+         family={Kim},
+         familyi={K\bibinitperiod},
+         given={Ayoung},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=DF}{%
+         family={Dellaert},
+         familyi={D\bibinitperiod},
+         given={Frank},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=BT}{%
+         family={Barfoot},
+         familyi={B\bibinitperiod},
+         given={Timothy},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=CD}{%
+         family={Cremers},
+         familyi={C\bibinitperiod},
+         given={Daniel},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \name{editor}{5}{}{%
+      {{hash=CL}{%
+         family={Carlone},
+         familyi={C\bibinitperiod},
+         given={Luca},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=KA}{%
+         family={Kim},
+         familyi={K\bibinitperiod},
+         given={Ayoung},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=DF}{%
+         family={Dellaert},
+         familyi={D\bibinitperiod},
+         given={Frank},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=BT}{%
+         family={Barfoot},
+         familyi={B\bibinitperiod},
+         given={Timothy},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=CD}{%
+         family={Cremers},
+         familyi={C\bibinitperiod},
+         given={Daniel},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Cambridge University Press}%
+    }
+    \strng{namehash}{CL+1}
+    \strng{fullhash}{CLKADFBTCD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{booktitle}{{SLAM Handbook.} From Localization and Mapping to Spatial
+  Intelligence}
+    \field{title}{Part1 Prelude}
+  \endentry
+
   \entry{Colledanchise_2018}{misc}{}
     \name{author}{2}{}{%
       {{hash=CM}{%
