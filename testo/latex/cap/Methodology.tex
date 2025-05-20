@@ -177,65 +177,68 @@ This is the list of all process used with a little description of what is used w
 	
 	\item \texttt{nav2\_lifecycle\_manager::LifecycleManager} that handling the lifecycle transition states for the stack in a deterministic way
 \end{itemize}
-The simulation configuration file has some changes in the structure because the version of ROS 2 is Jazzy while the robot use Humble. 
-The parameters where not as much changed by the default configuration, the only change we need to apply is in the \texttt{planner\_server} to have our navigation system after porting it to ROS 2. 
-In the next section is the step we took to port it to ROS 2.
-\subsection{Porting DStarGlobalPlanner to ROS 2}
-As write before, the \texttt{DStarGlobalPlanner}\footnote{\href{https://github.com/ElettraSciComp/DStar-Trajectory-Planner/tree/ros2_port}{https://github.com/ElettraSciComp/DStar-Trajectory-Planner/tree/ros2\_port}} is a implementation of the D* informed incremental search algoritm with external optimizers\cite{10.1007/978-3-031-67295-8_33} for the ROS 1 \texttt{move\_base} package\footnote{\href{https://wiki.ros.org/move_base}{https://wiki.ros.org/move\_base}}. In this part we will refer a lot on the porting documentation refered before \footnote{\href{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}}\footnote{\href{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}} and the documentection from Nav2 : "Writing a New Planner Plugin"\footnote{\href{https://docs.nav2.org/plugin_tutorials/docs/writing_new_nav2planner_plugin.html}{https://docs.nav2.org/plugin\_tutorials/docs/writing\_new\_nav2planner\_plugin.html}}
+The simulation configuration file contains minor differences due to the use of different versions of ROS 2: in simulation Jazzy while on robot Humble
+In the next section, , we will describe the key steps taken to port the global planner \texttt{DStarGlobalPlanner} from ROS 1 to ROS 2. 
+\subsection{Porting ROS 1 DStarGlobalPlanner to ROS 2}
+As mentioned previously, the \texttt{DStarGlobalPlanner}\footnote{\href{https://github.com/ElettraSciComp/DStar-Trajectory-Planner/tree/ros2_port}{https://github.com/ElettraSciComp/DStar-Trajectory-Planner/tree/ros2\_port}} is a implementation of the D* informed incremental search algoritm with external optimizers\cite{10.1007/978-3-031-67295-8_33} for the ROS 1 \texttt{move\_base} package\footnote{\href{https://wiki.ros.org/move_base}{https://wiki.ros.org/move\_base}}.\\
+Since the code is written using ROS 1, it needs to be ported to ROS 2. The procedure involved splitting the process into two parts. In the first part we ported the base structure from ROS 1 to ROS 2 using the porting documentation \footnote{\href{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}}\footnote{\href{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}} and in the second part, we adjust the code to fit the structure of a planner plugin using the documentation from Nav2 : "Writing a New Planner Plugin"\footnote{\href{https://docs.nav2.org/plugin_tutorials/docs/writing_new_nav2planner_plugin.html}{https://docs.nav2.org/plugin\_tutorials/docs/writing\_new\_nav2planner\_plugin.html}}.
 Is now described the 2 phases of porting the code, the first one is the Nav2 structure porting procedure and the second part adapt the old code to ROS 2.
-\subsubsection{Porting code to ROS 1}
-In the \texttt{package.xml} that describe the package as an organizational unit for your ROS 2 code, the changes that are performed are:
+\subsubsection{Porting code from ROS 1 to ROS 2}
+In the \texttt{package.xml} file, which describe the package as an organizational unit for your ROS 2 code, the following changes were made:
 \begin{itemize}
-	\item \texttt{buildtool\_depend} : \texttt{catking} $\rightarrow$ \texttt{ament\_cmake} :  ament as its build system, there are 2 one for CMake based packages and mostly cpp ament\_cmake and one for python ament\_python
-	\item \texttt{roscpp} $\rightarrow$ \texttt{rclcpp}: the new structure on how the client library are build are that at the fondation there is the general ros client library rcl writen in C and build on top of that are the rclcpp and rclpy, but are avaible in community maintened more.
-	\item update the naming of all the packages
-	\item to tell colcon the package is an ament\_cmake add it in the build\_type 
+	\item \texttt{buildtool\_depend} : \texttt{catking} $\rightarrow$ \texttt{ament\_cmake}: \texttt{ament\_cmake} is the new build system for CMake based packages. Many utilities for managing packages have been added compared to \texttt{catking} and more information is available in the documentation\footnote{\href{https://docs.ros.org/en/rolling/Concepts/Advanced/About-Build-System.html}{https://docs.ros.org/en/rolling/Concepts/Advanced/About-Build-System.html}}.
+	\item \texttt{roscpp} $\rightarrow$ \texttt{rclcpp}: \texttt{rclcpp} is the new ROS client library for C++, built on \texttt{rcl}, which support the implementation of language specific ROS Client Libraries. The \texttt{rcl} communicates with \texttt{rmw}, the interface of middleware primitives that are used by the higher level ROS API's and handle the communication with the \texttt{DDS}.
+	\item update the naming of all the packages.
+	\item to inform \texttt{colcon} that the package uses \texttt{ament\_cmake}, it is necessary to specify this in the \texttt{build\_type}.
 \end{itemize}
-Because we are working with cpp we need to edit also the \texttt{CMakeLists.txt} and the major changes are:
+After that we edited the \texttt{CMakeLists.txt} and the major changes are:
 \begin{itemize}
-	\item update all the names of the packages
-	\item set the new standard of C++ to 17
+	\item update the naming of all the packages.
+	\item set the new standard of C++ to 17.
 	\item \texttt{find\_package()} required to be called for each package
-	\item call \texttt{ament\_export\_dependencies()} to indicates which ament packages this package depends on at runtime
-	\item write \texttt{ament\_package()} at the end	
+	\item call \texttt{ament\_export\_dependencies()} to indicates which \texttt{ament} packages are necessary at runtime.
+	\item declare the package in ROS using \texttt{ament\_package()} at the end.
 \end{itemize}
-Also in the code this was changes:
+Other minor changes are:
 
 \begin{itemize}
-	\item the log calls are changed from \texttt{ROS\_} to \texttt{RCLCPP\_}
-	\item the structure of some messages are changed
-	\item add good practice to use share pointer
+	\item Log calls are changed from \texttt{ROS\_} to \texttt{RCLCPP\_}
+	\item Structure of some messages are changed (es. \texttt{geometry\_msgs::PoseStamped} $\rightarrow$ \texttt{geometry\_msgs::msg::PoseStamped}).
+	\item The structure of the C++ program now required the use of smart pointer.
 \end{itemize}
-other changes are reported in the next section because are also connected with Nav2
 
-\subsubsection{Porting code to Nav 2}
+Other changes relate to ROS 2 are described in the next section because they are relate to Nav2.
+
+\subsubsection{Porting code from ROS 1 Navigation stack to Nav2}
+This is a list of the changes made for porting the planner to Nav2:
 \begin{itemize}
-	\item in plugin definition: we move from thr base\_class\_type of nav\_core::BaseGlobalPlanner to nav2\_core::GlobalPlanner.
-	\item because it is a plugin based on \texttt{nav2\_core::GlobalPlanner} it inherits 5 pure virtual methods (\texttt{configure()},\texttt{activate()},\texttt{deactivate()},\texttt{cleanup()},\texttt{createPlan()}) that required override and used to compute the trajectories. Now we describe each method
+	\item Since it is a global planner, it inherits from new abstract interface for global planners, \texttt{nav2\_core::GlobalPlanner}. As a result, we updated the\\ \texttt{global\_planner\_plugin.xml} file changing the \texttt{base\_class\_type}.
+	\item Because it is a plugin based on \texttt{nav2\_core::GlobalPlanner}, it inherits 5 pure virtual methods that are necessary for correct operation: \texttt{configure()}, \texttt{activate()}, \texttt{deactivate()} and \texttt{cleanup()}, \texttt{createPlan()}. We will now describe each method:
 	\begin{itemize}
-		\item \texttt{configure()} : called when node enters \texttt{on\_configure} state, used for perform declarations of ROS parameters and initialization of planner’s member variables. The input parameters are: shared pointer to parent node, planner name, tf buffer pointer and shared pointer to costmap. This replace the \texttt{initialize} method used in ROS 1 and also the class initialization. Also it's parametrs are used to link the planner information locally:
+		\item \texttt{configure()}: it's called when the node enters \texttt{on\_configure} state, is used for perform declarations of ROS parameters and initialization of planner’s member variables. The input parameters are:
 		\begin{itemize}
-		\item \texttt{rclcpp\_lifecycle::LifecycleNode::WeakPtr} to link to the base class
-		\item the name of the plugin
-		\item a link to the \texttt{tf} with \texttt{std::shared\_ptr<tf2\_ros::Buffer>}
-		\item the map with \texttt{std::shared\_ptr<nav2\_costmap\_2d::Costmap2DROS>}
+			\item \texttt{rclcpp\_lifecycle::LifecycleNode::WeakPtr} A weak pointer to link to the base class.
+			\item The name of the planner.
+			\item A share pointer to the \texttt{tf} buffer\\ \texttt{std::shared\_ptr<tf2\_ros::Buffer>}.
+			\item A shared pointer to the costmap\\ \texttt{std::shared\_ptr<nav2\_costmap\_2d::Costmap2DROS>}.
 		\end{itemize}
-		\item \texttt{activate()} : called when node enters \texttt{on\_activate} state, used for implement operations which are necessary before planner goes to an active state.
-		\item \texttt{deactivate()} : called when node enters \texttt{on\_deactivate} state, used for implement operations which are necessary before planner goes to an inactive state.
-		\item \texttt{cleanup()} : called when node enters \texttt{on\_cleanup} state, should clean up resources which are created for the planner.
-		\item \texttt{createPlan()} : called when planner server demands a global plan for specified start and goal pose. replace the makePlan used in ROS 1 and return a path as \texttt{nav\_msgs::msg::Path} using the start and end position as \texttt{geometry\_msgs::msg::PoseStamped}
+		This replace the \texttt{initialize} method and the class initialization in ROS 1. 
+		\item \texttt{activate()}: Called when the node enters \texttt{on\_activate} state, used for implement operations which are necessary before planner goes to an active state. In our case we allocate memory and fill our internal costmap \texttt{state\_map}, which is used by the D* (\texttt{dstar}) algorithm.
+		\item \texttt{deactivate()}: Called when the node enters \texttt{on\_deactivate} state, used for implement operations which are necessary before planner goes to an inactive state. In our case, this method is not used and is left empty.
+		\item \texttt{cleanup()} : Called when the node enters \texttt{on\_cleanup} state, used for clean up resources which are created for the planner. In our case we destroys the allocated memory used by \texttt{state\_map} and \texttt{dstar}. 
+		\item \texttt{createPlan()}: Called when planner server demands a global plan from a start and goal pose. It required the start and goal position as\\ \texttt{geometry\_msgs::msg::PoseStamped} and return and return a path \texttt{nav\_msgs::msg::Path}. Replace the \texttt{makePlan} used in ROS 1.
 	\end{itemize}
-	\item at the end we placed the code that is used also or plugins:\\
+	\item At the end of the C++ code we write this two rows that are used to export the planner:\\
 \begin{listing} [ht!]
 \begin{minted}{cpp} 
 #include "pluginlib/class_list_macros.hpp"
 PLUGINLIB_EXPORT_CLASS(<type of the plugin class>, <type of the base class>);
 \end{minted}
 \end{listing}
-	\item because it's a plugin we need to add a plugin declaration where is package.xml is located and edit the CMake file as described in the doc for plugins\footnote{\href{https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Pluginlib.html}{https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Pluginlib.html}}.
+	\item Because it's a plugin, we need to add a plugin declaration creating a file \texttt{global\_planner\_plugin.xml}, where is located the \texttt{package.xml}, that describe the plugin and edit the CMake file as described in the documentation for plugins\footnote{\href{https://docs.ros.org/en/rolling/Tutorials/Beginner-Client-Libraries/Pluginlib.html}{https://docs.ros.org/en/rolling/Tutorials/Beginner-Client-Libraries/Pluginlib.html}}.
 \end{itemize}
-\subsubsection{build the project}
-At the end we build the system using the new tool for building \texttt{colcon} and we have the global planner and also all the system ready to navigate through the facility.
+\subsubsection{Building the project}
+Finally, we build the system using the new build tool, \texttt{colcon build}. After compiling the code we should have the global planner ready to be used.
 
 \chapter{Hardware adaptation process from Rover Zero to Rover Mini}
 \alert{Non ho informazioni su nessun Rover Zero, rimuovo il capitolo?}
