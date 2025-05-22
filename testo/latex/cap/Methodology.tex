@@ -134,7 +134,7 @@ Now we have all the requirements to use the navigation stack Nav2.
 In this section we will discuss what components are used for the navigation stack and how we have ported the Global planner from ROS 1 to ROS 2.
 \subsection{Navigation Launch file}
 The launch file contains all the necessary processes required for the Navigation Nav2 system to operate. It implement also the composition structure (\ref{Composition}) and the lifecycle manager (\ref{LifecycleNode}).
-This is the list of all process used with a little description of what is used with them, \alert{documention is avaible at} \footnote{\href{https://docs.nav2.org/setup_guides/algorithm/select_algorithm.html}{https://docs.nav2.org/setup\_guides/algorithm/select\_algorithm.html}} :
+This is the list of all process used with a little description of what is used with them, \alert{documention is avaible at} \footnote{\href{https://docs.nav2.org/setup_guides/algorithm/select_algorithm.html}{https://docs.nav2.org/setup\_guides/algorithm/select\_algorithm.html}} and \alert{migration guide}\footnote{\href{https://docs.nav2.org/migration/index.html}{https://docs.nav2.org/migration/index.html}} :
 \begin{itemize}
 	\item \texttt{nav2\_controller::ControllerServer} that use the following plugins:
 	\begin{itemize}
@@ -221,6 +221,7 @@ This is a list of the changes made for porting the planner to Nav2:
 			\item The name of the planner.
 			\item A share pointer to the \texttt{tf} buffer\\ \texttt{std::shared\_ptr<tf2\_ros::Buffer>}.
 			\item A shared pointer to the costmap\\ \texttt{std::shared\_ptr<nav2\_costmap\_2d::Costmap2DROS>}.
+			\item For jazzy also: \texttt{std::function<bool()> cancel\_checker} that allow for the cancellation of the current planning task.
 		\end{itemize}
 		This replace the \texttt{initialize} method and the class initialization in ROS 1. 
 		\item \texttt{activate()}: Called when the node enters \texttt{on\_activate} state, used for implement operations which are necessary before planner goes to an active state. In our case we allocate memory and fill our internal costmap \texttt{state\_map}, which is used by the D* (\texttt{dstar}) algorithm.
@@ -344,14 +345,21 @@ Then, as described in the documentation, on each robot and the server on witch r
 After all of this we can use the following launch file to start the Free Fleet:\\
 \texttt{1rmf\_mini\_fleet\_adapter.launch.xml}\\
 Its parameters are the fleet configuration file and the route maps that is going to use.
-
-\section{web interface}
-The it is possible to control the fleet remotly using a web interface.
-The open-RMF give 2 structure for remote control
+Now on the RMF server is possible to see the topic of the robot.
+\section{Web interfaces}
+Also, Open-RMF offer a web-based interface to visualize and control of Open-RMF, \texttt{rmf-web}\footnote{\href{https://github.com/open-rmf/rmf-web}{https://github.com/open-rmf/rmf-web}}.
+It composed by a:
 \begin{itemize}
-	\item api server : allow execution
+	\item api server : based on openapi specification and \texttt{fastapi} allow execution of REST APIs methods to communicate with Open-RMF. This is available as docker image 
 	\item dashboard : is the dashboard that connect to the api server and allow the control of the fleet
 \end{itemize}
+
+Then we obtain the following interface:
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\linewidth]{img/openRMF-dashboard.png}
+	\captionof{figure}{Open-RMF Dashboard}
+\end{figure}
 
 
 

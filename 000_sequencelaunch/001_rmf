@@ -25,6 +25,7 @@ source install/setup.bash
 # python3 /root/ff_ws/src/myTesiCode/rmf_code/code/nav2_get_tf.py -c /root/ff_ws/src/myTesiCode/zenoh_1_1/zenoh_config_server/server_config.json5
 
 ### rnf-core
+export ROS_DOMAIN_ID=15
 ros2 launch myCode 0rmf_mini_world_rmf_core.launch.xml
 
 #set up rmf-web 
@@ -32,6 +33,7 @@ ros2 launch myCode 0rmf_mini_world_rmf_core.launch.xml
 #outside on test machine
 docker compose -f /scratch/code/tesi_code/src/myTesiCode/Dockerfiles/dockerCompose/rmf-web_base/compose.yml up 
 
+export ROS_DOMAIN_ID=15
 ros2 launch myCode 1rmf_mini_fleet_adapter.launch.xml server_uri:="ws://localhost:8000/_internal"
 
 

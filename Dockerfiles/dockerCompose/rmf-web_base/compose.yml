@@ -3,7 +3,7 @@ services:
     image: ghcr.io/open-rmf/rmf-web/api-server:latest
     network_mode: "host"
     environment:
-      - ROS_DOMAIN_ID=0
+      - ROS_DOMAIN_ID=15
       - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
   dashboard:
     image: ghcr.io/open-rmf/rmf-web/demo-dashboard:latest

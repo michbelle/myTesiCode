@@ -69,3 +69,9 @@ reference_coordinates:
     robot: [[5.181, 22.613],
           [1.726, 20.227],
           [-3.025, 12.522]]
+
+#if missing return error, TODO fix on the main free fleet repo
+plugins:
+  hello_world:
+    module: "free_fleet_examples.actions.hello_world"
+    actions: ["hello_world", "delayed_hello_world"]
