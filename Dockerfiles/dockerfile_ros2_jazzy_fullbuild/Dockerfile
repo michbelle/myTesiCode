@@ -35,7 +35,7 @@ RUN cd ~/ff_ws/src \
     && apt update \
     && cd ~/ff_ws \
     && rosdep install --from-paths src --ignore-src --rosdistro jazzy -yr \
-    && /bin/bash -c "source /opt/ros/jazzy/setup.bash; colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release >> ~/log_build_rmf.log" \
+    && /bin/bash -c "source /opt/ros/jazzy/setup.bash; colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release >> ~/log_build_rmf.log" \
     && echo "source ~/ff_ws/install/setup.bash" >> ~/.bashrc
 
 #install D-start-trajectory-planner
@@ -44,7 +44,7 @@ RUN cd ~/ff_ws/src \
     && apt update \
     && cd ~/ff_ws \
     && rosdep install --from-paths src --ignore-src --rosdistro jazzy -yr \
-    && /bin/bash -c "source /opt/ros/jazzy/setup.bash; colcon build --packages-select dstar_global_planner --cmake-args -DCMAKE_BUILD_TYPE=Release >> ~/log_build_Dstar.log" 
+    && /bin/bash -c "source /opt/ros/jazzy/setup.bash; colcon build --symlink-install --packages-select dstar_global_planner --cmake-args -DCMAKE_BUILD_TYPE=Release >> ~/log_build_Dstar.log" 
 
 #install tesi code
 RUN cd ~/ff_ws/src \
@@ -53,7 +53,7 @@ RUN cd ~/ff_ws/src \
     && cd ~/ff_ws \
     && rosdep install --from-paths src --ignore-src --rosdistro jazzy -yr \
     && echo "export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:/root/ff_ws/src/myTesiCode/rmf_code/ign_world/elettra/modelOUT/" >> ~/.bashrc \
-    && /bin/bash -c "source /opt/ros/jazzy/setup.bash; colcon build --packages-select myCode >> ~/log_build_mycode.log" \
+    && /bin/bash -c "source /opt/ros/jazzy/setup.bash; colcon build --symlink-install --packages-select myCode >> ~/log_build_mycode.log" \
     && echo "source ~/ff_ws/install/setup.bash" >> ~/.bashrc
 
 # #set simulation robot for nav2
