@@ -11,7 +11,7 @@ docker run -it --rm \
     --network host \
     --name serverNavRos \
     rmf_all_imagev1.1  \
-    bash -c "cd /root/ff_ws && colcon build --packages-select myCode && bash"
+    bash -c "cd /root/ff_ws && colcon build --symlink-install --packages-select myCode && bash"
 
 #without share local repo to docker
 docker run -it --rm -v /tmp/.X11-unix:/tmp/.X11-unix:ro --device=/dev/dri:/dev/dri -e DISPLAY=$DISPLAY --network host --name serverNavRos rmf_all_imagev1.1  bash
