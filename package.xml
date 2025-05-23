@@ -12,6 +12,10 @@
   <test_depend>ament_lint_common</test_depend>
 
   <!-- dependences -->
+  
+  <!-- communication protocol -->
+  <depend>rmw_cyclonedds_cpp</depend>
+
   <!-- mapping  -->
   <depend>cartographer_ros</depend>
   <depend>cartographer</depend>
