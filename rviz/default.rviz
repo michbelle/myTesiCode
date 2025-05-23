@@ -6,6 +6,7 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /MapGlobal1
       Splitter Ratio: 0.5
     Tree Height: 555
   - Class: rviz_common/Selection
@@ -74,10 +75,10 @@ Visualization Manager:
       Binary representation: false
       Binary threshold: 100
       Class: rviz_default_plugins/Map
-      Color Scheme: map
+      Color Scheme: costmap
       Draw Behind: false
       Enabled: true
-      Name: Map
+      Name: MapLocal
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -100,7 +101,7 @@ Visualization Manager:
       Color Scheme: map
       Draw Behind: false
       Enabled: true
-      Name: Map
+      Name: MapGlobal
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -202,18 +203,6 @@ Visualization Manager:
         Reliability Policy: Reliable
         Value: /plan
       Value: true
-    - Class: rviz_default_plugins/MarkerArray
-      Enabled: true
-      Name: MarkerArray
-      Namespaces:
-        {}
-      Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /trajectories
-      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -260,7 +249,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 57.738101959228516
+      Distance: 57.530555725097656
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -296,5 +285,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1200
-  X: 2296
+  X: 720
   Y: 88
