@@ -346,13 +346,17 @@ After all of this we can use the following launch file to start the Free Fleet:\
 \texttt{1rmf\_mini\_fleet\_adapter.launch.xml}\\
 Its parameters are the fleet configuration file and the route maps that is going to use.
 Now on the RMF server is possible to see the topic of the robot.
+\newpage
 \section{Web interfaces}
 Also, Open-RMF offer a web-based interface to visualize and control of Open-RMF, \texttt{rmf-web}\footnote{\href{https://github.com/open-rmf/rmf-web}{https://github.com/open-rmf/rmf-web}}.
 It composed by a:
 \begin{itemize}
-	\item api server : based on openapi specification and \texttt{fastapi} allow execution of REST APIs methods to communicate with Open-RMF. This is available as docker image 
-	\item dashboard : is the dashboard that connect to the api server and allow the control of the fleet
+	\item api server : based on OpenAPI specification and Python library \texttt{FastAPI} allow execution of REST APIs methods to communicate with Open-RMF.
+	\item dashboard : In our case is a demo dashboard that connect to the api server and allow to control the fleet.
 \end{itemize}
+
+Both are available as docker images and in the code can launch using:\\
+\texttt{docker compose -f /path/to/compose.yml up}
 
 Then we obtain the following interface:
 \begin{figure}[h]
@@ -361,18 +365,20 @@ Then we obtain the following interface:
 	\captionof{figure}{Open-RMF Dashboard}
 \end{figure}
 
+\subsection{Deployment Template}
+Open-RMF offers a reference template\footnote{\href{https://github.com/open-rmf/rmf_deployment_template}{https://github.com/open-rmf/rmf\_deployment\_template}} to deploy in production use. Based on \texttt{kubernetes} gives all the information to deploy on public server and setup a secure connection to it.
 
 
 
 \chapter{Testing and evaluation of the system}
 The testing have brigh up some problem in the design of the rover.
-If needed to move in office the robot with the laser sensor cannot see part of the obstacle, see image:
+If needed to move in office the robot with the laser sensor cannot see some part of obstacle, see image:
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\linewidth]{img/problem\_chair.jpg}
-	\captionof{figure}{Cartographer Algorithm}
+	\captionof{figure}{Laser position error}
 \end{figure}\\
-can be increase the occupancy map bigger but the dimension of the legs chair wouldn't allow to pass through port. A solution is to move the laser to a lower position but this required a low profile laser, that need some filtering to remove the wheel and obtaining blind spot without adding the sensor on top or adding another sensor like a deep camera that give a 3D occupancy greed that can be processed to obtain a simple map.
+A solution would increase the occupancy map but the dimension of the legs chair  are enough long that reduce a lot the dimension available to pass through doors that the planner wouldn't allow to pass through it. A solution is to move the LIDAR under the robot but require a low profile one and add blind spot without adding the sensor on top or adding another sensor like a deep camera that give a 3D occupancy greed that can be processed to obtain a simple 2D map.
 \\
 \alert{The RMF commands from waypoint to waypoint: RMF commands the robot from waypoint to waypoint, and it leaves the low level navigation to each robot's navigation stack. So if the robot chooses to use a non-straight route, it means that the RMF navigation graph might need to be re-drawn or reconsidered (if there are constant obstacles around), or the navigation stack of the robot should be tuned to allow tighter tolerances for static/dynamic obstacles. but how the robot chooses to navigate between them is out of RMF's control, since RMF does not have dynamic obstacle information, or if there are new static obstacles, it needs to be reflected into RMF's traffic navigation graph}
 
