@@ -89,16 +89,11 @@ In this section, we will describe how to acquire a map and use it to achieve the
 \subsection{Mapping}
 We have already have a map, but for completeness, we provided the code for the following SLAM packages: \texttt{slam\_toolbox}\cite{Macenski2021} (GitHub: SteveMacenski/slam\_toolbox\footnote{\href{https://github.com/SteveMacenski/slam_toolbox/tree/ros2}{https://github.com/SteveMacenski/slam\_toolbox/tree/ros2}}) and \texttt{cartographer\_ros}\cite{45466} (GitHub: ros2/cartographer\_ros\footnote{\href{https://github.com/cartographer-project/cartographer_ros}{https://github.com/cartographer-project/cartographer\_ros}}). They can be launch using the following launch files:\\
 \hspace*{10mm} \texttt{X<r/s>\_mappingW<slam/cartographer>.launch.py} \\
-To save the map, you can use the following command, which is valid for both \texttt{slam\_toolbox} and \texttt{cartographer\_ros}.  This \alert{command} will save the map in two files, a \texttt{.pgm} and a \texttt{.yaml}:\\
+To save the map, you can use the following command, which is valid for both \texttt{slam\_toolbox} and \texttt{cartographer\_ros}.  This command will save the map in two files, a \texttt{.pgm} and a \texttt{.yaml}:\\
 \hspace*{10mm} \texttt{ros2 run nav2\_map\_server map\_saver\_cli -f map}\\
-When using Cartographer, it is also possible to save the map as a \texttt{.pdstream} using the \alert{following command}:
-\begin{listing} [ht!]
-\begin{minted}{bash} 
-    ros2 service call /write_state cartographer_ros_msgs/srv/WriteState "{filename: 'map-elettra.pdstream', include_unfinished_submaps : false}"
-    ros2 interface show cartographer_ros_msgs/srv/FinishTrajectory.srv
-    ros2 service call /write_state cartographer_ros_msgs/srv/WriteState "{filename: '/home/develop/bags/mymap.pbstream'}"
-\end{minted}
-\end{listing}
+When using Cartographer, it is also possible to save the map as a \texttt{.pdstream} using the following command:\\
+    \hspace*{10mm} \texttt{ros2 service call /write\_state cartographer\_ros\_msgs/srv/WriteState\\ 
+    \hspace*{15mm}"\{filename: "map.pdstream", include\_unfinished\_submaps :false\}"}
 \newpage
 \subsection{Only localization}
 The map that was built using Cartographer is the following:
@@ -109,7 +104,7 @@ The map that was built using Cartographer is the following:
 \end{figure}
 
 We attempted to use Cartographer solely for localization; however, due to the project's lack of maintenance, \alert{we found it challenging to use it correctly}. As a solution, we opted for the method provided by the Nav2 package, specifically  \texttt{nav2\_amcl} and the \texttt{amcl} node.\\
-But this has the problem that we need to convert the map acquired with cartographer as a \texttt{.pbstream} to a pair of \texttt{.pgm} and \texttt{.yaml} for the \texttt{amcl} node. This can be done using this \alert{command}:\\
+But this has the problem that we need to convert the map acquired with cartographer as a \texttt{.pbstream} to a pair of \texttt{.pgm} and \texttt{.yaml} for the \texttt{amcl} node. This can be done using this 	command:\\
 \begin{listing} [ht!]
 \begin{minted}{bash} 
 ros2 run cartographer_ros cartographer_pbstream_to_ros_map \
@@ -119,7 +114,7 @@ ros2 run cartographer_ros cartographer_pbstream_to_ros_map \
 \end{minted}
 \end{listing}\\
 \newpage
-Since certain walls of the Cartographer map where not solid black, the conversion brings some errors that lead to the misinterpretation of these areas as free zones and the planner returned a path that pass through them. \alert{The solution of this problem was to add the walls manually using GIMP}, an image editor, on the \texttt{.pgm} file.\\
+Since certain walls of the Cartographer map where not solid black, the conversion brings some errors that lead to the misinterpretation of these areas as free zones and the planner returned a path that pass through them. The solution of this problem was to add the walls manually using GIMP, an image editor, on the \texttt{.pgm} file.\\
 We then obtained the following map:
 \begin{figure}[h]
 	\centering
@@ -381,7 +376,7 @@ If needed to move in office the robot with the laser sensor cannot see some part
 A solution would increase the occupancy map but the dimension of the legs chair  are enough long that reduce a lot the dimension available to pass through doors that the planner wouldn't allow to pass through it. A solution is to move the LIDAR under the robot but require a low profile one and add blind spot without adding the sensor on top or adding another sensor like a deep camera that give a 3D occupancy greed that can be processed to obtain a simple 2D map.
 \\
 \alert{The RMF commands from waypoint to waypoint: RMF commands the robot from waypoint to waypoint, and it leaves the low level navigation to each robot's navigation stack. So if the robot chooses to use a non-straight route, it means that the RMF navigation graph might need to be re-drawn or reconsidered (if there are constant obstacles around), or the navigation stack of the robot should be tuned to allow tighter tolerances for static/dynamic obstacles. but how the robot chooses to navigate between them is out of RMF's control, since RMF does not have dynamic obstacle information, or if there are new static obstacles, it needs to be reflected into RMF's traffic navigation graph}
-
+The Dstart planner found hard time to calculate a path after converting the map in pgm file. The algorithm was calculating also the unknow space as empty space so it was adding a lot of calculus. The solution was to convert all the unknow space to occupied space. that salved the problem.
 Another thing that we discover both with the traffic editor and also using a better image manipulation program like gimp is that the image taken from the planimetry and the cartographer map are not well aligned. see image below:
 \begin{figure}[h]
 	\centering

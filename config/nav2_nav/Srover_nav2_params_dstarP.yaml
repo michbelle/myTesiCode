@@ -199,14 +199,14 @@ planner_server:
     GridBased:
       plugin: "dstar_global_planner/DStarGlobalPlanner" # https://github.com/ElettraSciComp/DStar-Trajectory-Planner
       goal_distance_threshold: 0.3
-      neighbor_distance_threshold : 0.01
-      occupancy_threshold: 253 #level of costmap to say if occupied 
+      neighbor_distance_threshold : 0.1
+      occupancy_threshold: 64 #level of costmap to say if occupied 
       cutoff_distance: 16
       trajectory_optimizer: #to stay in the center
         repulsion_gain: 50.0
         potential_field_radius: 10.0 
       erosion: #remove lidar noise
-        enable: true
+        enable: false
         erosion_gap: 2
 
 smoother_server:
