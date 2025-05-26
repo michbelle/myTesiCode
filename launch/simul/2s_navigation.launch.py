@@ -70,7 +70,7 @@ def generate_launch_description():
 
     declare_params_file_cmd = DeclareLaunchArgument(
         'params_file_nav',
-        default_value=os.path.join(myCode_dir, 'config', 'nav2_nav', 'Srover_nav2_params_dstarP.yaml'),
+        default_value=os.path.join(myCode_dir, 'config', 'nav2_nav', 'Srover_nav2_params_dstarP.yaml'), # Srover_nav2_params_dstarP Srover_nav2_params
         description='Full path to the ROS2 parameters file to use for all launched nodes')
 
     declare_autostart_cmd = DeclareLaunchArgument(
@@ -78,7 +78,7 @@ def generate_launch_description():
         description='Automatically startup the nav2 stack')
 
     declare_use_composition_cmd = DeclareLaunchArgument(
-        'use_composition', default_value='False',
+        'use_composition', default_value='True',
         description='Whether to use composed bringup')
 
     declare_use_respawn_cmd = DeclareLaunchArgument(
