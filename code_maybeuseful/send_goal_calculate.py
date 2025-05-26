@@ -60,8 +60,14 @@ class ClickedPointListener(Node):
 
     def get_result_callback(self, future):
         result = future.result().result
-        self.get_logger().info('Result: {0}'.format(result))
-
+        if result.error_code != 0:
+            self.get_logger().error('Result: {0}'.format(result))
+        else:
+            self.get_logger().info(f'Obtained path in {result.planning_time.sec},{result.planning_time.nanosec}')
+        
+        self.get_logger().debug('---------------------------')
+        self.get_logger().debug('Result: {0}'.format(result))
+        self.get_logger().debug('---------------------------')
     def feedback_callback(self, feedback_msg):
         feedback = feedback_msg.feedback
         self.get_logger().info('Received feedback: {0}'.format(feedback))
