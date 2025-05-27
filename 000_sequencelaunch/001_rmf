@@ -40,11 +40,13 @@ ros2 launch myCode 1rmf_mini_fleet_adapter.launch.xml server_uri:="ws://localhos
 
 # Other commands
 
+
+##edit route map
+# traffic-editor /root/ff_ws/src/myTesiCode/rmf_code/map/elettra/RMF-elettra-map.building.yaml
+
 ## create the route maps
 # ros2 run rmf_building_map_tools building_map_generator nav /root/ff_ws/src/myTesiCode/rmf_code/map/elettra/RMF-elettra-map.building.yaml /root/ff_ws/src/myTesiCode/rmf_code/trafficNavPath/elettra/
 
 ## create the gazebo world
 # ros2 run rmf_building_map_tools building_map_generator gazebo /root/ff_ws/src/myTesiCode/rmf_code/map/elettra/RMF-elettra-map.building.yaml ign-elettra-map.world /root/ff_ws/src/myTesiCode/rmf_code/ign_world/elettra/modelOUT
 
-##edit route map
-# traffic-editor /root/ff_ws/src/myTesiCode/rmf_code/map/elettra/RMF-elettra-map.building.yaml

@@ -52,8 +52,8 @@ def generate_launch_description():
             "-topic", "/robot_description",
             "-name", "rover_mini",
             "-allow_renaming", "true",
-            "-x", "72.45",
-            "-y","-84.11",
+            "-x", "41.38",
+            "-y","-47.91",
             "-z", "0.1",
         ]
     )
