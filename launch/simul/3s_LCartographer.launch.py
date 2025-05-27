@@ -22,11 +22,11 @@ def generate_launch_description():
     publish_period_sec = LaunchConfiguration('publish_period_sec', default='0.5')
     # load_state_arg = LaunchConfiguration('load_state_filename')
     # Configuration file folder path
-    configuration_directory = LaunchConfiguration('configuration_directory',default= os.path.join(pkg_share, 'config') )
+    configuration_directory = LaunchConfiguration('configuration_directory',default= os.path.join(pkg_share, 'config', 'localization') )
     # Configuration file
     configuration_basename = LaunchConfiguration('configuration_basename', default='localizationCartographer.lua') # localizationCartographer cartographer_example
 
-    load_state_filename_arg = LaunchConfiguration('load_state_filename', default= os.path.join(pkg_share, 'maps', "maze_cart.pbstream"))
+    load_state_filename_arg = LaunchConfiguration('load_state_filename', default= os.path.join(pkg_share, 'maps', "map-elettra", "Cart", "map.pbstream"))
 
 
     #Nodes
