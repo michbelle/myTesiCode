@@ -12,12 +12,11 @@ def generate_launch_description():
   pkg_share = FindPackageShare(package='myCode').find('myCode')
  
   # Set the path to the RViz configuration settings
-  default_rviz_config_path = os.path.join(pkg_share, 'rviz/rviz_basic_settings.rviz')
+  default_rviz_config_path = os.path.join(pkg_share, 'rviz/visul_model3D/frame_model.rviz')
  
   # Set the path to the URDF file
   default_urdf_model_path = os.path.join(pkg_share, 'urdf/mini.urdf')
  
-  ########### YOU DO NOT NEED TO CHANGE ANYTHING BELOW THIS LINE ##############  
   # Launch configuration variables specific to simulation
   gui = LaunchConfiguration('gui')
   urdf_model = LaunchConfiguration('urdf_model')

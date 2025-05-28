@@ -6,10 +6,11 @@ amcl:
     odom_frame_id: odom
     scan_topic: scan
     map_topic: map
-    alpha1: 0.2 #    Expected process noise in odometry’s rotation estimate from rotation.
-    alpha2: 0.2 #    Expected process noise in odometry’s rotation estimate from translation.   
-    alpha3: 0.2 #    Expected process noise in odometry’s translation estimate from translation.
-    alpha4: 0.2 #    Expected process noise in odometry’s translation estimate from rotation.
+    alpha1: 0.3 #    Expected process noise in odometry’s rotation estimate from rotation.
+    alpha2: 0.3 #    Expected process noise in odometry’s rotation estimate from translation.   
+    alpha3: 0.3 #    Expected process noise in odometry’s translation estimate from translation.
+    alpha4: 0.3 #    Expected process noise in odometry’s translation estimate from rotation.
+    alpha5: 0.3 #    For Omni models only: translation noise.
     service_introspection_mode: "disabled" #    The introspection mode for services. Options are “disabled”, “metadata”, “contents”.
     beam_skip_distance: 0.5 #Ignore beams that most particles disagree with in Likelihood field model. Maximum distance to consider skipping for (m).
     beam_skip_error_threshold: 0.9 #    Percentage of beams after not matching map to force full update due to bad convergence.
