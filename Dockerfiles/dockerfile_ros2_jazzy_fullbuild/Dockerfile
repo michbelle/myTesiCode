@@ -35,7 +35,7 @@ RUN cd ~/ff_ws/src \
     && apt update \
     && cd ~/ff_ws \
     && rosdep install --from-paths src --ignore-src --rosdistro jazzy -yr \
-    && /bin/bash -c "source /opt/ros/jazzy/setup.bash; colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release >> ~/log_build_rmf.log" \
+    && /bin/bash -c "source /opt/ros/jazzy/setup.bash; colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release -j4 >> ~/log_build_rmf.log" \
     && echo "source ~/ff_ws/install/setup.bash" >> ~/.bashrc
 
 #install D-start-trajectory-planner

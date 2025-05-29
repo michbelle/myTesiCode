@@ -5,6 +5,7 @@ xhost local:root
 
 path_repo=/home/michelebelletti/
 path_repo=/scratch/code/
+path_repo=/home/michele/
 
 docker run -it --rm \
     -v $path_repo/tesi_code/src/myTesiCode:/root/ff_ws/src/myTesiCode \
