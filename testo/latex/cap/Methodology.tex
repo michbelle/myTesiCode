@@ -1,36 +1,35 @@
 \part{Methodology}
-In this part, we describe the entire procedure followed for building this project:
+In this part, we describe the entire procedure followed in the development of this project:
 \begin{itemize}
-	\item Setup of our testing platform, which is based on the Rover Mini and a suite of onboard sensors.
-	\item Setup the Nav2 navigation stack.
-	\item The procedure used to port the Global planner from ROS 1 to ROS 2 and how it's insert in Nav2
-	\item And the tools used to integrate it in the Open-RMF system.
+	\item The setup of our testing platform, based on the Rover Mini and a suite of onboard sensors.
+	\item The configuration of the Nav2 navigation stack.
+	\item The procedure used to port the global planner from ROS 1 to ROS 2, and its integration into the Nav2 framework.
+	\item The tools and methods used to integrate the system into Open-RMF.
 \end{itemize}
-All the source code developed for this project is publicly available in the following GitHub repository: \texttt{michbelle/myTesiCode}\footnote{\href{https://github.com/michbelle/myTesiCode}{https://github.com/michbelle/myTesiCode}}. The repository also includes the necessary components for simulating the platform.\\
-\alert{The simulation environment is containerized} using Docker, which provides a consistent and OS-independent base system. The Docker image is built on top of \texttt{osrf/ros:jazzy-desktop-full} and includes all the packages developed for this thesis, as well as the required Open-RMF tools and demo setups.\\
-\alert{Tested were done with a i5-7600K CPU and a GeForce GTX 1060 6GB on Ubuntu 22.04. The software showed noticeable lag on this configuration; therefore, we recommend using more recent and powerful hardware for optimal performance.}
+All source code developed for this project is publicly available in the following GitHub repository: \texttt{michbelle/myTesiCode}\footnote{\href{https://github.com/michbelle/myTesiCode}{https://github.com/michbelle/myTesiCode}}. The repository also includes the necessary components for simulating the platform.\\
+The simulation environment is containerized using Docker, which provides a consistent and OS-independent base system. The Docker image is built on top of \texttt{osrf/ros:jazzy-desktop-full} and includes all the packages developed for this thesis, as well as the required Open-RMF tools and demo setups.\\
 
 
 
 \chapter{Description of research platform and hardware used}
-The robot used in this thesis is a four-wheel drive (WD) skid-steering vehicle (see Figure \ref{fig:RoverRobotics Rover Mini}). It has a maximum speed of 12.87 km/h and a payload of 45,36 kg. Its operational time ranges from 60 to 90 minutes under active usage, and up to 6 hours in idle mode. The manufacturer provides open-source control and simulation code on GitHub\footnote{\href{https://github.com/RoverRobotics/roverrobotics_ros2}{https://github.com/RoverRobotics/roverrobotics\_ros2}}, compatible with the Gazebo simulator. However, this code is officially supported only for ROS 2 Humble, so that is the ROS 2 distribution chosen for this thesis.\\
-The robot includes a USB interface that enables connection to a PC or single-board computer for control purposes. In this work, a mini PC is used to control the robot and also used to manage the entire navigation stack based on Nav2.
-The Mini PC is a \textbf{Beelink SER3-E-16512EJ0W64PRO} with a Ryzen 7 3750H processor which is a quad-core 8-thread 2.3 GHz mobile processor boosting to 4.0 GHz with a Radeon RX Vega 10 Graphics.
-The mini PC draws power directly from the robot, which also supplies 19V output. \alert{This will reduce the operation time.}
+The robot used in this thesis is a four-wheel drive (WD) skid-steering vehicle (see Figure \ref{fig:RoverRobotics Rover Mini}). It has a maximum speed of 12.87 km/h and a payload of 45,36 kg. Its operational time ranges from 60 to 90 minutes under active usage, and up to 6 hours in idle mode. The manufacturer provides control and simulation code on GitHub\footnote{\href{https://github.com/RoverRobotics/roverrobotics_ros2}{https://github.com/RoverRobotics/roverrobotics\_ros2}}, compatible with the Gazebo simulator. However, this code is officially tested only for the ROS 2 Humble distribution, which has therefore been selected for use in this thesis.\\
+The robot features a USB interface that allows connection to a PC or single-board computer for control purposes. In this work, a mini PC is used to control the robot and also used to manage the entire navigation stack based on Nav2.
+The Mini PC used is a \textbf{Beelink SER3-E-16512EJ0W64PRO} with a Ryzen 7 3750H processor which is a quad-core 8-thread 2.3 GHz mobile processor boosting to 4.0 GHz with a Radeon RX Vega 10 Graphics.
+The mini PC draws power directly from the robot, which supplies a 19V output, thereby reducing the overall operational time.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.4\linewidth]{img/miniPC.jpg}
 	\captionof{figure}{Mini PC used}
 \end{figure}\\
-To improve odometry estimation, an additional sensor is mounted: the \textbf{IMU Witmotion (WIT) JY901B}. This is a 9-Axis Combined IMU/Magnetometer/Altimeter (measure linear accelerations, angular velocities, Euler angles, magnetic field, barometry, altitude). It communicates via TTL/UART protocol. Sensor data are acquired using the Witmotion Sensors UART Connection Library\cite{andrei_vukolov_2022_7017118},with a USB-to-serial converter, and are published in the ROS 2 environment using a dedicated node \texttt{witmotion\_ros}, avaible on GitHub at  \texttt{ElettraSciComp/witmotion\_IMU\_ros}\footnote{\href{https://github.com/ElettraSciComp/witmotion_IMU_ros/tree/ros2}{https://github.com/ElettraSciComp/witmotion\_IMU\_ros/tree/ros2}}.
+To improve odometry estimation, an additional sensor is integrated: the \textbf{IMU Witmotion (WIT) JY901B}. This device is a 9-Axis Combined IMU/Magnetometer/Altimeter (measure linear accelerations, angular velocities, Euler angles, magnetic field, barometry, altitude) that communicates using the TTL/UART protocol. Sensor data are acquired using the Witmotion Sensors UART Connection Library\cite{andrei_vukolov_2022_7017118}, using a USB-to-serial converter, and are published in the ROS 2 environment through a dedicated node, \texttt{witmotion\_ros}, avaible on GitHub at \\ \texttt{ElettraSciComp/witmotion\_IMU\_ros}\footnote{\href{https://github.com/ElettraSciComp/witmotion_IMU_ros/tree/ros2}{https://github.com/ElettraSciComp/witmotion\_IMU\_ros/tree/ros2}}.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.4\linewidth]{img/IMU.jpg}
 	\captionof{figure}{IMU used}
 \end{figure}\\
-For localization \ref{ref_map_to_odom}, a \textbf{2D laser scanner} is employed to provide environment perception and correct for odometry drift by maintaining a transformation link between the \texttt{map} and \texttt{odom} TF frames.
-The 2D laser scanner offers a cost-effective solution for environmental perception, providing dense spatial information that enables obstacle detection and basic environment recognition. Compared to alternative technologies \cite{10056144}\cite{vslamComparison2021}, it requires significantly less computational power, making it a practical choice for lightweight and resource-constrained robotic platforms.
-The Laser scan used is \textbf{RPLIDAR S1} a 360 degree 2D laser scanner(LIDAR) with a distance range of 40m on white object and 10m on black ones, a sample rate of 9.2kHz, scan rate from 8 to 15 Hz, which mean an angular resolution of 0.313-0.587°, with an accuracy of $\pm$5cm and resolution of 3cm.
+For localization \ref{ref_map_to_odom}, a \textbf{2D laser scanner} is employed to provide environment perception and compensate for odometry drift by providing a transformation link between the \texttt{map} and \texttt{odom} TF frames.
+The 2D laser scanner provides a cost-effective solution for environmental perception, providing dense spatial information that enables obstacle detection and basic environment recognition. Compared to alternative technologies \cite{10056144}\cite{vslamComparison2021}, it requires significantly less computational power, making it a practical choice for lightweight and resource-constrained robotic platforms.
+The Laser scan used is \textbf{RPLIDAR S1} a 360 degree 2D laser scanner(LIDAR) with a distance range of 40m on white object and 10m on black ones. It features a sample rate of 9.2kHz and a scan rate ranging from 8 to 15 Hz,resulting in an angular resolution from 0.313° to 0.587°, with an accuracy of $\pm$5cm and resolution of 3cm.
 The ROS 2 driver for the RPLIDAR S1 is available on Github at: \texttt{Slamtec/sllidar\_ros2}\footnote{\href{https://github.com/Slamtec/sllidar_ros2}{https://github.com/Slamtec/sllidar\_ros2}}.
 \begin{figure}[h]
 	\centering
@@ -38,28 +37,28 @@ The ROS 2 driver for the RPLIDAR S1 is available on Github at: \texttt{Slamtec/s
 	\captionof{figure}{LIDAR used}
 \end{figure}
 \newpage
-All components are physically mounted on the rover, using custom 3D-printed parts as shows in the following image:
+All components are physically mounted on the rover using custom 3D-printed parts, as shown in the following image.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.4\linewidth]{img/RoverwithSensor.jpg}
 	\captionof{figure}{Robot used}
 \end{figure}\\
-To reflect this new hardware configuration, the original URDF (Unified Robot Description Format) file provided by the manufacturer was modified. This ensures accurate sensor placement relative to the \texttt{base\_link} frame, which is essential for proper operation of sensor-dependent ROS 2 nodes.\\
+To reflect the updated hardware configuration, the original URDF (Unified Robot Description Format) file provided by the manufacturer was modified. This ensures accurate sensor placement relative to the \texttt{base\_link} frame, which is essential for proper operation of sensor-dependent ROS 2 nodes.\\
 A 3D model of the robot, including all coordinate frames (TF), is shown in this picture:
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.4\linewidth]{img/modelWithTFtree.png}
 \captionof{figure}{3D model with TF}
 \end{figure}\\
-With the system fully assembled, the following ROS 2 launch files allow to get the data from the sensors connected on the robot's mini PC:
+With the system fully assembled, the following ROS 2 launch files are used to retrieve data from the sensors connected to the robot’s onboard mini PC:
 \begin{itemize}
 	\item \texttt{0.1r\_sensorLaunch.launch.py}: Launches the nodes responsible for publishing data from the IMU and LIDAR sensors.
 	\item \texttt{0.2r\_mini.launch.py}: Publishes odometry data based on the built-in encoders of the robot.
 \end{itemize}
 \newpage
-While for simulation the following launch file can be used for starting the simulation:
+While, for simulation, the following launch file can be used for starting the simulation:
 \begin{itemize}
-	\item \texttt{0s\_ign\_mini\_gazebo.launch.py}: Launch the simulation in gazebo of the robot with the sensors and using the node \texttt{ros\_gz\_bridge/parameter\_bridge} share the data generate in Gazebo with ROS 2.
+	\item \texttt{0s\_ign\_mini\_gazebo.launch.py}: Launches the Gazebo simulation of the robot with all configured sensors. The \texttt{ros\_gz\_bridge/parameter\_bridge} node is used to share simulated data between Gazebo and the ROS 2 environment.
 \end{itemize}
 \begin{figure}[h]
 	\centering
@@ -69,29 +68,29 @@ While for simulation the following launch file can be used for starting the simu
 
 
 \chapter{Steps taken to port the navigation stack from ROS 1 to ROS 2}
-In this chapter, we divide the system architecture according to the key components of the Nav2 stack that are utilized. Particular emphasis is placed on the process of porting the Global Planner module from ROS 1 to ROS 2, detailing the necessary adaptations and challenges encountered.
+In this chapter, we divide the system architecture according to the key components of the Nav2 stack that are utilized. Particular emphasis is placed on the process of porting the Global Planner module from ROS 1 to ROS 2, with a detailed discussion of the required adaptations and the challenges encountered during the transition.
 
 \section{Odometry Estimation \texttt{odom} $\rightarrow$ \texttt{base\_link}}
-As previously discussed, the raw odometry data provided by the rover are not sufficiently accurate, particularly in rotational movements\cite{MooreStouchKeneralizedEkf2014}. This is a well-known issue in odometry estimation for skid-steering vehicles, which tend to produce significant drift and errors during turns.\\
-To address this problem, we used the \texttt{robot\_localization} package\cite{MooreStouchKeneralizedEkf2014}, specifically the \texttt{ekf\_node}.
+As previously discussed, the raw odometry data provided by the rover are not sufficiently accurate, particularly in rotational movements\cite{MooreStouchKeneralizedEkf2014}. This is a well-known issue in odometry estimation for skid-steering vehicles, which tend to produce significant drift and errors when turning.\\
+To address this problem, the \texttt{robot\_localization} package\cite{MooreStouchKeneralizedEkf2014} was employed, specifically its \texttt{ekf\_node} Node.
 This package enables the fusion of multiple sensor, even multiple instances of the same sensor type, and supports output in various ROS message formats, such as \texttt{nav\_msgs/Odometry}. It also allows preprocessing of sensor messages prior to inserting into the estimation process. The filter performs continuous state estimation and is robust to intermittent sensor data loss, maintaining a coherent position estimate over time.\\
 To launch the EKF node, the following launch file was wrote:\\
 \hspace*{10mm}\texttt{1<r/s>\_robot\_localizationEKF.launch.py}
 
 \subsection{Configuration Odometry Estimation in \texttt{ekf\_node}}
-As described previously and in the documentation of the node\footnote{\href{https://docs.ros.org/en/noetic/api/robot_localization/html/index.html}{https://docs.ros.org/en/noetic/api/robot\_localization/html/index.html}}, we added the information about the sensors used to the configuration file. The principal information to include is the type of sensor and on which topic subscribe for the data, \texttt{odom0:odometry/wheels} and \texttt{imu0:imu/data}, and, for each sensor, we need to choose which components of the state measurement data we want to fuse using the following array, setting the corresponding values to \texttt{true} for those we wish to include and \texttt{false} for those we do not:\\
+As previously described and detailed in the node’s documentation\footnote{\href{https://docs.ros.org/en/noetic/api/robot_localization/html/index.html}{https://docs.ros.org/en/noetic/api/robot\_localization/html/index.html}}, we added the information about the sensors used to the configuration file. The principal information to include is the type of sensor and on which topic subscribe, \texttt{odom0:odometry/wheels} and \texttt{imu0:imu/data}, and, for each sensor, we need to choose which components of the state measurement data we want to fuse using the following array by setting the corresponding values to \texttt{true} for those we wish to include and \texttt{false} for those we do not:\\
 \texttt{sensorX\_config}:$ [X, Y, Z, roll, pitch, yaw, \dot{X}, \dot{Y}, \dot{Z}, \dot{roll}, \dot{pitch}, \dot{yaw}, \ddot{X}, \ddot{Y}, \ddot{Z}] $\\
-\alert{ In our case we used only the yaw velocity for the IMU while for the odometry we select only the velocity along the x and y}.\\
-It is also possible to tune the process noise covariance matrix $ Q $, which represents the noise we add to the total error after each prediction step. Generally, the larger the value of $ Q $ relative to the variance of a given variable in an input message, the faster the filter will converge to the value indicated by the measurement.
+\alert{ In our case, we fused only the yaw angular velocity from the IMU while for the odometry we select only the velocity along the x and y}.\\
+Additionally, the process noise covariance matrix $ Q $ can be tuned. This matrix represents the noise we add to the total error after each prediction step. Generally, the larger the value of $ Q $ relative to the variance of a given variable in an input message, the faster the filter will converge to the value indicated by the measurement.
 
 \section{Localization \texttt{map} $\rightarrow$ \texttt{odom}}
-In this section, we will describe how to acquire a map and use it to achieve the link between the \texttt{map} frame and \texttt{odom} frame using a localization method. This is necessary because, for long-term operation, the position of the robot in the world is not enough accurate and we need a method to compensate this error\cite{sh-p1-prelude}.
+In this section, we describe the process of acquiring a map and establishing the transformation between the \texttt{map} frame and \texttt{odom} frame using a localization method. This is necessary because, for long-term operation, the position of the robot in the world, using only odometry data, tends to accumulate errors and is not sufficiently accurate. Therefore, a localization technique is required to compensate for these errors\cite{sh-p1-prelude}.
 \subsection{Mapping}
-We have already have a map, but for completeness, we provided the code for the following SLAM packages: \texttt{slam\_toolbox}\cite{Macenski2021} (GitHub: SteveMacenski/slam\_toolbox\footnote{\href{https://github.com/SteveMacenski/slam_toolbox/tree/ros2}{https://github.com/SteveMacenski/slam\_toolbox/tree/ros2}}) and \texttt{cartographer\_ros}\cite{45466} (GitHub: ros2/cartographer\_ros\footnote{\href{https://github.com/cartographer-project/cartographer_ros}{https://github.com/cartographer-project/cartographer\_ros}}). They can be launch using the following launch files:\\
+Although a map is already available, for completeness we provide instructions to run the following SLAM packages: \texttt{slam\_toolbox}\cite{Macenski2021} (GitHub: SteveMacenski/slam\_toolbox\footnote{\href{https://github.com/SteveMacenski/slam_toolbox/tree/ros2}{https://github.com/SteveMacenski/slam\_toolbox/tree/ros2}}) and \texttt{cartographer\_ros}\cite{45466} (GitHub: ros2/cartographer\_ros\footnote{\href{https://github.com/cartographer-project/cartographer_ros}{https://github.com/cartographer-project/cartographer\_ros}}). These packages can be launched using the following launch files:\\
 \hspace*{10mm} \texttt{X<r/s>\_mappingW<slam/cartographer>.launch.py} \\
-To save the map, you can use the following command, which is valid for both \texttt{slam\_toolbox} and \texttt{cartographer\_ros}.  This command will save the map in two files, a \texttt{.pgm} and a \texttt{.yaml}:\\
+To save the generated map, use the following command, which works for both  \texttt{slam\_toolbox} and \texttt{cartographer\_ros}. This will save the map as two files:  a \texttt{.pgm} image and a \texttt{.yaml} metadata file:\\
 \hspace*{10mm} \texttt{ros2 run nav2\_map\_server map\_saver\_cli -f map}\\
-When using Cartographer, it is also possible to save the map as a \texttt{.pdstream} using the following command:\\
+When using Cartographer, it is also possible to save the map as a \texttt{.pdstream} format with the following command:\\
     \hspace*{10mm} \texttt{ros2 service call /write\_state cartographer\_ros\_msgs/srv/WriteState\\ 
     \hspace*{15mm}"\{filename: "map.pdstream", include\_unfinished\_submaps :false\}"}
 \newpage
@@ -102,9 +101,8 @@ The map that was built using Cartographer is the following:
 	\includegraphics[width=0.4\linewidth]{img/map.png}
 	\captionof{figure}{Map acquired with Cartographer}
 \end{figure}
-
-We attempted to use Cartographer solely for localization; however, due to the project's lack of maintenance, \alert{we found it challenging to use it correctly}. As a solution, we opted for the method provided by the Nav2 package, specifically  \texttt{nav2\_amcl} and the \texttt{amcl} node.\\
-But this has the problem that we need to convert the map acquired with cartographer as a \texttt{.pbstream} to a pair of \texttt{.pgm} and \texttt{.yaml} for the \texttt{amcl} node. This can be done using this 	command:\\
+We initially attempted to use Cartographer solely for localization; however, due to the project’s limited maintenance, we encountered difficulties in using it effectively. As a solution, we opted for the method provided by the Nav2 package, specifically  \texttt{nav2\_amcl} and the \texttt{amcl} node.\\
+One limitation of this approach is the need to convert the map acquired with Cartographer from the \texttt{.pbstream} format into a \texttt{.pgm} image and \texttt{.yaml} metadata pair, which are required by the \texttt{amcl} node. This conversion can be performed using the following command:\\
 \begin{listing} [ht!]
 \begin{minted}{bash} 
 ros2 run cartographer_ros cartographer_pbstream_to_ros_map \
@@ -114,26 +112,26 @@ ros2 run cartographer_ros cartographer_pbstream_to_ros_map \
 \end{minted}
 \end{listing}\\
 \newpage
-Since certain walls of the Cartographer map where not solid black, the conversion brings some errors that lead to the misinterpretation of these areas as free zones and the planner returned a path that pass through them. The solution of this problem was to add the walls manually using GIMP, an image editor, on the \texttt{.pgm} file.\\
-We then obtained the following map:
+Since certain walls of the Cartographer map where not solid black, the conversion process introduced errors that caused these areas to be misinterpreted as free space. As a result, the planner generated paths that passed through walls. To address this issue, the walls were manually corrected using GIMP, an image editing tool, by modifying the \texttt{.pgm} map file.\\
+The corrected map is shown below:
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.4\linewidth]{img/mapV.png}
 	\captionof{figure}{Map edited with Gimp and used}
 \end{figure}\\
-We have now all tools necessary for the localization and we have wrote the following launch file to start the localization:\\
+With the map properly adjusted, all necessary tools for localization are now available. We created the following launch file to initiate localization:\\
 \hspace*{10mm} \texttt{3<r/s>\_L<amcl/Cartographer>.launch.py}
 
-Now we have all the requirements to use the navigation stack Nav2.
+At this stage, all requirements are met to utilize the Nav2 navigation stack.
 \section{Structure Navigation Stack Nav2}
-In this section we will discuss what components are used for the navigation stack and how we have ported the Global planner from ROS 1 to ROS 2.
+In this section, we will discuss the components used in the Nav2 navigation stack and describe the process of porting the Global Planner from ROS 1 to ROS 2.
 \subsection{Navigation Launch file}
-The launch file contains all the necessary processes required for the Navigation Nav2 system to operate. It implement also the composition structure (\ref{Composition}) and the lifecycle manager (\ref{LifecycleNode}).
-This is the list of all process used with a little description of what is used with them, \alert{documention is avaible at} \footnote{\href{https://docs.nav2.org/setup_guides/algorithm/select_algorithm.html}{https://docs.nav2.org/setup\_guides/algorithm/select\_algorithm.html}} and \alert{migration guide}\footnote{\href{https://docs.nav2.org/migration/index.html}{https://docs.nav2.org/migration/index.html}} :
+The launch file contains all the necessary processes required for the  Navigation stack Nav2 to operate. It also implement the composition structure (\ref{Composition}) and the lifecycle manager (\ref{LifecycleNode}).
+Below is a list of the core components used, along with a brief description of the plugins associated with each. Additional documentation can be found in  \footnote{\href{https://docs.nav2.org/setup_guides/algorithm/select_algorithm.html}{https://docs.nav2.org/setup\_guides/algorithm/select\_algorithm.html}} , and a migration guide is available in\footnote{\href{https://docs.nav2.org/migration/index.html}{https://docs.nav2.org/migration/index.html}} :
 \begin{itemize}
 	\item \texttt{nav2\_controller::ControllerServer} that use the following plugins:
 	\begin{itemize}
-		\item As \texttt{controller\_plugins} use \texttt{nav2\_mppi\_controller::MPPIController} that is a Model Predictive Path Integral (MPPI) algorithm to track a path with adaptive collision avoidance.
+		\item As \texttt{controller\_plugins} use \texttt{\alert{nav2\_mppi\_controller::MPPIController}}: a Model Predictive Path Integral (MPPI) algorithm to track a path with adaptive collision avoidance.
 		
 		\item As \texttt{progress\_checker\_plugins} use \texttt{nav2\_controller::SimpleProgressChecker} that checks whether the robot has made positional progress.
 		
@@ -142,7 +140,7 @@ This is the list of all process used with a little description of what is used w
 	
 	\item \texttt{nav2\_smoother::SmootherServer} that use the following plugins:
 	\begin{itemize}
-		\item As \texttt{smoother\_plugins} use \texttt{nav2\_smoother::SimpleSmoother} that take in an input path and smooth it using a simple and fast smoothing technique. It weights the initial path points and the smoothed path points to create a balanced result where the path retains its high level characteristics but reduces oscillations or jagged features.
+		\item As \texttt{smoother\_plugins} use \texttt{nav2\_smoother::SimpleSmoother} that takes an input path and applies a lightweight smoothing algorithm. It weights the initial path points and the smoothed path points to create a balanced result where the path retains its high level characteristics but reduces oscillations or jagged features.
 	\end{itemize}
 	
 	\item \texttt{nav2\_planner::PlannerServer} that use the following plugins:
@@ -153,8 +151,8 @@ This is the list of all process used with a little description of what is used w
 	\item \texttt{nav2\_behaviors::BehaviorServer} that use the following plugins:
 	\begin{itemize}
 		\item As \texttt{behavior\_plugins} use:
-		\texttt{nav2\_behaviors/Spin} performs an in-place rotation by a given angle,
-		\texttt{nav2\_behaviors/BackUp} which causes the robot to back up by a specific displacement,
+		\texttt{nav2\_behaviors/Spin} performs an in-place rotation by a specified angle,
+		\texttt{nav2\_behaviors/BackUp} moves the robot backward by a set distance,
 		\alert{\texttt{nav2\_behaviors/DriveOnHeading} that is} which causes the robot to drive on the current heading by a specific displacement,
 		\texttt{nav2\_behaviors/Wait} that is ,
 		\alert{\texttt{nav2\_behaviors/AssistedTeleop} that is} allow user to teleop the robot avoiding commands that can create collision.
@@ -162,7 +160,7 @@ This is the list of all process used with a little description of what is used w
 	
 	\item \texttt{nav2\_bt\_navigator::BtNavigator} that use the following navigators:
 	\begin{itemize}
-		\item As \texttt{smoother\_plugins} use \texttt{nav2\_bt\_navigator::NavigateToPoseNavigator} and \texttt{nav2\_bt\_navigator::NavigateThroughPosesNavigator} that use the bt tree to navigate
+		\item As \texttt{smoother\_plugins} use \texttt{nav2\_bt\_navigator::NavigateToPoseNavigator} and \texttt{nav2\_bt\_navigator::NavigateThroughPosesNavigator} that utilize the default behavior trees (BT) for navigation.
 	\end{itemize}
 	
 	\item \alert{\texttt{nav2\_waypoint\_follower::WaypointFollower}} that use the following plugins:
@@ -172,12 +170,12 @@ This is the list of all process used with a little description of what is used w
 	
 	\item \texttt{nav2\_lifecycle\_manager::LifecycleManager} that handling the lifecycle transition states for the stack in a deterministic way
 \end{itemize}
-The simulation configuration file contains minor differences due to the use of different versions of ROS 2: in simulation Jazzy while on robot Humble
-In the next section, , we will describe the key steps taken to port the global planner \texttt{DStarGlobalPlanner} from ROS 1 to ROS 2. 
+The simulation configuration file contains minor differences due to the use of different versions of ROS 2: Jazzy in the simulated environment and Humble on the physical robot.
+In the next section, we will describe the key steps taken to port the global planner \texttt{DStarGlobalPlanner} from ROS 1 to ROS 2. 
 \subsection{Porting ROS 1 DStarGlobalPlanner to ROS 2}
-As mentioned previously, the \texttt{DStarGlobalPlanner}\footnote{\href{https://github.com/ElettraSciComp/DStar-Trajectory-Planner/tree/ros2_port}{https://github.com/ElettraSciComp/DStar-Trajectory-Planner/tree/ros2\_port}} is a implementation of the D* informed incremental search algoritm with external optimizers\cite{10.1007/978-3-031-67295-8_33} for the ROS 1 \texttt{move\_base} package\footnote{\href{https://wiki.ros.org/move_base}{https://wiki.ros.org/move\_base}}.\\
-Since the code is written using ROS 1, it needs to be ported to ROS 2. The procedure involved splitting the process into two parts. In the first part we ported the base structure from ROS 1 to ROS 2 using the porting documentation \footnote{\href{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}}\footnote{\href{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}} and in the second part, we adjust the code to fit the structure of a planner plugin using the documentation from Nav2 : "Writing a New Planner Plugin"\footnote{\href{https://docs.nav2.org/plugin_tutorials/docs/writing_new_nav2planner_plugin.html}{https://docs.nav2.org/plugin\_tutorials/docs/writing\_new\_nav2planner\_plugin.html}}.
-Is now described the 2 phases of porting the code, the first one is the Nav2 structure porting procedure and the second part adapt the old code to ROS 2.
+As previously mentioned, the \texttt{DStarGlobalPlanner}\footnote{\href{https://github.com/ElettraSciComp/DStar-Trajectory-Planner/tree/ros2_port}{https://github.com/ElettraSciComp/DStar-Trajectory-Planner/tree/ros2\_port}} is a implementation of the D* informed incremental search algoritm with external optimizers\cite{10.1007/978-3-031-67295-8_33} for the ROS 1 \texttt{move\_base} package\footnote{\href{https://wiki.ros.org/move_base}{https://wiki.ros.org/move\_base}}.\\
+Since the code is written using ROS 1, it needs to be ported to ROS 2. This process was divided into two main phases. In the first phase, we migrated the base structure of the package from ROS 1 to ROS 2, following these ROS 2 porting guidelines \footnote{\href{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}}\footnote{\href{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}}. In the second phase, we adapted the code to comply with the structure required by Nav2 planner plugins, based on the Nav2 documentation titled: "Writing a New Planner Plugin"\footnote{\href{https://docs.nav2.org/plugin_tutorials/docs/writing_new_nav2planner_plugin.html}{https://docs.nav2.org/plugin\_tutorials/docs/writing\_new\_nav2planner\_plugin.html}}.
+The following subsections describe these two phases in detail. The first focuses on the structural migration to ROS 2 and the integration into the Nav2 framework. The second details the modifications needed to adapt the planner logic and interfaces to match ROS 2 conventions and the plugin architecture.
 \subsubsection{Porting code from ROS 1 to ROS 2}
 In the \texttt{package.xml} file, which describe the package as an organizational unit for your ROS 2 code, the following changes were made:
 \begin{itemize}
