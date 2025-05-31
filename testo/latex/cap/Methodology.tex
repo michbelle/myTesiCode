@@ -133,7 +133,7 @@ Below is a list of the core components used, along with a brief description of t
 	\begin{itemize}
 		\item As \texttt{controller\_plugins} use \texttt{\alert{nav2\_mppi\_controller::MPPIController}}: a Model Predictive Path Integral (MPPI) algorithm to track a path with adaptive collision avoidance.
 		
-		\item As \texttt{progress\_checker\_plugins} use \texttt{nav2\_controller::SimpleProgressChecker} that checks whether the robot has made positional progress.
+		\item As \texttt{progress\_checker\_plugins} use\\ \texttt{nav2\_controller::SimpleProgressChecker} that checks whether the robot has made positional progress.
 		
 		\item As \texttt{goal\_checker\_plugins} use \texttt{nav2\_controller::SimpleGoalChecker} that checks whether the robot has reached the goal pose.
 	\end{itemize}
@@ -153,25 +153,19 @@ Below is a list of the core components used, along with a brief description of t
 		\item As \texttt{behavior\_plugins} use:
 		\texttt{nav2\_behaviors/Spin} performs an in-place rotation by a specified angle,
 		\texttt{nav2\_behaviors/BackUp} moves the robot backward by a set distance,
-		\alert{\texttt{nav2\_behaviors/DriveOnHeading} that is} which causes the robot to drive on the current heading by a specific displacement,
-		\texttt{nav2\_behaviors/Wait} that is ,
-		\alert{\texttt{nav2\_behaviors/AssistedTeleop} that is} allow user to teleop the robot avoiding commands that can create collision.
+		\texttt{nav2\_behaviors/Wait}  is used to pause navigation for a specified duration, allowing time for temporary occlusions to clear before resuming path planning.
 	\end{itemize}
 	
 	\item \texttt{nav2\_bt\_navigator::BtNavigator} that use the following navigators:
 	\begin{itemize}
-		\item As \texttt{smoother\_plugins} use \texttt{nav2\_bt\_navigator::NavigateToPoseNavigator} and \texttt{nav2\_bt\_navigator::NavigateThroughPosesNavigator} that utilize the default behavior trees (BT) for navigation.
-	\end{itemize}
-	
-	\item \alert{\texttt{nav2\_waypoint\_follower::WaypointFollower}} that use the following plugins:
-	\begin{itemize}
-		\item As \texttt{smoother\_plugins} use \texttt{nav2\_smoother::SimpleSmoother} that is 
+		\item As \texttt{smoother\_plugins} use\\ \texttt{nav2\_bt\_navigator::NavigateToPoseNavigator} and\\ \texttt{nav2\_bt\_navigator::NavigateThroughPosesNavigator} that utilize the default behavior trees (BT) for navigation.
 	\end{itemize}
 	
 	\item \texttt{nav2\_lifecycle\_manager::LifecycleManager} that handling the lifecycle transition states for the stack in a deterministic way
 \end{itemize}
 The simulation configuration file contains minor differences due to the use of different versions of ROS 2: Jazzy in the simulated environment and Humble on the physical robot.
-In the next section, we will describe the key steps taken to port the global planner \texttt{DStarGlobalPlanner} from ROS 1 to ROS 2. 
+In the next section, we will describe the key steps taken to port the global planner \texttt{DStarGlobalPlanner} from ROS 1 to ROS 2.
+\newpage 
 \subsection{Porting ROS 1 DStarGlobalPlanner to ROS 2}
 As previously mentioned, the \texttt{DStarGlobalPlanner}\footnote{\href{https://github.com/ElettraSciComp/DStar-Trajectory-Planner/tree/ros2_port}{https://github.com/ElettraSciComp/DStar-Trajectory-Planner/tree/ros2\_port}} is a implementation of the D* informed incremental search algoritm with external optimizers\cite{10.1007/978-3-031-67295-8_33} for the ROS 1 \texttt{move\_base} package\footnote{\href{https://wiki.ros.org/move_base}{https://wiki.ros.org/move\_base}}.\\
 Since the code is written using ROS 1, it needs to be ported to ROS 2. This process was divided into two main phases. In the first phase, we migrated the base structure of the package from ROS 1 to ROS 2, following these ROS 2 porting guidelines \footnote{\href{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}}\footnote{\href{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}}. In the second phase, we adapted the code to comply with the structure required by Nav2 planner plugins, based on the Nav2 documentation titled: "Writing a New Planner Plugin"\footnote{\href{https://docs.nav2.org/plugin_tutorials/docs/writing_new_nav2planner_plugin.html}{https://docs.nav2.org/plugin\_tutorials/docs/writing\_new\_nav2planner\_plugin.html}}.
@@ -179,206 +173,216 @@ The following subsections describe these two phases in detail. The first focuses
 \subsubsection{Porting code from ROS 1 to ROS 2}
 In the \texttt{package.xml} file, which describe the package as an organizational unit for your ROS 2 code, the following changes were made:
 \begin{itemize}
-	\item \texttt{buildtool\_depend} : \texttt{catking} $\rightarrow$ \texttt{ament\_cmake}: \texttt{ament\_cmake} is the new build system for CMake based packages. Many utilities for managing packages have been added compared to \texttt{catking} and more information is available in the documentation\footnote{\href{https://docs.ros.org/en/rolling/Concepts/Advanced/About-Build-System.html}{https://docs.ros.org/en/rolling/Concepts/Advanced/About-Build-System.html}}.
-	\item \texttt{roscpp} $\rightarrow$ \texttt{rclcpp}: \texttt{rclcpp} is the new ROS client library for C++, built on \texttt{rcl}, which support the implementation of language specific ROS Client Libraries. The \texttt{rcl} communicates with \texttt{rmw}, the interface of middleware primitives that are used by the higher level ROS API's and handle the communication with the \texttt{DDS}.
-	\item update the naming of all the packages.
-	\item to inform \texttt{colcon} that the package uses \texttt{ament\_cmake}, it is necessary to specify this in the \texttt{build\_type}.
+	\item \texttt{buildtool\_depend} : \texttt{catking} $\rightarrow$ \texttt{ament\_cmake}: \texttt{ament\_cmake} is the new build system for CMake based packages. Compared to \texttt{catkin}, it introduces many utilities for managing packages. More information is available in the documentation\footnote{\href{https://docs.ros.org/en/rolling/Concepts/Advanced/About-Build-System.html}{https://docs.ros.org/en/rolling/Concepts/Advanced/About-Build-System.html}}.
+	\item \texttt{roscpp} $\rightarrow$ \texttt{rclcpp}: \texttt{rclcpp} is the new ROS client library for C++, built on \texttt{rcl}, which provides the foundation for language-specific client libraries. \texttt{rcl} communicates with \texttt{rmw}(ROS middleware interface), which handles the communication with \texttt{DDS} (Data Distribution Service).
+	\item Updated package naming to follow the ROS 2 conventions.
+	\item to inform \texttt{colcon} that the package uses \texttt{ament\_cmake}, the build type must be explicitly specified in the \texttt{build\_type}.
 \end{itemize}
-After that we edited the \texttt{CMakeLists.txt} and the major changes are:
+Subsequently, the \texttt{CMakeLists.txt} file was updated with the following major changes:
 \begin{itemize}
-	\item update the naming of all the packages.
-	\item set the new standard of C++ to 17.
-	\item \texttt{find\_package()} required to be called for each package
-	\item call \texttt{ament\_export\_dependencies()} to indicates which \texttt{ament} packages are necessary at runtime.
-	\item declare the package in ROS using \texttt{ament\_package()} at the end.
+	\item Package names were updated to reflect ROS 2 naming conventions.
+	\item C++ standard was set to 17.
+	\item \texttt{find\_package()} is required to be called for each package.
+	\item \texttt{ament\_export\_dependencies()}  is used to declare runtime dependencies.
+	\item The package must be declared in ROS with \texttt{ament\_package()}.
 \end{itemize}
 Other minor changes are:
 
 \begin{itemize}
-	\item Log calls are changed from \texttt{ROS\_} to \texttt{RCLCPP\_}
-	\item Structure of some messages are changed (es. \texttt{geometry\_msgs::PoseStamped} $\rightarrow$ \texttt{geometry\_msgs::msg::PoseStamped}).
+	\item Log calls were updated from \texttt{ROS\_} to \texttt{RCLCPP\_}
+	\item Message type structures changed (e.g.,\\ \texttt{geometry\_msgs::PoseStamped} $\rightarrow$ \texttt{geometry\_msgs::msg::PoseStamped}).
 	\item The structure of the C++ program now required the use of smart pointer.
 \end{itemize}
 
-Other changes relate to ROS 2 are described in the next section because they are relate to Nav2.
+Additional changes specific to the ROS 2 Navigation stack Nav2 are discussed in the following section.
 
 \subsubsection{Porting code from ROS 1 Navigation stack to Nav2}
-This is a list of the changes made for porting the planner to Nav2:
+The following changes were made to port the planner to the Nav2 framework:
 \begin{itemize}
-	\item Since it is a global planner, it inherits from new abstract interface for global planners, \texttt{nav2\_core::GlobalPlanner}. As a result, we updated the\\ \texttt{global\_planner\_plugin.xml} file changing the \texttt{base\_class\_type}.
-	\item Because it is a plugin based on \texttt{nav2\_core::GlobalPlanner}, it inherits 5 pure virtual methods that are necessary for correct operation: \texttt{configure()}, \texttt{activate()}, \texttt{deactivate()} and \texttt{cleanup()}, \texttt{createPlan()}. We will now describe each method:
+	\item Since the planner is a \textbf{global planner}, it now inherits from the new abstract interface \texttt{nav2\_core::GlobalPlanner}. As a result, we updated the\\ \texttt{global\_planner\_plugin.xml} file to change the \texttt{base\_class\_type} accordingly.
+	\item As a plugin based on \texttt{nav2\_core::GlobalPlanner}, the planner must implement five pure virtual methods required for proper operation: \texttt{configure()}, \texttt{activate()}, \texttt{deactivate()} and \texttt{cleanup()}, \texttt{createPlan()}. Below is a description of each method:
 	\begin{itemize}
-		\item \texttt{configure()}: it's called when the node enters \texttt{on\_configure} state, is used for perform declarations of ROS parameters and initialization of planner’s member variables. The input parameters are:
+		\item \texttt{configure()}: it's called when the node enters \texttt{on\_configure} state. This method is responsible for declaring ROS parameters and initializing the planner's member variables. It takes the following input parameters:
 		\begin{itemize}
-			\item \texttt{rclcpp\_lifecycle::LifecycleNode::WeakPtr} A weak pointer to link to the base class.
-			\item The name of the planner.
+			\item \texttt{rclcpp\_lifecycle::LifecycleNode::WeakPtr}  A weak pointer to the base lifecycle node.
+			\item The planner’s name as a \texttt{std::string}.
 			\item A share pointer to the \texttt{tf} buffer\\ \texttt{std::shared\_ptr<tf2\_ros::Buffer>}.
 			\item A shared pointer to the costmap\\ \texttt{std::shared\_ptr<nav2\_costmap\_2d::Costmap2DROS>}.
 			\item For jazzy also: \texttt{std::function<bool()> cancel\_checker} that allow for the cancellation of the current planning task.
 		\end{itemize}
-		This replace the \texttt{initialize} method and the class initialization in ROS 1. 
-		\item \texttt{activate()}: Called when the node enters \texttt{on\_activate} state, used for implement operations which are necessary before planner goes to an active state. In our case we allocate memory and fill our internal costmap \texttt{state\_map}, which is used by the D* (\texttt{dstar}) algorithm.
-		\item \texttt{deactivate()}: Called when the node enters \texttt{on\_deactivate} state, used for implement operations which are necessary before planner goes to an inactive state. In our case, this method is not used and is left empty.
-		\item \texttt{cleanup()} : Called when the node enters \texttt{on\_cleanup} state, used for clean up resources which are created for the planner. In our case we destroys the allocated memory used by \texttt{state\_map} and \texttt{dstar}. 
-		\item \texttt{createPlan()}: Called when planner server demands a global plan from a start and goal pose. It required the start and goal position as\\ \texttt{geometry\_msgs::msg::PoseStamped} and return and return a path \texttt{nav\_msgs::msg::Path}. Replace the \texttt{makePlan} used in ROS 1.
+		This replace the \texttt{initialize} method and the class initialization used in ROS 1.
+		\item \texttt{activate()}: Called when the node enters \texttt{on\_activate} state, used for implement operations which are necessary before planner goes to an active state. In our case, we allocate memory and fill our internal costmap \texttt{state\_map}, which is used by the D* (\texttt{dstar}) algorithm.
+		\item \texttt{deactivate()}: Called when the node enters \texttt{on\_deactivate} state. This method is used for implementing operations which are necessary before planner goes to an inactive state. In our case, this method is not used and is left empty.
+		\item \texttt{cleanup()}: Called when the node enters \texttt{on\_cleanup} state. This method is used for cleaning up resources which are created for the planner. In our case we destroys the allocated memory used by \texttt{state\_map} and \texttt{dstar}. 
+		\item \texttt{createPlan()}: Invoked when the planner server requests a global plan between a start and goal pose. It required the start and goal position as\\ \texttt{geometry\_msgs::msg::PoseStamped} and return a path \texttt{nav\_msgs::msg::Path}. It replace the \texttt{makePlan} used in ROS 1.
 	\end{itemize}
-	\item At the end of the C++ code we write this two rows that are used to export the planner:\\
+	\item At the end of the C++ code,  we added the following lines to export the planner as a plugin:\\
 \begin{listing} [ht!]
 \begin{minted}{cpp} 
 #include "pluginlib/class_list_macros.hpp"
 PLUGINLIB_EXPORT_CLASS(<type of the plugin class>, <type of the base class>);
 \end{minted}
 \end{listing}
-	\item Because it's a plugin, we need to add a plugin declaration creating a file \texttt{global\_planner\_plugin.xml}, where is located the \texttt{package.xml}, that describe the plugin and edit the CMake file as described in the documentation for plugins\footnote{\href{https://docs.ros.org/en/rolling/Tutorials/Beginner-Client-Libraries/Pluginlib.html}{https://docs.ros.org/en/rolling/Tutorials/Beginner-Client-Libraries/Pluginlib.html}}.
+	\item Because it is a plugin,it is necessary to provide a description using a plugin declaration file. This is done by creating a file named \texttt{global\_planner\_plugin.xml} in the same directory as the \texttt{package.xml}.
+	The \texttt{global\_planner\_plugin.xml} file specifies the plugin's class type and the base class it inherits from, following the format required by the pluginlib system. Then we edit the CMake file as described in the documentation\footnote{\href{https://docs.ros.org/en/rolling/Tutorials/Beginner-Client-Libraries/Pluginlib.html}{https://docs.ros.org/en/rolling/Tutorials/Beginner-Client-Libraries/Pluginlib.html}}.
 \end{itemize}
 \subsubsection{Building the project}
-Finally, we build the system using the new build tool, \texttt{colcon}\footnote{\href{https://github.com/colcon}{https://github.com/colcon}}. It is a command line tool to improve the workflow of building, testing and using multiple software packages. It automates the process, handles the ordering and sets up the environment to use the packages.\\
-After compiling the code we have the global planner ready to be used.
+The system was built using the new build tool, \texttt{colcon}\footnote{\href{https://github.com/colcon}{https://github.com/colcon}}. It is a command line tool to improve the workflow of building, testing and using multiple software packages. It automates the process, handles the ordering and sets up the environment to use the packages.\\
+After successful compilation, the global planner is ready for use within the Nav2 framework.
 
 \chapter{Hardware adaptation process from Rover Zero to Rover Mini}
 \alert{Rimuovo il capitolo?}
 \chapter{Integration of the navigation stack with Open-RMF}
-To integrate a fleet in Open-RMF, we first need information about the structure af a building, like automatic doors or lifts that can be controlled, and the \textbf{route maps} that robots can use. The \textbf{route maps} are used to predict the navigation paths that the robots will took allowing RMF to avoid conflicts, this procedure is called "traffic management". All these information have to be stored in a file that can be generated using the \textbf{traffic editor tool}\footnote{\href{https://github.com/open-rmf/rmf\_traffic\_editor}{https://github.com/open-rmf/rmf\_traffic\_editor}}  \footnote{\href{https://osrf.github.io/ros2multirobotbook/intro.html}{https://osrf.github.io/ros2multirobotbook/intro.html}}, a tool provided by Open-RMF. It now follow a description of how it works and how we had used it.
+To integrate a fleet in Open-RMF, we first need information about the building's infrastructure, such as automatic doors or lifts that can be controlled, and the \textbf{route maps} that robots can use. \textbf{Route maps} are essential for predicting the paths robots will take, enabling Open-RMF to perform effective \textbf{traffic management} and avoid conflicts. All these information have to be stored in a file that can be generated using the \textbf{traffic editor tool}\footnote{\href{https://github.com/open-rmf/rmf\_traffic\_editor}{https://github.com/open-rmf/rmf\_traffic\_editor}}  \footnote{\href{https://osrf.github.io/ros2multirobotbook/intro.html}{https://osrf.github.io/ros2multirobotbook/intro.html}}, a tool provided by Open-RMF. The following section describes how the Traffic Editor works and how we used it in our implementation.
 \section{Traffic Management - Route Maps Generation}
-We start a new project \texttt{*.building.yaml} and then add the map generated by Cartographer and the drawing of the facility's plans. We then defined the position of important point in the map and design the traffic flow for the floor following the best practice as describe here\footnote{\href{https://osrf.github.io/ros2multirobotbook/integration\_nav-maps-strategies.html}{https://osrf.github.io/ros2multirobotbook/integration\_nav-maps-strategies.html}}. Now we use the following components of the traffic editor to insert all the information:
+To begin describing the environment for Open-RMF, we created a new project in the Traffic Editor by generating a \texttt{*.building.yaml} file. We then imported both the map produced by Cartographer and the floor plan of the facility.After importing the map,we defined the positions of key elements and planned the traffic flow for the floor, following best practices as outlined in the Open-RMF documentation\footnote{\href{https://osrf.github.io/ros2multirobotbook/integration\_nav-maps-strategies.html}{https://osrf.github.io/ros2multirobotbook/integration\_nav-maps-strategies.html}}. The following components of the Traffic Editor were used to encode the necessary environment data:
 \begin{itemize}
-	\item \textbf{vertex}: They are waypoints or the definition of wall, door or else. The properties of a vertex can be:
+	\item \textbf{vertex}: They are waypoints or a part of the description of walls, doors or else. Each vertex can have several properties:
 	\begin{itemize}
-		\item \texttt{is\_holding\_point} : the robot is allowed to wait at this waypoint for an indefinite period of time.
-		\item \texttt{is\_parking\_spot}: robot is required to park itself.
-		\item \texttt{is\_passthrough\_point}: waypoint which the robot shouldn't stop.
-		\item \texttt{is\_charger}: charging station for a robot.
-		\item \texttt{is\_cleaning\_zone}: used for the \texttt{Clean} task, indicate if is a clean zone that is where to start the cleaning.
-		\item \texttt{dock\_name}: used when the robot is executing their custom docking sequence. \alert{send a command to rmf to dock the robot}.
-		\item \texttt{pickup\_dispenser}: dispenser workcell for \texttt{Delivery} Task.
-		\item \texttt{dropoff\_ingestor}: ingestor workcell for \texttt{Delivery} Task.
-		\item \texttt{spawn\_robot\_type}: used in simulation to spawn a robot model.
-		\item \texttt{spawn\_robot\_name}: used in simulation to identify a robot spawned.
+		\item \texttt{is\_holding\_point} : Indicates that the robot is allowed to wait at this waypoint for an indefinite period of time.
+		\item \texttt{is\_parking\_spot}: Designates a parking location for a robot.
+		\item \texttt{is\_passthrough\_point}: A waypoint where the robot should not stop.
+		\item \texttt{is\_charger}: Identifies a charging station.
+		\item \texttt{is\_cleaning\_zone}: Used as initial position for the \texttt{Clean} task.
+		\item \texttt{dock\_name}: Used for triggering docking behavior via RMF.
+		\item \texttt{pickup\_dispenser}: Specifies a dispenser workcell for \texttt{Delivery} tasks.
+		\item \texttt{dropoff\_ingestor}: Specifies an ingestor workcell for \texttt{Delivery} tasks.
+		\item \texttt{spawn\_robot\_type}: Used in simulation to spawn a robot model.
+		\item \texttt{spawn\_robot\_name}: Used in simulation to identify a spawned robot.
 	\end{itemize}
-	\item \texttt{measurement} allow to add a measurement to set the scale of the drawing. In our case we used the \alert{know} width of the hallway.
-	\item \texttt{door}: is used both for interacting with the real world than for simulation. If a robot is going to pass through a lane where is a door, RMF will request to open the door and also will add the model to the simulation.
-	\item \texttt{traffic lane}: connect waypoints and are the paths for a fleet to follow, they are divided by groups and multiple fleet can be assign on a group. RMF suppose that are straight lines for planning. The lanes can be unidirectional or bidirectional and have a specific "orientation" if required the robot to navigate forward or backward.
-	\item \texttt{fiducials}: used for align multiple floor and used as a link to ROS 2 map, are visible through multiple floor and give an information about their position respect the map.
-	\item \texttt{lift}: used for align multiple floor and used as a link to ROS 2 map, are visible through multiple floor and give an information about their position respect the map.
-	\item \texttt{walls}: used in simulation, add the walls to the world that will generate.
-	\item \texttt{floor}: used in simulation, add the ground plane for robots to walk on. It can be edited to add holes for the lifts.
-	\item \texttt{environment assets}: used in simulation, add Gazebo models of different furniture. 
+	\item \texttt{measurement}: Connects two vertex and is used to set the scale of the drawing. In our case, we used the width of a door.
+	\item \texttt{door}: Connects two vertex and is used for interacting with the real world and simulate doors. If a robot encounters a door on its route, RMF sends a command to open it. When generating the simulation world model, a controllable door model is automatically added.
+	\item \texttt{traffic lane}: Connects two waypoints and define the paths that fleets will follow. Lanes can be grouped, assigned to specific fleets, and configured as unidirectional or bidirectional. An optional "orientation" setting can be specified to require robots to move forward or backward along the lane. During planning, Open-RMF assumes that all traffic lanes are straight lines.
+	\item \texttt{fiducials}: Used for multi-floor alignment and as anchors for the ROS 2 map. They provide spatial reference points between floors.
+	\item \texttt{lift}: Is used for interacting with the real world and simulate elevators. If a robot goes to a lift, RMF sends a command to call it and, when the robot reach the waypoint, it send the lift to the designed floor. When generating the simulation world model, a controllable lift model is automatically added.
+	\item \texttt{walls}: Connect two waypoints to define the location of a wall in the environment. When generating the simulation world, a wall is created between these points.
+	\item \texttt{floor}:  Add the ground plane for robots in the simulation world. This component can be modified to include holes (e.g., for elevator shafts).
+	\item \texttt{environment assets}: Adds Gazebo models of various furniture and objects to the simulation, helping to create a realistic environment for testing and validation.
 \end{itemize}
-These decision were taken place when planning for the route maps:
+In the process of designing route maps, several strategic choices were made:
 \begin{itemize}
-	\item In the hallways can pass only one robot.
-	\item Holding points (leaf nodes) are added along the corridor or near the begin or the end of it for giving way to one another. For some task waypoint is suggested to add a very low limit speed to avoid that RMF will use them as holding points.
-	\item Adding mutex lanes or waypoints that allow, at any point of time, only one robot to occupy any waypoint or lane belonging to the same mutex group. This allows to avoids deadlocks.
+	\item Only one robot is allowed in a hallway at a time.
+	\item Holding points (leaf nodes) were added along corridors or near their entrances and exits to allow one robot to yield to another already in the hallway. For certain task-specific waypoints, it is recommended to assign a very low speed limit to discourage RMF from using them as generic holding points.
+	\item Mutex groups were defined on lanes and waypoints to ensure exclusive access, avoiding deadlocks by allowing only one robot to occupy a mutex-assigned group at any time.
 \end{itemize}
 \newpage
-At the end we obtained the following map:\\
+At the end we obtained the following configuration map:\\
 \begin{figure}[h]
 \centering
 \includegraphics[width=1\linewidth]{img/RMF-traffic-map.png}
 \captionof{figure}{Traffic editor with Elettra's route map}
 \end{figure}\\
-Then it is possible to generate each route maps from each graphs \texttt{*.yaml} using the command:\\
+The route map \texttt{.yaml} files for each graph can be generated using the following command:\\
 \texttt{ros2 run rmf\_building\_map\_tools building\_map\_generator nav \textbackslash \\ \hspace*{1cm} \$\{building\_map\_path\} \$\{output\_nav\_graphs\_dir\}}\\
-Then we can use the following command to generate the map that can be used in simulation:\\
+\vspace*{5mm}\\
+For the simulation, the world can be generated using the following command:\\
 \texttt{ros2 run rmf\_building\_map\_tools building\_map\_generator ignition \textbackslash{}\\ \hspace*{1cm}
 \$\{building\_map\_path\} \$\{output\_world\_path\} \$\{output\_model\_dir\}}\\
-While to download the models used during the configuration of the app use:\\
+And the following command can be used to download the models required for the simulation world:\\
 \texttt{ros2 run rmf\_building\_map\_tools building\_map\_model\_downloader \textbackslash{} \\ \hspace*{1cm}
 \$\{building\_map\_path\} -f -e \mytexttilde/.gazebo/models}\\
+
 \newpage
-For the simulation we obtained the following map:\\
+The simulation environment generated from the configuration resulted in the following world:\\
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\linewidth]{img/rmf\_generated\_world.png}
-	\captionof{figure}{Map generated using traffic editor}
+	\captionof{figure}{World generated using traffic editor}
 \end{figure}\\
 
-Added all the information we can now launch the core of RMF.
+We can now launch the core components of RMF.
 
 \section{RMF core}
-This is the launch file for starting the core of RMF:\\
+This is the launch file used to start the core components of RMF:\\
 \texttt{0rmf\_mini\_world\_rmf\_core.launch.xml}\\
 
-And it launch the following nodes, that are the structure of the core of RMF:
+This launch file starts the following nodes, which form the core structure of RMF:
 \begin{itemize}
-	\item \texttt{rmf\_traffic\_schedule} : Traffic Schedule, \alert{control the path structure and publish the itinerary topics, control the conflicts, }
-	\item \texttt{rmf\_traffic\_blockade} : the traffic Blockade Moderator, \alert{control checkpoint information}
-	\item \texttt{building\_map\_server} : publish the data of the map like points of interes like parking spot
-	\item \texttt{visualization.launch.xml}: optional node that allow to launch all the tool to see and control RMF using rviz2 \alert{provare a rimuovere}
-	\item \texttt{door\_supervisor}: using ROS structure publish the request of control the door
-	\item \texttt{lift\_superviso}: using ROS structure publish the request of control the lift
-	\item \texttt{rmf\_task\_dispatcher}: Dispatcher node will allow you to dispatch submitted task to the best fleet/robot within RMF.
-	\item \texttt{queue\_manager}: if request Enable the reservation node for parking spot de-confliction
+	\item \texttt{rmf\_traffic\_schedule} : Manages traffic scheduling by controlling path structures, publishing itinerary topics, and handling conflict resolution.
+	\item \texttt{rmf\_traffic\_blockade} : Acts as the Traffic Blockade Moderator, managing checkpoint information.
+	\item \texttt{building\_map\_server} : Publishes map data, including points of interest such as parking spots.
+	\item \texttt{visualization.launch.xml}: Optional nodes that launches visualization tools for monitoring and controlling RMF via rviz2.
+	\item \texttt{door\_supervisor}: Publishes control requests for doors using ROS communication structures.
+	\item \texttt{lift\_superviso}: Publishes control requests for lifts using ROS communication structures.
+	\item \texttt{rmf\_task\_dispatcher}: Allow to dispatch submitted task to the best fleet/robot within RMF.
+	\item \texttt{queue\_manager}: Manages reservations for parking spots and helps prevent conflicts.
 \end{itemize}
 
-Now that we have the core system launched we need to connect ours fleets using the fleet adapters. As said before Open-RMF gives a Free Fleet that is compatible with ROS 2 and Nav2. In the next section we will describe in detail how it work and how we have used it.
+Once the core system is launched, the next step is to connect our fleets using \textbf{fleet adapters}. Open-RMF provides the Free Fleet adapter, which is compatible with ROS 2 and Nav2. The following section will detail how this adapter works and how we integrated it into our system.
 
 \section{Free Fleet}
-Free fleet\footnote{\href{https://github.com/open-rmf/free\_fleet}{https://github.com/open-rmf/free\_fleet}} is a python implementation of the \texttt{full\_control} Open-RMF Fleet Adapter\footnote{\href{https://github.com/open-rmf/fleet_adapter_template}{https://github.com/open-rmf/fleet\_adapter\_template}}, that is the general template for communicate with a fleet manager, with the priority to control robot under ROS 1 and ROS 2.
-It uses \texttt{zenoh} as a communication layer between each robot and the fleet adapter. Following is view on how the free fleet adapter communicate with ROS:
+Free fleet\footnote{\href{https://github.com/open-rmf/free\_fleet}{https://github.com/open-rmf/free\_fleet}} is a python implementation of the \texttt{full\_control} Open-RMF Fleet Adapter\footnote{\href{https://github.com/open-rmf/fleet_adapter_template}{https://github.com/open-rmf/fleet\_adapter\_template}}, which serves as a general template for communicating with a fleet manager. Its primary goal is to control robots running under both ROS 1 and ROS 2.
+It uses \texttt{zenoh} as a communication layer between each robot and the fleet adapter.
+Below is an overview of how communication is managed using the Free Fleet adapter:
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\linewidth]{img/free\_fleet\_adapter.png}
 	\captionof{figure}{Free Fleet Adapter Communication}
 \end{figure}
 \subsection{Setup fleet}
-For using the Free fleet we need to create the configuration file of the fleet. It a file that describe the robots of a fleet that have the same characteristics. These are the necessary information: name of the fleet, limits in velocity, their size and some mechanical info, some info their power management, what task they are capable of and a list of all robot that are inside this fleet with their name, what charger they use and the correlation in position between the map on the robot and the one used in RMF.\\
-Setup the fleet, we need to setup Zenoh.
+To use the Free Fleet, it is necessary to create a \texttt{.yaml} configuration file for the fleet. This file describes the robots within the fleet that share the same characteristics. The configuration includes essential information such as the fleet name, velocity limit of the fleet, robot dimensions and mechanical details, power management parameters, the tasks the fleet are capable of performing, a list of all robots in the fleet with their individual names and their assigned chargers. It also need the positional correlation between the robot’s map and the RMF map.\\
+After setting up the fleet configuration, the next step is to configure Zenoh for communication.
 \subsection{Setup Zenoh}
-Zenoh\footnote{\href{https://zenoh.io/}{https://zenoh.io/}} is a pub/sub/query protocol unifying data in motion, data at rest and computations. It blends traditional pub/sub with geo distributed storage, queries and computations, while retaining a well level of time and space efficiency. It allow to send only specific topic through the web reducing bandwidth to a specific server.\\
-To setup this part of using Zenoh we need to:
-On a server is needed a Zenoh router that can be launched with (\texttt{\$ zenohd}), but there can be multiple instance of Zenoh router for redundancy.\\
-Then, as described in the documentation, on each robot and the server on witch run RMF there is the need to launch the standalone executable \texttt{zenoh-bridge-ros2dds} that bridges all ROS 2 communications using DDS over Zenoh. The configuration of this file depend on the machine. On the server it's configured to accept all the traffic \alert{test se necessario avere il server} from each robot, while on the robot we need to setup:
+Zenoh\footnote{\href{https://zenoh.io/}{https://zenoh.io/}} is a pub/sub/query protocol that unifies data in motion, data at rest and computations. It combines traditional pub/sub with geo distributed storage, queries and computations, while maintaining high efficiency in both time and space. Zenoh allows selective topic transmission over the network, reducing bandwidth usage to specific servers.\\
+To set up Zenoh for use with Free Fleet, the following steps are required:
 \begin{itemize}
- \item the \texttt{namespace} that is the same one associated to the file of configuration of the fleet
- \item enabling to publish the frame status of the robot (\texttt{.*/tf} and \texttt{.*/tf\_static}) and the battery information (\texttt{.*/battery\_state}) \item enabling the communication from the action servers that control the navigation(\texttt{.*/navigate\_to\_pose})
- \item setup Zenoh specific configurations that define the mode of communication and the server's address, with its protocol and port that the client will \texttt{connect} and \texttt{listen} to (\texttt{tcp/<ip address server>:7447})
+	\item Zenoh router must be running on a server. This router can be launched using the command: (\texttt{\$ zenohd}). Multiple instances of the Zenoh router can be run for redundancy.\\
+	\item On each robot and on the RMF server, the standalone executable\\ \texttt{zenoh-bridge-ros2dds} must be launched with the associated configuration file. This executable bridges all ROS 2 communications using DDS over Zenoh. The configuration of this file depend on the machine. On the server it's configured to accept all the traffic from each robot, while on the robot we need to setup:
+		\begin{itemize}
+		 \item The \texttt{namespace}, which must match the fleet configuration file namespace.
+		 \item Enabling the publication of the robot’s frame status topics (\texttt{.*/tf} and \texttt{.*/tf\_static}) and battery information (\texttt{.*/battery\_state})
+		 \item Enabling communication with action servers controlling navigation\\ (\texttt{.*/navigate\_to\_pose})
+		 \item Zenoh-specific configuration details, such as the communication mode, the server address, the protocol and the port for connection endpoints (e.g., \texttt{tcp/<ip address server>:7447})
+		\end{itemize}
 \end{itemize}
 \subsection{Launching Free Fleet}
-After all of this we can use the following launch file to start the Free Fleet:\\
+After completing the setup, we can use the following launch file to start the Free Fleet adapter:\\
 \texttt{1rmf\_mini\_fleet\_adapter.launch.xml}\\
-Its parameters are the fleet configuration file and the route maps that is going to use.
-Now on the RMF server is possible to see the topic of the robot.
+This launch file takes as parameters the fleet configuration file and the route maps that the fleet will use. Once launched, it is possible to monitor the robot topics on the RMF server.
 \newpage
 \section{Web interfaces}
-Also, Open-RMF offer a web-based interface to visualize and control of Open-RMF, \texttt{rmf-web}\footnote{\href{https://github.com/open-rmf/rmf-web}{https://github.com/open-rmf/rmf-web}}.
-It composed by a:
+Open-RMF also offers a web-based interface, \texttt{rmf-web}\footnote{\href{https://github.com/open-rmf/rmf-web}{https://github.com/open-rmf/rmf-web}}, to visualize and control the system on a browser. It consists of two main components:
 \begin{itemize}
-	\item api server : based on OpenAPI specification and Python library \texttt{FastAPI} allow execution of REST APIs methods to communicate with Open-RMF.
-	\item dashboard : In our case is a demo dashboard that connect to the api server and allow to control the fleet.
+	\item api server : Based on the OpenAPI specification and implemented with the Python FastAPI library, it provides REST API methods to communicate with Open-RMF.
+	\item dashboard :  In our case, a demo dashboard that connects to the API server and allows control of the fleet.
 \end{itemize}
 
-Both are available as docker images and in the code can launch using:\\
+Both components are available as Docker images and can be launched with the command:\\
 \texttt{docker compose -f /path/to/compose.yml up}
 
-Then we obtain the following interface:
+Then we can connect to the web dashboard:
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\linewidth]{img/openRMF-dashboard.png}
-	\captionof{figure}{Open-RMF Dashboard}
+	\captionof{figure}{Open-RMF Web Dashboard}
 \end{figure}
 
-\subsection{Deployment Template}
-Open-RMF offers a reference template\footnote{\href{https://github.com/open-rmf/rmf_deployment_template}{https://github.com/open-rmf/rmf\_deployment\_template}} to deploy in production use. Based on \texttt{kubernetes} gives all the information to deploy on public server and setup a secure connection to it.
+\subsection{\alert{Deployment Template}}
+Open-RMF offers a reference template\footnote{\href{https://github.com/open-rmf/rmf_deployment_template}{https://github.com/open-rmf/rmf\_deployment\_template}} for production deployment. Based on Kubernetes, it provides all the necessary information to deploy on a public server and to set up a secure connection.
 
 
-
-\chapter{Testing and evaluation of the system}
-The testing have brigh up some problem in the design of the rover.
-If needed to move in office the robot with the laser sensor cannot see some part of obstacle, see image:
+\chapter{\alert{Testing and evaluation of the system}}
+After some testing, these are the problems we found:
+\begin{itemize}
+\item The testing revealed some design issues with the rover. 
+When operating in an office environment, the robot’s laser sensor cannot detect certain parts of obstacles, as shown in the image below.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\linewidth]{img/problem\_chair.jpg}
 	\captionof{figure}{Laser position error}
 \end{figure}\\
-A solution would increase the occupancy map but the dimension of the legs chair  are enough long that reduce a lot the dimension available to pass through doors that the planner wouldn't allow to pass through it. A solution is to move the LIDAR under the robot but require a low profile one and add blind spot without adding the sensor on top or adding another sensor like a deep camera that give a 3D occupancy greed that can be processed to obtain a simple 2D map.
-\\
-\alert{The RMF commands from waypoint to waypoint: RMF commands the robot from waypoint to waypoint, and it leaves the low level navigation to each robot's navigation stack. So if the robot chooses to use a non-straight route, it means that the RMF navigation graph might need to be re-drawn or reconsidered (if there are constant obstacles around), or the navigation stack of the robot should be tuned to allow tighter tolerances for static/dynamic obstacles. but how the robot chooses to navigate between them is out of RMF's control, since RMF does not have dynamic obstacle information, or if there are new static obstacles, it needs to be reflected into RMF's traffic navigation graph}
-The Dstart planner found hard time to calculate a path after converting the map in pgm file. The algorithm was calculating also the unknow space as empty space so it was adding a lot of calculus. The solution was to convert all the unknow space to occupied space. that salved the problem.
-Another thing that we discover both with the traffic editor and also using a better image manipulation program like gimp is that the image taken from the planimetry and the cartographer map are not well aligned. see image below:
+One possible solution is to reduce the free space from the occupancy map. However, the dimensions of the chair legs are quite long, significantly reducing the available space to pass through doors, which the planner currently prevents.
+Another option is to relocate the LIDAR sensor underneath the robot. This would require a low-profile LIDAR and would create blind spots by the wheels if no additional sensors are added on top.
+Alternatively, adding a depth camera could provide a 3D occupancy grid, which can then be processed to generate a simpler 2D map.
+ 
+\item The RMF commands from waypoint to waypoint: RMF commands the robot from waypoint to waypoint, and it leaves the low level navigation to each robot's navigation stack. So if the robot chooses to use a non-straight route, it means that the RMF navigation graph might need to be re-drawn or reconsidered (if there are constant obstacles around), or the navigation stack of the robot should be tuned to allow tighter tolerances for static/dynamic obstacles. but how the robot chooses to navigate between them is out of RMF's control, since RMF does not have dynamic obstacle information, or if there are new static obstacles, it needs to be reflected into RMF's traffic navigation graph
+
+\item We also encountered issues with the D* planner after converting the map to a PGM file. The algorithm treated unknown space as free space, which greatly increased computation time. The solution was to mark all unknown space as occupied, which resolved the problem.
+
+\item Additionally, we discovered misalignment between the planimetry image and the Cartographer map, as shown in the image below. It appears that at each major rotation, the system overestimates the robot’s rotation angle during mapping.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\linewidth]{img/mapComposizione.png}
 	\captionof{figure}{Overlap Cartographer Map and photo of floor plan}
-\end{figure}\\
-It's look like at each major rotation it overestimate the angle that the robot rotate when performing the mapping.
+\end{figure}
+\end{itemize}
