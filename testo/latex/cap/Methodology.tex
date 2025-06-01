@@ -6,8 +6,8 @@ In this part, we describe the entire procedure followed in the development of th
 	\item The procedure used to port the global planner from ROS 1 to ROS 2, and its integration into the Nav2 framework.
 	\item The tools and methods used to integrate the system into Open-RMF.
 \end{itemize}
-All source code developed for this project is publicly available in the following GitHub repository: \texttt{michbelle/myTesiCode}\footnote{\href{https://github.com/michbelle/myTesiCode}{https://github.com/michbelle/myTesiCode}}. The repository also includes the necessary components for simulating the platform.\\
-The simulation environment is containerized using Docker, which provides a consistent and OS-independent base system. The Docker image is built on top of \texttt{osrf/ros:jazzy-desktop-full} and includes all the packages developed for this thesis, as well as the required Open-RMF tools and demo setups.\\
+All source code developed for this project is publicly available in the following GitHub repository: \texttt{michbelle/myTesiCode}\footnote{\href{https://github.com/michbelle/myTesiCode}{https://github.com/michbelle/myTesiCode}}. The repository also includes the necessary components for simulating the system.\\
+The simulation environment is containerized using Docker, which provides a consistent and OS-independent base system. The Docker image is built on top of \texttt{osrf/ros:jazzy-desktop-full} and includes all the packages developed for this thesis, as well as the required Open-RMF tools and its demo simulation.\\
 
 
 
@@ -53,7 +53,7 @@ A 3D model of the robot, including all coordinate frames (TF), is shown in this 
 With the system fully assembled, the following ROS 2 launch files are used to retrieve data from the sensors connected to the robot’s onboard mini PC:
 \begin{itemize}
 	\item \texttt{0.1r\_sensorLaunch.launch.py}: Launches the nodes responsible for publishing data from the IMU and LIDAR sensors.
-	\item \texttt{0.2r\_mini.launch.py}: Publishes odometry data based on the built-in encoders of the robot.
+	\item \texttt{0.2r\_mini.launch.py}: Publishes odometry data based on the built-in encoders of the robot and subscribes to the \texttt{/cmd\_vel} to move the robot.
 \end{itemize}
 \newpage
 While, for simulation, the following launch file can be used for starting the simulation:
@@ -68,10 +68,10 @@ While, for simulation, the following launch file can be used for starting the si
 
 
 \chapter{Steps taken to port the navigation stack from ROS 1 to ROS 2}
-In this chapter, we divide the system architecture according to the key components of the Nav2 stack that are utilized. Particular emphasis is placed on the process of porting the Global Planner module from ROS 1 to ROS 2, with a detailed discussion of the required adaptations and the challenges encountered during the transition.
+In this chapter, we outline the requirements for the operation of Nav2 and provide a comprehensive overview of the packages utilized by Nav2. Particular emphasis is placed on the process of porting the Global Planner module from ROS 1 to ROS 2, with a detailed discussion of the required adaptations and the challenges encountered during the transition.
 
 \section{Odometry Estimation \texttt{odom} $\rightarrow$ \texttt{base\_link}}
-As previously discussed, the raw odometry data provided by the rover are not sufficiently accurate, particularly in rotational movements\cite{MooreStouchKeneralizedEkf2014}. This is a well-known issue in odometry estimation for skid-steering vehicles, which tend to produce significant drift and errors when turning.\\
+As previously discussed, the raw odometry data provided by the rover are not sufficiently accurate, particularly in rotational movements\cite{MooreStouchKeneralizedEkf2014}. This is a well-known issue in odometry estimation for skid-steering vehicles, which tend to produce significant drift and errors when turning using only the data from the encoders.\\
 To address this problem, the \texttt{robot\_localization} package\cite{MooreStouchKeneralizedEkf2014} was employed, specifically its \texttt{ekf\_node} Node.
 This package enables the fusion of multiple sensor, even multiple instances of the same sensor type, and supports output in various ROS message formats, such as \texttt{nav\_msgs/Odometry}. It also allows preprocessing of sensor messages prior to inserting into the estimation process. The filter performs continuous state estimation and is robust to intermittent sensor data loss, maintaining a coherent position estimate over time.\\
 To launch the EKF node, the following launch file was wrote:\\
@@ -95,12 +95,12 @@ When using Cartographer, it is also possible to save the map as a \texttt{.pdstr
     \hspace*{15mm}"\{filename: "map.pdstream", include\_unfinished\_submaps :false\}"}
 \newpage
 \subsection{Only localization}
-The map that was built using Cartographer is the following:
+The map that was built using Cartographer is the following:\\
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.4\linewidth]{img/map.png}
 	\captionof{figure}{Map acquired with Cartographer}
-\end{figure}
+\end{figure}\\
 We initially attempted to use Cartographer solely for localization; however, due to the project’s limited maintenance, we encountered difficulties in using it effectively. As a solution, we opted for the method provided by the Nav2 package, specifically  \texttt{nav2\_amcl} and the \texttt{amcl} node.\\
 One limitation of this approach is the need to convert the map acquired with Cartographer from the \texttt{.pbstream} format into a \texttt{.pgm} image and \texttt{.yaml} metadata pair, which are required by the \texttt{amcl} node. This conversion can be performed using the following command:\\
 \begin{listing} [ht!]
@@ -156,12 +156,12 @@ Below is a list of the core components used, along with a brief description of t
 		\texttt{nav2\_behaviors/Wait}  is used to pause navigation for a specified duration, allowing time for temporary occlusions to clear before resuming path planning.
 	\end{itemize}
 	
-	\item \texttt{nav2\_bt\_navigator::BtNavigator} that use the following navigators:
+	\item \texttt{nav2\_bt\_navigator::BtNavigator} that use the following plugins:
 	\begin{itemize}
-		\item As \texttt{smoother\_plugins} use\\ \texttt{nav2\_bt\_navigator::NavigateToPoseNavigator} and\\ \texttt{nav2\_bt\_navigator::NavigateThroughPosesNavigator} that utilize the default behavior trees (BT) for navigation.
+		\item As \texttt{navigators} use\\ \texttt{nav2\_bt\_navigator::NavigateToPoseNavigator} and\\ \texttt{nav2\_bt\_navigator::NavigateThroughPosesNavigator} that utilize the default behavior trees (BT) for navigation.
 	\end{itemize}
 	
-	\item \texttt{nav2\_lifecycle\_manager::LifecycleManager} that handling the lifecycle transition states for the stack in a deterministic way
+	\item \texttt{nav2\_lifecycle\_manager::LifecycleManager} that handling the lifecycle transition states for the stack in a deterministic way.
 \end{itemize}
 The simulation configuration file contains minor differences due to the use of different versions of ROS 2: Jazzy in the simulated environment and Humble on the physical robot.
 In the next section, we will describe the key steps taken to port the global planner \texttt{DStarGlobalPlanner} from ROS 1 to ROS 2.
@@ -176,7 +176,7 @@ In the \texttt{package.xml} file, which describe the package as an organizationa
 	\item \texttt{buildtool\_depend} : \texttt{catking} $\rightarrow$ \texttt{ament\_cmake}: \texttt{ament\_cmake} is the new build system for CMake based packages. Compared to \texttt{catkin}, it introduces many utilities for managing packages. More information is available in the documentation\footnote{\href{https://docs.ros.org/en/rolling/Concepts/Advanced/About-Build-System.html}{https://docs.ros.org/en/rolling/Concepts/Advanced/About-Build-System.html}}.
 	\item \texttt{roscpp} $\rightarrow$ \texttt{rclcpp}: \texttt{rclcpp} is the new ROS client library for C++, built on \texttt{rcl}, which provides the foundation for language-specific client libraries. \texttt{rcl} communicates with \texttt{rmw}(ROS middleware interface), which handles the communication with \texttt{DDS} (Data Distribution Service).
 	\item Updated package naming to follow the ROS 2 conventions.
-	\item to inform \texttt{colcon} that the package uses \texttt{ament\_cmake}, the build type must be explicitly specified in the \texttt{build\_type}.
+	\item To inform \texttt{colcon} that the package uses \texttt{ament\_cmake}, the build type must be explicitly specified in the \texttt{build\_type}.
 \end{itemize}
 Subsequently, the \texttt{CMakeLists.txt} file was updated with the following major changes:
 \begin{itemize}
@@ -235,7 +235,7 @@ After successful compilation, the global planner is ready for use within the Nav
 \chapter{Integration of the navigation stack with Open-RMF}
 To integrate a fleet in Open-RMF, we first need information about the building's infrastructure, such as automatic doors or lifts that can be controlled, and the \textbf{route maps} that robots can use. \textbf{Route maps} are essential for predicting the paths robots will take, enabling Open-RMF to perform effective \textbf{traffic management} and avoid conflicts. All these information have to be stored in a file that can be generated using the \textbf{traffic editor tool}\footnote{\href{https://github.com/open-rmf/rmf\_traffic\_editor}{https://github.com/open-rmf/rmf\_traffic\_editor}}  \footnote{\href{https://osrf.github.io/ros2multirobotbook/intro.html}{https://osrf.github.io/ros2multirobotbook/intro.html}}, a tool provided by Open-RMF. The following section describes how the Traffic Editor works and how we used it in our implementation.
 \section{Traffic Management - Route Maps Generation}
-To begin describing the environment for Open-RMF, we created a new project in the Traffic Editor by generating a \texttt{*.building.yaml} file. We then imported both the map produced by Cartographer and the floor plan of the facility.After importing the map,we defined the positions of key elements and planned the traffic flow for the floor, following best practices as outlined in the Open-RMF documentation\footnote{\href{https://osrf.github.io/ros2multirobotbook/integration\_nav-maps-strategies.html}{https://osrf.github.io/ros2multirobotbook/integration\_nav-maps-strategies.html}}. The following components of the Traffic Editor were used to encode the necessary environment data:
+To begin describing the environment for Open-RMF, we created a new project in the Traffic Editor by generating a \texttt{.building.yaml} file. We then imported both the map produced by Cartographer and the floor plan of the facility.After importing the map,we defined the positions of key elements and planned the traffic flow for the floor, following best practices as outlined in the Open-RMF documentation\footnote{\href{https://osrf.github.io/ros2multirobotbook/integration\_nav-maps-strategies.html}{https://osrf.github.io/ros2multirobotbook/integration\_nav-maps-strategies.html}}. The following components of the Traffic Editor were used to encode the necessary environment data:
 \begin{itemize}
 	\item \textbf{vertex}: They are waypoints or a part of the description of walls, doors or else. Each vertex can have several properties:
 	\begin{itemize}
@@ -303,7 +303,7 @@ This launch file starts the following nodes, which form the core structure of RM
 	\item \texttt{building\_map\_server} : Publishes map data, including points of interest such as parking spots.
 	\item \texttt{visualization.launch.xml}: Optional nodes that launches visualization tools for monitoring and controlling RMF via rviz2.
 	\item \texttt{door\_supervisor}: Publishes control requests for doors using ROS communication structures.
-	\item \texttt{lift\_superviso}: Publishes control requests for lifts using ROS communication structures.
+	\item \texttt{lift\_supervisor}: Publishes control requests for lifts using ROS communication structures.
 	\item \texttt{rmf\_task\_dispatcher}: Allow to dispatch submitted task to the best fleet/robot within RMF.
 	\item \texttt{queue\_manager}: Manages reservations for parking spots and helps prevent conflicts.
 \end{itemize}
@@ -326,7 +326,7 @@ After setting up the fleet configuration, the next step is to configure Zenoh fo
 Zenoh\footnote{\href{https://zenoh.io/}{https://zenoh.io/}} is a pub/sub/query protocol that unifies data in motion, data at rest and computations. It combines traditional pub/sub with geo distributed storage, queries and computations, while maintaining high efficiency in both time and space. Zenoh allows selective topic transmission over the network, reducing bandwidth usage to specific servers.\\
 To set up Zenoh for use with Free Fleet, the following steps are required:
 \begin{itemize}
-	\item Zenoh router must be running on a server. This router can be launched using the command: (\texttt{\$ zenohd}). Multiple instances of the Zenoh router can be run for redundancy.\\
+	\item Zenoh router must be running on a server. This router can be launched using the command: (\texttt{\$ zenohd}). Multiple instances of the Zenoh router can be run for redundancy.
 	\item On each robot and on the RMF server, the standalone executable\\ \texttt{zenoh-bridge-ros2dds} must be launched with the associated configuration file. This executable bridges all ROS 2 communications using DDS over Zenoh. The configuration of this file depend on the machine. On the server it's configured to accept all the traffic from each robot, while on the robot we need to setup:
 		\begin{itemize}
 		 \item The \texttt{namespace}, which must match the fleet configuration file namespace.
