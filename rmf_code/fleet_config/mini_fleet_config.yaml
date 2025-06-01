@@ -63,12 +63,12 @@ rmf_fleet:
 # Optional
 reference_coordinates:
   PT:
-    rmf: [[73.5818, -86.1411],
-          [68.1894, -89.2635],
-          [61.5902, -100.1195]]
-    robot: [[5.181, 22.613],
-          [1.726, 20.227],
-          [-3.025, 12.522]]
+    rmf: [[45.3419, -73.7068],
+          [50.2, -65.7145],
+          [54.17,-63.416]]
+    robot: [[-2.33091, 12.5592],
+          [2.36216, 20.2909],
+          [6.01244, 22.3951]]
 
 #if missing return error, TODO fix on the main free fleet repo
 plugins:
