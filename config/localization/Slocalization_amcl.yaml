@@ -45,10 +45,10 @@ amcl:
     first_map_only: false #    Allows AMCL to accept maps more than once on the map_topic. This is especially useful when you’re using the LoadMap service in map_server. Prior to Humble, this is first_map_only_.
     set_initial_pose: True
     initial_pose:
-      x: 4.88674
-      y: 23.1518
+      x: 5.13584
+      y: 22.9718
       z: 1.101
-      yaw: 0.0732896
+      yaw: -0.0649066 
     
 
 
