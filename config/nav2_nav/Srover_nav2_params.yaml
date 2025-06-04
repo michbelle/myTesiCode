@@ -384,28 +384,32 @@ behavior_server:
   ros__parameters:
     costmap_topic: local_costmap/costmap_raw
     footprint_topic: local_costmap/published_footprint
+    global_costmap_topic: global_costmap/costmap_raw
+    global_footprint_topic: global_costmap/published_footprint
     cycle_frequency: 10.0
-    behavior_plugins: ["spin", "backup", "drive_on_heading", "assisted_teleop", "wait"]
+    # behavior_plugins: ["spin", "backup", "drive_on_heading", "wait", "assisted_teleop"]
+    behavior_plugins: ["spin", "backup","drive_on_heading", "wait"]
     spin:
       plugin: "nav2_behaviors::Spin"
     backup:
       plugin: "nav2_behaviors::BackUp"
-    drive_on_heading:
-      plugin: "nav2_behaviors::DriveOnHeading"
     wait:
       plugin: "nav2_behaviors::Wait"
-    assisted_teleop:
-      plugin: "nav2_behaviors::AssistedTeleop"
-    global_frame: odom
+    drive_on_heading:
+      plugin: "nav2_behaviors::DriveOnHeading"
+    # assisted_teleop:
+    #   plugin: "nav2_behaviors::AssistedTeleop" 
+    local_frame: odom # odom 
+    global_frame: map # map odom before
     robot_base_frame: base_link
     transform_tolerance: 1.2
     use_sim_time: True
+    transform_timeout: 0.1
     simulate_ahead_time: 2.0
     max_rotational_vel: 2.5
     min_rotational_vel: 0.55
     rotational_acc_lim: 4.2
-    # local_frame: odom
-    # global_frame: map
+    enable_stamped_cmd_vel : false # default false in Jazzy or older
 
 robot_state_publisher:
   ros__parameters:

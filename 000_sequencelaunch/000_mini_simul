@@ -1,6 +1,5 @@
 #setup docker
 
-#xhost +
 xhost local:root
 
 path_repo=/home/michelebelletti/
