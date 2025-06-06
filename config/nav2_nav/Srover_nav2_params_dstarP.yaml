@@ -208,7 +208,7 @@ planner_server:
       plugin: "dstar_global_planner/DStarGlobalPlanner" # https://github.com/ElettraSciComp/DStar-Trajectory-Planner
       goal_distance_threshold: 0.3
       neighbor_distance_threshold : 0.1
-      occupancy_threshold: 64 #level of costmap to say if occupied 
+      occupancy_threshold: 252 #level of costmap to say if occupied 
       cutoff_distance: 16
       trajectory_optimizer: #to stay in the center
         repulsion_gain: 50.0

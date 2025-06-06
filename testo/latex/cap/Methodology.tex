@@ -112,7 +112,8 @@ ros2 run cartographer_ros cartographer_pbstream_to_ros_map \
 \end{minted}
 \end{listing}\\
 \newpage
-Since certain walls of the Cartographer map where not solid black, the conversion process introduced errors that caused these areas to be misinterpreted as free space. As a result, the planner generated paths that passed through walls. To address this issue, the walls were manually corrected using GIMP, an image editing tool, by modifying the \texttt{.pgm} map file.\\
+Since certain walls of the Cartographer map where not solid black, the conversion process introduced errors that caused these areas to be misinterpreted as free space. \alert{As a result, the planner generated paths that passed through walls because \texttt{track\_unknown\_space} in the global costmap node the default value is \texttt{false} that treats unknown space as free space. Setting this to \texttt{true} solved the problem. While the noisy map generated converting the map also create some "teleportation" for the localization AMCL.}
+To address this issue, the walls were manually corrected using GIMP, an image editing tool, by modifying the \texttt{.pgm} map file.\\
 The corrected map is shown below:
 \begin{figure}[h]
 	\centering
