@@ -112,7 +112,8 @@ ros2 run cartographer_ros cartographer_pbstream_to_ros_map \
 \end{minted}
 \end{listing}\\
 \newpage
-Since certain walls of the Cartographer map where not solid black, the conversion process introduced errors that caused these areas to be misinterpreted as free space. As a result, the planner generated paths that passed through walls. To address this issue, the walls were manually corrected using GIMP, an image editing tool, by modifying the \texttt{.pgm} map file.\\
+Since certain walls of the Cartographer map where not solid black, the conversion process introduced errors that caused these areas to be misinterpreted as free space. \alert{As a result, the planner generated paths that passed through walls because \texttt{track\_unknown\_space} in the global costmap node the default value is \texttt{false} that treats unknown space as free space. Setting this to \texttt{true} solved the problem. While the noisy map generated converting the map also create some "teleportation" for the localization AMCL.}
+To address this issue, the walls were manually corrected using GIMP, an image editing tool, by modifying the \texttt{.pgm} map file.\\
 The corrected map is shown below:
 \begin{figure}[h]
 	\centering
@@ -377,7 +378,11 @@ Alternatively, adding a depth camera could provide a 3D occupancy grid, which ca
  
 \item The RMF commands from waypoint to waypoint: RMF commands the robot from waypoint to waypoint, and it leaves the low level navigation to each robot's navigation stack. So if the robot chooses to use a non-straight route, it means that the RMF navigation graph might need to be re-drawn or reconsidered (if there are constant obstacles around), or the navigation stack of the robot should be tuned to allow tighter tolerances for static/dynamic obstacles. but how the robot chooses to navigate between them is out of RMF's control, since RMF does not have dynamic obstacle information, or if there are new static obstacles, it needs to be reflected into RMF's traffic navigation graph
 
-\item We also encountered issues with the D* planner after converting the map to a PGM file. The algorithm treated unknown space as free space, which greatly increased computation time. The solution was to mark all unknown space as occupied, which resolved the problem.
+\item \remove{We also encountered issues with the D* planner after converting the map to a PGM file. The algorithm treated unknown space as free space, which greatly increased computation time. The solution was to mark all unknown space as occupied, which resolved the problem.}
+
+\item \alert{Setting up the D-star global planner }
+
+\item \alert{Setting up collision monitor for improve safety reason }
 
 \item Additionally, we discovered misalignment between the planimetry image and the Cartographer map, as shown in the image below. It appears that at each major rotation, the system overestimates the robot’s rotation angle during mapping.
 \begin{figure}[h]

@@ -34,6 +34,9 @@ ros2 launch myCode 0rmf_mini_world_rmf_core.launch.xml
 #outside on test machine
 docker compose -f /scratch/code/tesi_code/src/myTesiCode/Dockerfiles/dockerCompose/rmf-web_base/compose.yml up 
 
+## BUG:
+chmod +x /root/ff_ws/install/free_fleet_adapter/lib/free_fleet_adapter/*
+## 
 export ROS_DOMAIN_ID=15
 ros2 launch myCode 1rmf_mini_fleet_adapter.launch.xml server_uri:="ws://localhost:8000/_internal"
 
