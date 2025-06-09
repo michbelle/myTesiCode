@@ -1,9 +1,9 @@
 amcl:
   ros__parameters:
     use_sim_time: False
-    alpha1: 0.3 #    Expected process noise in odometry’s rotation estimate from rotation.
+    alpha1: 0.2 #    Expected process noise in odometry’s rotation estimate from rotation.
     alpha2: 0.2 #    Expected process noise in odometry’s rotation estimate from translation.   
-    alpha3: 0.1 #    Expected process noise in odometry’s translation estimate from translation.
+    alpha3: 0.2 #    Expected process noise in odometry’s translation estimate from translation.
     alpha4: 0.2 #    Expected process noise in odometry’s translation estimate from rotation.
     base_frame_id: base_link
     global_frame_id: map
