@@ -80,7 +80,8 @@ To launch the EKF node, the following launch file was wrote:\\
 \subsection{Configuration Odometry Estimation in \texttt{ekf\_node}}
 As previously described and detailed in the node’s documentation\footnote{\href{https://docs.ros.org/en/noetic/api/robot_localization/html/index.html}{https://docs.ros.org/en/noetic/api/robot\_localization/html/index.html}}, we added the information about the sensors used to the configuration file. The principal information to include is the type of sensor and on which topic subscribe, \texttt{odom0:odometry/wheels} and \texttt{imu0:imu/data}, and, for each sensor, we need to choose which components of the state measurement data we want to fuse using the following array by setting the corresponding values to \texttt{true} for those we wish to include and \texttt{false} for those we do not:\\
 \texttt{sensorX\_config}:$ [X, Y, Z, roll, pitch, yaw, \dot{X}, \dot{Y}, \dot{Z}, \dot{roll}, \dot{pitch}, \dot{yaw}, \ddot{X}, \ddot{Y}, \ddot{Z}] $\\
-\alert{ In our case, we fused only the yaw angular velocity from the IMU while for the odometry we select only the velocity along the x and y}.\\
+\remove{In our case, we fused only the yaw angular velocity from the IMU while for the odometry we select only the velocity along the x and y.\\}
+\alert{In our case, we fused the yaw angular velocity and the linear acceleration on x and y from the IMU with the velocity along the x and y  from the odometry in ENU (East North Up) coordinates.\\}
 Additionally, the process noise covariance matrix $ Q $ can be tuned. This matrix represents the noise we add to the total error after each prediction step. Generally, the larger the value of $ Q $ relative to the variance of a given variable in an input message, the faster the filter will converge to the value indicated by the measurement.
 
 \section{Localization \texttt{map} $\rightarrow$ \texttt{odom}}
@@ -112,8 +113,8 @@ ros2 run cartographer_ros cartographer_pbstream_to_ros_map \
 \end{minted}
 \end{listing}\\
 \newpage
-Since certain walls of the Cartographer map where not solid black, the conversion process introduced errors that caused these areas to be misinterpreted as free space. \alert{As a result, the planner generated paths that passed through walls because \texttt{track\_unknown\_space} in the global costmap node the default value is \texttt{false} that treats unknown space as free space. Setting this to \texttt{true} solved the problem. While the noisy map generated converting the map also create some "teleportation" for the localization AMCL.}
-To address this issue, the walls were manually corrected using GIMP, an image editing tool, by modifying the \texttt{.pgm} map file.\\
+Since certain walls of the Cartographer map where not solid black\alert{, given by the uncertainty of the right position of them during mapping}, the conversion process introduced errors that caused these areas to be misinterpreted as free space. \alert{As a result, the planner generated paths that passed through them. To address this issue, the walls were manually corrected using GIMP, an image editing tool, by modifying the \texttt{.pgm} map file.\\ While, for our planner, that works considering that the unknown space is not usable for planning, we have to set the variable \texttt{track\_unknown\_space} in the global costmap node to  \texttt{true} (\texttt{false} by default) to obtain the best result from our planner.}
+\remove{To address this issue, the walls were manually corrected using GIMP, an image editing tool, by modifying the \texttt{.pgm} map file.\\}
 The corrected map is shown below:
 \begin{figure}[h]
 	\centering
@@ -380,9 +381,9 @@ Alternatively, adding a depth camera could provide a 3D occupancy grid, which ca
 
 \item \remove{We also encountered issues with the D* planner after converting the map to a PGM file. The algorithm treated unknown space as free space, which greatly increased computation time. The solution was to mark all unknown space as occupied, which resolved the problem.}
 
-\item \alert{Setting up the D-star global planner }
+\item \alert{The D-star planner is not designed if encounter an obstacle during its path, it not update the costmap used internally at each request of the planner}
 
-\item \alert{Setting up collision monitor for improve safety reason }
+\item \add{Setting up collision monitor for improve safety reason}
 
 \item Additionally, we discovered misalignment between the planimetry image and the Cartographer map, as shown in the image below. It appears that at each major rotation, the system overestimates the robot’s rotation angle during mapping.
 \begin{figure}[h]
