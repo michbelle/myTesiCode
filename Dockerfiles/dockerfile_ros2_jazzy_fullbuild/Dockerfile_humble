@@ -1,0 +1,31 @@
+# just config with data
+
+# add AS builder to have a build enviroment see internet about
+ARG rosimage=osrf/ros:humble-desktop-full
+
+FROM $rosimage
+
+#install zenoh
+RUN echo "deb [trusted=yes] https://download.eclipse.org/zenoh/debian-repo/ /" | sudo tee -a /etc/apt/sources.list > /dev/null \
+    && apt update \
+    && apt install -y systemctl libgtk-3-common zenoh \
+    && rm -rf /var/lib/apt/lists/*
+
+#install D-start-trajectory-planner
+RUN mkdir -p ~/ff_ws/src \
+    && cd ~/ff_ws/src \
+    && git clone -b ros2_port https://github.com/ElettraSciComp/DStar-Trajectory-Planner.git \
+    && apt update \
+    && cd ~/ff_ws \
+    && rosdep install --from-paths src --ignore-src --rosdistro humble -yr \
+    && /bin/bash -c "source /opt/ros/humble/setup.bash; colcon build --symlink-install --packages-select dstar_global_planner --cmake-args -DCMAKE_BUILD_TYPE=Release >> ~/log_build_Dstar.log" 
+
+#install tesi code
+RUN cd ~/ff_ws/src \
+    && git clone -b master https://github.com/michbelle/myTesiCode.git \
+    && apt update \
+    && cd ~/ff_ws \
+    && rosdep install --from-paths src --ignore-src --rosdistro humble -yr \
+    && echo "export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:/root/ff_ws/src/myTesiCode/rmf_code/ign_world/elettra/modelOUT/" >> ~/.bashrc \
+    && /bin/bash -c "source /opt/ros/humble/setup.bash; colcon build --symlink-install --packages-select myCode >> ~/log_build_mycode.log" \
+    && echo "source ~/ff_ws/install/setup.bash" >> ~/.bashrc
