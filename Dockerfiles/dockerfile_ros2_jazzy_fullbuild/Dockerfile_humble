@@ -29,6 +29,6 @@ RUN cd ~/ff_ws/src \
     && apt update \
     && cd ~/ff_ws \
     && rosdep install --from-paths src --ignore-src --rosdistro humble -yr \
-    && echo "export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:/root/ff_ws/src/myTesiCode/rmf_code/ign_world/elettra/modelOUT/" >> ~/.bashrc \
-    && /bin/bash -c "source /opt/ros/humble/setup.bash; colcon build --symlink-install --packages-select myCode >> ~/log_build_mycode.log" \
+    && echo "export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp" >> ~/.bashrc \
+    && /bin/bash -c "source /opt/ros/humble/setup.bash; colcon build --symlink-install --packages-select myCode" \
     && echo "source ~/ff_ws/install/setup.bash" >> ~/.bashrc
