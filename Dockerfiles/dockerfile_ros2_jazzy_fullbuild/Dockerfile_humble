@@ -5,6 +5,9 @@ ARG rosimage=osrf/ros:humble-desktop-full
 
 FROM $rosimage
 
+
+RUN apt update && apt install -y ros-dev-tools vim tmux
+
 #install zenoh
 RUN echo "deb [trusted=yes] https://download.eclipse.org/zenoh/debian-repo/ /" | sudo tee -a /etc/apt/sources.list > /dev/null \
     && apt update \

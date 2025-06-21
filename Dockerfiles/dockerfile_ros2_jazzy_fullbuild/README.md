@@ -13,3 +13,7 @@ Docker load image
 Docker new image
 
 ```docker build --no-cache . -t rmf_all_imagev1.1```
+
+Docker new image
+
+```docker build --no-cache -f Dockerfile_humble . -t sensor_humble```
