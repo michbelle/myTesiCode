@@ -1,10 +1,10 @@
 amcl:
   ros__parameters:
     use_sim_time: False
-    alpha1: 0.2 #    Expected process noise in odometry’s rotation estimate from rotation.
-    alpha2: 0.2 #    Expected process noise in odometry’s rotation estimate from translation.   
-    alpha3: 0.2 #    Expected process noise in odometry’s translation estimate from translation.
-    alpha4: 0.2 #    Expected process noise in odometry’s translation estimate from rotation.
+    alpha1: 0.1 #    Expected process noise in odometry’s rotation estimate from rotation.
+    alpha2: 0.001 #    Expected process noise in odometry’s rotation estimate from translation.   
+    alpha3: 0.05 #    Expected process noise in odometry’s translation estimate from translation.
+    alpha4: 0.001 #    Expected process noise in odometry’s translation estimate from rotation.
     base_frame_id: base_link
     global_frame_id: map
     laser_model_type: likelihood_field
@@ -19,7 +19,8 @@ amcl:
     z_max: 0.05
     z_rand: 0.1
     z_short: 0.05
-    scan_topic: scan
+    map_topic : /map
+    scan_topic: /scan
     set_initial_pose: True
     initial_pose:
       x: 5.72118
