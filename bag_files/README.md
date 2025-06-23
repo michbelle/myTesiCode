@@ -52,7 +52,12 @@ play
 ros2 bag play \
     record_001 \
     --topics \
-
+    <topic 1> \ ...
 
 ```
 
+playing with simulation time
+```
+ros2 bag play record_001 --clock
+
+```
