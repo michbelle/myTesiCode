@@ -28,7 +28,7 @@ avaible topics
 record
 ```bash
 ros2 bag record \
-    -o record_001 \
+    -o record_003 \
     /imu/data \
     /joint_states \
     /magnetometer \
