@@ -155,25 +155,27 @@ Visualization Manager:
       Show Axes: true
       Show Names: false
       Tree:
-        map:
-          odom:
-            base_link:
-              base_footprint:
+        base_link:
+          base_footprint:
+            {}
+          chassis_link:
+            fl_wheel_link:
+              {}
+            fr_wheel_link:
+              {}
+            payload_link:
+              imu_link:
                 {}
-              chassis_link:
-                fl_wheel_link:
-                  {}
-                fr_wheel_link:
-                  {}
-                payload_link:
-                  imu_link:
-                    {}
-                  lidar_link:
-                    {}
-                rl_wheel_link:
-                  {}
-                rr_wheel_link:
-                  {}
+              lidar_link:
+                {}
+            rl_wheel_link:
+              {}
+            rr_wheel_link:
+              {}
+        map:
+          {}
+        odom:
+          {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -258,7 +260,7 @@ Visualization Manager:
           Scale: 1
           Value: true
         Value: true
-      Enabled: true
+      Enabled: false
       Head Length: 0.30000001192092896
       Head Radius: 0.10000000149011612
       Name: AMCL_PoseWithCovariance
@@ -272,7 +274,7 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /amcl_pose
-      Value: true
+      Value: false
     - Angle Tolerance: 0.10000000149011612
       Class: rviz_default_plugins/Odometry
       Covariance:
@@ -290,7 +292,7 @@ Visualization Manager:
           Scale: 1
           Value: true
         Value: true
-      Enabled: true
+      Enabled: false
       Keep: 2
       Name: EKF_Odometry
       Position Tolerance: 0.10000000149011612
@@ -311,11 +313,11 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /odometry/filtered
-      Value: true
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: map
+    Fixed Frame: base_link
     Frame Rate: 30
   Name: root
   Tools:

@@ -21,6 +21,8 @@ amcl:
     z_short: 0.05
     map_topic : /map
     scan_topic: /scan
+    update_min_a: 0.2
+    update_min_d: 0.25
     set_initial_pose: True
     initial_pose:
       # record2
