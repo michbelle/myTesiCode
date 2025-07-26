@@ -28,7 +28,7 @@ avaible topics
 record
 ```bash
 ros2 bag record \
-    -o record_001 \
+    -o record_003 \
     /imu/data \
     /joint_states \
     /magnetometer \
@@ -52,7 +52,12 @@ play
 ros2 bag play \
     record_001 \
     --topics \
-
+    <topic 1> \ ...
 
 ```
 
+playing with simulation time
+```
+ros2 bag play record_001 --clock
+
+```

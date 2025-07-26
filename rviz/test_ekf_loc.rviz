@@ -6,8 +6,8 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /LaserScan1
         - /LaserScan1/Topic1
+        - /EKF_Odometry1
       Splitter Ratio: 0.5
     Tree Height: 555
   - Class: rviz_common/Selection
@@ -50,10 +50,12 @@ Visualization Manager:
       Reference Frame: <Fixed Frame>
       Value: true
     - Alpha: 0.699999988079071
+      Binary representation: false
+      Binary threshold: 100
       Class: rviz_default_plugins/Map
       Color Scheme: map
       Draw Behind: false
-      Enabled: false
+      Enabled: true
       Name: Map
       Topic:
         Depth: 5
@@ -69,12 +71,14 @@ Visualization Manager:
         Reliability Policy: Reliable
         Value: /map_updates
       Use Timestamp: false
-      Value: false
+      Value: true
     - Alpha: 0.699999988079071
+      Binary representation: false
+      Binary threshold: 100
       Class: rviz_default_plugins/Map
       Color Scheme: costmap
       Draw Behind: false
-      Enabled: false
+      Enabled: true
       Name: MapLocal
       Topic:
         Depth: 5
@@ -90,12 +94,14 @@ Visualization Manager:
         Reliability Policy: Reliable
         Value: /local_costmap/costmap_updates
       Use Timestamp: false
-      Value: false
+      Value: true
     - Alpha: 0.699999988079071
+      Binary representation: false
+      Binary threshold: 100
       Class: rviz_default_plugins/Map
       Color Scheme: map
       Draw Behind: false
-      Enabled: false
+      Enabled: true
       Name: MapGlobal
       Topic:
         Depth: 5
@@ -111,9 +117,11 @@ Visualization Manager:
         Reliability Policy: Reliable
         Value: /global_costmap/costmap_updates
       Use Timestamp: false
-      Value: false
+      Value: true
     - Class: rviz_default_plugins/TF
       Enabled: true
+      Filter (blacklist): ""
+      Filter (whitelist): ""
       Frame Timeout: 15
       Frames:
         All Enabled: true
@@ -130,6 +138,8 @@ Visualization Manager:
         imu_link:
           Value: true
         lidar_link:
+          Value: true
+        map:
           Value: true
         odom:
           Value: true
@@ -162,6 +172,8 @@ Visualization Manager:
               {}
             rr_wheel_link:
               {}
+        map:
+          {}
         odom:
           {}
       Update Interval: 0
@@ -248,10 +260,10 @@ Visualization Manager:
           Scale: 1
           Value: true
         Value: true
-      Enabled: true
+      Enabled: false
       Head Length: 0.30000001192092896
       Head Radius: 0.10000000149011612
-      Name: PoseWithCovariance
+      Name: AMCL_PoseWithCovariance
       Shaft Length: 1
       Shaft Radius: 0.05000000074505806
       Shape: Arrow
@@ -262,7 +274,7 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /amcl_pose
-      Value: true
+      Value: false
     - Angle Tolerance: 0.10000000149011612
       Class: rviz_default_plugins/Odometry
       Covariance:
@@ -281,8 +293,8 @@ Visualization Manager:
           Value: true
         Value: true
       Enabled: false
-      Keep: 100
-      Name: Odometry
+      Keep: 2
+      Name: EKF_Odometry
       Position Tolerance: 0.10000000149011612
       Shape:
         Alpha: 1
@@ -348,16 +360,16 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 47.832611083984375
+      Distance: 16.974504470825195
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0
-        Y: 0
-        Z: 0
+        X: -0.35505998134613037
+        Y: 2.4565114974975586
+        Z: -1.485947847366333
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
@@ -384,5 +396,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1200
-  X: 2229
+  X: 720
   Y: 108
