@@ -2,5 +2,106 @@
 \part{Results and Analysis}
 
 \chapter{Presentation of results from testing and evaluation}
+This part is diveded based on the differents thing that have been solved:
+\begin{itemize}
+	\item porting the planner
+	\item use the strucure of a robot base and build using nav2 a navigation robot in a challeging enviroment
+	\item port a old ros1 robot jobot to ros2
+	\item use of the Open-rmf
+\end{itemize}
+\section{Plenner implementation}
+this are some result optained by the planner\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{img/rviz.png}
+	\captionof{figure}{results obtained by the planner}
+\end{figure}\\
+\section{RoverRobotics navigation result}
+This are some images that display the navigation of the rover\\
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{img/rviz.png}
+\captionof{figure}{results navigation of roverrobotics}
+\end{figure}\\
+\section{Jobot navigation result}
+This are some images that display the navigation of the jobot\\
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{img/rviz.png}
+\captionof{figure}{results navigation of jobot}
+\end{figure}\\
+\section{RoverRobotics navigation result}
+This are some images that display the navigation of the rover\\
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{img/rviz.png}
+\captionof{figure}{results navigation of roverrobotics}
+\end{figure}\\
+\section{Open-RMF navigation result}
+these are some result of the navigation of the 2 robots\\
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{img/rviz.png}
+\captionof{figure}{results navigation of the 2 robots with open-rmf}
+\end{figure}\\
+
 \chapter{Comparison of system performance before and after the porting process}
+This part is diveded based on the differents thing that have been solved:
+\begin{itemize}
+	\item porting the planner
+	\item use the strucure of a robot base and build using nav2 a navigation robot in a challeging enviroment
+	\item port a old ros1 robot to ros2
+	\item use of the Open-rmf
+\end{itemize}
+
+\section{Plenner comparisation before and after and vs new nav2 planner}
+in this part we show the time required from the asking to the global planner node to the responce path that it returned based on the differences systems on the jobot robot that has ros 1 built in vs the docker ros2 image and the standard planner. \\
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		Start->End & ROS 1 D-start & ROS 2 D-start & ROS 2 Nav2 \\
+		\hline
+		ufficio -> magazzino & 1.25 & 1.35 & 1.27 \\
+		\hline
+		ufficio -> pausa lontana 1 & 1.25 & 1.35 & 1.27 \\
+		\hline
+		magazzino -> pausa lontana 2 & 1.25 & 1.35 & 1.27 \\
+		\hline
+	\end{tabular}
+	\caption{result planner asking the node}
+\end{table}\\
+this is some result on rviz\\
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{img/rviz.png}
+\captionof{figure}{rviz plan results}
+\end{figure}\\
+we obtain the following conclusion\\
+
+\section{comparisation jobot navigation}
+the test are performed using the same points as used before
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		Start->End & ROS 1 D-start & ROS 2 D-start \\
+		\hline
+		ufficio -> magazzino & 1.25 & 1.35\\
+		\hline
+		ufficio -> pausa lontana 1 & 1.25 & 1.35\\
+		\hline
+		magazzino -> pausa lontana 2 & 1.25 & 1.35\\
+		\hline
+	\end{tabular}
+	\caption{result planner asking the node}
+\end{table}
+we obtain the following conclusion
 \chapter{Discussion on the challenges encountered and how they were addressed}
+the chalenges are:
+\begin{itemize}
+	\item high error on localization moving forward, it over estimate the movment comparing the map
+\end{itemize}
+
+
+

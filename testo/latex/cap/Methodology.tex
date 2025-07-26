@@ -232,8 +232,31 @@ PLUGINLIB_EXPORT_CLASS(<type of the plugin class>, <type of the base class>);
 The system was built using the new build tool, \texttt{colcon}\footnote{\href{https://github.com/colcon}{https://github.com/colcon}}. It is a command line tool to improve the workflow of building, testing and using multiple software packages. It automates the process, handles the ordering and sets up the environment to use the packages.\\
 After successful compilation, the global planner is ready for use within the Nav2 framework.
 
-\chapter{Hardware adaptation process from Rover Zero to Rover Mini}
-\alert{Rimuovo il capitolo?}
+\chapter{Jobot porting procedure to ROS 2}
+\alert{
+	Hardware adaptation process from Rover Zero to Rover Mini -Rimuovo il capitolo?\\
+}
+\alert{
+In this chapter we modified the code to control the robot based on ROS 1 to ROS 2.}
+\section{how is made}
+\alert{
+the robot is a 2WD rover based on a NUC connected to a laser scanner A3 and an arduino that throutght a serial control control the robot and obtain the data from the IMU.\\the robot is the following one:\\
+}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\linewidth]{img/rviz.png}
+	\captionof{figure}{Jobot robot}
+\end{figure}\\
+\section{changing in the code}
+\alert{	We changed the strucure of hw the node work, i changed the strucure like a state machine used in the lifecycle node. this setup allow to control remotly the passages of the states of the robot allowing to obtain information when the robot has failed to configurate himself corretly. For now the passage is automatic controlled by an lifecycle manager node similar to the one used to control the navigation nodes.\\
+similar changes from porting the navigation
+}
+
+\section{create a simulated robot}
+
+\alert{in gazebo we take the input of the /cmd\_vel and publish data of odom to have a model of the robot avaible  in gazebo to simulation the robot also in gazebo}
+
+
 \chapter{Integration of the navigation stack with Open-RMF}
 To integrate a fleet in Open-RMF, we first need information about the building's infrastructure, such as automatic doors or lifts that can be controlled, and the \textbf{route maps} that robots can use. \textbf{Route maps} are essential for predicting the paths robots will take, enabling Open-RMF to perform effective \textbf{traffic management} and avoid conflicts. All these information have to be stored in a file that can be generated using the \textbf{traffic editor tool}\footnote{\href{https://github.com/open-rmf/rmf\_traffic\_editor}{https://github.com/open-rmf/rmf\_traffic\_editor}}  \footnote{\href{https://osrf.github.io/ros2multirobotbook/intro.html}{https://osrf.github.io/ros2multirobotbook/intro.html}}, a tool provided by Open-RMF. The following section describes how the Traffic Editor works and how we used it in our implementation.
 \section{Traffic Management - Route Maps Generation}
