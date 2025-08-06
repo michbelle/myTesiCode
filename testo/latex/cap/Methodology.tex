@@ -237,23 +237,37 @@ After successful compilation, the global planner is ready for use within the Nav
 	Hardware adaptation process from Rover Zero to Rover Mini -Rimuovo il capitolo?\\
 }
 \alert{
-In this chapter we modified the code to control the robot based on ROS 1 to ROS 2.}
-\section{how is made}
+	Since we have another 2WD rover, called Jobot, still based on ROS 1. it was chosen to port also that robot to ROS 2 to best evaluate the use of Open-RMF.
+}
+\section{Jobot Description}
 \alert{
-the robot is a 2WD rover based on a NUC connected to a laser scanner A3 and an arduino that throutght a serial control control the robot and obtain the data from the IMU.\\the robot is the following one:\\
+Jobot is a 6 wheels with 2WD rover. It has a mini pc that collect data from a Rplidar  A2 laser sensor and acceleration data from a serial bus to a Arduino microprocessor connected to an IMU.\\The robot is the following one:\\
 }
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\linewidth]{img/rviz.png}
 	\captionof{figure}{Jobot robot}
 \end{figure}\\
+\alert{
+	\\
+}
 \section{changing in the code}
 \alert{	We changed the strucure of hw the node work, i changed the strucure like a state machine used in the lifecycle node. this setup allow to control remotly the passages of the states of the robot allowing to obtain information when the robot has failed to configurate himself corretly. For now the passage is automatic controlled by an lifecycle manager node similar to the one used to control the navigation nodes.\\
 similar changes from porting the navigation
 }
 
-\section{create a simulated robot}
-
+\section{Create a model for the simulation}
+\add{
+For the simulation purpose we need to create a model of it in the URDF format, that is going to be used by Gazebo to build a 3D model and generate all the information of the sensor that are used.
+For the creation of the model we are going to use:
+ignition::gazebo::systems::DiffDrive
+sensor name="imu" type="imu"
+sensor name='gpu\_lidar' type='gpu\_lidar'
+<plugin filename="libignition-gazebo-sensors-system.so" name="ignition::gazebo::systems::Sensors">
+<render\_engine>ogre2</render\_engine>
+</plugin>
+Similar to the mini rover
+}
 \alert{in gazebo we take the input of the /cmd\_vel and publish data of odom to have a model of the robot avaible  in gazebo to simulation the robot also in gazebo}
 
 
