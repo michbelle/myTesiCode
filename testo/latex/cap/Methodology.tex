@@ -249,26 +249,32 @@ Jobot is a 6 wheels with 2WD rover. It has a mini pc that collect data from a Rp
 	\captionof{figure}{Jobot robot}
 \end{figure}\\
 \alert{
-	\\
+	\\The steps taken in action to use the code in ROS 2 is the following.
 }
-\section{changing in the code}
-\alert{	We changed the strucure of hw the node work, i changed the strucure like a state machine used in the lifecycle node. this setup allow to control remotly the passages of the states of the robot allowing to obtain information when the robot has failed to configurate himself corretly. For now the passage is automatic controlled by an lifecycle manager node similar to the one used to control the navigation nodes.\\
-similar changes from porting the navigation
+\section{What changes where made in the code}
+\alert{
+	The code use the serial ROS 1 library to communicate to the Arduino and retrive the data from the encoders and the imu data. This is not more available in ROS 2 and to avoid to rewrite the code we use some code porting available on the internet. In our case: 
+	https://github.com/iwelch82/serial-ros2.git
+	Then the data are used to publish and odometry pose estimation of the robot and also to publish the data of the imu using a secondary node. This node is updated to use a base node logic while the principal node that call it is wrote using the lifecycle structure. The logic is used to configure the node during on\_configure and if fail stop and clean everything when it is request of deactivate or cleanup. This structure allow to remotely control the passage through the states, for now and in our case it is going to be associated to an automatic manager used in nav2 the \texttt{lifecycle\_manager} in \texttt{nav2\_lifecycle\_manager}. This node check all the node that are connected to him and sequentialy configure all the node and then activate. If for some reason someone crashed or we want do kill a process also for the other nodes the procedure is communicated and a procedure of stop all nodes is activated. This node is only called in the launch file.
+	Also the Jobot has a series of custom messages used internally, they where update using the ROS 2 standard.
+	When it all configured then the node start to publish the robot state odometry but doesnt publish static trasform between the sensors, so they are manualy published using the \texttt{static\_transform\_publisher} provided by \texttt{tf2\_ros}.
+}
+
+\alert{
+	This and with the same software used for the navigation allow this platform to be an autonomous mobile robot.
 }
 
 \section{Create a model for the simulation}
-\add{
-For the simulation purpose we need to create a model of it in the URDF format, that is going to be used by Gazebo to build a 3D model and generate all the information of the sensor that are used.
-For the creation of the model we are going to use:
-ignition::gazebo::systems::DiffDrive
-sensor name="imu" type="imu"
-sensor name='gpu\_lidar' type='gpu\_lidar'
-<plugin filename="libignition-gazebo-sensors-system.so" name="ignition::gazebo::systems::Sensors">
-<render\_engine>ogre2</render\_engine>
-</plugin>
-Similar to the mini rover
+\alert{
+For simulation purpose we need to create a model of it in the URDF format, that is going to be used by Gazebo to build a 3D model and generate all the information of the sensor that are used.
+Since there are 2WD is going to add 2 cylinder as wheel that are controlled by this gazebo plugin \texttt{ignition::gazebo::systems::DiffDrive} that allow to receive the command of velocity and move the robot consecutively. Then we add the sensors types \texttt{imu} and \texttt{gpu\_lidar} to simulate the imu and the lidar setting their parameters as similar as the realistic sensors used. This modeling is similar to the editing of the Mini Rover from the Rover Robotics.
+At the end we obtain the following model:
 }
-\alert{in gazebo we take the input of the /cmd\_vel and publish data of odom to have a model of the robot avaible  in gazebo to simulation the robot also in gazebo}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\linewidth]{img/jobot_tf_strucure.png}
+	\captionof{figure}{Jobot robot URDF model}
+\end{figure}\\
 
 
 \chapter{Integration of the navigation stack with Open-RMF}
@@ -378,6 +384,10 @@ To set up Zenoh for use with Free Fleet, the following steps are required:
 After completing the setup, we can use the following launch file to start the Free Fleet adapter:\\
 \texttt{1rmf\_mini\_fleet\_adapter.launch.xml}\\
 This launch file takes as parameters the fleet configuration file and the route maps that the fleet will use. Once launched, it is possible to monitor the robot topics on the RMF server.
+\alert{
+	\\Also this is replicated for the Jobot fleet, launching the following file\\
+	\texttt{rmf\_jobot\_fleet\_adapter.launch.xml}\\
+}
 \newpage
 \section{Web interfaces}
 Open-RMF also offers a web-based interface, \texttt{rmf-web}\footnote{\href{https://github.com/open-rmf/rmf-web}{https://github.com/open-rmf/rmf-web}}, to visualize and control the system on a browser. It consists of two main components:
