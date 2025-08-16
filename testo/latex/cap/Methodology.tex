@@ -245,7 +245,7 @@ Jobot is a 6 wheels with 2WD rover. It has a mini pc that collect data from a Rp
 }
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=1\linewidth]{img/rviz.png}
+	\includegraphics[width=0.5\linewidth]{img/jobot_robot.jpg}
 	\captionof{figure}{Jobot robot}
 \end{figure}\\
 \alert{
@@ -257,13 +257,16 @@ Jobot is a 6 wheels with 2WD rover. It has a mini pc that collect data from a Rp
 	https://github.com/iwelch82/serial-ros2.git
 	Then the data are used to publish and odometry pose estimation of the robot and also to publish the data of the imu using a secondary node. This node is updated to use a base node logic while the principal node that call it is wrote using the lifecycle structure. The logic is used to configure the node during on\_configure and if fail stop and clean everything when it is request of deactivate or cleanup. This structure allow to remotely control the passage through the states, for now and in our case it is going to be associated to an automatic manager used in nav2 the \texttt{lifecycle\_manager} in \texttt{nav2\_lifecycle\_manager}. This node check all the node that are connected to him and sequentialy configure all the node and then activate. If for some reason someone crashed or we want do kill a process also for the other nodes the procedure is communicated and a procedure of stop all nodes is activated. This node is only called in the launch file.
 	Also the Jobot has a series of custom messages used internally, they where update using the ROS 2 standard.
-	When it all configured then the node start to publish the robot state odometry but doesnt publish static trasform between the sensors, so they are manualy published using the \texttt{static\_transform\_publisher} provided by \texttt{tf2\_ros}.
+	When it all configured then the node start to publish the robot state odometry but doesnt publish static trasform between the sensors, so they are manualy published using the \texttt{static\_transform\_publisher} provided by \texttt{tf2\_ros}.\\
 }
-
+\add{
+	To avoid a lot of changes the software is build inside a docker container and all the applications are launched by it.\\
+}
 \alert{
-	This and with the same software used for the navigation allow this platform to be an autonomous mobile robot.
+	This and with the same software used for the navigation allow this platform to be an autonomous mobile robot.\\
 }
 
+\newpage
 \section{Create a model for the simulation}
 \alert{
 For simulation purpose we need to create a model of it in the URDF format, that is going to be used by Gazebo to build a 3D model and generate all the information of the sensor that are used.
@@ -272,7 +275,7 @@ At the end we obtain the following model:
 }
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=1\linewidth]{img/jobot_tf_strucure.png}
+	\includegraphics[width=0.6\linewidth]{img/jobot_tf_strucure.png}
 	\captionof{figure}{Jobot robot URDF model}
 \end{figure}\\
 
@@ -439,3 +442,5 @@ Alternatively, adding a depth camera could provide a 3D occupancy grid, which ca
 	\captionof{figure}{Overlap Cartographer Map and photo of floor plan}
 \end{figure}
 \end{itemize}
+
+\item \alert{For feaster the deployment of the robots, we used the  functionality of rosbag, a tool that allow to record the data published by some or all nodes and then republished after also with fastest velocity. This allot us to configure obtain the best outcome of process noise covariance of the localization node and the }
