@@ -342,7 +342,7 @@ We can now launch the core components of RMF.
 
 \section{RMF core}
 This is the launch file used to start the core components of RMF:\\
-\texttt{0rmf\_mini\_world\_rmf\_core.launch.xml}\\
+\texttt{0\_rmf\_core.launch.xml}\\
 
 This launch file starts the following nodes, which form the core structure of RMF:
 \begin{itemize}
@@ -389,7 +389,7 @@ After completing the setup, we can use the following launch file to start the Fr
 This launch file takes as parameters the fleet configuration file and the route maps that the fleet will use. Once launched, it is possible to monitor the robot topics on the RMF server.
 \alert{
 	\\Also this is replicated for the Jobot fleet, launching the following file\\
-	\texttt{rmf\_jobot\_fleet\_adapter.launch.xml}\\
+	\texttt{1rmf\_jobot\_fleet\_adapter.launch.xml}\\
 }
 \newpage
 \section{Web interfaces}
@@ -409,8 +409,8 @@ Then we can connect to the web dashboard:
 	\captionof{figure}{Open-RMF Web Dashboard}
 \end{figure}
 
-\subsection{\alert{Deployment Template}}
-Open-RMF offers a reference template\footnote{\href{https://github.com/open-rmf/rmf_deployment_template}{https://github.com/open-rmf/rmf\_deployment\_template}} for production deployment. Based on Kubernetes, it provides all the necessary information to deploy on a public server and to set up a secure connection.
+\subsection{Deployment Template}
+\remove{Open-RMF offers a reference template\footnote{\href{https://github.com/open-rmf/rmf_deployment_template}{https://github.com/open-rmf/rmf\_deployment\_template}} for production deployment. Based on Kubernetes, it provides all the necessary information to deploy on a public server and to set up a secure connection.}
 
 
 \chapter{\alert{Testing and evaluation of the system}}
