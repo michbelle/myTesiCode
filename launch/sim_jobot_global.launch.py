@@ -14,7 +14,7 @@ from launch.actions import SetEnvironmentVariable
 
 def generate_launch_description():
     # Create the launch configuration variables
-    set_env_id_mini=SetEnvironmentVariable('ROS_DOMAIN_ID', '10'),
+    set_env_id_jobot=SetEnvironmentVariable('ROS_DOMAIN_ID', '20'),
     use_sim_time = LaunchConfiguration('use_sim_time')
 
     
@@ -26,25 +26,26 @@ def generate_launch_description():
     # Include the gz sim launch file  
     launch_folder = get_package_share_directory("myCode")
     gz_sim = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(launch_folder, "launch", "simul", "0.1s_ign_spawn_mini_gazebo.launch.py")),
+        PythonLaunchDescriptionSource(os.path.join(launch_folder, "launch", "simul", "0.2s_ign_spawn_jobot_gazebo.launch.py")),
         launch_arguments={
         }.items()
     )
-
+    
+    launch_folder = get_package_share_directory("jobot_launchpad")
     odometry_increase_precision = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(launch_folder, "launch", "1s_robot_localizationEKF.launch.py")),
+        PythonLaunchDescriptionSource(os.path.join(launch_folder, "launch", "simul", "Slocalization.launch.py")),
         launch_arguments={
         }.items()
     )
 
     nav_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(launch_folder, "launch", "2s_navigation.launch.py")),
+        PythonLaunchDescriptionSource(os.path.join(launch_folder, "launch", "simul", "Snavigation.launch.py")),
         launch_arguments={
         }.items()
     )
 
     localization_nav = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(launch_folder, "launch", "3s_Lamcl.py")),
+        PythonLaunchDescriptionSource(os.path.join(launch_folder, "launch", "simul", "Sslam.py")),
         launch_arguments={
         }.items()
     )
@@ -54,7 +55,7 @@ def generate_launch_description():
     # Create the launch description and populate
     ld = LaunchDescription()
 
-    ld.add_action(set_env_id_mini)
+    ld.add_action(set_env_id_jobot)
 
     # Declare the launch options
     ld.add_action(declare_use_sim_time_cmd)
