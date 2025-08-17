@@ -9,7 +9,7 @@ from launch.substitutions import Command, LaunchConfiguration, PathJoinSubstitut
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
 
-
+from launch.actions import ExecuteProcess
 
 def generate_launch_description():
     # Create the launch configuration variables
@@ -31,6 +31,11 @@ def generate_launch_description():
 
     # Include the gz sim launch file  
     gz_sim_share = get_package_share_directory("ros_gz_sim")
+    # gz_sim = ExecuteProcess(
+    #     cmd=['gz', 'sim', '-r', '-s', gz_world_arg],
+    #     output='screen',
+    # )
+    
     gz_sim = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(gz_sim_share, "launch", "gz_sim.launch.py")),
         launch_arguments={

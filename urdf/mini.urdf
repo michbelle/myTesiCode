@@ -1,4 +1,5 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="rover_mini">
+    <xacro:arg name="namespace" default="mini"/>
 
     <!-- Robot Parameters -->
     <xacro:property name="wheel_z_offset" value="-0.0155" />
@@ -193,14 +194,14 @@
             <child_frame_id>base_link</child_frame_id>
 
             <!-- Topics -->
-            <topic>/cmd_vel</topic>
-            <odom_topic>/odometry/wheels</odom_topic>
-            <tf_topic>/tf_gazebo</tf_topic>
+            <topic>$(arg namespace)/cmd_vel</topic>
+            <odom_topic>$(arg namespace)/odometry/wheels</odom_topic>
+            <tf_topic>$(arg namespace)/tf_gazebo</tf_topic>
 
         </plugin>
 
         <plugin filename="ignition-gazebo-joint-state-publisher-system" name="ignition::gazebo::systems::JointStatePublisher">
-            <topic>/joint_states</topic>
+            <topic>$(arg namespace)/joint_states</topic>
         </plugin>
     </gazebo>
 

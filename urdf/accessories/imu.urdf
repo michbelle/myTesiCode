@@ -1,4 +1,5 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="imu">
+    <xacro:arg name="namespace" default="mini"/>
     
     <link name="imu_link">
         <visual>
@@ -23,7 +24,7 @@
             <always_on>1</always_on>
             <update_rate>50</update_rate>
             <visualize>true</visualize>
-            <topic>imu/data</topic>
+            <topic>$(arg namespace)/imu/data</topic>
             <enable_metrics>true</enable_metrics>
             <gz_frame_id>imu_link</gz_frame_id>
         </sensor>
