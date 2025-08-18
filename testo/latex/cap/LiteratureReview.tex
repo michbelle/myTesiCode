@@ -212,13 +212,14 @@ The core of Open-RMF, known as \texttt{rmf\_core}, is composed of several modula
 The following tools are available to support development with Open-RMF:
 \begin{itemize}
 	\item \textbf{RMF demos}: A collection of demonstration packages showcasing the capabilities of Open-RMF. These serve as a useful starting point for development and experimentation.
-	\item \textbf{Traffic Editor}: A graphical map editor used to define traffic patterns and interaction points (e.g., doors, lifts) that RMF uses for traffic management. It also supports the generation of Gazebo simulation worlds based on the designed maps.
+	\item \textbf{Traffic Editor}: A graphical map editor used to define traffic patterns and interaction points (e.g., doors, lifts) that RMF uses for traffic management. It also supports the generation of Gazebo simulation worlds based on the designed maps.\\
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=0.8\linewidth]{img/RMF_tut_trafficEditor.png}
 		\captionof{figure}{Traffic Editor}
 		\label{fig:Traffic Editor}
-	\end{figure}\\\\\\
+	\end{figure}\\
+	\alert{this is gonna be replace by \textbf{rmf\_site}\footnote{\href{https://github.com/open-rmf/rmf\_site}{https://github.com/open-rmf/rmf\_site}}}
 	\item \textbf{Free Fleet}: An open-source fleet adapter that enables the integration of standalone mobile robots into Open-RMF, allowing the creation of heterogeneous fleets.
 	\begin{figure}[h]
 		\centering
@@ -227,6 +228,7 @@ The following tools are available to support development with Open-RMF:
 		\label{fig:Fleet Adapter}
 	\end{figure}
 	\item \textbf{RMF Schedule Visualizer}: An RViz plugin that provides visualization and monitoring of the RMF schedule, enabling users to observe and interact with traffic and task execution in real time.
+	\newpage
 	\item \textbf{RMF Web UI} : A web-based application for visualization and control of the Robotic Middleware Framework (\texttt{rmf\_core}). It provides a user-friendly interface for monitoring system state and interacting with fleet operations.
 	\begin{figure}[h]
 		\centering
