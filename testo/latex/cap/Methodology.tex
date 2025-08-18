@@ -436,11 +436,16 @@ Alternatively, adding a depth camera could provide a 3D occupancy grid, which ca
 \item \add{Setting up collision monitor for improve safety reason}
 
 \item Additionally, we discovered misalignment between the planimetry image and the Cartographer map, as shown in the image below. It appears that at each major rotation, the system overestimates the robot’s rotation angle during mapping.
+
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\linewidth]{img/mapComposizione.png}
 	\captionof{figure}{Overlap Cartographer Map and photo of floor plan}
 \end{figure}
-\end{itemize}
 
 \item \alert{For feaster the deployment of the robots, we used the  functionality of rosbag, a tool that allow to record the data published by some or all nodes and then republished after also with fastest velocity. This allot us to configure obtain the best outcome of process noise covariance of the localization node and the }
+
+
+
+
+\end{itemize}
