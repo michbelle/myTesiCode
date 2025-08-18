@@ -76,7 +76,6 @@ def generate_launch_description():
         ],
         remappings=[
             ("/"+robot_name+"/cmd_vel","/cmd_vel"),
-            ("/"+robot_name+"/clock","/clock"),
             ("/"+robot_name+"/odometry/wheels","/odometry/wheels"),
             ("/"+robot_name+"/tf","/tf"),
             ("/"+robot_name+"/joint_states","/joint_states"),
