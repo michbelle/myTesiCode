@@ -34,7 +34,7 @@ def generate_launch_description():
         executable="create",
         name="mini_gz_create",
         arguments=[
-            "-topic", "/"+robot_name+"/robot_description",
+            "-topic", "/robot_description",
             "-name", "rover_"+robot_name+"",
             "-allow_renaming", "true",
             "-x", "53.84",
@@ -49,7 +49,7 @@ def generate_launch_description():
         name="mini_gz_bridge",
         arguments=[
             "/"+robot_name+"/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist",
-            "/"+robot_name+"/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock",
+            "/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock",
             "/"+robot_name+"/odometry/wheels@nav_msgs/msg/Odometry@ignition.msgs.Odometry",
             "/"+robot_name+"/tf@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V",
             "/"+robot_name+"/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model",
@@ -59,7 +59,7 @@ def generate_launch_description():
         remappings=[
             ("/"+robot_name+"/cmd_vel","/cmd_vel"),
             ("/"+robot_name+"/clock","/clock"),
-            ("/"+robot_name+"/odometry","/odometry"),
+            ("/"+robot_name+"/odometry/wheels","/odometry/wheels"),
             ("/"+robot_name+"/tf","/tf"),
             ("/"+robot_name+"/joint_states","/joint_states"),
             ("/"+robot_name+"/scan","/scan"),
@@ -78,7 +78,7 @@ def generate_launch_description():
             executable="robot_state_publisher",
             name=robot_name+"_state_publisher",
             output="screen",
-            namespace=robot_name,
+            # namespace=robot_name,
             parameters=[params],
             # remappings=[
             #     ("/tf", "/mini/tf"),

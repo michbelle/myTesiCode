@@ -51,7 +51,8 @@ def generate_launch_description():
         name=f'{robot_name}_gz_create',
         arguments=[
             "-world", "",
-            "-topic", f"/{robot_name}/robot_description",
+            # "-topic", f"/{robot_name}/robot_description",
+            "-topic", f"/robot_description",
             "-name", f"{robot_name}",
             # "-allow_renaming", "true",
             "-x", "43.02",
@@ -97,7 +98,7 @@ def generate_launch_description():
             name=f'{robot_name}_state_publisher',
             output='screen',
             parameters=[params],
-            namespace=f"{robot_name}",
+            # namespace=f"{robot_name}",
             # remappings=[
             #     ('/robot_description', '/{robot_name}/robot_description'),
             # ],
