@@ -87,16 +87,16 @@ def generate_launch_description():
 
     # gen rviz
 
-    # rviz_config_dir = os.path.join(
-    #         get_package_share_directory("myCode"),
-    #         "rviz", "nav",
-    #         "mini_nav.rviz")
-    # rviz_node = Node(
-    #     package="rviz2",
-    #     executable="rviz2",
-    #     name="rviz2_mini_nav",
-    #     arguments=["-d", rviz_config_dir],
-    #     output="screen")
+    rviz_config_dir = os.path.join(
+            get_package_share_directory("myCode"),
+            "rviz", "nav",
+            "mini_nav.rviz")
+    rviz_node = Node(
+        package="rviz2",
+        executable="rviz2",
+        name="rviz2_mini_nav",
+        arguments=["-d", rviz_config_dir],
+        output="screen")
 
 
 
@@ -118,6 +118,6 @@ def generate_launch_description():
 
     # Launch Robot State Publisher
     ld.add_action(start_robot_state_publisher_cmd)
-    # ld.add_action(rviz_node)
+    ld.add_action(rviz_node)
 
     return ld

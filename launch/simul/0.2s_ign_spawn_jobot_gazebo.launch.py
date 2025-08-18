@@ -76,11 +76,11 @@ def generate_launch_description():
         ],
         remappings=[
             ("/"+robot_name+"/cmd_vel","/cmd_vel"),
-            ("/"+robot_name+"/odometry/wheels","/odometry/wheels"),
+            ("/"+robot_name+"/odometry/wheels","/odom"),
             ("/"+robot_name+"/tf","/tf"),
             ("/"+robot_name+"/joint_states","/joint_states"),
             ("/"+robot_name+"/scan","/scan"),
-            ("/"+robot_name+"/imu/data","/imu/data"),
+            ("/"+robot_name+"/imu/data","/arduino/imu_data_raw"),
         ],
     )
 
@@ -105,16 +105,16 @@ def generate_launch_description():
     
     # # gen rviz
     
-    # rviz_config_dir = os.path.join(
-    #         get_package_share_directory('myCode'),
-    #         'rviz', 'nav',
-    #         'jobot_nav.rviz')
-    # rviz_node = Node(
-    #     package='rviz2',
-    #     executable='rviz2',
-    #     name='rviz2_jobot_nav',
-    #     arguments=['-d', rviz_config_dir],
-    #     output='screen')
+    rviz_config_dir = os.path.join(
+            get_package_share_directory('myCode'),
+            'rviz', 'nav',
+            'jobot_nav.rviz')
+    rviz_node = Node(
+        package='rviz2',
+        executable='rviz2',
+        name='rviz2_jobot_nav',
+        arguments=['-d', rviz_config_dir],
+        output='screen')
 
 
     # Create the launch description and populate
@@ -131,6 +131,6 @@ def generate_launch_description():
 
     # Launch Robot State Publisher
     ld.add_action(start_robot_state_publisher_cmd)
-    # ld.add_action(rviz_node)
+    ld.add_action(rviz_node)
 
     return ld

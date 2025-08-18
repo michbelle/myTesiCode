@@ -11,10 +11,11 @@ from launch_ros.parameter_descriptions import ParameterValue
 
 from launch.actions import SetEnvironmentVariable
 
+import os
+os.environ["ROS_DOMAIN_ID"] = "20"
 
 def generate_launch_description():
     # Create the launch configuration variables
-    set_env_id_jobot=SetEnvironmentVariable('ROS_DOMAIN_ID', '20'),
     use_sim_time = LaunchConfiguration('use_sim_time')
 
     
@@ -45,7 +46,7 @@ def generate_launch_description():
     )
 
     localization_nav = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(launch_folder, "launch", "simul", "Sslam.py")),
+        PythonLaunchDescriptionSource(os.path.join(launch_folder, "launch", "simul", "Sslam.launch.py")),
         launch_arguments={
         }.items()
     )
@@ -54,8 +55,6 @@ def generate_launch_description():
 
     # Create the launch description and populate
     ld = LaunchDescription()
-
-    ld.add_action(set_env_id_jobot)
 
     # Declare the launch options
     ld.add_action(declare_use_sim_time_cmd)
