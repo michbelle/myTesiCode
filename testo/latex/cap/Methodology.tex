@@ -80,8 +80,7 @@ To launch the EKF node, the following launch file was wrote:\\
 \subsection{Configuration Odometry Estimation in \texttt{ekf\_node}}
 As previously described and detailed in the node’s documentation\footnote{\href{https://docs.ros.org/en/noetic/api/robot_localization/html/index.html}{https://docs.ros.org/en/noetic/api/robot\_localization/html/index.html}}, we added the information about the sensors used to the configuration file. The principal information to include is the type of sensor and on which topic subscribe, \texttt{odom0:odometry/wheels} and \texttt{imu0:imu/data}, and, for each sensor, we need to choose which components of the state measurement data we want to fuse using the following array by setting the corresponding values to \texttt{true} for those we wish to include and \texttt{false} for those we do not:\\
 \texttt{sensorX\_config}:$ [X, Y, Z, roll, pitch, yaw, \dot{X}, \dot{Y}, \dot{Z}, \dot{roll}, \dot{pitch}, \dot{yaw}, \ddot{X}, \ddot{Y}, \ddot{Z}] $\\
-\alert{In our case, we fused only the yaw angular velocity from the IMU while for the odometry we select only the velocity along the x and y in ENU (East North Up) coordinates.\\}
-\add{In our case, we fused the yaw angular velocity and the linear acceleration on x and y from the IMU with the velocity along the x and y  from the odometry in ENU (East North Up) coordinates.\\}
+\alert{In our case, we fused the yaw angular velocity from the IMU while for the odometry we select only the velocity along the x and y in ENU (East North Up) coordinates.\\}
 Additionally, the process noise covariance matrix $ Q $ can be tuned. This matrix represents the noise we add to the total error after each prediction step. Generally, the larger the value of $ Q $ relative to the variance of a given variable in an input message, the faster the filter will converge to the value indicated by the measurement.
 
 \section{Localization \texttt{map} $\rightarrow$ \texttt{odom}}
@@ -96,7 +95,8 @@ When using Cartographer, it is also possible to save the map as a \texttt{.pdstr
     \hspace*{15mm}"\{filename: "map.pdstream", include\_unfinished\_submaps :false\}"}
 \newpage
 \subsection{Only localization}
-The map that was built using Cartographer is the following:\\
+\remove{The map that was built using Cartographer is the following:}
+\alert{The map create using Cartographer was obtained by the robot Jobot while navigating through Building T of Elettra, which serves as an office building. The map is as follows:} \\
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.4\linewidth]{img/map.png}
@@ -113,8 +113,8 @@ ros2 run cartographer_ros cartographer_pbstream_to_ros_map \
 \end{minted}
 \end{listing}\\
 \newpage
-Since certain walls in the Cartographer generated map where not solid black\alert{, due to the uncertainty of their position during mapping}, the conversion process introduced errors that led to these areas to be misinterpreted as free space. \alert{As a result, the planner generated paths that passed through them. To address this issue, the walls were manually corrected using GIMP, an image editing tool, by modifying the \texttt{.pgm} map file.\\ Additionally, our planner is designed with the assumption that unknown spaces are not usable for planning. Therefore, we set the parameter \texttt{track\_unknown\_space} in the global costmap node to  \texttt{true} (\texttt{false} by default)  to achieve optimal results from our planner.}
-\remove{To address this issue, the walls were manually corrected using GIMP, an image editing tool, by modifying the \texttt{.pgm} map file.\\}
+Since certain walls in the Cartographer generated map where not solid black, due to the uncertainty of their position during mapping, the conversion process introduced errors that led to these areas to be misinterpreted as free space. As a result, the planner generated paths that passed through them. To address this issue, the walls were manually corrected using GIMP, an image editing tool, by modifying the \texttt{.pgm} map file.\\ Additionally, our planner is designed with the assumption that unknown spaces are not usable for planning. Therefore, we set the parameter \texttt{track\_unknown\_space} in the global costmap node to  \texttt{true} (\texttt{false} by default)  to achieve optimal results from our planner.
+\add{aggiungere teletransport per la modifica della mappa?}
 The corrected map is shown below:
 \begin{figure}[h]
 	\centering
@@ -169,8 +169,9 @@ The simulation configuration file contains minor differences due to the use of d
 In the next section, we will describe the key steps taken to port the global planner \texttt{DStarGlobalPlanner} from ROS 1 to ROS 2.
 \newpage 
 \subsection{Porting ROS 1 DStarGlobalPlanner to ROS 2}
-As previously mentioned, the \texttt{DStarGlobalPlanner}\footnote{\href{https://github.com/ElettraSciComp/DStar-Trajectory-Planner/tree/ros2_port}{https://github.com/ElettraSciComp/DStar-Trajectory-Planner/tree/ros2\_port}} is a implementation of the D* informed incremental search algoritm with external optimizers\cite{10.1007/978-3-031-67295-8_33} for the ROS 1 \texttt{move\_base} package\footnote{\href{https://wiki.ros.org/move_base}{https://wiki.ros.org/move\_base}}.\\
-Since the code is written using ROS 1, it needs to be ported to ROS 2. This process was divided into two main phases. In the first phase, we migrated the base structure of the package from ROS 1 to ROS 2, following these ROS 2 porting guidelines \footnote{\href{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}}\footnote{\href{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}}. In the second phase, we adapted the code to comply with the structure required by Nav2 planner plugins, based on the Nav2 documentation titled: "Writing a New Planner Plugin"\footnote{\href{https://docs.nav2.org/plugin_tutorials/docs/writing_new_nav2planner_plugin.html}{https://docs.nav2.org/plugin\_tutorials/docs/writing\_new\_nav2planner\_plugin.html}}.
+As previously mentioned, the \texttt{DStarGlobalPlanner}\footnote{\href{https://github.com/ElettraSciComp/DStar-Trajectory-Planner/tree/ros2_port}{https://github.com/ElettraSciComp/DStar-Trajectory-Planner/tree/ros2\_port}} is a implementation of the D* informed incremental search algoritm with external optimizers\cite{10.1007/978-3-031-67295-8_33} for the ROS 1 \texttt{move\_base} package\footnote{\href{https://wiki.ros.org/move_base}{https://wiki.ros.org/move\_base}} 
+\alert{and we want to analyze if there are some advantages of using this planner compared to the default planner.}\\
+Since the code is written using ROS 1\alert{, which is not compatible with ROS 2, it will need to be ported to the newer version}. This process was divided into two main phases. In the first phase, we migrated the base structure of the package from ROS 1 to ROS 2, following these ROS 2 porting guidelines \footnote{\href{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}{https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html}}\footnote{\href{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}{https://industrial-training-master.readthedocs.io/en/melodic/\_source/session7/ROS1-to-ROS2-porting.html}}. In the second phase, we adapted the code to comply with the structure required by Nav2 planner plugins, based on the Nav2 documentation titled: "Writing a New Planner Plugin"\footnote{\href{https://docs.nav2.org/plugin_tutorials/docs/writing_new_nav2planner_plugin.html}{https://docs.nav2.org/plugin\_tutorials/docs/writing\_new\_nav2planner\_plugin.html}}.
 The following subsections describe these two phases in detail. The first focuses on the structural migration to ROS 2 and the integration into the Nav2 framework. The second details the modifications needed to adapt the planner logic and interfaces to match ROS 2 conventions and the plugin architecture.
 \subsubsection{Porting code from ROS 1 to ROS 2}
 In the \texttt{package.xml} file, which describe the package as an organizational unit for your ROS 2 code, the following changes were made:
@@ -233,48 +234,40 @@ The system was built using the new build tool, \texttt{colcon}\footnote{\href{ht
 After successful compilation, the global planner is ready for use within the Nav2 framework.
 
 \chapter{Jobot porting procedure to ROS 2}
-\remove{
-	Hardware adaptation process from Rover Zero to Rover Mini -Rimuovo il capitolo?\\
-}
-\alert{
-	Since we have the Jobot, a 2WD rover still based on ROS 1, it was decided to port it to ROS 2 in order to effectively evaluate the use of Open-RMF.
-}
+
+
+Elettra has also a Jobot, a 2WD rover still based on ROS 1, it was decided to port it to ROS 2 in order to effectively evaluate the use of Open-RMF.
 \section{Jobot Description}
-\alert{
 Jobot is a 6-wheeled rover with a 2WD configuration. It is equipped with a mini PC that collects data from an RPLIDAR A2 laser sensor and acceleration data from a serial bus connected to an Arduino microprocessor, which is linked to an IMU. An image of the robot is available in \ref{fig:Jobot Rover}:\\
-}
-\alert{
-	\\The steps taken to port the code in ROS 2 are described in the following section.
-}
+The steps taken to port the code in ROS 2 are described in the following section.
+
 \section{What changes where made in the code}
-\alert{
-	The code use the serial ROS 1 library to communicate to the Arduino and retrieve the data from the encoders and the IMU. This library is no longer available in ROS 2, so to avoid rewriting the structure of the Jobot code, we utilized the same library that has been ported to ROS 2, which is available on GitHub: 
-	https://github.com/iwelch82/serial-ros2.git .
-	The retrieved data is used to publish the odometry pose estimation of the robot, while a secondary node handles the IMU data.\\
-	The secondary node for publishing the IMU data was updated to ROS 2 by simply using the base node logic, whereas the main node was rewritten using the lifecycle structure. This logic is employed to configure the node during the on\_configure method, and if it fails or a request for deactivation or cleanup is made, it stops and cleans everything. This structure allow to remotely control the passage through the states, for now and in our case it will be connected to an automatic Node manager used in nav2, the \texttt{lifecycle\_manager} in \texttt{nav2\_lifecycle\_manager}. This node check all the states of the nodes that are connected to it and sequentially configures and activates them. If a crash occurs or if we stop a specific node's process, the lifecycle communicates the change of state and activates a procedure to stop the connected nodes. This node is only called in the launch file.\\
-	In addiction we updates the custom messages to ROS 2 that the Jobot use internally.\\
-	Once everything is configured, the node starts to publish the robot's state odometry but does not publish static transforms between the sensors. These transforms are manually published using the \texttt{static\_transform\_publisher} provided by \texttt{tf2\_ros}.\\
-}
-\add{
-	To minimize changes, the software is built inside a Docker container, and all applications are launched from it.\\
-}
-\alert{
-	This, along with the same software used for navigation, enables this platform to function as an autonomous mobile robot (AMR).\\
-}
+
+The code use the serial ROS 1 library to communicate to the Arduino and retrieve the data from the encoders and the IMU. This library is no longer available in ROS 2, so to avoid rewriting the structure of the Jobot code, we utilized the same library that has been ported to ROS 2, which is available on GitHub: 
+https://github.com/iwelch82/serial-ros2.git .
+The retrieved data is used to publish the odometry pose estimation of the robot, while a secondary node handles the IMU data.\\
+The secondary node for publishing the IMU data was updated to ROS 2 by simply using the base node logic, whereas the main node was rewritten using the lifecycle structure. This logic is employed to configure the node during the on\_configure method, and if it fails or a request for deactivation or cleanup is made, it stops and cleans everything. This structure allow to remotely control the passage through the states, for now and in our case it will be connected to an automatic Node manager used in nav2, the \texttt{lifecycle\_manager} in \texttt{nav2\_lifecycle\_manager}. This node check all the states of the nodes that are connected to it and sequentially configures and activates them. If a crash occurs or if we stop a specific node's process, the lifecycle communicates the change of state and activates a procedure to stop the connected nodes. This node is only called in the launch file.\\
+In addiction we updates the custom messages to ROS 2 that the Jobot use internally.\\
+Once everything is configured, the node starts to publish the robot's state odometry but does not publish static transforms between the sensors. These transforms are manually published using the \texttt{static\_transform\_publisher} provided by \texttt{tf2\_ros}.\\
+
+To minimize changes, the software is built inside a Docker container, and all applications are launched from it.\\
+
+This, along with the same software used for navigation, enables this platform to function as an autonomous mobile robot (AMR).\\
+
 
 \newpage
 \section{Create a model for the simulation}
-\alert{
+
 For simulation purpose, we need to create a model  of the Jobot in the URDF format, which will be used by Gazebo to build a 3D representation and generate data from the sensors equipped on it.\\
 Since Jobot has a 2WD configuration, we will add two cylinders as wheels, which will be controlled by the Gazebo plugin \texttt{ignition::gazebo::systems::DiffDrive}. This plugin allows the robot to receive velocity commands and move accordingly.\\
 Next, we add the sensors gazebo type\texttt{IMU} and \texttt{gpu\_lidar} to simulate the IMU and the lidar on the robot. This procedure is similar to the one used for the Mini Rover from the Rover Robotics.
 At the end we obtain the following model:
-}
+
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.6\linewidth]{img/jobot_tf_strucure.png}
 	\captionof{figure}{Jobot robot URDF model}
-\end{figure}\\
+\end{figure}
 
 
 \chapter{Integration of the navigation stack with Open-RMF}
@@ -288,7 +281,7 @@ To begin describing the environment for Open-RMF, we created a new project in th
 		\item \texttt{is\_parking\_spot}: Designates a parking location for a robot.
 		\item \texttt{is\_passthrough\_point}: A waypoint where the robot should not stop.
 		\item \texttt{is\_charger}: Identifies a charging station.
-		\item \texttt{is\_cleaning\_zone}: \remove{Used as initial position} \alert{Used to indicate that this waypoint belong to a cleaning zone }for the \texttt{Clean} task.
+		\item \texttt{is\_cleaning\_zone}: Used to indicate that this waypoint belong to a cleaning zone for the \texttt{Clean} task.
 		\item \texttt{dock\_name}: Used for triggering docking behavior via RMF.
 		\item \texttt{pickup\_dispenser}: Specifies a dispenser workcell for \texttt{Delivery} tasks.
 		\item \texttt{dropoff\_ingestor}: Specifies an ingestor workcell for \texttt{Delivery} tasks.
@@ -384,10 +377,9 @@ To set up Zenoh for use with Free Fleet, the following steps are required:
 After completing the setup, we can use the following launch file to start the Free Fleet adapter:\\
 \texttt{1rmf\_mini\_fleet\_adapter.launch.xml}\\
 This launch file takes as parameters the fleet configuration file and the route maps that the fleet will use. Once launched, it is possible to monitor the robot topics on the RMF server.
-\alert{
-	\\Also this is replicated for the Jobot fleet, launching the following file\\
-	\texttt{1rmf\_jobot\_fleet\_adapter.launch.xml}\\
-}
+\\Also this is replicated for the Jobot fleet, launching the following file\\
+\texttt{1rmf\_jobot\_fleet\_adapter.launch.xml}\\
+
 \newpage
 \section{Web interfaces}
 Open-RMF also offers a web-based interface, \texttt{rmf-web}\footnote{\href{https://github.com/open-rmf/rmf-web}{https://github.com/open-rmf/rmf-web}}, to visualize and control the system on a browser. It consists of two main components:
@@ -406,10 +398,6 @@ Then we can connect to the web dashboard:
 	\captionof{figure}{Open-RMF Web Dashboard}
 \end{figure}
 
-\subsection{Deployment Template}
-\remove{Open-RMF offers a reference template\footnote{\href{https://github.com/open-rmf/rmf_deployment_template}{https://github.com/open-rmf/rmf\_deployment\_template}} for production deployment. Based on Kubernetes, it provides all the necessary information to deploy on a public server and to set up a secure connection.}
-
-
 \chapter{\alert{Testing and evaluation of the system}}
 After some testing, these are the problems we found:
 \begin{itemize}
@@ -426,9 +414,7 @@ Alternatively, adding a depth camera could provide a 3D occupancy grid, which ca
  
 \item The RMF commands from waypoint to waypoint: RMF commands the robot from waypoint to waypoint, and it leaves the low level navigation to each robot's navigation stack. So if the robot chooses to use a non-straight route, it means that the RMF navigation graph might need to be re-drawn or reconsidered (if there are constant obstacles around), or the navigation stack of the robot should be tuned to allow tighter tolerances for static/dynamic obstacles. but how the robot chooses to navigate between them is out of RMF's control, since RMF does not have dynamic obstacle information, or if there are new static obstacles, it needs to be reflected into RMF's traffic navigation graph
 
-\item \remove{We also encountered issues with the D* planner after converting the map to a PGM file. The algorithm treated unknown space as free space, which greatly increased computation time. The solution was to mark all unknown space as occupied, which resolved the problem.}
-
-\item \alert{The D-star planner is not designed if its path is completely blocked because it not update the costmap used internally at each request of the planner}
+\item The D-star planner is not designed if its path is completely blocked because it not update the costmap used internally at each request of the planner
 
 \item \add{Setting up collision monitor for improve safety reason}
 
@@ -440,7 +426,7 @@ Alternatively, adding a depth camera could provide a 3D occupancy grid, which ca
 	\captionof{figure}{Overlap Cartographer Map and photo of floor plan}
 \end{figure}
 
-\item \alert{For feaster the deployment of the robots, we used the  functionality of rosbag, a tool that allow to record the data published by some or all nodes and then republished after also with fastest velocity. This allot us to configure obtain the best outcome of process noise covariance of the localization node and the }
+\item For feaster the deployment of the robots, we used the  functionality of rosbag, a tool that allow to record the data published by some or all nodes and then republished after also with fastest velocity. This allot us to configure obtain the best outcome of process noise covariance of the localization node and the
 
 
 
