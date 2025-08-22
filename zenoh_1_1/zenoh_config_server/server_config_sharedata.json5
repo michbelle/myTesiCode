@@ -13,7 +13,7 @@
     },
   },
   // Zenoh related configurations
-  mode: "client", // client
+  mode: "client", // client peer
   connect: {
     endpoints: []
   },
