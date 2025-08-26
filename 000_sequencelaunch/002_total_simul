@@ -1,0 +1,65 @@
+xhost local:root
+
+path_repo=/home/michelebelletti/
+path_repo=/scratch/code/
+path_repo=/home/michele/
+
+
+#share local repo to docker
+docker run -it --rm \
+    -v $path_repo/tesi_code/src/myTesiCode:/root/ff_ws/src/myTesiCode \
+    -v $path_repo/tesi_code/src/DStar-Trajectory-Planner:/root/ff_ws/src/DStar-Trajectory-Planner \
+    -v $path_repo/tesi_code/src/jobot_driver_ros2:/root/ff_ws/src/jobot_driver_ros2 \
+    -v /tmp/.X11-unix:/tmp/.X11-unix:ro --device=/dev/dri:/dev/dri -e DISPLAY=$DISPLAY \
+    --privileged \
+    --network host \
+    --name serverNavRos \
+    rmf_all_imagev1.1  \
+    bash -c "cd /root/ff_ws && colcon build --symlink-install --packages-select myCode jobot_simulation jobot_launchpad && bash"
+
+#connect to the container
+docker exec -it serverNavRos bash
+
+#gazebo world simulation
+ros2 launch myCode 0.0s_ign_spawn_world_gazebo.launch.py 
+
+#spawn model mini
+ros2 launch myCode 0.1s_ign_spawn_mini_gazebo.launch.py
+
+#nav2 simul mini
+ros2 launch myCode navOnly_mini_global.launch.py
+
+#jobot spawn and nav2
+ros2 launch myCode sim_jobot_global.launch.py
+
+#zenoh server
+./root/ff_ws/src/myTesiCode/zenoh_1_1/simul_server_rmf_zenoh.sh
+
+#zenoh client mini
+./root/ff_ws/src/myTesiCode/zenoh_1_1/simul_mini_zenoh.sh
+
+#zenoh client jobot
+./root/ff_ws/src/myTesiCode/zenoh_1_1/simul_jobot_zenoh.sh
+
+#rmf-server
+ros2 launch myCode 0_rmf_core.launch.xml
+
+#rmf web interface
+export ROS_DOMAIN_ID=30
+
+path_repo=/home/michelebelletti/
+path_repo=/scratch/code/
+path_repo=/home/michele/
+
+docker compose -f $path_repo/tesi_code/src/myTesiCode/Dockerfiles/dockerCompose/rmf-web_base/compose.yml up 
+
+## fix BUG:
+chmod +x /root/ff_ws/install/free_fleet_adapter/lib/free_fleet_adapter/*
+
+#mini free fleet
+export ROS_DOMAIN_ID=30
+ros2 launch myCode 1rmf_mini_fleet_adapter.launch.xml server_uri:="ws://localhost:8000/_internal"
+
+#jobot free fleet
+export ROS_DOMAIN_ID=30
+ros2 launch myCode 1rmf_jobot_fleet_adapter.launch.xml server_uri:="ws://localhost:8000/_internal"
