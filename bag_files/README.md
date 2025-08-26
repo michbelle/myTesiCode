@@ -58,6 +58,5 @@ ros2 bag play \
 
 playing with simulation time
 ```
-ros2 bag play record_001 --clock
-
+ros2 bag play record_001 --clock -r 5
 ```
