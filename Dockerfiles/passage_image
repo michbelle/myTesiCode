@@ -1,0 +1,3 @@
+docker image save -o rmf_backup_$(date +%Y%m%d).tar rmf_all_imagev1.1
+
+docker image load -i image.tar
