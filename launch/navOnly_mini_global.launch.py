@@ -49,8 +49,26 @@ def generate_launch_description():
         launch_arguments={
         }.items()
     )
+    
+    
 
+    rviz_config_dir = os.path.join(
+            get_package_share_directory("myCode"),
+            "rviz", "nav",
+            "setting_param.rviz")
+    
+    rviz_node = Node(
+        package="rviz2",
+        executable="rviz2",
+        name="rviz2_mini_nav",
+        arguments=["-d", rviz_config_dir],
+        output="screen")
 
+    record_data = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(os.path.join(launch_folder, "launch", "utility", "odometry_recorder.launch.py")),
+        launch_arguments={
+        }.items()
+    )
 
     # Create the launch description and populate
     ld = LaunchDescription()
@@ -63,5 +81,8 @@ def generate_launch_description():
     ld.add_action(odometry_increase_precision)
     ld.add_action(nav_launch)
     ld.add_action(localization_nav)
+    
+    ld.add_action(rviz_node)
+    ld.add_action(record_data)
 
     return ld

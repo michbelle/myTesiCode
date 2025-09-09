@@ -82,6 +82,21 @@ As previously described and detailed in the node’s documentation\footnote{\hre
 \texttt{sensorX\_config}:$ [X, Y, Z, roll, pitch, yaw, \dot{X}, \dot{Y}, \dot{Z}, \dot{roll}, \dot{pitch}, \dot{yaw}, \ddot{X}, \ddot{Y}, \ddot{Z}] $\\
 \alert{In our case, we fused the yaw angular velocity from the IMU while for the odometry we select only the velocity along the x and y in ENU (East North Up) coordinates.\\}
 Additionally, the process noise covariance matrix $ Q $ can be tuned. This matrix represents the noise we add to the total error after each prediction step. Generally, the larger the value of $ Q $ relative to the variance of a given variable in an input message, the faster the filter will converge to the value indicated by the measurement.
+\alert{\\
+In the next section we will evaluate the performance obtained setting these parameters.
+}
+
+\subsection{\alert{Parameter changing result}}
+\alert{
+As describe in the paper, it allow the fusion of multiple sensor data and also expose the process noise covariance to tune it.
+}
+\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\linewidth]{img/odom_wheel_filter.png}
+	\captionof{figure}{Difference in the odometry between raw data and filtered (recorded data 001)}
+\end{figure}\\
+
 
 \section{Localization \texttt{map} $\rightarrow$ \texttt{odom}}
 In this section, we describe the process of acquiring a map and establishing the transformation between the \texttt{map} frame and \texttt{odom} frame using a localization method. This is necessary because, for long-term operation, the position of the robot in the world, using only odometry data, tends to accumulate errors and is not sufficiently accurate. Therefore, a localization technique is required to compensate for these errors\cite{sh-p1-prelude}.
@@ -427,8 +442,6 @@ Alternatively, adding a depth camera could provide a 3D occupancy grid, which ca
 \end{figure}
 
 \item For feaster the deployment of the robots, we used the  functionality of rosbag, a tool that allow to record the data published by some or all nodes and then republished after also with fastest velocity. This allot us to configure obtain the best outcome of process noise covariance of the localization node and the
-
-
 
 
 \end{itemize}
