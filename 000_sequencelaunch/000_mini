@@ -1,4 +1,4 @@
-export ROS_DOMAIN_ID=9
+export ROS_DOMAIN_ID=10
 
 ros2 launch myCode 0.1r_sensorLaunch.launch.py
 ros2 launch myCode 0.2r_mini.launch.py
