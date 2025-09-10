@@ -1,0 +1,2 @@
+ros2 run tf2_ros static_transform_publisher --frame-id map --child-frame-id odom --x 0 --y 0
+ros2 run tf2_ros static_transform_publisher --frame-id odom --child-frame-id base_link
