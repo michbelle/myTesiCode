@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import PointStamped
@@ -10,6 +12,7 @@ from nav2_msgs.action import ComputePathToPose
 
 import time
 
+from datetime import timedelta
 class calculatePath(Node):
 
     def __init__(self):
@@ -83,10 +86,10 @@ class calculatePath(Node):
             try:
                 if not hasattr(result, 'error_code') and result.planning_time.sec== 0 and result.planning_time.nanosec== 0:
                     self.get_logger().error('failed to generate path')
-                    self.time_calculation = 10
+                    self.time_calculation = timedelta(seconds=10).seconds
                 else:
-                    self.get_logger().info(f'Obtained path in {result.planning_time.sec},{result.planning_time.nanosec}')
-                    self.time_calculation=result.planning_time
+                    self.get_logger().info(f'Obtained path in {result.planning_time.sec+result.planning_time.nanosec*1e-9 }')
+                    self.time_calculation=result.planning_time.nanosec * 1e-9 + result.planning_time.sec
             except Exception as e:
                 print(e)
 
@@ -109,10 +112,38 @@ def main(args=None):
             position_elettra['ufficio'],
             position_elettra['ripostiglio'],
         ],
-
+        [
+            position_elettra['ufficio'],
+            position_elettra['ripostiglio'],
+        ],
+        [
+            position_elettra['ufficio'],
+            position_elettra['ingresso'],
+        ],
+        [
+            position_elettra['ufficio'],
+            position_elettra['ingresso'],
+        ],
+        [
+            position_elettra['ufficio'],
+            position_elettra['ingresso'],
+        ],
+        # [
+        #     position_elettra['ingresso'],
+        #     position_elettra['ripostiglio'],
+        # ],
+        [
+            position_elettra['ingresso'],
+            position_elettra['disegnatori'],
+        ],
+        [
+            position_elettra['ingresso'],
+            position_elettra['disegnatori'],
+        ],
     ]
+    for planner in ["GridBased_Dstar"]:
     # for planner in ["GridBased_Dstar", "GridBased"]:
-    for planner in ["GridBased"]:
+    # for planner in ["GridBased"]:
         for start, goal in starts_goals_positions:
             time_calculation=[]
             for i in range(10):
@@ -121,7 +152,7 @@ def main(args=None):
                 calculatePath_ActClient.calculate_path_to(planner,start, goal)
                 rclpy.spin(calculatePath_ActClient)
                 time_calculation.append(calculatePath_ActClient.time_calculation)
-            
+            print(statistics.mean(time_calculation))
 
 if __name__ == '__main__':
     main()
