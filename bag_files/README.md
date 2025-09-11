@@ -53,7 +53,8 @@ ros2 bag play \
     record_001 \
     --topics \
     <topic 1> \ ...
-
+    --clock
+    -r 1
 ```
 
 playing with simulation time
